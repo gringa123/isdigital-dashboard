@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>isdigital ops — Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f0;color:#1a1a18;min-height:100vh}
+.navbar{position:fixed;top:0;left:0;right:0;height:50px;background:#fff;border-bottom:1px solid #e8e7e0;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,0.06);flex-wrap:wrap;gap:8px}
+.nav-brand{font-weight:700;font-size:15px;color:#1a1a18}.nav-brand span{color:#2e7d32}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto}
+.nav-tab{padding:5px 10px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:500;color:#666;border:none;background:transparent;white-space:nowrap}
+.nav-tab:hover{background:#f5f5f0;color:#1a1a18}.nav-tab.active{background:#1a1a18;color:#fff}
+.nav-right{display:flex;align-items:center;gap:8px}
+.period-btns{display:flex;gap:3px;background:#f5f5f0;padding:3px;border-radius:8px}
+.period-btn{padding:4px 9px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600;color:#666;border:none;background:transparent}
+.period-btn.active{background:#fff;color:#1a1a18;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+.live-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:#2e7d32;font-weight:500}
+.live-dot{width:6px;height:6px;background:#2e7d32;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.content{margin-top:60px;padding:16px;max-width:1400px;margin-left:auto;margin-right:auto}
+.page{display:none}.page.active{display:block}
+.card{background:#fff;border:1px solid #e8e7e0;border-radius:10px;padding:16px}
+.cards-row{display:grid;gap:10px;margin-bottom:14px}
+.cards-4{grid-template-columns:repeat(4,1fr)}.cards-6{grid-template-columns:repeat(6,1fr)}
+.cards-2{grid-template-columns:repeat(2,1fr)}.cards-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards-4,.cards-6{grid-template-columns:repeat(2,1fr)}.cards-2,.cards-3{grid-template-columns:1fr}}
+.card-label{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px}
+.card-value{font-size:22px;font-weight:700;color:#1a1a18;margin-bottom:3px}
+.card-sub{font-size:11px;color:#999}
+.up{color:#2e7d32}.down{color:#c62828}.warn{color:#e65100}
+.pill{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.pill-green{background:#e8f5e9;color:#1b5e20}.pill-red{background:#ffebee;color:#b71c1c}
+.pill-orange{background:#fff8e1;color:#e65100}.pill-blue{background:#e3f2fd;color:#1565c0}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e8e7e0}
+table{width:100%;border-collapse:collapse;background:#fff}
+th{background:#f9f9f7;padding:9px 11px;text-align:left;font-size:10px;font-weight:700;color:#999;text-transform:uppercase;border-bottom:1px solid #e8e7e0;white-space:nowrap}
+td{padding:9px 11px;font-size:12px;color:#1a1a18;border-bottom:1px solid #f5f5f0;white-space:nowrap}
+tr:last-child td{border-bottom:none}tr:hover td{background:#fafaf8}
+.section-title{font-size:14px;font-weight:700;margin:18px 0 10px}
+.alert-block{border-radius:10px;padding:14px 16px;margin-bottom:12px;border-left:4px solid}
+.alert-red{background:#fff5f5;border-color:#c62828}.alert-orange{background:#fffbf0;border-color:#e65100}
+.alert-green{background:#f0fff4;border-color:#2e7d32}
+.alert-title{font-size:13px;font-weight:700;margin-bottom:8px}
+.alert-item{font-size:12px;color:#555;padding:5px 0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.05)}
+.alert-item:last-child{border-bottom:none}
+.funnel-bar{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.funnel-label{font-size:12px;color:#666;width:110px;flex-shrink:0}
+.funnel-track{flex:1;background:#f0f0ec;border-radius:4px;height:22px;overflow:hidden}
+.funnel-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff}
+.funnel-num{font-size:12px;font-weight:600;width:75px;text-align:right;flex-shrink:0}
+.offer-block{background:#fff;border:1px solid #e8e7e0;border-radius:12px;padding:18px;margin-bottom:14px}
+.offer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.offer-name{font-size:16px;font-weight:700}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f5f5f0}
+.metric-row:last-child{border-bottom:none}
+.metric-name{font-size:12px;color:#666}.metric-val{font-size:13px;font-weight:700}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase}
+.tag-tk{background:#e8f5e9;color:#1b5e20}.tag-fb{background:#e3f2fd;color:#1565c0}
+.roas-good{color:#2e7d32;font-weight:700}.roas-ok{color:#e65100;font-weight:700}.roas-bad{color:#c62828;font-weight:700}
+.btn{padding:6px 13px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;border:1px solid #e8e7e0;background:#fff;color:#1a1a18}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.page-title{font-size:18px;font-weight:700}.page-date{font-size:12px;color:#999}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">is<span>digital</span> <span style="font-weight:300;color:#999;font-size:11px">ops</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('overview',this)">Visão Geral</button>
+    <button class="nav-tab" onclick="showPage('ofertas',this)">Por Oferta</button>
+    <button class="nav-tab" onclick="showPage('criativos',this)">Criativos</button>
+    <button class="nav-tab" onclick="showPage('vsl',this)">VSL & Funil</button>
+    <button class="nav-tab" onclick="showPage('estrutura',this)">Estrutura</button>
+    <button class="nav-tab" onclick="showPage('diagnostico',this)">Diagnóstico</button>
+    <button class="nav-tab" onclick="showPage('financeiro',this)">Financeiro</button>
+    <button class="nav-tab" onclick="showPage('metas',this)">Metas</button>
+  </div>
+  <div class="nav-right">
+    <div class="period-btns">
+      <button class="period-btn active" onclick="setPeriod('hoje',this)">Hoje</button>
+      <button class="period-btn" onclick="setPeriod('7d',this)">7 dias</button>
+    </div>
+    <div class="live-badge"><div class="live-dot"></div><span id="ts">11/04 18h</span></div>
+  </div>
+</nav>
+<div class="content">
+
+<!-- VISAO GERAL -->
+<div id="page-overview" class="page active">
+  <div class="page-header">
+    <div><div class="page-title">Visão Geral</div><div class="page-date" id="period-label">Hoje — 11/04/2026</div></div>
+    <div style="display:flex;gap:8px"><button class="btn" onclick="exportData()">⬇ Exportar</button><label class="btn">⬆ Importar<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label></div>
+  </div>
+  <div class="cards-row cards-4">
+    <div class="card"><div class="card-label">Ad Spend</div><div class="card-value" id="v-spend">$2.569</div><div class="card-sub warn" id="v-spend-sub">Meta: $2.333 (+10%)</div></div>
+    <div class="card"><div class="card-label">Receita</div><div class="card-value up" id="v-rev">$3.120</div><div class="card-sub up" id="v-rev-sub">26 vendas</div></div>
+    <div class="card" style="border-left:3px solid #2e7d32"><div class="card-label">Lucro / ROI</div><div class="card-value up" id="v-profit">+$551</div><div class="card-sub up" id="v-roi">ROI +21.5%</div></div>
+    <div class="card"><div class="card-label">ROAS</div><div class="card-value warn" id="v-roas">1.21x</div><div class="card-sub">Meta: 1.43x</div></div>
+  </div>
+  <div class="cards-row cards-6">
+    <div class="card"><div class="card-label">CPA</div><div class="card-value up" id="v-cpa">$98</div><div class="card-sub up">Meta: $168 ✓</div></div>
+    <div class="card"><div class="card-label">Vendas</div><div class="card-value up" id="v-vendas">26</div><div class="card-sub up">Meta: 14 ✓ 185%</div></div>
+    <div class="card"><div class="card-label">ICs</div><div class="card-value up" id="v-ic">92</div><div class="card-sub up">Meta: 63 ✓ 146%</div></div>
+    <div class="card"><div class="card-label">Conv. Checkout</div><div class="card-value up" id="v-conv">28.3%</div><div class="card-sub up">Meta: 22% ✓</div></div>
+    <div class="card"><div class="card-label">Connect VSL</div><div class="card-value" id="v-vsl">90.8%</div><div class="card-sub">LP: 11.464</div></div>
+    <div class="card"><div class="card-label">LP Views</div><div class="card-value" id="v-lp">11.464</div><div class="card-sub">Clicks: 12.633</div></div>
+  </div>
+  <div class="cards-row cards-2">
+    <div class="card"><div class="card-label" style="margin-bottom:10px">🎵 TikTok</div>
+      <div class="metric-row"><span class="metric-name">Spend</span><span class="metric-val">$1.294</span></div>
+      <div class="metric-row"><span class="metric-name">Receita</span><span class="metric-val up">$1.920</span></div>
+      <div class="metric-row"><span class="metric-name">ROAS</span><span class="metric-val up">1.48x</span></div>
+      <div class="metric-row"><span class="metric-name">Vendas / CPA</span><span class="metric-val">20 / $65</span></div>
+    </div>
+    <div class="card"><div class="card-label" style="margin-bottom:10px">📘 Facebook</div>
+      <div class="metric-row"><span class="metric-name">Spend</span><span class="metric-val">$1.275</span></div>
+      <div class="metric-row"><span class="metric-name">Receita</span><span class="metric-val warn">$1.200</span></div>
+      <div class="metric-row"><span class="metric-name">ROAS</span><span class="metric-val warn">0.94x</span></div>
+      <div class="metric-row"><span class="metric-name">Vendas / CPA</span><span class="metric-val">6 / $213</span></div>
+    </div>
+  </div>
+  <div class="section-title">Comparativo Hoje vs 7 dias vs Meta</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Métrica</th><th>Hoje</th><th>7 dias</th><th>Meta/dia</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Ad Spend</td><td>$2.569</td><td>$25.507</td><td>$2.333</td><td><span class="pill pill-orange">+10% acima</span></td></tr>
+      <tr><td>Receita</td><td>$3.120</td><td>$22.724</td><td>$3.333</td><td><span class="pill pill-orange">94% da meta</span></td></tr>
+      <tr><td>Lucro</td><td class="up">+$551</td><td class="down">-$2.783</td><td>+$1.000</td><td><span class="pill pill-orange">Hoje ok / 7d negativo</span></td></tr>
+      <tr><td>ROAS</td><td class="warn">1.21x</td><td class="down">0.89x</td><td>1.43x</td><td><span class="pill pill-red">Abaixo da meta</span></td></tr>
+      <tr><td>Vendas</td><td class="up">26</td><td>125</td><td>14</td><td><span class="pill pill-green">✓ Hoje superando</span></td></tr>
+      <tr><td>CPA</td><td class="up">$98</td><td class="warn">$204</td><td>$168</td><td><span class="pill pill-green">✓ Hoje dentro</span></td></tr>
+      <tr><td>Conv. Checkout</td><td class="up">28.3%</td><td class="up">28.9%</td><td>22%</td><td><span class="pill pill-green">✓ Excelente</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- POR OFERTA -->
+<div id="page-ofertas" class="page">
+  <div class="page-header"><div class="page-title">Performance por Oferta</div><div class="page-date">7 dias — 05 a 11/04/2026</div></div>
+  <div class="offer-block" style="border-top:3px solid #2e7d32">
+    <div class="offer-header"><div><div class="offer-name">🏆 Renda Extra (Amazon)</div><div style="font-size:12px;color:#666;margin-top:3px">Melhor oferta — ROAS médio 1.27x (7d) | CPA $36</div></div>
+    <div style="display:flex;gap:6px"><span class="tag tag-tk">TikTok</span><span class="pill pill-green">🟢 Escalar</span></div></div>
+    <div class="cards-row cards-4">
+      <div class="card"><div class="card-label">Spend 7d</div><div class="card-value">$1.242</div></div>
+      <div class="card"><div class="card-label">Receita 7d</div><div class="card-value up">$1.584</div></div>
+      <div class="card"><div class="card-label">ROAS 7d</div><div class="card-value up">1.27x</div></div>
+      <div class="card"><div class="card-label">CPA médio</div><div class="card-value up">$36</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campanha</th><th>Conta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>IC</th><th>Conv%</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>TTK75-12 CB</td><td>TTK75</td><td>$38</td><td class="up">$288</td><td class="roas-good">7.60x</td><td class="up">$7.6</td><td>5</td><td>10</td><td>50%</td><td><span class="pill pill-green">🟢 ESCALAR URGENTE</span></td></tr>
+        <tr><td>TTK75-10 CB</td><td>TTK75</td><td>$1.54</td><td class="up">$76</td><td class="roas-good">49.8x</td><td class="up">$1.54</td><td>1</td><td>1</td><td>100%</td><td><span class="pill pill-green">🟢 Testar escala</span></td></tr>
+        <tr><td>TTK81-6 CB</td><td>TTK81</td><td>$749</td><td class="up">$1.074</td><td class="roas-good">1.43x</td><td class="up">$39</td><td>19</td><td>66</td><td>28.8%</td><td><span class="pill pill-green">🟢 Escalar</span></td></tr>
+        <tr><td>TTK75-11 CB</td><td>TTK75</td><td>$39</td><td class="up">$76</td><td class="roas-ok">1.94x</td><td>$39</td><td>1</td><td>6</td><td>16.7%</td><td><span class="pill pill-orange">🟡 Monitorar</span></td></tr>
+        <tr><td>TTK75-14 CB</td><td>TTK75</td><td>$40</td><td class="up">$46</td><td class="roas-ok">1.17x</td><td>$20</td><td>2</td><td>2</td><td>100%</td><td><span class="pill pill-orange">🟡 Monitorar</span></td></tr>
+        <tr><td>TTK75-13 CB</td><td>TTK75</td><td>$39</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td>0</td><td>0%</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+        <tr><td>TTK81-5 CB</td><td>TTK81</td><td>$129</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td>10</td><td>0%</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="offer-block" style="border-top:3px solid #e65100">
+    <div class="offer-header"><div><div class="offer-name">SugarHarmony</div><div style="font-size:12px;color:#666;margin-top:3px">ROAS 1.07x (7d) | CPA $224 | Acima break-even</div></div>
+    <div style="display:flex;gap:6px"><span class="tag tag-fb">Facebook</span><span class="pill pill-orange">🟡 Monitorar</span></div></div>
+    <div class="cards-row cards-4">
+      <div class="card"><div class="card-label">Spend 7d</div><div class="card-value">$9.216</div></div>
+      <div class="card"><div class="card-label">Receita 7d</div><div class="card-value up">$9.840</div></div>
+      <div class="card"><div class="card-label">ROAS 7d</div><div class="card-value warn">1.07x</div></div>
+      <div class="card"><div class="card-label">CPA médio</div><div class="card-value">$224</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campanha</th><th>Conta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>IC</th><th>Conv%</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Emily Lily C3 (VSL15+16)</td><td>Caique FB</td><td>$7.521</td><td class="up">$8.640</td><td class="roas-ok">1.15x</td><td>$209</td><td>36</td><td>109</td><td>33%</td><td><span class="pill pill-orange">🟡 Manter</span></td></tr>
+        <tr><td>Agencia Monkey 1526344</td><td>Laura Moreira</td><td>$1.695</td><td class="warn">$1.200</td><td class="roas-bad">0.71x</td><td>$339</td><td>5</td><td>14</td><td>35.7%</td><td><span class="pill pill-red">🔴 Revisar</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="offer-block" style="border-top:3px solid #c62828">
+    <div class="offer-header"><div><div class="offer-name">GlucoZen</div><div style="font-size:12px;color:#c62828;margin-top:3px">ROAS 0.93x (7d) | 3 contas com $600+ e 0 vendas</div></div>
+    <div style="display:flex;gap:6px"><span class="tag tag-fb">Facebook</span><span class="pill pill-red">🔴 Atenção</span></div></div>
+    <div class="cards-row cards-4">
+      <div class="card"><div class="card-label">Spend 7d</div><div class="card-value">$5.949</div></div>
+      <div class="card"><div class="card-label">Receita 7d</div><div class="card-value warn">$5.520</div></div>
+      <div class="card"><div class="card-label">ROAS 7d</div><div class="card-value down">0.93x</div></div>
+      <div class="card"><div class="card-label">Desperd. 7d</div><div class="card-value down">-$429</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campanha</th><th>Conta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Agencia Monkey 873022</td><td>Patricia Santos</td><td>$5.345</td><td class="up">$5.520</td><td class="roas-ok">1.03x</td><td>$232</td><td>23</td><td><span class="pill pill-orange">🟡 Monitorar</span></td></tr>
+        <tr><td>Lauren Walker C1</td><td>Julianna Paula</td><td>$307</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td><span class="pill pill-red">🔴 PAUSAR</span></td></tr>
+        <tr><td>Victoria Scarlett C3</td><td>Caique FB</td><td>$227</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td><span class="pill pill-red">🔴 PAUSAR</span></td></tr>
+        <tr><td>Barbara Brown C2</td><td>Julianna Paula</td><td>$70</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td><span class="pill pill-red">🔴 PAUSAR</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="offer-block" style="border-top:3px solid #c62828">
+    <div class="offer-header"><div><div class="offer-name">Vapofil</div><div style="font-size:12px;color:#c62828;margin-top:3px">ROAS 0.64x (7d) CRÍTICO | Estrutura MICROLEAD não funciona</div></div>
+    <div style="display:flex;gap:6px"><span class="tag tag-tk">TikTok</span><span class="pill pill-red">🔴 Revisar urgente</span></div></div>
+    <div class="cards-row cards-4">
+      <div class="card"><div class="card-label">Spend 7d</div><div class="card-value">$9.100</div></div>
+      <div class="card"><div class="card-label">Receita 7d</div><div class="card-value warn">$5.780</div></div>
+      <div class="card"><div class="card-label">ROAS 7d</div><div class="card-value down">0.64x</div></div>
+      <div class="card"><div class="card-label">Desperd. 7d</div><div class="card-value down">-$3.320</div></div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campanha</th><th>Conta</th><th>Spend</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>IC</th><th>Conv%</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>TTK82-2 MICROLEAD</td><td>TTK82-2</td><td>$3.170</td><td class="roas-bad">0.83x</td><td>$264</td><td>12</td><td>423</td><td>2.8%</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+        <tr><td>TTK82-4 MICROLEAD</td><td>TTK82-4</td><td>$2.519</td><td class="roas-bad">0.60x</td><td>$360</td><td>7</td><td>543</td><td>1.3%</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+        <tr><td>TTK82-3 MICROLEAD</td><td>TTK82-3</td><td>$1.573</td><td class="roas-bad">0.38x</td><td>$524</td><td>3</td><td>110</td><td>2.7%</td><td><span class="pill pill-red">🔴 PAUSAR URGENTE</span></td></tr>
+        <tr><td>TTK83-1 MICROLEAD</td><td>TTK83</td><td>$973</td><td class="roas-bad">0.45x</td><td>$220</td><td>2</td><td>920</td><td>0.2%</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+        <tr><td>TTK81-9</td><td>TTK81</td><td>$495</td><td class="roas-bad">0.85x</td><td>$248</td><td>2</td><td>57</td><td>3.5%</td><td><span class="pill pill-orange">🟡 Monitorar</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- CRIATIVOS -->
+<div id="page-criativos" class="page">
+  <div class="page-header"><div class="page-title">Análise de Criativos</div><div class="page-date">7 dias — 05 a 11/04/2026</div></div>
+  <div class="section-title">🎵 TikTok — Criativos (ordenado por ROAS)</div>
+  <div class="table-wrap" style="margin-bottom:18px"><table>
+    <thead><tr><th>#</th><th>Criativo</th><th>Oferta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Conv%</th><th>IC</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr style="background:#f0fff4"><td>🥇</td><td><b>TTK75-10</b></td><td>Renda Extra</td><td>$1.54</td><td class="up">$76</td><td class="roas-good">49.8x</td><td class="up">$1.54</td><td>100%</td><td>1</td><td><span class="pill pill-green">Top criativo</span></td></tr>
+      <tr style="background:#f0fff4"><td>🥈</td><td><b>TTK75-12</b></td><td>Renda Extra</td><td>$38</td><td class="up">$288</td><td class="roas-good">7.60x</td><td class="up">$7.6</td><td>50%</td><td>10</td><td><span class="pill pill-green">Escalar urgente</span></td></tr>
+      <tr style="background:#f0fff4"><td>🥉</td><td><b>TTK75-11</b></td><td>Renda Extra</td><td>$39</td><td class="up">$76</td><td class="roas-good">1.94x</td><td class="up">$39</td><td>16.7%</td><td>6</td><td><span class="pill pill-green">Escalar</span></td></tr>
+      <tr><td></td><td>TTK81-6</td><td>Renda Extra</td><td>$749</td><td class="up">$1.074</td><td class="roas-good">1.43x</td><td class="up">$39</td><td>28.8%</td><td>66</td><td><span class="pill pill-green">Escalar</span></td></tr>
+      <tr><td></td><td>TTK75-14</td><td>Renda Extra</td><td>$40</td><td class="up">$46</td><td class="roas-ok">1.17x</td><td>$20</td><td>100%</td><td>2</td><td><span class="pill pill-orange">Monitorar</span></td></tr>
+      <tr><td></td><td>TTK82-2</td><td>Vapofil</td><td>$3.170</td><td class="warn">$2.620</td><td class="roas-bad">0.83x</td><td>$264</td><td>2.8%</td><td>423</td><td><span class="pill pill-red">Pausar</span></td></tr>
+      <tr><td></td><td>TTK82-4</td><td>Vapofil</td><td>$2.519</td><td class="warn">$1.500</td><td class="roas-bad">0.60x</td><td>$360</td><td>1.3%</td><td>543</td><td><span class="pill pill-red">Pausar</span></td></tr>
+      <tr><td></td><td>TTK82-3</td><td>Vapofil</td><td>$1.573</td><td class="warn">$600</td><td class="roas-bad">0.38x</td><td>$524</td><td>2.7%</td><td>110</td><td><span class="pill pill-red">Pausar urgente</span></td></tr>
+      <tr><td></td><td>TTK83-1</td><td>Vapofil</td><td>$973</td><td class="warn">$440</td><td class="roas-bad">0.45x</td><td>$220</td><td>0.2%</td><td>920</td><td><span class="pill pill-red">Pausar</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="section-title">📘 Facebook — Criativos</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Criativo</th><th>Oferta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>IC</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr style="background:#f0fff4"><td>🥇</td><td><b>Emily Lily C3</b></td><td>SugarHarmony</td><td>$7.521</td><td class="up">$8.640</td><td class="roas-ok">1.15x</td><td>$209</td><td>36</td><td>109</td><td><span class="pill pill-orange">Manter</span></td></tr>
+      <tr><td>🥈</td><td>Agencia Monkey 873022</td><td>GlucoZen</td><td>$5.345</td><td class="up">$5.520</td><td class="roas-ok">1.03x</td><td>$232</td><td>23</td><td>72</td><td><span class="pill pill-orange">Monitorar</span></td></tr>
+      <tr><td></td><td>Agencia Monkey 1526344</td><td>SugarHarmony</td><td>$1.695</td><td class="warn">$1.200</td><td class="roas-bad">0.71x</td><td>$339</td><td>5</td><td>14</td><td><span class="pill pill-red">Revisar</span></td></tr>
+      <tr><td></td><td>Lauren Walker C1</td><td>GlucoZen</td><td>$307</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td>3</td><td><span class="pill pill-red">PAUSAR</span></td></tr>
+      <tr><td></td><td>Victoria Scarlett C3</td><td>GlucoZen</td><td>$227</td><td class="down">$0</td><td class="roas-bad">0x</td><td>—</td><td>0</td><td>5</td><td><span class="pill pill-red">PAUSAR</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- VSL E FUNIL -->
+<div id="page-vsl" class="page">
+  <div class="page-header"><div class="page-title">VSL & Funil de Conversão</div></div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="section-title" style="margin-top:0">Funil Geral — Hoje (11/04/2026)</div>
+    <div style="max-width:650px">
+      <div class="funnel-bar"><div class="funnel-label">Clicks</div><div class="funnel-track"><div class="funnel-fill" style="width:100%;background:#1565c0">12.633</div></div><div class="funnel-num up">12.633</div></div>
+      <div class="funnel-bar"><div class="funnel-label">LP Views</div><div class="funnel-track"><div class="funnel-fill" style="width:91%;background:#1976d2">11.464</div></div><div class="funnel-num">11.464</div></div>
+      <div class="funnel-bar"><div class="funnel-label">Plays VSL</div><div class="funnel-track"><div class="funnel-fill" style="width:82%;background:#42a5f5">~9.400</div></div><div class="funnel-num">~9.400</div></div>
+      <div class="funnel-bar"><div class="funnel-label">IC Checkout</div><div class="funnel-track"><div class="funnel-fill" style="width:1%;background:#e65100;min-width:70px">92</div></div><div class="funnel-num warn">92</div></div>
+      <div class="funnel-bar"><div class="funnel-label">Vendas</div><div class="funnel-track"><div class="funnel-fill" style="width:0.2%;background:#2e7d32;min-width:55px">26</div></div><div class="funnel-num up">26</div></div>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:14px">
+      <div><span style="color:#999;font-size:11px">Click → LP</span><br><b>90.7%</b></div>
+      <div><span style="color:#999;font-size:11px">LP → IC</span><br><b>0.8%</b></div>
+      <div><span style="color:#999;font-size:11px">IC → Venda</span><br><b class="up">28.3%</b></div>
+      <div><span style="color:#999;font-size:11px">Click → Venda</span><br><b>0.21%</b></div>
+    </div>
+  </div>
+  <div class="section-title">Funil Reverso — Meta diária</div>
+  <div class="table-wrap" style="margin-bottom:14px"><table>
+    <thead><tr><th>Etapa</th><th>Meta/dia</th><th>Real hoje</th><th>Gap</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Vendas</td><td>14</td><td class="up">26</td><td class="up">+12</td><td><span class="pill pill-green">✓ Acima</span></td></tr>
+      <tr><td>IC Checkouts</td><td>63</td><td class="up">92</td><td class="up">+29</td><td><span class="pill pill-green">✓ Acima</span></td></tr>
+      <tr><td>LP Views</td><td>~28.000</td><td class="warn">11.464</td><td class="down">-16.536</td><td><span class="pill pill-red">Abaixo</span></td></tr>
+      <tr><td>Ad Spend</td><td>$2.333</td><td class="warn">$2.569</td><td class="warn">+$236</td><td><span class="pill pill-orange">Acima orçamento</span></td></tr>
+      <tr><td>ROAS mínimo</td><td>1.43x</td><td class="warn">1.21x</td><td class="down">-0.22x</td><td><span class="pill pill-orange">Abaixo meta</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="section-title">VSLs no Ar — Dados Vturb (30 dias)</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Oferta</th><th>Plat.</th><th>VSL</th><th>Plays (30d)</th><th>Play Rate</th><th>Ret. Pitch</th><th>Aud. Pitch</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>SugarHarmony</td><td><span class="tag tag-tk">TK</span></td><td>ANTIGA PV TUDO PARASITE VSL10</td><td>25.299</td><td>—</td><td>—</td><td>—</td><td><span class="pill pill-orange">Principal TK</span></td></tr>
+      <tr><td>SugarHarmony</td><td><span class="tag tag-fb">FB</span></td><td>ANTIGA PV EMILY e TUDO VSL10</td><td>14.580</td><td>—</td><td>—</td><td>—</td><td><span class="pill pill-orange">Principal FB</span></td></tr>
+      <tr><td>Vapofil</td><td><span class="tag tag-tk">TK</span></td><td>RODANDO TTK82-4 VSL</td><td>9.280</td><td>—</td><td>—</td><td>—</td><td><span class="pill pill-orange">Em uso</span></td></tr>
+      <tr><td>Vapofil</td><td><span class="tag tag-tk">TK</span></td><td>RODANDO TTK82-2 VSL</td><td>9.149</td><td>—</td><td>—</td><td>—</td><td><span class="pill pill-orange">Em uso</span></td></tr>
+      <tr><td>GlucoZen</td><td><span class="tag tag-fb">FB</span></td><td>RODANDO FB EMILY VSL16</td><td>5.603</td><td>—</td><td>—</td><td>—</td><td><span class="pill pill-orange">Em uso</span></td></tr>
+      <tr><td>SugarHarmony</td><td><span class="tag tag-fb">FB</span></td><td>VSL 15 EMILY MICROLEAD1</td><td>397</td><td class="up">94.44%</td><td class="up">11.51%</td><td>45</td><td><span class="pill pill-green">Excelente retenção</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- ESTRUTURA -->
+<div id="page-estrutura" class="page">
+  <div class="page-header"><div class="page-title">Estrutura de Campanhas</div><div class="page-date">7 dias</div></div>
+  <div class="cards-row cards-4">
+    <div class="card" style="border-top:3px solid #2e7d32"><div class="card-label">Melhor modelo</div><div class="card-value" style="font-size:20px">CBO</div><div class="card-sub">Todas as campanhas</div></div>
+    <div class="card" style="border-top:3px solid #2e7d32"><div class="card-label">Melhor estratégia</div><div class="card-value" style="font-size:16px">Auto (sem bid)</div><div class="card-sub">Renda Extra TK</div></div>
+    <div class="card" style="border-top:3px solid #c62828"><div class="card-label">Pior estratégia</div><div class="card-value" style="font-size:16px">MICROLEAD</div><div class="card-sub">Vapofil: 0.64x ROAS</div></div>
+    <div class="card" style="border-top:3px solid #e65100"><div class="card-label">Estrutura top</div><div class="card-value" style="font-size:16px">1-4-1</div><div class="card-sub">TTK75: 4 conjuntos</div></div>
+  </div>
+  <div class="section-title">Campanhas com spend acima de $100 (7 dias)</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Campanha</th><th>Canal</th><th>Oferta</th><th>Modelo</th><th>Estratégia</th><th>Spend</th><th>ROAS</th><th>CPA</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td>TTK75-12</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>CBO</td><td>Auto</td><td>$38</td><td class="roas-good">7.60x</td><td class="up">$7.6</td><td><span class="pill pill-green">🟢 Top semana</span></td></tr>
+      <tr><td>TTK81-6</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>CBO</td><td>Auto</td><td>$749</td><td class="roas-good">1.43x</td><td class="up">$39</td><td><span class="pill pill-green">🟢 Escalar</span></td></tr>
+      <tr><td>Emily Lily C3</td><td><span class="tag tag-fb">FB</span></td><td>SugarHarmony</td><td>CBO</td><td>CANELA+PARASITE</td><td>$7.521</td><td class="roas-ok">1.15x</td><td>$209</td><td><span class="pill pill-orange">🟡 Manter</span></td></tr>
+      <tr><td>Agencia Monkey 873022</td><td><span class="tag tag-fb">FB</span></td><td>GlucoZen</td><td>CBO</td><td>CANELA+PARASITE</td><td>$5.345</td><td class="roas-ok">1.03x</td><td>$232</td><td><span class="pill pill-orange">🟡 Monitorar</span></td></tr>
+      <tr><td>TTK82-2 MICROLEAD</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>CBO</td><td>MICROLEAD</td><td>$3.170</td><td class="roas-bad">0.83x</td><td>$264</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+      <tr><td>TTK82-4 MICROLEAD</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>CBO</td><td>MICROLEAD</td><td>$2.519</td><td class="roas-bad">0.60x</td><td>$360</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+      <tr><td>Agencia Monkey 1526344</td><td><span class="tag tag-fb">FB</span></td><td>SugarHarmony</td><td>CBO</td><td>CANELA+PARASITE</td><td>$1.695</td><td class="roas-bad">0.71x</td><td>$339</td><td><span class="pill pill-red">🔴 Revisar</span></td></tr>
+      <tr><td>TTK82-3 MICROLEAD</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>CBO</td><td>MICROLEAD</td><td>$1.573</td><td class="roas-bad">0.38x</td><td>$524</td><td><span class="pill pill-red">🔴 PAUSAR URGENTE</span></td></tr>
+      <tr><td>TTK83-1 MICROLEAD</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>CBO</td><td>MICROLEAD</td><td>$973</td><td class="roas-bad">0.45x</td><td>$220</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+      <tr><td>TTK81-5 CB</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>CBO</td><td>Auto</td><td>$129</td><td class="roas-bad">0x</td><td>—</td><td><span class="pill pill-red">🔴 Pausar</span></td></tr>
+      <tr><td>Lauren Walker C1</td><td><span class="tag tag-fb">FB</span></td><td>GlucoZen</td><td>CBO</td><td>CANELA</td><td>$307</td><td class="roas-bad">0x</td><td>—</td><td><span class="pill pill-red">🔴 PAUSAR</span></td></tr>
+      <tr><td>Victoria Scarlett C3</td><td><span class="tag tag-fb">FB</span></td><td>GlucoZen</td><td>CBO</td><td>CANELA</td><td>$227</td><td class="roas-bad">0x</td><td>—</td><td><span class="pill pill-red">🔴 PAUSAR</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- DIAGNÓSTICO -->
+<div id="page-diagnostico" class="page">
+  <div class="page-header"><div class="page-title">Diagnóstico Automático</div><div class="page-date">Gerado: 11/04/2026 18:00</div></div>
+  <div class="alert-block alert-red">
+    <div class="alert-title">🔴 PAUSAR AGORA — Campanhas queimando verba</div>
+    <div class="alert-item"><span><b>TTK82-3 MICROLEAD VAPOFIL</b> — ROAS 0.38x, CPA $524</span><span class="down">$1.573 spend | $224/dia</span></div>
+    <div class="alert-item"><span><b>TTK82-4 MICROLEAD VAPOFIL</b> — ROAS 0.60x, CPA $360</span><span class="down">$2.519 spend | $360/dia</span></div>
+    <div class="alert-item"><span><b>Lauren Walker C1 GlucoZen</b> — $307 gastos, 0 vendas, 0 ICs</span><span class="down">$44/dia desperdiçado</span></div>
+    <div class="alert-item"><span><b>Victoria Scarlett C3 GlucoZen</b> — $227 gastos, 0 vendas</span><span class="down">$32/dia desperdiçado</span></div>
+    <div class="alert-item"><span><b>Barbara Brown C2 GlucoZen</b> — $70 gastos, 0 vendas</span><span class="down">$10/dia</span></div>
+    <div class="alert-item"><span><b>TTK83-1 MICROLEAD VAPOFIL</b> — ROAS 0.45x, conv. 0.2%</span><span class="down">$973 | $139/dia</span></div>
+    <div class="alert-item"><span><b>TTK81-5 CB Renda Extra</b> — $129, 0 vendas</span><span class="down">$18/dia</span></div>
+    <div class="alert-item"><span><b>TTK75-13 Renda Extra</b> — $39, 0 vendas, 0 ICs</span><span class="down">$6/dia</span></div>
+  </div>
+  <div class="alert-block alert-orange">
+    <div class="alert-title">🟡 MONITORAR 48h</div>
+    <div class="alert-item"><span><b>Agencia Monkey 873022 GlucoZen</b> — ROAS 1.03x, 23 vendas</span><span class="warn">Verificar tendência</span></div>
+    <div class="alert-item"><span><b>TTK82-2 MICROLEAD VAPOFIL</b> — ROAS 0.83x, maior volume</span><span class="warn">Se não melhora → pausar</span></div>
+    <div class="alert-item"><span><b>Agencia Monkey 1526344 SugarHarmony</b> — ROAS 0.71x</span><span class="warn">Revisar VSL e criativo</span></div>
+    <div class="alert-item"><span><b>TTK81-9 Vapofil</b> — ROAS 0.85x, $495 spend</span><span class="warn">Borderline break-even</span></div>
+  </div>
+  <div class="alert-block alert-green">
+    <div class="alert-title">🟢 ESCALAR AGORA</div>
+    <div class="alert-item"><span><b>TTK75-12 AMAZON RENDA EXTRA</b> — ROAS 7.60x, apenas $38</span><span class="up">→ $200-300/dia URGENTE</span></div>
+    <div class="alert-item"><span><b>TTK81-6 AMAZON RENDA EXTRA</b> — ROAS 1.43x, 19 vendas</span><span class="up">→ +20%/dia (~$900/dia)</span></div>
+    <div class="alert-item"><span><b>TTK75-10 AMAZON RENDA EXTRA</b> — ROAS 49.8x (micro)</span><span class="up">→ Testar $50-100/dia</span></div>
+    <div class="alert-item"><span><b>Emily Lily C3 SugarHarmony</b> — ROAS 1.15x, 36 vendas</span><span class="up">→ +10% budget/dia</span></div>
+  </div>
+  <div class="section-title">Ranking completo (7 dias)</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Canal</th><th>Oferta</th><th>Campanha</th><th>Spend</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>TTK75-10</td><td>$1.54</td><td class="roas-good">49.8x</td><td class="up">$1.54</td><td>1</td><td><span class="pill pill-green">Testar</span></td></tr>
+      <tr><td>2</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>TTK75-12</td><td>$38</td><td class="roas-good">7.60x</td><td class="up">$7.6</td><td>5</td><td><span class="pill pill-green">🏆 Top semana</span></td></tr>
+      <tr><td>3</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>TTK75-11</td><td>$39</td><td class="roas-good">1.94x</td><td class="up">$39</td><td>1</td><td><span class="pill pill-green">Escalar</span></td></tr>
+      <tr><td>4</td><td><span class="tag tag-tk">TK</span></td><td>Renda Extra</td><td>TTK81-6</td><td>$749</td><td class="roas-good">1.43x</td><td class="up">$39</td><td>19</td><td><span class="pill pill-green">Escalar</span></td></tr>
+      <tr><td>5</td><td><span class="tag tag-fb">FB</span></td><td>SugarHarmony</td><td>Emily Lily C3</td><td>$7.521</td><td class="roas-ok">1.15x</td><td>$209</td><td>36</td><td><span class="pill pill-orange">Manter</span></td></tr>
+      <tr><td>6</td><td><span class="tag tag-fb">FB</span></td><td>GlucoZen</td><td>Agencia Monkey 873022</td><td>$5.345</td><td class="roas-ok">1.03x</td><td>$232</td><td>23</td><td><span class="pill pill-orange">Monitorar</span></td></tr>
+      <tr><td>7</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>TTK82-2</td><td>$3.170</td><td class="roas-bad">0.83x</td><td>$264</td><td>12</td><td><span class="pill pill-red">Pausar</span></td></tr>
+      <tr><td>8</td><td><span class="tag tag-fb">FB</span></td><td>SugarHarmony</td><td>Agencia Monkey 1526344</td><td>$1.695</td><td class="roas-bad">0.71x</td><td>$339</td><td>5</td><td><span class="pill pill-red">Revisar</span></td></tr>
+      <tr><td>9</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>TTK82-4</td><td>$2.519</td><td class="roas-bad">0.60x</td><td>$360</td><td>7</td><td><span class="pill pill-red">Pausar</span></td></tr>
+      <tr><td>10</td><td><span class="tag tag-tk">TK</span></td><td>Vapofil</td><td>TTK82-3</td><td>$1.573</td><td class="roas-bad">0.38x</td><td>$524</td><td>3</td><td><span class="pill pill-red">PAUSAR</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- FINANCEIRO -->
+<div id="page-financeiro" class="page">
+  <div class="page-header"><div class="page-title">Financeiro</div></div>
+  <div class="cards-row cards-3">
+    <div class="card"><div class="card-label">Hoje (11/04)</div>
+      <div class="metric-row"><span class="metric-name">Receita bruta</span><span class="metric-val up">$3.120</span></div>
+      <div class="metric-row"><span class="metric-name">Ad Spend</span><span class="metric-val">$2.569</span></div>
+      <div class="metric-row"><span class="metric-name">Lucro</span><span class="metric-val up">+$551</span></div>
+      <div class="metric-row"><span class="metric-name">Margem</span><span class="metric-val up">17.7%</span></div>
+      <div class="metric-row"><span class="metric-name">ROAS</span><span class="metric-val warn">1.21x</span></div>
+    </div>
+    <div class="card"><div class="card-label">7 dias (05-11/04)</div>
+      <div class="metric-row"><span class="metric-name">Receita bruta</span><span class="metric-val">$22.724</span></div>
+      <div class="metric-row"><span class="metric-name">Ad Spend</span><span class="metric-val">$25.507</span></div>
+      <div class="metric-row"><span class="metric-name">Lucro</span><span class="metric-val down">-$2.783</span></div>
+      <div class="metric-row"><span class="metric-name">Margem</span><span class="metric-val down">-10.9%</span></div>
+      <div class="metric-row"><span class="metric-name">ROAS</span><span class="metric-val down">0.89x</span></div>
+    </div>
+    <div class="card"><div class="card-label">Projeção mês (base 7d)</div>
+      <div class="metric-row"><span class="metric-name">Receita projetada</span><span class="metric-val warn">$97.388</span></div>
+      <div class="metric-row"><span class="metric-name">Spend projetado</span><span class="metric-val warn">$109.315</span></div>
+      <div class="metric-row"><span class="metric-name">Lucro projetado</span><span class="metric-val down">-$11.927</span></div>
+      <div class="metric-row"><span class="metric-name">ROAS projetado</span><span class="metric-val down">0.89x</span></div>
+    </div>
+  </div>
+  <div class="section-title">Break-even por oferta</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Oferta</th><th>Comissão</th><th>CPA meta</th><th>CPA real 7d</th><th>CPA hoje</th><th>Lucro/venda</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Renda Extra</td><td>$76-$220*</td><td>$53-154</td><td class="up">$36</td><td class="up">$31</td><td class="up">+$40+</td><td><span class="pill pill-green">✓ Lucrativo</span></td></tr>
+      <tr><td>SugarHarmony</td><td>$240</td><td>$168</td><td class="warn">$224</td><td class="up">$128</td><td class="warn">+$16</td><td><span class="pill pill-orange">7d acima do CPA meta</span></td></tr>
+      <tr><td>GlucoZen</td><td>$240</td><td>$168</td><td class="down">$258</td><td class="warn">$207</td><td class="down">-$18</td><td><span class="pill pill-red">Prejuízo 7d</span></td></tr>
+      <tr><td>Vapofil</td><td>$220</td><td>$154</td><td class="down">$331</td><td class="down">$330</td><td class="down">-$111</td><td><span class="pill pill-red">🔴 Crítico</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- METAS -->
+<div id="page-metas" class="page">
+  <div class="page-header"><div class="page-title">Controle de Metas</div><div class="page-date">Abril 2026</div></div>
+  <div class="cards-row cards-3">
+    <div class="card" style="border-top:3px solid #1565c0"><div class="card-label">Meta faturamento</div><div class="card-value">$100.000</div><div class="card-sub">$3.333/dia</div></div>
+    <div class="card" style="border-top:3px solid #1565c0"><div class="card-label">Budget diário</div><div class="card-value">$2.333</div><div class="card-sub">$70.000/mês</div></div>
+    <div class="card" style="border-top:3px solid #1565c0"><div class="card-label">Margem desejada</div><div class="card-value">30%</div><div class="card-sub">$30.000 lucro/mês</div></div>
+  </div>
+  <div class="section-title">Controle diário — Hoje (11/04/2026)</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Métrica</th><th>Meta/dia</th><th>Real hoje</th><th>% meta</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Vendas</td><td>14</td><td class="up">26</td><td class="up">185%</td><td><span class="pill pill-green">✓ Superando</span></td></tr>
+      <tr><td>Faturamento</td><td>$3.333</td><td class="warn">$3.120</td><td class="warn">94%</td><td><span class="pill pill-orange">⚠ Próximo</span></td></tr>
+      <tr><td>Ad Spend</td><td>$2.333</td><td class="warn">$2.569</td><td class="warn">110%</td><td><span class="pill pill-orange">⚠ Acima</span></td></tr>
+      <tr><td>ROAS</td><td>1.43x</td><td class="warn">1.21x</td><td class="warn">85%</td><td><span class="pill pill-orange">⚠ Melhorando</span></td></tr>
+      <tr><td>CPA</td><td>$168</td><td class="up">$98</td><td class="up">58%</td><td><span class="pill pill-green">✓ Dentro</span></td></tr>
+      <tr><td>IC Checkouts</td><td>63</td><td class="up">92</td><td class="up">146%</td><td><span class="pill pill-green">✓ Superando</span></td></tr>
+      <tr><td>Conv. Checkout</td><td>22%</td><td class="up">28.3%</td><td class="up">129%</td><td><span class="pill pill-green">✓ Excelente</span></td></tr>
+      <tr><td>Lucro</td><td>+$1.000</td><td class="warn">+$551</td><td class="warn">55%</td><td><span class="pill pill-orange">⚠ Abaixo</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="alert-block alert-orange" style="margin-top:16px">
+    <div class="alert-title">💡 Simulação: pausar campanhas 🔴 + escalar 🟢</div>
+    <p style="font-size:12px;color:#555;line-height:1.7">
+      Pausar: TTK82-3, TTK82-4, Lauren Walker, Victoria Scarlett, Barbara Brown, TTK83-1, TTK75-13<br>
+      <b>Economia/dia: ~$680 liberados</b><br>
+      Redirecionar para TTK75-12 + TTK81-6 + TTK75-10<br>
+      <b>ROAS projetado após ajuste: ~1.35x</b> (próximo da meta 1.43x)
+    </p>
+  </div>
+</div>
+
+</div>
+
+<script>
+const DATA = {
+  hoje: { spend:2569,receita:3120,lucro:551,roas:1.21,roi:21.5,vendas:26,ic:92,cpa:98,conv:28.3,vsl:90.8,lp:11464 },
+  sete: { spend:25507,receita:22724,lucro:-2783,roas:0.89,roi:-10.9,vendas:125,ic:432,cpa:204,conv:28.9 }
+};
+
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+function setPeriod(p, btn) {
+  document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const d = p === 'hoje' ? DATA.hoje : DATA.sete;
+  const label = p === 'hoje' ? 'Hoje — 11/04/2026' : 'Últimos 7 dias — 05 a 11/04/2026';
+  document.getElementById('period-label').textContent = label;
+  document.getElementById('v-spend').textContent = '$' + d.spend.toLocaleString('pt-BR');
+  document.getElementById('v-rev').textContent = '$' + d.receita.toLocaleString('pt-BR');
+  document.getElementById('v-profit').textContent = (d.lucro >= 0 ? '+' : '') + '$' + Math.abs(d.lucro).toLocaleString('pt-BR');
+  document.getElementById('v-profit').className = 'card-value ' + (d.lucro >= 0 ? 'up' : 'down');
+  document.getElementById('v-roi').textContent = 'ROI ' + (d.roi >= 0 ? '+' : '') + d.roi.toFixed(1) + '%';
+  document.getElementById('v-roas').textContent = d.roas.toFixed(2) + 'x';
+  document.getElementById('v-roas').style.color = d.roas >= 1.43 ? '#2e7d32' : d.roas >= 1 ? '#e65100' : '#c62828';
+  document.getElementById('v-cpa').textContent = '$' + d.cpa;
+  document.getElementById('v-vendas').textContent = d.vendas;
+  document.getElementById('v-ic').textContent = d.ic;
+  document.getElementById('v-conv').textContent = d.conv + '%';
+  if(d.lp) document.getElementById('v-lp').textContent = d.lp.toLocaleString('pt-BR');
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify({DATA, ts: new Date().toISOString()}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'isdigital-' + new Date().toISOString().split('T')[0] + '.json'; a.click();
+}
+
+function importData(e) {
+  const reader = new FileReader();
+  reader.onload = ev => { try { alert('Dados importados!'); } catch(err) { alert('Erro: ' + err.message); } };
+  reader.readAsText(e.target.files[0]);
+}
+
+// Salvar no localStorage
+localStorage.setItem('isdigital_ops_data', JSON.stringify({DATA, ts: new Date().toISOString()}));
+</script>
+</body>
+</html>
