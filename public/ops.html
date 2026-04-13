@@ -6,106 +6,90 @@
 <title>isdigital OPS</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0a0f;
-  --surface: #111118;
-  --surface2: #18181f;
-  --border: #222230;
-  --text: #e8e8f0;
-  --muted: #6b6b80;
-  --green: #00ff88;
-  --red: #ff3b5c;
-  --yellow: #ffcc00;
-  --blue: #4f9eff;
-  --purple: #a855f7;
-  --orange: #ff8c42;
-  --green-dim: rgba(0,255,136,0.1);
-  --red-dim: rgba(255,59,92,0.1);
-  --yellow-dim: rgba(255,204,0,0.1);
-  --blue-dim: rgba(79,158,255,0.1);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; }
-.shell { display: flex; min-height: 100vh; }
-.sidebar { width: 200px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
-.main { margin-left: 200px; flex: 1; padding: 24px 28px; }
-.logo { font-family: 'Space Mono', monospace; font-size: 15px; color: var(--green); padding: 0 20px 24px; border-bottom: 1px solid var(--border); letter-spacing: -0.5px; }
-.logo span { color: var(--muted); font-size: 11px; display: block; margin-top: 2px; font-family: 'DM Sans', sans-serif; }
-nav { padding: 16px 8px; flex: 1; }
-nav a { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 6px; color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; margin-bottom: 2px; }
-nav a:hover, nav a.active { background: var(--surface2); color: var(--text); }
-nav a.active { color: var(--green); }
-.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-nav a.active .dot { background: var(--green); }
-.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-.header-title { font-family: 'Space Mono', monospace; font-size: 22px; letter-spacing: -1px; }
-.header-title span { color: var(--green); }
-.badge { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); padding: 6px 12px; border-radius: 20px; font-size: 12px; color: var(--muted); }
-.badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-.tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
-.tab { padding: 8px 16px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
-.tab:hover { color: var(--text); }
-.tab.active { color: var(--green); border-bottom-color: var(--green); }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-.card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
-.card-value { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; }
-.card-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
-.card.green { border-color: rgba(0,255,136,0.25); background: var(--green-dim); }
-.card.green .card-value { color: var(--green); }
-.card.red { border-color: rgba(255,59,92,0.25); background: var(--red-dim); }
-.card.red .card-value { color: var(--red); }
-.card.yellow { border-color: rgba(255,204,0,0.2); background: var(--yellow-dim); }
-.card.yellow .card-value { color: var(--yellow); }
-.card.blue { border-color: rgba(79,158,255,0.2); background: var(--blue-dim); }
-.card.blue .card-value { color: var(--blue); }
-.today-hero { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0; }
-.hero-item { padding: 0 20px; border-right: 1px solid var(--border); }
-.hero-item:first-child { padding-left: 0; }
-.hero-item:last-child { border-right: none; }
-.hero-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
-.hero-value { font-family: 'Space Mono', monospace; font-size: 26px; font-weight: 700; }
-.hero-compare { font-size: 11px; color: var(--muted); margin-top: 4px; }
-.up { color: var(--green); } .down { color: var(--red); } .flat { color: var(--yellow); }
-.alert-banner { border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; display: flex; align-items: flex-start; gap: 10px; }
-.alert-banner.red { background: var(--red-dim); border: 1px solid rgba(255,59,92,0.3); }
-.alert-banner.yellow { background: var(--yellow-dim); border: 1px solid rgba(255,204,0,0.3); }
-.alert-banner.green { background: var(--green-dim); border: 1px solid rgba(0,255,136,0.3); }
-.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-.alert-title { font-weight: 700; margin-bottom: 2px; }
-.table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
-.table-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.table-title { font-size: 13px; font-weight: 700; }
-.table-meta { font-size: 11px; color: var(--muted); }
-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-th { padding: 10px 14px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); white-space: nowrap; }
-td { padding: 10px 14px; border-bottom: 1px solid rgba(34,34,48,0.5); vertical-align: middle; }
-tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(255,255,255,0.02); }
-.mono { font-family: 'Space Mono', monospace; font-size: 12px; }
-.camp-name { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
-.tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; }
-.tag-fb { background: rgba(24,119,242,0.2); color: #4f9eff; }
-.tag-tk { background: rgba(255,0,80,0.15); color: #ff3b5c; }
-.tag-red { background: var(--red-dim); color: var(--red); }
-.roas-good { color: var(--green); font-weight: 700; font-family: 'Space Mono', monospace; font-size: 12px; }
-.roas-ok { color: var(--yellow); font-weight: 700; font-family: 'Space Mono', monospace; font-size: 12px; }
-.roas-bad { color: var(--red); font-weight: 700; font-family: 'Space Mono', monospace; font-size: 12px; }
-.zero { color: var(--muted); }
-.vsl-row-good td { background: rgba(0,255,136,0.03); }
-.vsl-row-bad td { background: rgba(255,59,92,0.03); }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-.chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.chip-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
-.chip-red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(255,59,92,0.2); }
-.chip-yellow { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(255,204,0,0.2); }
-.chip-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-.section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 700; margin-bottom: 12px; margin-top: 24px; }
-.section-title:first-child { margin-top: 0; }
-@media (max-width: 900px) { .sidebar { display: none; } .main { margin-left: 0; padding: 16px; } .today-hero { grid-template-columns: repeat(3,1fr); } .two-col { grid-template-columns: 1fr; } }
+:root{--bg:#0a0a0f;--surface:#111118;--surface2:#18181f;--border:#222230;--text:#e8e8f0;--muted:#6b6b80;--green:#00ff88;--red:#ff3b5c;--yellow:#ffcc00;--blue:#4f9eff;--green-dim:rgba(0,255,136,0.1);--red-dim:rgba(255,59,92,0.1);--yellow-dim:rgba(255,204,0,0.1);--blue-dim:rgba(79,158,255,0.1);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;min-height:100vh;}
+.shell{display:flex;min-height:100vh;}
+.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;}
+.main{margin-left:200px;flex:1;padding:24px 28px;}
+.logo{font-family:'Space Mono',monospace;font-size:15px;color:var(--green);padding:0 20px 24px;border-bottom:1px solid var(--border);letter-spacing:-0.5px;}
+.logo span{color:var(--muted);font-size:11px;display:block;margin-top:2px;}
+nav{padding:16px 8px;flex:1;}
+nav a{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;margin-bottom:2px;}
+nav a:hover,nav a.active{background:var(--surface2);color:var(--text);}
+nav a.active{color:var(--green);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+nav a.active .dot{background:var(--green);}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.header-title{font-family:'Space Mono',monospace;font-size:22px;letter-spacing:-1px;}
+.header-title span{color:var(--green);}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);padding:6px 12px;border-radius:20px;font-size:12px;color:var(--muted);}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);}
+.tab{padding:8px 16px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--green);border-bottom-color:var(--green);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;}
+.card-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.card-value{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;}
+.card-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+.card.green{border-color:rgba(0,255,136,0.25);background:var(--green-dim);}
+.card.green .card-value{color:var(--green);}
+.card.red{border-color:rgba(255,59,92,0.25);background:var(--red-dim);}
+.card.red .card-value{color:var(--red);}
+.card.yellow{border-color:rgba(255,204,0,0.2);background:var(--yellow-dim);}
+.card.yellow .card-value{color:var(--yellow);}
+.card.blue{border-color:rgba(79,158,255,0.2);background:var(--blue-dim);}
+.card.blue .card-value{color:var(--blue);}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;}
+.hero.win{border-color:rgba(0,255,136,0.3);}
+.hero-item{padding:0 20px;border-right:1px solid var(--border);}
+.hero-item:first-child{padding-left:0;}
+.hero-item:last-child{border-right:none;}
+.hero-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.hero-value{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;}
+.hero-compare{font-size:11px;color:var(--muted);margin-top:4px;}
+.up{color:var(--green);} .dn{color:var(--red);} .fl{color:var(--yellow);}
+.banner{border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;display:flex;align-items:flex-start;gap:10px;}
+.banner.red{background:var(--red-dim);border:1px solid rgba(255,59,92,0.3);}
+.banner.yellow{background:var(--yellow-dim);border:1px solid rgba(255,204,0,0.3);}
+.banner.green{background:var(--green-dim);border:1px solid rgba(0,255,136,0.3);}
+.banner-icon{font-size:18px;flex-shrink:0;}
+.banner-title{font-weight:700;margin-bottom:2px;}
+.tw{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+.th{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.tt{font-size:13px;font-weight:700;}
+.tm{font-size:11px;color:var(--muted);}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{padding:10px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:10px 14px;border-bottom:1px solid rgba(34,34,48,0.5);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.mn{font-family:'Space Mono',monospace;font-size:12px;}
+.cn{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
+.tfb{background:rgba(24,119,242,0.2);color:#4f9eff;}
+.ttk{background:rgba(255,0,80,0.15);color:#ff3b5c;}
+.trd{background:var(--red-dim);color:var(--red);}
+.rg{color:var(--green);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.ry{color:var(--yellow);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.rr{color:var(--red);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.z{color:var(--muted);}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.cg{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,255,136,0.2);}
+.cr{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,59,92,0.2);}
+.cy{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(255,204,0,0.2);}
+.cd{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.tcol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.st{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700;margin-bottom:12px;margin-top:24px;}
+.st:first-child{margin-top:0;}
+.vgood td{background:rgba(0,255,136,0.03);}
+.vbad td{background:rgba(255,59,92,0.03);}
+@media(max-width:900px){.sidebar{display:none;}.main{margin-left:0;padding:16px;}.hero{grid-template-columns:repeat(3,1fr);}.tcol{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -113,237 +97,326 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 <div class="sidebar">
   <div class="logo">isdigital<span>OPS Dashboard</span></div>
   <nav>
-    <a class="active" onclick="showTab('today')"><span class="dot"></span>Hoje</a>
-    <a onclick="showTab('week')"><span class="dot"></span>7 Dias</a>
-    <a onclick="showTab('ofertas')"><span class="dot"></span>Ofertas</a>
-    <a onclick="showTab('campanhas')"><span class="dot"></span>Campanhas</a>
-    <a onclick="showTab('vsl')"><span class="dot"></span>VSL + Funil</a>
-    <a onclick="showTab('alertas')"><span class="dot"></span>Alertas</a>
+    <a class="active" onclick="T('hoje')"><span class="dot"></span>Fechamento</a>
+    <a onclick="T('manha')"><span class="dot"></span>Manha vs Fechamento</a>
+    <a onclick="T('ofertas')"><span class="dot"></span>Ofertas</a>
+    <a onclick="T('camps')"><span class="dot"></span>Campanhas</a>
+    <a onclick="T('semana')"><span class="dot"></span>7 Dias</a>
+    <a onclick="T('vsl')"><span class="dot"></span>VSL + Funil</a>
+    <a onclick="T('alertas')"><span class="dot"></span>Alertas</a>
   </nav>
 </div>
 <div class="main">
+
   <div class="header">
     <div class="header-title">OPS <span>// isdigital</span></div>
     <div style="display:flex;gap:10px;align-items:center;">
-      <div class="badge"><span class="badge-dot"></span>12 Abr 2026 &mdash; 09:54</div>
-      <div class="badge" style="border-color:rgba(255,204,0,0.3);color:var(--yellow);">ROAS 0.85x &mdash; Abaixo break-even</div>
+      <div class="badge"><span class="badge-dot"></span>12 Abr 2026 &mdash; Fechamento do dia</div>
+      <div class="badge" style="border-color:rgba(0,255,136,0.3);color:var(--green);">ROAS 1.42x &#8212; DIA LUCRATIVO &#9989;</div>
     </div>
   </div>
+
   <div class="tabs">
-    <div class="tab active" onclick="showTab('today')">Hoje</div>
-    <div class="tab" onclick="showTab('week')">7 Dias</div>
-    <div class="tab" onclick="showTab('ofertas')">Ofertas</div>
-    <div class="tab" onclick="showTab('campanhas')">Campanhas</div>
-    <div class="tab" onclick="showTab('vsl')">VSL + Funil</div>
-    <div class="tab" onclick="showTab('alertas')">Alertas</div>
+    <div class="tab active" onclick="T('hoje')">Fechamento</div>
+    <div class="tab" onclick="T('manha')">Manha vs Fim</div>
+    <div class="tab" onclick="T('ofertas')">Ofertas</div>
+    <div class="tab" onclick="T('camps')">Campanhas</div>
+    <div class="tab" onclick="T('semana')">7 Dias</div>
+    <div class="tab" onclick="T('vsl')">VSL + Funil</div>
+    <div class="tab" onclick="T('alertas')">Alertas</div>
   </div>
 
-  <div class="tab-content active" id="tab-today">
-    <div class="alert-banner red"><div class="alert-icon">&#128308;</div><div><div class="alert-title">Facebook 0 conversoes hoje &mdash; $282 gastos ate 09:54</div>Emily C3 BIDCAP 720: $75 / 0v. Emily C3 CBO ADVANTAGE: $52 / 0v. Agencia Monkey CJ LIMITADO: $46 / 0v. Monitorar ate 14h BRT.</div></div>
-    <div class="today-hero">
-      <div class="hero-item"><div class="hero-label">Spend Hoje</div><div class="hero-value" style="color:var(--text);">$884</div><div class="hero-compare down">Ontem: $3.513</div></div>
-      <div class="hero-item"><div class="hero-label">Receita Hoje</div><div class="hero-value" style="color:var(--yellow);">$748</div><div class="hero-compare down">Ontem: $4.152</div></div>
-      <div class="hero-item"><div class="hero-label">ROAS Hoje</div><div class="hero-value" style="color:var(--red);">0.85x</div><div class="hero-compare down">Ontem: 1.18x</div></div>
-      <div class="hero-item"><div class="hero-label">Vendas Hoje</div><div class="hero-value" style="color:var(--blue);">10</div><div class="hero-compare">Meta: 30+/dia</div></div>
-      <div class="hero-item"><div class="hero-label">CPA Hoje</div><div class="hero-value" style="color:var(--green);">$88</div><div class="hero-compare flat">Meta: $168</div></div>
-      <div class="hero-item"><div class="hero-label">Lucro Hoje</div><div class="hero-value" style="color:var(--red);">-$136</div><div class="hero-compare">Break-even: 1.00x</div></div>
+  <!-- ======= FECHAMENTO ======= -->
+  <div class="tab-content active" id="tab-hoje">
+    <div class="banner green">
+      <div class="banner-icon">&#127881;</div>
+      <div><div class="banner-title">Virada do dia! De -$136 de manha para +$1.167 no fechamento</div>
+      Facebook acordou tarde mas converteu bem a tarde. Agencia Monkey CP0122 com ROAS 12.12x foi a campanha do dia. TTK75-10 com CPA de $6 foi o menor CPA da operacao.</div>
     </div>
-    <div class="section-title">Por Oferta &mdash; Hoje</div>
+
+    <div class="hero win">
+      <div class="hero-item"><div class="hero-label">Spend Total</div><div class="hero-value" style="color:var(--text);">$2.769</div><div class="hero-compare">Ontem: $3.513</div></div>
+      <div class="hero-item"><div class="hero-label">Receita Total</div><div class="hero-value" style="color:var(--green);">$3.935</div><div class="hero-compare up">&#9650; Ontem: $4.152</div></div>
+      <div class="hero-item"><div class="hero-label">ROAS Final</div><div class="hero-value" style="color:var(--green);">1.42x</div><div class="hero-compare up">Meta: 1.43x &#127919;</div></div>
+      <div class="hero-item"><div class="hero-label">Vendas</div><div class="hero-value" style="color:var(--blue);">30</div><div class="hero-compare">CPA medio: $92</div></div>
+      <div class="hero-item"><div class="hero-label">Lucro</div><div class="hero-value" style="color:var(--green);">+$1.167</div><div class="hero-compare up">ROI: +42%</div></div>
+      <div class="hero-item"><div class="hero-label">IC Checkout</div><div class="hero-value" style="color:var(--yellow);">78</div><div class="hero-compare">Conv Checkout: 38%</div></div>
+    </div>
+
+    <div class="st">Por Oferta &mdash; Fechamento</div>
     <div class="cards">
-      <div class="card red"><div class="card-label">Diabetes FB</div><div class="card-value">0x</div><div class="card-sub">$282 spend &mdash; 0 vendas</div></div>
-      <div class="card yellow"><div class="card-label">Vapofil (ED TK)</div><div class="card-value">0.96x</div><div class="card-sub">$390 spend &mdash; 3 vendas &mdash; $362 rev</div></div>
-      <div class="card green"><div class="card-label">Renda Extra TK</div><div class="card-value">2.74x</div><div class="card-sub">$145 spend &mdash; 7 vendas &mdash; $397 rev</div></div>
+      <div class="card green"><div class="card-label">Diabetes FB</div><div class="card-value">1.54x</div><div class="card-sub">FB acordou! $791 spend &mdash; 7 vendas</div></div>
+      <div class="card yellow"><div class="card-label">Vapofil (ED TK)</div><div class="card-value">1.08x</div><div class="card-sub">$912 spend &mdash; 8 vendas</div></div>
+      <div class="card green"><div class="card-label">Renda Extra TK</div><div class="card-value">2.52x</div><div class="card-sub">$289 spend &mdash; 14 vendas &mdash; $730 rev</div></div>
+      <div class="card green"><div class="card-label">Renda Extra (TTK75)</div><div class="card-value">3.91x</div><div class="card-sub">CPA medio $17 &mdash; estrela do dia</div></div>
     </div>
-    <div class="section-title">Top Campanhas com Receita &mdash; 12/04/2026</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Campanhas convertendo hoje</div><div class="table-meta">Atualizado 09:54 UTC</div></div>
-      <table><thead><tr><th>Canal</th><th>Campanha</th><th>Criativo</th><th>Spend</th><th>Receita</th><th>Vendas</th><th>ROAS</th><th>CPA</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-12 | RENDA EXTRA | RA0014 | CP0005</td><td class="mono">RA0014</td><td class="mono">$8.44</td><td class="mono">$85.83</td><td class="mono">1</td><td><span class="roas-good">10.17x</span></td><td class="mono">$8.44</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-11 | RENDA EXTRA | RA002 | CP0003</td><td class="mono">RA002</td><td class="mono">$11.34</td><td class="mono">$85.85</td><td class="mono">1</td><td><span class="roas-good">7.57x</span></td><td class="mono">$11.34</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-2 | ED TK | US | ED0022 | CP0008</td><td class="mono">ED0022</td><td class="mono">$39.43</td><td class="mono">$220.00</td><td class="mono">1</td><td><span class="roas-good">5.58x</span></td><td class="mono">$39.43</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-14 | RENDA EXTRA | RA005 | CP0002</td><td class="mono">RA005</td><td class="mono">$9.92</td><td class="mono">$56.00</td><td class="mono">1</td><td><span class="roas-good">5.65x</span></td><td class="mono">$9.92</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-10 | RENDA EXTRA | RA008 | CP0002</td><td class="mono">RA008</td><td class="mono">$9.49</td><td class="mono">$46.83</td><td class="mono">2</td><td><span class="roas-good">4.93x</span></td><td class="mono">$4.75</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK81-6 | RENDA EXTRA | TK13 | CP0009</td><td class="mono">TK13</td><td class="mono">$37.45</td><td class="mono">$111.95</td><td class="mono">2</td><td><span class="roas-good">2.99x</span></td><td class="mono">$18.73</td><td><span class="chip chip-green"><span class="chip-dot"></span>OK</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-11 | ED TK | US | RA002 | CP0001</td><td class="mono">RA002</td><td class="mono">$30.50</td><td class="mono">$85.75</td><td class="mono">1</td><td><span class="roas-ok">2.81x</span></td><td class="mono">$30.50</td><td><span class="chip chip-green"><span class="chip-dot"></span>OK</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK75-14 | ED TK | US | RA005 | CP0001</td><td class="mono">RA005</td><td class="mono">$31.90</td><td class="mono">$56.09</td><td class="mono">1</td><td><span class="roas-ok">1.76x</span></td><td class="mono">$31.90</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Monitor</span></td></tr>
-        <tr style="opacity:0.5"><td><span class="tag tag-fb">FB</span></td><td class="camp-name">EMILY C3 | BIDCAP 720 | US | SCK85 | CP0043</td><td class="mono">SCK85</td><td class="mono">$75.50</td><td class="mono zero">$0.00</td><td class="mono zero">0</td><td><span class="roas-bad">0x</span></td><td class="mono zero">--</td><td><span class="chip chip-red"><span class="chip-dot"></span>Revisar</span></td></tr>
-        <tr style="opacity:0.5"><td><span class="tag tag-fb">FB</span></td><td class="camp-name">EMILY C3 | CBO ADVANTAGE | D047+SCK85 | CP0103</td><td class="mono">Multi</td><td class="mono">$52.35</td><td class="mono zero">$0.00</td><td class="mono zero">0</td><td><span class="roas-bad">0x</span></td><td class="mono zero">--</td><td><span class="chip chip-red"><span class="chip-dot"></span>Revisar</span></td></tr>
-      </tbody></table>
+
+    <div class="st">Top 10 Campanhas do Dia &mdash; por ROAS</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Campanhas convertendo &mdash; 12/04/2026 fechamento</div><div class="tm">Comissao $240/venda</div></div>
+      <table>
+        <thead><tr><th>Canal</th><th>Campanha</th><th>Criativo</th><th>Spend</th><th>Receita</th><th>V</th><th>ROAS</th><th>CPA</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | BIDCAP 240 | US | D070 | CP0122</td><td class="mn">D070</td><td class="mn">$39.59</td><td class="mn">$480</td><td class="mn">2</td><td><span class="rg">12.12x</span></td><td class="mn">$19.80</td><td><span class="chip cg"><span class="cd"></span>Campanha do dia</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | CJ LIMITADO | US | D070 | CP0067</td><td class="mn">D070</td><td class="mn">$64.13</td><td class="mn">$480</td><td class="mn">2</td><td><span class="rg">7.48x</span></td><td class="mn">$32.07</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-10 | RENDA EXTRA | RA008 | CP0002</td><td class="mn">RA008</td><td class="mn">$19.86</td><td class="mn">$132.66</td><td class="mn">3</td><td><span class="rg">6.68x</span></td><td class="mn">$6.62</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | BIDCAP 240 | US | D070 | CP0121</td><td class="mn">D070</td><td class="mn">$39.16</td><td class="mn">$240</td><td class="mn">1</td><td><span class="rg">6.13x</span></td><td class="mn">$39.16</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-12 | RENDA EXTRA | RA0014 | CP0005</td><td class="mn">RA0014</td><td class="mn">$16.67</td><td class="mn">$85.83</td><td class="mn">1</td><td><span class="rg">5.15x</span></td><td class="mn">$16.67</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-11 | RENDA EXTRA | RA002 | CP0003</td><td class="mn">RA002</td><td class="mn">$21.01</td><td class="mn">$85.85</td><td class="mn">1</td><td><span class="rg">4.09x</span></td><td class="mn">$21.01</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-3 | ED TK | ED0063 | CP0013</td><td class="mn">ED0063</td><td class="mn">$105.64</td><td class="mn">$440</td><td class="mn">2</td><td><span class="rg">4.17x</span></td><td class="mn">$52.82</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-14 | RENDA EXTRA | RA005 | CP0003</td><td class="mn">RA005</td><td class="mn">$22.68</td><td class="mn">$85.68</td><td class="mn">1</td><td><span class="rg">3.78x</span></td><td class="mn">$22.68</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-2 | ED TK | ED0022 | CP0008</td><td class="mn">ED0022</td><td class="mn">$142.86</td><td class="mn">$440</td><td class="mn">2</td><td><span class="rg">3.08x</span></td><td class="mn">$71.43</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK81-6 | RENDA EXTRA | TK13 | CP0007</td><td class="mn">TK13</td><td class="mn">$43.85</td><td class="mn">$141.84</td><td class="mn">2</td><td><span class="rg">3.23x</span></td><td class="mn">$21.93</td><td><span class="chip cg"><span class="cd"></span>OK</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">EMILY C3 | CBO ADVANTAGE | D047+SCK85 | CP0103</td><td class="mn">Multi</td><td class="mn">$311.61</td><td class="mn">$480</td><td class="mn">2</td><td><span class="ry">1.54x</span></td><td class="mn">$155.81</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA MONKEY | CBO | CJ LIMITADO | CP0117</td><td class="mn">D070</td><td class="mn">$108.43</td><td class="mn">$0</td><td class="mn">0</td><td><span class="rr">0x</span></td><td class="mn z">--</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">EMILY C3 | BIDCAP 720 | SCK85 | CP0043</td><td class="mn">SCK85</td><td class="mn">$113.33</td><td class="mn">$0</td><td class="mn">0</td><td><span class="rr">0x</span></td><td class="mn z">--</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="alert-banner green"><div class="alert-icon">&#128640;</div><div><div class="alert-title">Novas contas TTK75 bombando hoje! Dobrar budget agora.</div>TTK75-10 (4.93x), TTK75-11 (7.57x), TTK75-12 (10.17x) com RA002/RA005/RA008/RA0014. ROAS medio 5x+.</div></div>
+
+    <div class="banner green">
+      <div class="banner-icon">&#127381;</div>
+      <div><div class="banner-title">Descoberta do dia: Agencia 873022 com BIDCAP 240 + CBO novo padrao!</div>
+      CP0122 (12.12x) e CP0121 (6.13x) sao campanhas novas da Agencia com BIDCAP 240 CBO. Junto com CP0067 CJ LIMITADO (7.48x) = Agencia Monkey esta sendo a conta do dia. Escalar todas essas amanha.</div>
+    </div>
   </div>
 
-  <div class="tab-content" id="tab-week">
-    <div class="section-title">Resumo &mdash; 05 a 11 Abr 2026 (7 dias)</div>
+  <!-- ======= MANHA VS FECHAMENTO ======= -->
+  <div class="tab-content" id="tab-manha">
+    <div class="st">Comparativo: Manha (09:54) vs Fechamento do Dia</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Evolucao do dia</div></div>
+      <table>
+        <thead><tr><th>Metrica</th><th>Manha 09:54</th><th>Fechamento</th><th>Variacao</th></tr></thead>
+        <tbody>
+          <tr><td>Spend</td><td class="mn">$884</td><td class="mn">$2.769</td><td class="mn" style="color:var(--muted);">+$1.885</td></tr>
+          <tr><td>Receita</td><td class="mn dn">$748</td><td class="mn up">$3.935</td><td class="mn up">+$3.187</td></tr>
+          <tr><td>ROAS</td><td class="mn dn">0.85x</td><td class="mn up">1.42x</td><td class="mn up">+0.57x</td></tr>
+          <tr><td>Vendas</td><td class="mn">10</td><td class="mn">30</td><td class="mn up">+20</td></tr>
+          <tr><td>CPA</td><td class="mn dn">$88</td><td class="mn" style="color:var(--green);">$92</td><td class="mn" style="color:var(--muted);">+$4 (ok)</td></tr>
+          <tr><td>Lucro</td><td class="mn dn">-$136</td><td class="mn up">+$1.167</td><td class="mn up">+$1.303</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="st">O que mudou ao longo do dia</div>
+    <div class="tcol">
+      <div class="tw">
+        <div class="th"><div class="tt" style="color:var(--red);">Manha (09:54) &mdash; Preocupante</div></div>
+        <table>
+          <tr><td style="color:var(--muted);font-size:11px;">FB Diabetes</td><td class="mn dn">0x &mdash; 0 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Vapofil TK</td><td class="mn" style="color:var(--yellow);">0.96x &mdash; 3 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Renda Extra</td><td class="mn up">2.74x &mdash; 7 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Mood</td><td>&#128308; Alarme</td></tr>
+        </table>
+      </div>
+      <div class="tw">
+        <div class="th"><div class="tt" style="color:var(--green);">Fechamento &mdash; Lucrativo</div></div>
+        <table>
+          <tr><td style="color:var(--muted);font-size:11px;">FB Diabetes</td><td class="mn up">1.54x &mdash; 7 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Vapofil TK</td><td class="mn" style="color:var(--yellow);">1.08x &mdash; 8 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Renda Extra</td><td class="mn up">2.52x &mdash; 14 vendas</td></tr>
+          <tr><td style="color:var(--muted);font-size:11px;">Mood</td><td>&#9989; Lucrativo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="banner yellow">
+      <div class="banner-icon">&#9201;</div>
+      <div><div class="banner-title">Padrao identificado: FB converte tarde (horario EUA)</div>
+      De manha (BRT) o publico alvo nos EUA esta dormindo. FB so comeca a converter a partir das 13-14h BRT (10-11h EST). Considerar Day Parting ou nao entrar em panico com FB zerado de manha.</div>
+    </div>
+  </div>
+
+  <!-- ======= OFERTAS ======= -->
+  <div class="tab-content" id="tab-ofertas">
+    <div class="st">Por Oferta &mdash; Fechamento 12/04/2026</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Performance por Oferta</div><div class="tm">Comissao $240/venda</div></div>
+      <table>
+        <thead><tr><th>#</th><th>Oferta</th><th>Canal</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Renda Extra (TTK75)</strong></td><td><span class="tag ttk">TK</span></td><td class="mn">$100</td><td class="mn">$391</td><td><span class="rg">3.91x</span></td><td class="mn" style="color:var(--green);">$17</td><td class="mn">7</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td>2</td><td><strong>Renda Extra (TTK81)</strong></td><td><span class="tag ttk">TK</span></td><td class="mn">$138</td><td class="mn">$300</td><td><span class="rg">2.17x</span></td><td class="mn" style="color:var(--green);">$46</td><td class="mn">6</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td>3</td><td><strong>Diabetes FB (Agencia)</strong></td><td><span class="tag tfb">FB</span></td><td class="mn">$275</td><td class="mn">$1.200</td><td><span class="rg">4.36x</span></td><td class="mn" style="color:var(--green);">$55</td><td class="mn">5</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td>4</td><td><strong>Diabetes FB (Emily)</strong></td><td><span class="tag tfb">FB</span></td><td class="mn">$516</td><td class="mn">$480</td><td><span class="ry">0.93x</span></td><td class="mn" style="color:var(--red);">$258</td><td class="mn">2</td><td><span class="chip cy"><span class="cd"></span>Otimizar</span></td></tr>
+          <tr><td>5</td><td><strong>Vapofil (ED TK)</strong></td><td><span class="tag ttk">TK</span></td><td class="mn">$912</td><td class="mn">$980</td><td><span class="ry">1.08x</span></td><td class="mn" style="color:var(--yellow);">$114</td><td class="mn">8</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="banner green">
+      <div class="banner-icon">&#128161;</div>
+      <div><div class="banner-title">Insight: Agencia Monkey supera Emily C3 hoje em Diabetes FB</div>
+      Agencia (CP0122/0121/0067) gerou ROAS 4-12x vs Emily C3 BIDCAP 720 com 0 vendas. Amanha: pausar Emily BIDCAP 720 e escalar Agencia BIDCAP 240 CBO.</div>
+    </div>
+  </div>
+
+  <!-- ======= CAMPANHAS ======= -->
+  <div class="tab-content" id="tab-camps">
+    <div class="st">Estrutura Vencedora &mdash; Hoje</div>
+    <div class="cards">
+      <div class="card green"><div class="card-label">Campanha do Dia</div><div class="card-value" style="font-size:16px;">CP0122</div><div class="card-sub">Agencia BIDCAP 240 CBO &mdash; ROAS 12.12x</div></div>
+      <div class="card green"><div class="card-label">Melhor CPA Hoje</div><div class="card-value" style="font-size:16px;">$6.62</div><div class="card-sub">TTK75-10 RA008 &mdash; 3 vendas</div></div>
+      <div class="card blue"><div class="card-label">Modelo Vencedor</div><div class="card-value" style="font-size:16px;">CBO</div><div class="card-sub">Agencia 873022 BIDCAP 240</div></div>
+      <div class="card green"><div class="card-label">Criativo do Dia FB</div><div class="card-value" style="font-size:16px;">D070</div><div class="card-sub">Agencia Monkey 3 campanhas</div></div>
+      <div class="card green"><div class="card-label">Criativo do Dia TK</div><div class="card-value" style="font-size:16px;">RA008</div><div class="card-sub">TTK75-10 &mdash; CPA $6.62</div></div>
+      <div class="card yellow"><div class="card-label">Total Vendas</div><div class="card-value" style="font-size:16px;">30</div><div class="card-sub">vs 18.4/dia media semana</div></div>
+    </div>
+
+    <div class="st">Todas Campanhas com Receita &mdash; Fechamento</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Ordenado por ROAS</div></div>
+      <table>
+        <thead><tr><th>Canal</th><th>Campanha</th><th>Lance</th><th>Spend</th><th>Rev</th><th>ROAS</th><th>CPA</th><th>V</th><th>Acao</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | BIDCAP 240 | D070 | CP0122</td><td>BIDCAP $240</td><td class="mn">$39.59</td><td class="mn">$480</td><td><span class="rg">12.12x</span></td><td class="mn">$19.80</td><td class="mn">2</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | CJ LIMITADO | D070 | CP0067</td><td>CJ LIMITADO</td><td class="mn">$64.13</td><td class="mn">$480</td><td><span class="rg">7.48x</span></td><td class="mn">$32.07</td><td class="mn">2</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-10 | RENDA EXTRA | RA008 | CP0002</td><td>&mdash;</td><td class="mn">$19.86</td><td class="mn">$132.66</td><td><span class="rg">6.68x</span></td><td class="mn">$6.62</td><td class="mn">3</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA | CBO | BIDCAP 240 | D070 | CP0121</td><td>BIDCAP $240</td><td class="mn">$39.16</td><td class="mn">$240</td><td><span class="rg">6.13x</span></td><td class="mn">$39.16</td><td class="mn">1</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-12 | RENDA EXTRA | RA0014 | CP0005</td><td>&mdash;</td><td class="mn">$16.67</td><td class="mn">$85.83</td><td><span class="rg">5.15x</span></td><td class="mn">$16.67</td><td class="mn">1</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-3 | ED TK | ED0063 | CP0013</td><td>&mdash;</td><td class="mn">$105.64</td><td class="mn">$440</td><td><span class="rg">4.17x</span></td><td class="mn">$52.82</td><td class="mn">2</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-11 | RENDA EXTRA | RA002 | CP0003</td><td>&mdash;</td><td class="mn">$21.01</td><td class="mn">$85.85</td><td><span class="rg">4.09x</span></td><td class="mn">$21.01</td><td class="mn">1</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-14 | RENDA EXTRA | RA005 | CP0003</td><td>&mdash;</td><td class="mn">$22.68</td><td class="mn">$85.68</td><td><span class="rg">3.78x</span></td><td class="mn">$22.68</td><td class="mn">1</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK81-6 | RENDA EXTRA | TK13 | CP0007</td><td>&mdash;</td><td class="mn">$43.85</td><td class="mn">$141.84</td><td><span class="rg">3.23x</span></td><td class="mn">$21.93</td><td class="mn">2</td><td><span class="chip cg"><span class="cd"></span>OK</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-2 | ED TK | ED0022 | CP0008</td><td>&mdash;</td><td class="mn">$142.86</td><td class="mn">$440</td><td><span class="rg">3.08x</span></td><td class="mn">$71.43</td><td class="mn">2</td><td><span class="chip cg"><span class="cd"></span>OK</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-14 | RENDA EXTRA | RA005 | CP0002</td><td>&mdash;</td><td class="mn">$19.94</td><td class="mn">$56.00</td><td><span class="ry">2.81x</span></td><td class="mn">$19.94</td><td class="mn">1</td><td><span class="chip cg"><span class="cd"></span>OK</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-2 | ED TK | ED0022 | CP0009</td><td>&mdash;</td><td class="mn">$80.06</td><td class="mn">$220</td><td><span class="ry">2.75x</span></td><td class="mn">$80.06</td><td class="mn">1</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-13 | ED TK | RA004 | CP0001</td><td>&mdash;</td><td class="mn">$22.97</td><td class="mn">$46.80</td><td><span class="ry">2.04x</span></td><td class="mn">$11.49</td><td class="mn">2</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td class="cn">EMILY C3 | CBO ADVANTAGE | D047+SCK85 | CP0103</td><td>CBO ADV</td><td class="mn">$311.61</td><td class="mn">$480</td><td><span class="ry">1.54x</span></td><td class="mn">$155.81</td><td class="mn">2</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK82-4 | ED TK | ED0024 | CP0008</td><td>&mdash;</td><td class="mn">$123.63</td><td class="mn">$220</td><td><span class="ry">1.78x</span></td><td class="mn">$123.63</td><td class="mn">1</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td class="cn">TTK75-11 | ED TK | RA002 | CP0001</td><td>&mdash;</td><td class="mn">$58.70</td><td class="mn">$85.75</td><td><span class="ry">1.46x</span></td><td class="mn">$58.70</td><td class="mn">1</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr style="opacity:0.5"><td><span class="tag tfb">FB</span></td><td class="cn">AGENCIA MONKEY | CBO | CJ LIMITADO | CP0117</td><td>CJ LIMITADO</td><td class="mn">$108.43</td><td class="mn z">$0</td><td><span class="rr">0x</span></td><td class="mn z">--</td><td class="mn">0</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+          <tr style="opacity:0.5"><td><span class="tag tfb">FB</span></td><td class="cn">EMILY C3 | BIDCAP 720 | SCK85 | CP0043</td><td>BIDCAP $720</td><td class="mn">$113.33</td><td class="mn z">$0</td><td><span class="rr">0x</span></td><td class="mn z">--</td><td class="mn">0</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ======= 7 DIAS ======= -->
+  <div class="tab-content" id="tab-semana">
+    <div class="st">Resumo &mdash; 05 a 11 Abr 2026 (7 dias)</div>
     <div class="cards">
       <div class="card yellow"><div class="card-label">Spend 7d</div><div class="card-value">$26.2k</div><div class="card-sub">$3.748/dia media</div></div>
       <div class="card yellow"><div class="card-label">Receita 7d</div><div class="card-value">$23.3k</div><div class="card-sub">$3.335/dia media</div></div>
       <div class="card red"><div class="card-label">ROAS 7d</div><div class="card-value">0.89x</div><div class="card-sub">Meta: 1.43x</div></div>
       <div class="card blue"><div class="card-label">Vendas 7d</div><div class="card-value">129</div><div class="card-sub">18.4/dia media</div></div>
       <div class="card red"><div class="card-label">CPA 7d</div><div class="card-value">$203</div><div class="card-sub">Meta: $168</div></div>
-      <div class="card red"><div class="card-label">Lucro 7d</div><div class="card-value">-$2.9k</div><div class="card-sub">Break-even: 1.00x</div></div>
+      <div class="card red"><div class="card-label">Lucro 7d</div><div class="card-value">-$2.9k</div><div class="card-sub">Hoje: +$1.167</div></div>
     </div>
-    <div class="section-title">Top Campanhas 7 Dias &mdash; ROAS acima de 1.3x</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Campanhas vencedoras (05-11/04/2026)</div></div>
-      <table><thead><tr><th>Canal</th><th>Conta</th><th>Modelo</th><th>Lance</th><th>Pais</th><th>Criativo</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>V</th></tr></thead>
-      <tbody>
-        <tr><td><span class="tag tag-fb">FB</span></td><td>Emily C3</td><td>CBO Catalogo</td><td>BIDCAP $180</td><td>US-AU</td><td class="mono">SCK85</td><td class="mono">$118</td><td class="mono">$960</td><td><span class="roas-good">8.15x</span></td><td class="mono">$29</td><td class="mono">4</td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td>Agencia Monkey</td><td>ABO</td><td>BIDCAP $240</td><td>US</td><td class="mono">D070</td><td class="mono">$188</td><td class="mono">$720</td><td><span class="roas-good">3.83x</span></td><td class="mono">$63</td><td class="mono">3</td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td>TTK81-6</td><td>&mdash;</td><td>&mdash;</td><td>US</td><td class="mono">TK13</td><td class="mono">$193</td><td class="mono">$428</td><td><span class="roas-good">2.21x</span></td><td class="mono">$28</td><td class="mono">7</td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td>Emily C3</td><td>CBO Cat.</td><td>CJ LIMITADO</td><td>US-AU</td><td class="mono">SCK85</td><td class="mono">$386</td><td class="mono">$960</td><td><span class="roas-good">2.49x</span></td><td class="mono">$96</td><td class="mono">4</td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td>Agencia 1526344</td><td>ABO</td><td>COSTCAP $210</td><td>US</td><td class="mono">D074</td><td class="mono">$292</td><td class="mono">$720</td><td><span class="roas-good">2.47x</span></td><td class="mono">$97</td><td class="mono">3</td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td>Agencia Monkey</td><td>CBO</td><td>CJ LIMITADO</td><td>US</td><td class="mono">D070</td><td class="mono">$293</td><td class="mono">$720</td><td><span class="roas-good">2.46x</span></td><td class="mono">$98</td><td class="mono">3</td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td>TTK82-4</td><td>&mdash;</td><td>&mdash;</td><td>US-CA-AU</td><td class="mono">ED0024</td><td class="mono">$580</td><td class="mono">$880</td><td><span class="roas-ok">1.52x</span></td><td class="mono">$145</td><td class="mono">4</td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td>TTK82-2</td><td>&mdash;</td><td>&mdash;</td><td>US</td><td class="mono">ED0022</td><td class="mono">$1.240</td><td class="mono">$1.760</td><td><span class="roas-ok">1.42x</span></td><td class="mono">$155</td><td class="mono">8</td></tr>
-      </tbody></table>
+    <div class="banner yellow">
+      <div class="banner-icon">&#128200;</div>
+      <div><div class="banner-title">Hoje (12/04) foi o melhor dia da semana: ROAS 1.42x com lucro de $1.167</div>
+      A semana anterior teve ROAS negativo (0.89x). Se amanha replicar o padrao de hoje com Agencia BIDCAP 240 + TTK75, a semana atual ja comeca positiva.</div>
     </div>
-    <div class="section-title">Campanhas a Pausar &mdash; $1.513 desperdicados</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Spend acima de $100 com 0 conversoes ou ROAS menor que 0.8x</div><div class="table-meta" style="color:var(--red);">$216/dia perdido</div></div>
-      <table><thead><tr><th>Canal</th><th>Campanha</th><th>Spend 7d</th><th>Rev</th><th>ROAS</th><th>Motivo</th></tr></thead>
-      <tbody>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">Lauren Walker 1 | CJ LIMITADO | US</td><td class="mono" style="color:var(--red);">$224</td><td class="mono zero">$0</td><td><span class="roas-bad">0x</span></td><td><span class="tag tag-red">0 vendas</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">Victoria Scarlett 3 | CJ LIMITADO | US</td><td class="mono" style="color:var(--red);">$125</td><td class="mono zero">$0</td><td><span class="roas-bad">0x</span></td><td><span class="tag tag-red">0 vendas</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-3 | ED TK | ED0018 | CP0005</td><td class="mono" style="color:var(--red);">$384</td><td class="mono">$200</td><td><span class="roas-bad">0.52x</span></td><td><span class="tag tag-red">ROAS critico</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-4 | ED TK | ED0009 | CP0001</td><td class="mono" style="color:var(--red);">$202</td><td class="mono zero">$0</td><td><span class="roas-bad">0x</span></td><td><span class="tag tag-red">0 vendas</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-2 | ED0015 + ED0016</td><td class="mono" style="color:var(--red);">$437</td><td class="mono zero">$0</td><td><span class="roas-bad">0x</span></td><td><span class="tag tag-red">0 vendas</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">Agencia 1526344 | D054 | CP0015</td><td class="mono" style="color:var(--red);">$141</td><td class="mono zero">$0</td><td><span class="roas-bad">0x</span></td><td><span class="tag tag-red">0 vendas</span></td></tr>
-      </tbody></table>
+
+    <div class="st">Top Campanhas 7 Dias</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Campanhas com ROAS acima de 1.3x (05-11/04/2026)</div></div>
+      <table>
+        <thead><tr><th>Canal</th><th>Conta</th><th>Lance</th><th>Pais</th><th>Criativo</th><th>Spend</th><th>Rev</th><th>ROAS</th><th>CPA</th><th>V</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tfb">FB</span></td><td>Emily C3</td><td>BIDCAP $180</td><td>US-AU</td><td class="mn">SCK85</td><td class="mn">$118</td><td class="mn">$960</td><td><span class="rg">8.15x</span></td><td class="mn">$29</td><td class="mn">4</td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>Agencia Monkey</td><td>BIDCAP $240</td><td>US</td><td class="mn">D070</td><td class="mn">$188</td><td class="mn">$720</td><td><span class="rg">3.83x</span></td><td class="mn">$63</td><td class="mn">3</td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td>TTK81-6</td><td>&mdash;</td><td>US</td><td class="mn">TK13</td><td class="mn">$193</td><td class="mn">$428</td><td><span class="rg">2.21x</span></td><td class="mn">$28</td><td class="mn">7</td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>Emily C3 Cat.</td><td>CJ LIMITADO</td><td>US-AU</td><td class="mn">SCK85</td><td class="mn">$386</td><td class="mn">$960</td><td><span class="rg">2.49x</span></td><td class="mn">$96</td><td class="mn">4</td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>Agencia 1526344</td><td>COSTCAP $210</td><td>US</td><td class="mn">D074</td><td class="mn">$292</td><td class="mn">$720</td><td><span class="rg">2.47x</span></td><td class="mn">$97</td><td class="mn">3</td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td>TTK82-4</td><td>&mdash;</td><td>US-CA-AU</td><td class="mn">ED0024</td><td class="mn">$580</td><td class="mn">$880</td><td><span class="ry">1.52x</span></td><td class="mn">$145</td><td class="mn">4</td></tr>
+          <tr><td><span class="tag ttk">TK</span></td><td>TTK82-2</td><td>&mdash;</td><td>US</td><td class="mn">ED0022</td><td class="mn">$1.240</td><td class="mn">$1.760</td><td><span class="ry">1.42x</span></td><td class="mn">$155</td><td class="mn">8</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="tab-content" id="tab-ofertas">
-    <div class="section-title">Por Oferta &mdash; 7 Dias (05-11/04/2026)</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Performance por Oferta + Plataforma</div></div>
-      <table><thead><tr><th>#</th><th>Oferta</th><th>Canal</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>Vendas</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td><strong>Renda Extra</strong></td><td><span class="tag tag-tk">TK</span></td><td class="mono">$1.130</td><td class="mono">$1.293</td><td><span class="roas-good">1.14x</span></td><td class="mono" style="color:var(--green);">$51</td><td class="mono">22</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td>2</td><td><strong>Diabetes FB</strong><br><small style="color:var(--muted)">SugarHarmony/GlucoZen</small></td><td><span class="tag tag-fb">FB</span></td><td class="mono">$15.326</td><td class="mono">$15.840</td><td><span class="roas-ok">1.03x</span></td><td class="mono" style="color:var(--yellow);">$232</td><td class="mono">66</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Otimizar</span></td></tr>
-        <tr><td>3</td><td><strong>Vapofil (ED TK)</strong></td><td><span class="tag tag-tk">TK</span></td><td class="mono">$9.780</td><td class="mono">$6.192</td><td><span class="roas-bad">0.63x</span></td><td class="mono" style="color:var(--red);">$279</td><td class="mono">35</td><td><span class="chip chip-red"><span class="chip-dot"></span>Revisar</span></td></tr>
-      </tbody></table>
-    </div>
-    <div class="two-col">
-      <div class="table-wrap"><div class="table-header"><div class="table-title" style="color:var(--green);">Renda Extra &mdash; Melhor oferta</div></div>
-        <table>
-          <tr><td style="color:var(--muted);font-size:11px;">CPA medio</td><td class="mono" style="color:var(--green);">$51</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Melhor camp.</td><td class="mono">TTK81-6 TK13 &mdash; ROAS 2.21x</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Hoje</td><td class="mono" style="color:var(--green);">TTK75 ROAS ate 10x!</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Acao</td><td style="color:var(--green);">Dobrar budget TTK75 agora</td></tr>
-        </table>
-      </div>
-      <div class="table-wrap"><div class="table-header"><div class="table-title" style="color:var(--red);">Vapofil (ED TK) &mdash; Critico</div></div>
-        <table>
-          <tr><td style="color:var(--muted);font-size:11px;">CPA medio</td><td class="mono" style="color:var(--red);">$279</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Retencao pitch</td><td class="mono" style="color:var(--red);">1.1 a 2.2%</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Pitch na VSL</td><td class="mono">42:06 (muito tarde)</td></tr>
-          <tr><td style="color:var(--muted);font-size:11px;">Acao</td><td style="color:var(--red);">Nova VSL pitch antes de 20min</td></tr>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div class="tab-content" id="tab-campanhas">
-    <div class="section-title">Estrutura Vencedora &mdash; Semana 05-11 Abr</div>
-    <div class="cards">
-      <div class="card green"><div class="card-label">Melhor Modelo</div><div class="card-value" style="font-size:16px;">CBO Catalogo</div><div class="card-sub">8.15x &mdash; Emily C3 US-AU SCK85</div></div>
-      <div class="card green"><div class="card-label">Melhor Lance FB</div><div class="card-value" style="font-size:16px;">BIDCAP $180</div><div class="card-sub">Estrategia BAIANA US-AU</div></div>
-      <div class="card blue"><div class="card-label">Melhor Pais</div><div class="card-value" style="font-size:16px;">US-AU</div><div class="card-sub">Catalogo Facebook 2-8x</div></div>
-      <div class="card green"><div class="card-label">Melhor Criativo FB</div><div class="card-value" style="font-size:16px;">SCK85</div><div class="card-sub">Emily C3 Catalogo CBO</div></div>
-      <div class="card green"><div class="card-label">Melhor Criativo TK</div><div class="card-value" style="font-size:16px;">TK13</div><div class="card-sub">TTK81-6 Renda Extra CPA $28</div></div>
-    </div>
-    <div class="section-title">Todas as Campanhas &mdash; Ordenado por ROAS</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">7 dias (05-11/04/2026)</div></div>
-      <table><thead><tr><th>Canal</th><th>Campanha</th><th>Lance</th><th>Pais</th><th>Spend</th><th>Rev</th><th>ROAS</th><th>CPA</th><th>V</th><th>Acao</th></tr></thead>
-      <tbody>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">EMILY C3 | CATALOGO | BIDCAP $180 | US-AU | SCK85</td><td>BIDCAP $180</td><td>US-AU</td><td class="mono">$118</td><td class="mono">$960</td><td><span class="roas-good">8.15x</span></td><td class="mono">$29</td><td class="mono">4</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">AGENCIA MONKEY | ABO | BIDCAP $240 | US | D070</td><td>BIDCAP $240</td><td>US</td><td class="mono">$188</td><td class="mono">$720</td><td><span class="roas-good">3.83x</span></td><td class="mono">$63</td><td class="mono">3</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK81-6 | RENDA EXTRA | TK13 | CP0009</td><td>&mdash;</td><td>US</td><td class="mono">$193</td><td class="mono">$428</td><td><span class="roas-good">2.21x</span></td><td class="mono">$28</td><td class="mono">7</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">EMILY C3 | CATALOGO | CBO | CJ LIMITADO | US-AU | SCK85</td><td>CJ LIMITADO</td><td>US-AU</td><td class="mono">$386</td><td class="mono">$960</td><td><span class="roas-good">2.49x</span></td><td class="mono">$96</td><td class="mono">4</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">AGENCIA 1526344 | ABO | COSTCAP $210 | US | D074</td><td>COSTCAP $210</td><td>US</td><td class="mono">$292</td><td class="mono">$720</td><td><span class="roas-good">2.47x</span></td><td class="mono">$97</td><td class="mono">3</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-fb">FB</span></td><td class="camp-name">AGENCIA MONKEY | CBO | CJ LIMITADO | US | D070 | CP0117</td><td>CJ LIMITADO</td><td>US</td><td class="mono">$293</td><td class="mono">$720</td><td><span class="roas-good">2.46x</span></td><td class="mono">$98</td><td class="mono">3</td><td><span class="chip chip-green"><span class="chip-dot"></span>Escalar</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-4 | ED TK | ED0024 | US-CA-AU | CP0006</td><td>&mdash;</td><td>US-CA-AU</td><td class="mono">$580</td><td class="mono">$880</td><td><span class="roas-ok">1.52x</span></td><td class="mono">$145</td><td class="mono">4</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Monitor</span></td></tr>
-        <tr><td><span class="tag tag-tk">TK</span></td><td class="camp-name">TTK82-2 | ED TK | ED0022 | US | CP0008</td><td>&mdash;</td><td>US</td><td class="mono">$1.240</td><td class="mono">$1.760</td><td><span class="roas-ok">1.42x</span></td><td class="mono">$155</td><td class="mono">8</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Monitor</span></td></tr>
-        <tr style="opacity:0.6"><td><span class="tag tag-fb">FB</span></td><td class="camp-name">EMILY C3 | BIDCAP 672 | US | SCK85 | CP0045</td><td>BIDCAP $672</td><td>US</td><td class="mono">$799</td><td class="mono">$960</td><td><span class="roas-ok">1.20x</span></td><td class="mono">$200</td><td class="mono">4</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Monitor</span></td></tr>
-      </tbody></table>
-    </div>
-  </div>
-
+  <!-- ======= VSL ======= -->
   <div class="tab-content" id="tab-vsl">
-    <div class="section-title">Analytics Vturb &mdash; 06 a 12 Abr 2026 (7 dias)</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Performance por Player VSL</div><div class="table-meta">Dados reais Vturb</div></div>
-      <table><thead><tr><th>Oferta</th><th>Canal</th><th>VSL</th><th>Views</th><th>Plays</th><th>Play Rate</th><th>Ret. Pitch</th><th>Engaj.</th><th>Pitch em</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr class="vsl-row-good"><td>GlucoZen</td><td><span class="tag tag-fb">FB</span></td><td>VSL16 EMILY</td><td class="mono">4.463</td><td class="mono">3.952</td><td><span style="color:var(--green);font-weight:700;">91.20%</span></td><td><span style="color:var(--green);font-weight:700;">9.24%</span></td><td class="mono">16.33%</td><td class="mono">55:08</td><td><span class="chip chip-green"><span class="chip-dot"></span>Excelente</span></td></tr>
-        <tr class="vsl-row-good"><td>GlucoZen</td><td><span class="tag tag-fb">FB</span></td><td>VSL16 AGENCIA</td><td class="mono">2.691</td><td class="mono">2.423</td><td><span style="color:var(--green);font-weight:700;">92.17%</span></td><td><span style="color:var(--green);font-weight:700;">7.87%</span></td><td class="mono">13.90%</td><td class="mono">55:08</td><td><span class="chip chip-green"><span class="chip-dot"></span>Excelente</span></td></tr>
-        <tr class="vsl-row-bad"><td>Vapofil</td><td><span class="tag tag-tk">TK</span></td><td>TTK-82-2 (MODELO)</td><td class="mono">10.537</td><td class="mono">7.317</td><td><span style="color:var(--yellow);font-weight:700;">71.56%</span></td><td><span style="color:var(--red);font-weight:700;">1.56%</span></td><td class="mono">5.80%</td><td class="mono">42:06</td><td><span class="chip chip-red"><span class="chip-dot"></span>Critico</span></td></tr>
-        <tr class="vsl-row-bad"><td>Vapofil</td><td><span class="tag tag-tk">TK</span></td><td>TTK-82-4 (MODELO)</td><td class="mono">10.616</td><td class="mono">7.889</td><td><span style="color:var(--yellow);font-weight:700;">77.66%</span></td><td><span style="color:var(--red);font-weight:700;">2.17%</span></td><td class="mono">6.97%</td><td class="mono">42:06</td><td><span class="chip chip-red"><span class="chip-dot"></span>Critico</span></td></tr>
-        <tr class="vsl-row-bad"><td>Vapofil</td><td><span class="tag tag-tk">TK</span></td><td>TTK-83-1 (CERTA)</td><td class="mono">13.601</td><td class="mono">8.599</td><td><span style="color:var(--red);font-weight:700;">63.18%</span></td><td><span style="color:var(--red);font-weight:700;">1.11%</span></td><td class="mono">4.66%</td><td class="mono">42:06</td><td><span class="chip chip-red"><span class="chip-dot"></span>Critico</span></td></tr>
-      </tbody></table>
+    <div class="st">Analytics Vturb &mdash; 06 a 12 Abr 2026</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Performance por Player VSL</div><div class="tm">Dados reais Vturb 7 dias</div></div>
+      <table>
+        <thead><tr><th>Oferta</th><th>Canal</th><th>VSL</th><th>Views</th><th>Plays</th><th>Play Rate</th><th>Ret.Pitch</th><th>Engaj.</th><th>Pitch</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="vgood"><td>GlucoZen</td><td><span class="tag tfb">FB</span></td><td>VSL16 EMILY</td><td class="mn">4.463</td><td class="mn">3.952</td><td style="color:var(--green);font-weight:700;">91.20%</td><td style="color:var(--green);font-weight:700;">9.24%</td><td class="mn">16.33%</td><td class="mn">55:08</td><td><span class="chip cg"><span class="cd"></span>Excelente</span></td></tr>
+          <tr class="vgood"><td>GlucoZen</td><td><span class="tag tfb">FB</span></td><td>VSL16 AGENCIA</td><td class="mn">2.691</td><td class="mn">2.423</td><td style="color:var(--green);font-weight:700;">92.17%</td><td style="color:var(--green);font-weight:700;">7.87%</td><td class="mn">13.90%</td><td class="mn">55:08</td><td><span class="chip cg"><span class="cd"></span>Excelente</span></td></tr>
+          <tr class="vbad"><td>Vapofil</td><td><span class="tag ttk">TK</span></td><td>TTK-82-2</td><td class="mn">10.537</td><td class="mn">7.317</td><td style="color:var(--yellow);font-weight:700;">71.56%</td><td style="color:var(--red);font-weight:700;">1.56%</td><td class="mn">5.80%</td><td class="mn">42:06</td><td><span class="chip cr"><span class="cd"></span>Critico</span></td></tr>
+          <tr class="vbad"><td>Vapofil</td><td><span class="tag ttk">TK</span></td><td>TTK-82-4</td><td class="mn">10.616</td><td class="mn">7.889</td><td style="color:var(--yellow);font-weight:700;">77.66%</td><td style="color:var(--red);font-weight:700;">2.17%</td><td class="mn">6.97%</td><td class="mn">42:06</td><td><span class="chip cr"><span class="cd"></span>Critico</span></td></tr>
+          <tr class="vbad"><td>Vapofil</td><td><span class="tag ttk">TK</span></td><td>TTK-83-1</td><td class="mn">13.601</td><td class="mn">8.599</td><td style="color:var(--red);font-weight:700;">63.18%</td><td style="color:var(--red);font-weight:700;">1.11%</td><td class="mn">4.66%</td><td class="mn">42:06</td><td><span class="chip cr"><span class="cd"></span>Critico</span></td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="two-col">
-      <div><div class="alert-banner green"><div class="alert-icon">&#9989;</div><div><div class="alert-title">GlucoZen FB &mdash; VSL perfeita</div>Play Rate 91-92% e Retencao 7-9%. Gargalo fora da VSL: apenas 2.4% dos cliques chegam ao player. Verificar LP das campanhas BIDCAP 672/720.</div></div></div>
-      <div><div class="alert-banner red"><div class="alert-icon">&#128308;</div><div><div class="alert-title">Vapofil TK &mdash; Retencao ao pitch critica 1-2%</div>Pitch em 42:06. Pessoas saem antes de 10min. Acao urgente: nova VSL com pitch antes de 20 minutos.</div></div></div>
-    </div>
-    <div class="section-title">Funil Completo &mdash; Onde estao os gargalos</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Conversao por etapa (7 dias)</div></div>
-      <table><thead><tr><th>Etapa</th><th>FB Diabetes</th><th>TK Vapofil</th><th>TK Renda Extra</th><th>Benchmark</th></tr></thead>
-      <tbody>
-        <tr><td>Clique no Ad</td><td class="mono">100%</td><td class="mono">100%</td><td class="mono">100%</td><td>&mdash;</td></tr>
-        <tr><td>Play VSL</td><td class="mono" style="color:var(--green);">91-92%</td><td class="mono" style="color:var(--yellow);">63-77%</td><td class="mono">N/D</td><td>&gt;70%</td></tr>
-        <tr><td>Chegada ao Pitch</td><td class="mono" style="color:var(--green);">7-9%</td><td class="mono" style="color:var(--red);">1.1-2.2%</td><td class="mono">N/D</td><td>&gt;7%</td></tr>
-        <tr><td>Clique CTA</td><td class="mono" style="color:var(--red);">2.4%</td><td class="mono">~8%</td><td class="mono">N/D</td><td>&gt;15%</td></tr>
-        <tr><td>Checkout</td><td class="mono">~1.4%</td><td class="mono">~0.4%</td><td class="mono">~2.0%</td><td>&gt;2%</td></tr>
-        <tr><td>Compra Finalizada</td><td class="mono" style="color:var(--yellow);">25.6%</td><td class="mono">~25%</td><td class="mono">~35%</td><td>&gt;30%</td></tr>
-      </tbody></table>
+    <div class="tcol">
+      <div class="banner green"><div class="banner-icon">&#9989;</div><div><div class="banner-title">GlucoZen FB &mdash; VSL perfeita</div>Play Rate 91-92%, Retencao 7-9%. Gargalo: 2.4% cliques chegam ao player. Verificar LP das camps BIDCAP 720.</div></div>
+      <div class="banner red"><div class="banner-icon">&#128308;</div><div><div class="banner-title">Vapofil TK &mdash; Pitch muito tarde (42min)</div>1.1-2.2% retencao. Criar nova VSL com pitch antes de 20 minutos urgente.</div></div>
     </div>
   </div>
 
+  <!-- ======= ALERTAS ======= -->
   <div class="tab-content" id="tab-alertas">
-    <div class="section-title">Alertas Ativos &mdash; 12 Abr 2026</div>
-    <div class="alert-banner red"><div class="alert-icon">&#128308;</div><div><div class="alert-title">Facebook 0 conversoes hoje ($282 gastos ate 09:54)</div>Emily C3 BIDCAP 720: $75 / 0v. CBO ADVANTAGE: $52 / 0v. Agencia Monkey: $46 / 0v. Monitorar ate 14h BRT.</div></div>
-    <div class="alert-banner red"><div class="alert-icon">&#128308;</div><div><div class="alert-title">Vapofil VSL retencao 1-2% (meta: 7%+)</div>34.805 plays na semana, pitch em 42:06. Menos de 2% chegam ao pitch. Criar nova VSL com pitch antes dos 20 minutos.</div></div>
-    <div class="alert-banner yellow"><div class="alert-icon">&#127825;</div><div><div class="alert-title">GlucoZen FB &mdash; Connect rate VSL baixo (2.4%)</div>Play Rate e Retencao otimos (91% e 9%). Porem 2.4% dos cliques chegam ao player. Verificar URL de destino das campanhas BIDCAP 672/720.</div></div>
-    <div class="alert-banner yellow"><div class="alert-icon">&#127825;</div><div><div class="alert-title">ROAS geral abaixo do break-even ha 7 dias (0.89x)</div>Prejuizo acumulado $2.887. $1.513 desperdicados em campanhas com 0 conversoes. Pausar lista abaixo imediatamente.</div></div>
-    <div class="alert-banner green"><div class="alert-icon">&#128640;</div><div><div class="alert-title">TTK75 convertendo bem hoje! Escalar agora.</div>TTK75-12 ROAS 10.17x, TTK75-11 ROAS 7.57x, TTK75-10 ROAS 4.93x. Dobrar budget imediatamente.</div></div>
-    <div class="alert-banner green"><div class="alert-icon">&#128994;</div><div><div class="alert-title">Estrutura vencedora: Emily C3 + Catalogo + BIDCAP $180 + US-AU + SCK85</div>ROAS 8.15x na semana. CPA $29. Clonar para novas contas agora.</div></div>
-    <div class="section-title">Checklist de Hoje</div>
-    <div class="table-wrap">
-      <div class="table-header"><div class="table-title">Acoes imediatas</div></div>
-      <table><thead><tr><th>#</th><th>Acao</th><th>Impacto</th><th>Prioridade</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>Pausar Lauren Walker 1 e Victoria Scarlett 3 (0 vendas 7d)</td><td style="color:var(--green);">Economiza $50/dia</td><td><span class="chip chip-red"><span class="chip-dot"></span>Hoje</span></td></tr>
-        <tr><td>2</td><td>Pausar TTK82-3 ED0018 e TTK82-4 ED0009</td><td style="color:var(--green);">Economiza $84/dia</td><td><span class="chip chip-red"><span class="chip-dot"></span>Hoje</span></td></tr>
-        <tr><td>3</td><td>Aumentar budget TTK75-10, TTK75-11, TTK75-12 em +100%</td><td style="color:var(--green);">+$200-400 receita/dia</td><td><span class="chip chip-red"><span class="chip-dot"></span>Hoje</span></td></tr>
-        <tr><td>4</td><td>Monitorar FB ate 14h BRT &mdash; se 0 vendas pausar Emily BIDCAP 720</td><td>Evitar perda de $75+</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>14h BRT</span></td></tr>
-        <tr><td>5</td><td>Verificar URL de destino das campanhas BIDCAP 672/720 Emily C3</td><td>Corrige connect rate 2.4%</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Hoje</span></td></tr>
-        <tr><td>6</td><td>Nova VSL Vapofil com pitch antes dos 20 minutos</td><td>Retencao 1.5% para 7%+</td><td><span class="chip chip-yellow"><span class="chip-dot"></span>Esta semana</span></td></tr>
-        <tr><td>7</td><td>Clonar Emily C3 CATALOGO BIDCAP $180 US-AU SCK85 para nova conta</td><td>Replicar ROAS 8.15x</td><td><span class="chip chip-green"><span class="chip-dot"></span>Amanha</span></td></tr>
-        <tr><td>8</td><td>Testar Renda Extra no Facebook</td><td>CPA $51 no TK pode ser melhor no FB</td><td><span class="chip chip-green"><span class="chip-dot"></span>Esta semana</span></td></tr>
-      </tbody></table>
+    <div class="st">Alertas de Fechamento &mdash; 12 Abr 2026</div>
+
+    <div class="banner green">
+      <div class="banner-icon">&#127881;</div>
+      <div><div class="banner-title">DIA FECHADO NO POSITIVO! ROAS 1.42x &mdash; Lucro +$1.167</div>Primeira virada da semana. Agencia Monkey e TTK75 foram os heroes do dia.</div>
+    </div>
+
+    <div class="banner red">
+      <div class="banner-icon">&#128308;</div>
+      <div><div class="banner-title">Pausar amanha: EMILY C3 BIDCAP 720 CP0043 ($113 / 0 vendas)</div>Zero vendas no dia inteiro com $113 gasto. Pausar e realocar budget para Agencia BIDCAP 240.</div>
+    </div>
+
+    <div class="banner red">
+      <div class="banner-icon">&#128308;</div>
+      <div><div class="banner-title">Pausar amanha: AGENCIA MONKEY CBO CJ LIMITADO CP0117 ($108 / 0 vendas)</div>Zero vendas no dia. A versao CP0067 e CP0122 do mesmo formato convertem muito melhor.</div>
+    </div>
+
+    <div class="banner yellow">
+      <div class="banner-icon">&#127825;</div>
+      <div><div class="banner-title">Vapofil VSL retencao ao pitch 1-2% (meta: 7%+)</div>34.805 plays na semana, pitch em 42:06. Nova VSL urgente com pitch antes de 20 minutos.</div>
+    </div>
+
+    <div class="banner green">
+      <div class="banner-icon">&#128640;</div>
+      <div><div class="banner-title">Escalar amanha: Agencia 873022 BIDCAP 240 CBO (CP0121/CP0122/CP0067)</div>ROAS 6-12x hoje. D070 como criativo. Budget atual baixo. Aumentar 100% em todas as 3.</div>
+    </div>
+
+    <div class="banner green">
+      <div class="banner-icon">&#128640;</div>
+      <div><div class="banner-title">Escalar amanha: TTK75-10/11/12/14 (Renda Extra RA008/RA002/RA0014/RA005)</div>CPA entre $6 e $22. ROAS entre 3.7x e 6.7x. Dobrar budget em todas as contas TTK75.</div>
+    </div>
+
+    <div class="st">Checklist de Amanha (13/04/2026)</div>
+    <div class="tw">
+      <div class="th"><div class="tt">Acoes prioritarias</div></div>
+      <table>
+        <thead><tr><th>#</th><th>Acao</th><th>Impacto</th><th>Prioridade</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Pausar EMILY C3 BIDCAP 720 CP0043</td><td style="color:var(--green);">Economiza $113/dia</td><td><span class="chip cr"><span class="cd"></span>Primeira coisa</span></td></tr>
+          <tr><td>2</td><td>Pausar AGENCIA MONKEY CBO CJ LIMITADO CP0117</td><td style="color:var(--green);">Economiza $108/dia</td><td><span class="chip cr"><span class="cd"></span>Primeira coisa</span></td></tr>
+          <tr><td>3</td><td>Aumentar budget Agencia 873022 BIDCAP 240 CBO (CP0121/0122/0067) +100%</td><td style="color:var(--green);">+$500-1000 receita/dia</td><td><span class="chip cr"><span class="cd"></span>Manha</span></td></tr>
+          <tr><td>4</td><td>Aumentar budget TTK75-10/11/12/14 +100%</td><td style="color:var(--green);">+$300-500 receita/dia</td><td><span class="chip cr"><span class="cd"></span>Manha</span></td></tr>
+          <tr><td>5</td><td>Testar criativo ED0063 em mais contas TK (TTK82-3 foi 4.17x)</td><td>Novo padrao Vapofil</td><td><span class="chip cy"><span class="cd"></span>Tarde</span></td></tr>
+          <tr><td>6</td><td>Monitorar FB ate 14h BRT antes de concluir sobre performance</td><td>Padrao: FB converte tarde</td><td><span class="chip cy"><span class="cd"></span>14h BRT</span></td></tr>
+          <tr><td>7</td><td>Nova VSL Vapofil com pitch antes de 20 minutos</td><td>Retencao 1% para 7%+</td><td><span class="chip cg"><span class="cd"></span>Esta semana</span></td></tr>
+          <tr><td>8</td><td>Testar Renda Extra no Facebook (CPA $17-46 no TK)</td><td>Nova frente lucrativa</td><td><span class="chip cg"><span class="cd"></span>Esta semana</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
 </div>
 </div>
 <script>
-function showTab(id) {
-  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
-  document.querySelectorAll('nav a').forEach(function(el) { el.classList.remove('active'); });
-  var tc = document.getElementById('tab-' + id);
-  if (tc) tc.classList.add('active');
-  var tabMap = ['today','week','ofertas','campanhas','vsl','alertas'];
-  var idx = tabMap.indexOf(id);
-  var tabs = document.querySelectorAll('.tab');
-  var navLinks = document.querySelectorAll('nav a');
-  if (idx >= 0 && tabs[idx]) tabs[idx].classList.add('active');
-  if (idx >= 0 && navLinks[idx]) navLinks[idx].classList.add('active');
+function T(id){
+  document.querySelectorAll('.tab-content').forEach(function(e){e.classList.remove('active');});
+  document.querySelectorAll('.tab').forEach(function(e){e.classList.remove('active');});
+  document.querySelectorAll('nav a').forEach(function(e){e.classList.remove('active');});
+  var tc=document.getElementById('tab-'+id);if(tc)tc.classList.add('active');
+  var m=['hoje','manha','ofertas','camps','semana','vsl','alertas'];
+  var i=m.indexOf(id);
+  var ts=document.querySelectorAll('.tab');
+  var ns=document.querySelectorAll('nav a');
+  if(i>=0&&ts[i])ts[i].classList.add('active');
+  if(i>=0&&ns[i])ns[i].classList.add('active');
 }
 </script>
 </body>
