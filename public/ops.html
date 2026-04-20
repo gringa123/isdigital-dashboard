@@ -6,55 +6,51 @@
 <title>isdigital OPS</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--s:#111118;--s2:#18181f;--b:#222230;--t:#e8e8f0;--m:#6b6b80;--g:#00ff88;--r:#ff3b5c;--y:#ffcc00;--bl:#4f9eff;--pu:#b66dff;--gd:rgba(0,255,136,0.1);--rd:rgba(255,59,92,0.1);--yd:rgba(255,204,0,0.1);--bld:rgba(79,158,255,0.1);--pud:rgba(182,109,255,0.1);}
+:root{--bg:#0a0a0f;--s:#111118;--s2:#18181f;--b:#222230;--t:#e8e8f0;--m:#6b6b80;--g:#00ff88;--r:#ff3b5c;--y:#ffcc00;--bl:#4f9eff;--pu:#a855f7;--gd:rgba(0,255,136,0.1);--rd:rgba(255,59,92,0.1);--yd:rgba(255,204,0,0.1);--bld:rgba(79,158,255,0.1);--pud:rgba(168,85,247,0.1);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;font-size:14px;}
 .shell{display:flex;min-height:100vh;}
-.sb{width:200px;background:var(--s);border-right:1px solid var(--b);display:flex;flex-direction:column;padding:20px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;}
-.mn{margin-left:200px;flex:1;padding:24px 28px;}
-.logo{font-family:'Space Mono',monospace;font-size:15px;color:var(--g);padding:0 20px 24px;border-bottom:1px solid var(--b);}
+.sb{width:210px;background:var(--s);border-right:1px solid var(--b);display:flex;flex-direction:column;padding:20px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;}
+.mn{margin-left:210px;flex:1;padding:24px 28px;}
+.logo{font-family:'Space Mono',monospace;font-size:15px;color:var(--g);padding:0 20px 20px;border-bottom:1px solid var(--b);}
 .logo span{color:var(--m);font-size:11px;display:block;margin-top:2px;}
-nav{padding:16px 8px;flex:1;}
+nav{padding:12px 8px;flex:1;}
 nav a{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;color:var(--m);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;margin-bottom:2px;}
 nav a:hover,nav a.active{background:var(--s2);color:var(--t);}
 nav a.active{color:var(--g);}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--m);flex-shrink:0;}
 nav a.active .dot{background:var(--g);}
+.nav-sep{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--m);padding:12px 12px 4px;font-weight:700;}
 .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
 .htit{font-family:'Space Mono',monospace;font-size:22px;letter-spacing:-1px;}
 .htit span{color:var(--g);}
 .bdg{display:inline-flex;align-items:center;gap:6px;background:var(--s);border:1px solid var(--b);padding:6px 12px;border-radius:20px;font-size:12px;color:var(--m);}
 .bdg-dot{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--b);}
-.tab{padding:8px 16px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;}
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--b);flex-wrap:wrap;}
+.tab{padding:8px 16px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;white-space:nowrap;}
 .tab:hover{color:var(--t);}
 .tab.active{color:var(--g);border-bottom-color:var(--g);}
 .tc{display:none;}
 .tc.active{display:block;}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:20px;}
 .card{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px;}
 .cl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
 .cv{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;}
 .cs{font-size:11px;color:var(--m);margin-top:4px;}
-.card.g{border-color:rgba(0,255,136,0.25);background:var(--gd);}
-.card.g .cv{color:var(--g);}
-.card.r{border-color:rgba(255,59,92,0.25);background:var(--rd);}
-.card.r .cv{color:var(--r);}
-.card.y{border-color:rgba(255,204,0,0.2);background:var(--yd);}
-.card.y .cv{color:var(--y);}
-.card.b{border-color:rgba(79,158,255,0.2);background:var(--bld);}
-.card.b .cv{color:var(--bl);}
-.card.p{border-color:rgba(182,109,255,0.25);background:var(--pud);}
-.card.p .cv{color:var(--pu);}
-.hero{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:20px 24px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);}
-.hero.r{border-color:rgba(255,59,92,0.3);background:rgba(255,59,92,0.04);}
-.hero.g{border-color:rgba(0,255,136,0.35);background:rgba(0,255,136,0.04);}
+.card.g{border-color:rgba(0,255,136,0.25);background:var(--gd);}.card.g .cv{color:var(--g);}
+.card.r{border-color:rgba(255,59,92,0.25);background:var(--rd);}.card.r .cv{color:var(--r);}
+.card.y{border-color:rgba(255,204,0,0.2);background:var(--yd);}.card.y .cv{color:var(--y);}
+.card.b{border-color:rgba(79,158,255,0.2);background:var(--bld);}.card.b .cv{color:var(--bl);}
+.card.pu{border-color:rgba(168,85,247,0.25);background:var(--pud);}.card.pu .cv{color:var(--pu);}
+.hero{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);}
+.hero.win{border-color:rgba(0,255,136,0.35);background:rgba(0,255,136,0.04);}
+.hero.lose{border-color:rgba(255,59,92,0.25);background:rgba(255,59,92,0.03);}
 .hi{padding:0 16px;border-right:1px solid var(--b);}
 .hi:first-child{padding-left:0;}
 .hi:last-child{border-right:none;}
 .hl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
-.hv{font-family:'Space Mono',monospace;font-size:24px;font-weight:700;}
+.hv{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;}
 .hc{font-size:11px;color:var(--m);margin-top:4px;}
 .up{color:var(--g);}.dn{color:var(--r);}.fl{color:var(--y);}
 .ban{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;display:flex;align-items:flex-start;gap:10px;}
@@ -62,7 +58,7 @@ nav a.active .dot{background:var(--g);}
 .ban.y{background:var(--yd);border:1px solid rgba(255,204,0,0.3);}
 .ban.g{background:var(--gd);border:1px solid rgba(0,255,136,0.3);}
 .ban.b{background:var(--bld);border:1px solid rgba(79,158,255,0.3);}
-.ban.p{background:var(--pud);border:1px solid rgba(182,109,255,0.3);}
+.ban.pu{background:var(--pud);border:1px solid rgba(168,85,247,0.3);}
 .bi{font-size:18px;flex-shrink:0;}
 .bt{font-weight:700;margin-bottom:2px;}
 .tw{background:var(--s);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:20px;}
@@ -75,41 +71,43 @@ td{padding:10px 14px;border-bottom:1px solid rgba(34,34,48,0.5);vertical-align:m
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,0.02);}
 .mo{font-family:'Space Mono',monospace;font-size:12px;}
-.cn{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
+.cn{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
 .tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
 .tfb{background:rgba(24,119,242,0.2);color:#4f9eff;}
 .ttk{background:rgba(255,0,80,0.15);color:#ff3b5c;}
-.temag{background:rgba(182,109,255,0.2);color:#b66dff;}
+.tpu{background:rgba(168,85,247,0.2);color:#a855f7;}
 .rg{color:var(--g);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
 .ry{color:var(--y);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
 .rr{color:var(--r);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.z{color:var(--m);}
 .chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
 .cg{background:var(--gd);color:var(--g);border:1px solid rgba(0,255,136,0.2);}
 .cr{background:var(--rd);color:var(--r);border:1px solid rgba(255,59,92,0.2);}
 .cy{background:var(--yd);color:var(--y);border:1px solid rgba(255,204,0,0.2);}
-.cp{background:var(--pud);color:var(--pu);border:1px solid rgba(182,109,255,0.2);}
+.cb{background:var(--bld);color:var(--bl);border:1px solid rgba(79,158,255,0.2);}
+.cpu{background:var(--pud);color:var(--pu);border:1px solid rgba(168,85,247,0.2);}
 .cd{width:5px;height:5px;border-radius:50%;background:currentColor;}
 .tc2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
 .st{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--m);font-weight:700;margin-bottom:12px;margin-top:20px;}
 .st:first-child{margin-top:0;}
 .vg td{background:rgba(0,255,136,0.03);}
 .vb td{background:rgba(255,59,92,0.03);}
-.vp td{background:rgba(182,109,255,0.03);}
+.vy td{background:rgba(255,204,0,0.03);}
+.vpu td{background:rgba(168,85,247,0.03);}
 /* VSL comparativo */
-.vsl-box{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:20px;margin-bottom:16px;}
-.vsl-box-title{font-size:13px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.vsl-row{display:grid;grid-template-columns:130px 1fr 1fr 90px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--b);}
+.vsl-box{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:18px;margin-bottom:16px;}
+.vsl-title{font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.vsl-row{display:grid;grid-template-columns:130px 1fr 1fr 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(34,34,48,0.4);}
 .vsl-row:last-child{border-bottom:none;}
 .vsl-lbl{font-size:11px;color:var(--m);}
-.bar-w{background:var(--b);border-radius:4px;height:7px;overflow:hidden;}
-.bar-f{height:7px;border-radius:4px;}
+.bar-w{background:var(--b);border-radius:4px;height:6px;overflow:hidden;}
+.bar-f{height:6px;border-radius:4px;}
 .bar-g{background:var(--g);}
 .bar-y{background:var(--y);}
 .bar-r{background:var(--r);}
-.bar-p{background:var(--pu);}
-.d-up{color:var(--g);font-weight:700;font-size:12px;text-align:right;}
-.d-dn{color:var(--r);font-weight:700;font-size:12px;text-align:right;}
-.d-eq{color:var(--m);font-size:12px;text-align:right;}
+.dlt-up{color:var(--g);font-weight:700;font-size:12px;}
+.dlt-dn{color:var(--r);font-weight:700;font-size:12px;}
+.dlt-eq{color:var(--m);font-size:12px;}
 </style>
 </head>
 <body>
@@ -117,10 +115,14 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 <div class="sb">
   <div class="logo">isdigital<span>OPS Dashboard</span></div>
   <nav>
-    <a class="active" onclick="T('hoje')"><span class="dot"></span>Hoje</a>
-    <a onclick="T('semana')"><span class="dot"></span>7 Dias</a>
+    <div class="nav-sep">Hoje 19/04</div>
+    <a class="active" onclick="T('hoje')"><span class="dot"></span>Overview</a>
     <a onclick="T('camps')"><span class="dot"></span>Campanhas</a>
-    <a onclick="T('vsl')"><span class="dot"></span>VSL + Funil</a>
+    <div class="nav-sep">Semana</div>
+    <a onclick="T('semana')"><span class="dot"></span>7 Dias</a>
+    <div class="nav-sep">Funil</div>
+    <a onclick="T('vsl')"><span class="dot"></span>VSL + Comparativo</a>
+    <div class="nav-sep">Acao</div>
     <a onclick="T('alertas')"><span class="dot"></span>Alertas</a>
   </nav>
 </div>
@@ -129,133 +131,128 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   <div class="hdr">
     <div class="htit">OPS <span>// isdigital</span></div>
     <div style="display:flex;gap:10px;align-items:center;">
-      <div class="bdg"><span class="bdg-dot"></span>19 Abr 2026 &mdash; Live</div>
-      <div class="bdg" style="border-color:rgba(182,109,255,0.3);color:var(--pu);">&#128293; Nova oferta: EMAG TK</div>
+      <div class="bdg"><span class="bdg-dot"></span>19 Abr 2026 &mdash; Ao vivo</div>
+      <div class="bdg" style="border-color:rgba(255,59,92,0.3);color:var(--r);">ROAS 0.89x &mdash; Em calibracao</div>
     </div>
   </div>
 
   <div class="tabs">
-    <div class="tab active" onclick="T('hoje')">Hoje</div>
-    <div class="tab" onclick="T('semana')">7 Dias</div>
+    <div class="tab active" onclick="T('hoje')">Overview</div>
     <div class="tab" onclick="T('camps')">Campanhas</div>
-    <div class="tab" onclick="T('vsl')">VSL + Funil</div>
+    <div class="tab" onclick="T('semana')">7 Dias</div>
+    <div class="tab" onclick="T('vsl')">VSL + Comparativo</div>
     <div class="tab" onclick="T('alertas')">Alertas</div>
   </div>
 
   <!-- HOJE -->
   <div class="tc active" id="tab-hoje">
 
-    <div class="ban p">
-      <div class="bi">&#128293;</div>
-      <div><div class="bt">SEMANA NOVA — TikTok voltou com nova oferta EMAG TK (emagrecimento)!</div>
-      Contas TTK73 e TTK74 rodando hoje com criativos EMAG002 e EMAG007. Ainda calibrando. FB Agencia Monkey continua forte com ROAS 3.86-9.7x. ROAS total negativo por causa do EMAG ainda sem conversoes suficientes.</div>
+    <div class="ban pu">
+      <div class="bi">&#128640;</div>
+      <div><div class="bt">&#10024; Nova oferta estreando hoje: EMAG TK (Emagrecimento no TikTok)</div>
+      TTK73 e TTK74 rodando com criativos EMAG002, EMAG007, EMAG014. Ainda calibrando &mdash; ROAS 0.92-1.33x. FB Diabetes (Agencia Monkey) continua sendo o destaque do dia com ROAS 3.86-9.70x.</div>
     </div>
 
-    <div class="hero r">
-      <div class="hi"><div class="hl">Spend Hoje</div><div class="hv" style="color:var(--t);">$2.538</div><div class="hc">FB + TK EMAG</div></div>
-      <div class="hi"><div class="hl">Receita</div><div class="hv" style="color:var(--y);">$2.260</div><div class="hc">10 vendas</div></div>
-      <div class="hi"><div class="hl">ROAS</div><div class="hv" style="color:var(--r);">0.89x</div><div class="hc">TK EMAG puxando pra baixo</div></div>
-      <div class="hi"><div class="hl">Vendas</div><div class="hv" style="color:var(--bl);">10</div><div class="hc">AOV: $226</div></div>
-      <div class="hi"><div class="hl">Lucro</div><div class="hv" style="color:var(--r);">-$278</div><div class="hc">TK EMAG: -$369</div></div>
+    <div class="hero lose">
+      <div class="hi"><div class="hl">Spend Hoje</div><div class="hv" style="color:var(--t);">$2.538</div><div class="hc">FB + TK novo</div></div>
+      <div class="hi"><div class="hl">Receita Hoje</div><div class="hv" style="color:var(--y);">$2.260</div><div class="hc">10 vendas</div></div>
+      <div class="hi"><div class="hl">ROAS</div><div class="hv" style="color:var(--r);">0.89x</div><div class="hc">EMAG calibrando</div></div>
+      <div class="hi"><div class="hl">Vendas</div><div class="hv" style="color:var(--bl);">10</div><div class="hc">AOV $226</div></div>
+      <div class="hi"><div class="hl">Lucro</div><div class="hv" style="color:var(--r);">-$278</div><div class="hc">EMAG pesando</div></div>
       <div class="hi"><div class="hl">CPA</div><div class="hv" style="color:var(--r);">$253</div><div class="hc">Meta: $168</div></div>
     </div>
 
-    <div class="st">Por Plataforma/Oferta &mdash; Hoje</div>
-    <div class="tc2">
-      <div class="card g"><div class="cl">Facebook &mdash; GlucoZen</div><div class="cv">3.7x</div><div class="cs">Agencia + Emily / $1.809 spend / $1.980 rev / 9v</div></div>
-      <div class="card p"><div class="cl">TikTok &mdash; EMAG (Novo!)</div><div class="cv">0.52x</div><div class="cs">TTK73+TTK74 / $729 spend / $380 rev / 2v / Calibrando</div></div>
+    <div class="st">Por Oferta &mdash; Hoje</div>
+    <div class="cards">
+      <div class="card g"><div class="cl">Diabetes FB (Agencia)</div><div class="cv">3.86x</div><div class="cs">CBO BIDCAP 240 &mdash; $122 spend / $470 rev</div></div>
+      <div class="card g"><div class="cl">Diabetes FB (Emily)</div><div class="cv">3.91x</div><div class="cs">CBO BIDCAP 240 SCK85 &mdash; $60 / $235</div></div>
+      <div class="card pu"><div class="cl">&#10024; EMAG TK (novo)</div><div class="cv">1.12x</div><div class="cs">TTK73+74 &mdash; $350 spend / $380 rev &mdash; calibrando</div></div>
     </div>
 
-    <div class="st">Top Campanhas Hoje &mdash; por ROAS</div>
+    <div class="ban g">
+      <div class="bi">&#127881;</div>
+      <div><div class="bt">&#127881; Emily C3 migrada para Player 2.0! Ret.Pitch voltou a aparecer</div>
+      Player VSL16 Emily agora no Player 2.0 &mdash; hoje marcando 10.33% de retencao ao pitch. A melhor taxa que ja registramos nessa VSL!</div>
+    </div>
+  </div>
+
+  <!-- CAMPANHAS -->
+  <div class="tc" id="tab-camps">
+    <div class="st">Campanhas com Receita &mdash; Hoje 19/04</div>
     <div class="tw">
-      <div class="th"><div class="tt">Campanhas convertendo</div><div class="tm"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 5px var(--g);animation:pulse 2s infinite;margin-right:5px;"></span>Ao vivo</div></div>
+      <div class="th"><div class="tt">Todas as conversoes de hoje</div><div class="tm">Comissao $235-240/venda</div></div>
       <table>
-        <thead><tr><th>Canal</th><th>Oferta</th><th>Campanha</th><th>Criativo</th><th>Spend</th><th>Rev</th><th>ROAS</th><th>CPA</th><th>Status</th></tr></thead>
+        <thead><tr><th>Canal</th><th>Oferta</th><th>Campanha</th><th>Criativo</th><th>Spend</th><th>Receita</th><th>V</th><th>ROAS</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | US | 1-100-1</td><td class="mo">D070</td><td class="mo">$122</td><td class="mo">$470</td><td><span class="rg">3.86x</span></td><td class="mo">$122</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
-          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">EMILY C3 | CBO | BIDCAP 240 | SCK85</td><td class="mo">SCK85</td><td class="mo">$60</td><td class="mo">$235</td><td><span class="rg">3.91x</span></td><td class="mo">$60</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
-          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | US | 1-200-1</td><td class="mo">D070</td><td class="mo">$203</td><td class="mo">$235</td><td><span class="ry">1.16x</span></td><td class="mo">$203</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
-          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | D070</td><td class="mo">D070</td><td class="mo">$60</td><td class="mo">$235</td><td><span class="rg">3.89x</span></td><td class="mo">$60</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
-          <tr><td><span class="tag temag">TK</span></td><td>EMAG &#128293;</td><td class="cn">TTK73-16 | EMAG TK | US-AU-CA | EMAG002</td><td class="mo">EMAG002</td><td class="mo">$143</td><td class="mo">$190</td><td><span class="ry">1.33x</span></td><td class="mo">$143</td><td><span class="chip cp"><span class="cd"></span>Novo &mdash; monitorar</span></td></tr>
-          <tr><td><span class="tag temag">TK</span></td><td>EMAG &#128293;</td><td class="cn">TTK74-21 | EMAG TK | US-AU-CA | EMAG007</td><td class="mo">EMAG007</td><td class="mo">$206</td><td class="mo">$190</td><td><span class="rr">0.92x</span></td><td class="mo">$206</td><td><span class="chip cp"><span class="cd"></span>Novo &mdash; monitorar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | 1-100-1 | D070</td><td class="mo">D070</td><td class="mo">$122</td><td class="mo">$470</td><td class="mo">2</td><td><span class="rg">3.86x</span></td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | 1-200-1 | D070</td><td class="mo">D070</td><td class="mo">$203</td><td class="mo">$235</td><td class="mo">1</td><td><span class="ry">1.16x</span></td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">EMILY C3 | CBO | BIDCAP 240 | SCK85 | CP0103</td><td class="mo">SCK85</td><td class="mo">$60</td><td class="mo">$235</td><td class="mo">1</td><td><span class="rg">3.91x</span></td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | D070</td><td class="mo">D070</td><td class="mo">$60</td><td class="mo">$235</td><td class="mo">1</td><td><span class="rg">3.89x</span></td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">EMILY C3 | CBO | BIDCAP 240 | SCK85</td><td class="mo">SCK85</td><td class="mo">$25</td><td class="mo">$235</td><td class="mo">1</td><td><span class="rg">9.67x</span></td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr><td><span class="tag tfb">FB</span></td><td>GlucoZen</td><td class="cn">AGENCIA | CBO | BIDCAP 240 | D070</td><td class="mo">D070</td><td class="mo">$25</td><td class="mo">$235</td><td class="mo">1</td><td><span class="rg">9.70x</span></td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr class="vpu"><td><span class="tag tpu">TK</span></td><td>&#10024; EMAG</td><td class="cn">TTK73-16 | EMAG TK | US-AU-CA | EMAG002</td><td class="mo">EMAG002</td><td class="mo">$143</td><td class="mo">$190</td><td class="mo">1</td><td><span class="ry">1.33x</span></td><td><span class="chip cpu"><span class="cd"></span>Novo&mdash;aguardar</span></td></tr>
+          <tr class="vpu"><td><span class="tag tpu">TK</span></td><td>&#10024; EMAG</td><td class="cn">TTK74-21 | EMAG TK | US-AU-CA | EMAG007</td><td class="mo">EMAG007</td><td class="mo">$206</td><td class="mo">$190</td><td class="mo">1</td><td><span class="rr">0.92x</span></td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="ban g">
-      <div class="bi">&#128161;</div>
-      <div><div class="bt">FB GlucoZen isolado = ROAS 3.7x hoje — a maquina continua funcionando</div>
-      Agencia Monkey + Emily C3 BIDCAP 240 gerando ROAS 3.86-3.91x. O negativo vem so do EMAG TK novo. Separar analise das duas ofertas para nao confundir a leitura do FB.</div>
+    <div class="ban pu">
+      <div class="bi">&#128300;</div>
+      <div><div class="bt">EMAG TK estreou hoje &mdash; ainda muito cedo para julgar</div>
+      2 vendas em dia de lancamento e dentro do esperado. EMAG002 (TTK73) com ROAS 1.33x e mais promissor que EMAG007 (TTK74) com 0.92x. Aguardar 3-5 dias para ter dados suficientes antes de pausar ou escalar. Contas TTK73/TTK74 com budgets $50-300/dia.</div>
     </div>
   </div>
 
   <!-- 7 DIAS -->
   <div class="tc" id="tab-semana">
+    <div class="st">Resumo &mdash; 13 a 19 Abr 2026 (semana nova)</div>
+
     <div class="ban y">
       <div class="bi">&#128197;</div>
-      <div><div class="bt">Semana nova — 13 a 19/04/2026 — so hoje rodou</div>
-      As campanhas anteriores (TK Vapofil, TTK81-6 Renda Extra) foram pausadas. Hoje e o primeiro dia da nova semana com EMAG TK + GlucoZen FB. Os 7 dias mostram o acumulado desta semana.</div>
+      <div><div class="bt">Semana nova &mdash; campanhas relanando hoje (19/04)</div>
+      Os 7 dias (13-19/04) mostram apenas dados de hoje porque as novas campanhas (EMAG TK + FB Diabetes reformulado) comecaram nesta data. Semana anterior (09-15/04) teve CPA $164 e lucro acumulado positivo nos ultimos 4 dias.</div>
     </div>
 
     <div class="cards">
-      <div class="card y"><div class="cl">Spend 7d</div><div class="cv">$2.538</div><div class="cs">So hoje rodou (19/04)</div></div>
-      <div class="card y"><div class="cl">Receita 7d</div><div class="cv">$2.260</div><div class="cs">10 vendas no total</div></div>
-      <div class="card r"><div class="cl">ROAS 7d</div><div class="cv">0.89x</div><div class="cs">EMAG TK calibrando</div></div>
-      <div class="card b"><div class="cl">Vendas 7d</div><div class="cv">10</div><div class="cs">GlucoZen: 8v | EMAG: 2v</div></div>
-      <div class="card r"><div class="cl">CPA 7d</div><div class="cv">$253</div><div class="cs">Meta: $168</div></div>
-      <div class="card g"><div class="cl">FB GlucoZen</div><div class="cv">3.70x</div><div class="cs">Isolado ainda excelente</div></div>
+      <div class="card y"><div class="cl">Spend Semana</div><div class="cv">$2.538</div><div class="cs">Dia 1 da semana nova</div></div>
+      <div class="card y"><div class="cl">Receita Semana</div><div class="cv">$2.260</div><div class="cs">10 vendas</div></div>
+      <div class="card r"><div class="cl">ROAS Semana</div><div class="cv">0.89x</div><div class="cs">Esperado: 1o dia calibrando</div></div>
+      <div class="card pu"><div class="cl">Nova Oferta</div><div class="cv">EMAG TK</div><div class="cs">Emagrecimento TTK73/TTK74</div></div>
+      <div class="card b"><div class="cl">Vendas</div><div class="cv">10</div><div class="cs">6 FB + 2 TK EMAG + 2 outros</div></div>
+      <div class="card g"><div class="cl">CPA Meta</div><div class="cv">$168</div><div class="cs">Hoje: $253 (calibrando)</div></div>
     </div>
 
-    <div class="st">Comparativo semanas anteriores</div>
+    <div class="st">Historico recente &mdash; ultimas semanas</div>
     <div class="tw">
-      <div class="th"><div class="tt">Historico semanal</div></div>
+      <div class="th"><div class="tt">Performance por semana</div></div>
       <table>
-        <thead><tr><th>Semana</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Vendas</th><th>CPA</th><th>Lucro</th></tr></thead>
+        <thead><tr><th>Periodo</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Vendas</th><th>CPA</th><th>Lucro</th><th>Destaque</th></tr></thead>
         <tbody>
-          <tr><td>05-11/04</td><td class="mo">$26.236</td><td class="mo">$23.349</td><td><span class="rr">0.89x</span></td><td class="mo">129</td><td class="mo">$203</td><td class="mo dn">-$2.887</td></tr>
-          <tr><td>09-15/04</td><td class="mo">$20.187</td><td class="mo">$19.532</td><td><span class="ry">0.97x</span></td><td class="mo">123</td><td class="mo" style="color:var(--g);">$164 &#10004;</td><td class="mo dn">-$655</td></tr>
-          <tr style="background:rgba(182,109,255,0.04)"><td><strong>13-19/04 (atual)</strong></td><td class="mo">$2.538*</td><td class="mo">$2.260*</td><td><span class="rr">0.89x*</span></td><td class="mo">10*</td><td class="mo">$253*</td><td class="mo dn">-$278*</td></tr>
+          <tr><td>05-11/04</td><td class="mo">$26.236</td><td class="mo">$23.349</td><td><span class="rr">0.89x</span></td><td class="mo">129</td><td class="mo dn">$203</td><td class="mo dn">-$2.887</td><td>TK Vapofil sangrado</td></tr>
+          <tr><td>09-15/04</td><td class="mo">$19.220</td><td class="mo">$18.092</td><td><span class="ry">0.94x</span></td><td class="mo">117</td><td class="mo up">$164 &#10004;</td><td class="mo dn">-$1.128</td><td>CPA abaixo da meta!</td></tr>
+          <tr class="vg"><td>12-15/04 (4d)</td><td class="mo">$7.734</td><td class="mo">$10.575</td><td><span class="rg">1.37x</span></td><td class="mo">~50</td><td class="mo up">$155 &#10004;</td><td class="mo up">+$2.841</td><td>4 dias lucrativos!</td></tr>
+          <tr class="vpu"><td><strong>19/04 (hoje)</strong></td><td class="mo">$2.538</td><td class="mo">$2.260</td><td><span class="rr">0.89x</span></td><td class="mo">10</td><td class="mo dn">$253</td><td class="mo dn">-$278</td><td>&#10024; EMAG TK estreia</td></tr>
         </tbody>
       </table>
     </div>
-    <div style="font-size:11px;color:var(--m);margin-top:-12px;">* So hoje (19/04) rodou — semana nova comecando</div>
   </div>
 
-  <!-- CAMPANHAS -->
-  <div class="tc" id="tab-camps">
-    <div class="st">Estrutura em transicao &mdash; 19 Abr 2026</div>
-    <div class="cards">
-      <div class="card g"><div class="cl">FB Vencedor</div><div class="cv" style="font-size:14px;">Agencia 873022</div><div class="cs">CBO + BIDCAP 240 + D070 | ROAS 3.86x hoje</div></div>
-      <div class="card g"><div class="cl">FB Vencedor 2</div><div class="cv" style="font-size:14px;">Emily C3</div><div class="cs">CBO + BIDCAP 240 + SCK85 | ROAS 3.91x hoje</div></div>
-      <div class="card p"><div class="cl">TK Novo</div><div class="cv" style="font-size:14px;">EMAG TK</div><div class="cs">TTK73/TTK74 | EMAG002/007 | Calibrando</div></div>
-      <div class="card r"><div class="cl">TK Pausado</div><div class="cv" style="font-size:14px;">Vapofil TK</div><div class="cs">TTK82/83 — VSL sem retencao (1-2%)</div></div>
-      <div class="card r"><div class="cl">FB Pausar</div><div class="cv" style="font-size:14px;">AGENCIA 1-200-1</div><div class="cs">$203 spend / ROAS 1.16x / CPA $203</div></div>
-      <div class="card y"><div class="cl">EMAG CPA</div><div class="cv" style="font-size:14px;">$190</div><div class="cs">Comissao estimada EMAG (verificar)</div></div>
-    </div>
-
-    <div class="ban p">
-      <div class="bi">&#128293;</div>
-      <div><div class="bt">Nova oferta EMAG TK — o que sabemos ate agora (so 1 dia de dado)</div>
-      TTK73-16 (EMAG002): ROAS 1.33x — acima do break-even, promissor. TTK74-21 (EMAG007): ROAS 0.92x — abaixo do BE. Aguardar 3-5 dias para concluir qual criativo escalar. Nao pausar ainda.</div>
-    </div>
-  </div>
-
-  <!-- VSL + FUNIL -->
+  <!-- VSL + COMPARATIVO -->
   <div class="tc" id="tab-vsl">
-    <div class="st">Analytics Vturb &mdash; Comparativo Hoje vs 7 Dias (13-19/04) — GlucoZen FB com gasto</div>
+    <div class="st">Vturb &mdash; Comparativo Hoje vs 7 Dias (13-19/04) &mdash; Apenas GlucoZen FB (oferta ativa)</div>
 
-    <div class="ban b">
-      <div class="bi">&#128200;</div>
-      <div><div class="bt">Comparativo diario de retencao — GlucoZen (unica oferta FB com gasto)</div>
-      Se retencao de hoje cair vs media 7 dias: sinal de degradacao de audiencia. Se subir: audiencia nova engajando melhor.</div>
+    <div class="ban g">
+      <div class="bi">&#127881;</div>
+      <div><div class="bt">&#127881; Emily C3 migrada para Player 2.0 &mdash; Ret.Pitch funcionando de novo!</div>
+      Hoje: 10.33% de retencao ao pitch. A melhor taxa registrada ate agora. A migracao foi essencial para recuperar visibilidade do funil. Ret.Pitch 7d: 8.90%.</div>
     </div>
 
-    <!-- GLUCOZEN EMILY — Player 2.0 Migrado! -->
+    <!-- EMILY COMPARATIVO -->
     <div class="vsl-box">
-      <div class="vsl-box-title">
+      <div class="vsl-title">
         <span class="tag tfb">FB</span>
         <span>GlucoZen VSL16 &mdash; EMILY C3</span>
-        <span class="chip cg" style="margin-left:auto;"><span class="cd"></span>Player 2.0 &#127881; Retencao SUBIU</span>
+        <span class="chip cg" style="margin-left:auto;"><span class="cd"></span>&#128640; Melhorando!</span>
       </div>
       <div class="vsl-row">
         <div class="vsl-lbl">Play Rate</div>
@@ -267,34 +264,40 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">90.26%</strong></div>
           <div class="bar-w"><div class="bar-f bar-g" style="width:90.26%"></div></div>
         </div>
-        <div class="d-up">&#8593; +0.90%</div>
+        <div><span class="dlt-up">&#8593; +0.90%</span></div>
       </div>
       <div class="vsl-row">
-        <div class="vsl-lbl">Retencao ao Pitch</div>
+        <div class="vsl-lbl">Ret. ao Pitch</div>
         <div>
           <div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--g);">10.33%</strong> &#127881;</div>
           <div class="bar-w"><div class="bar-f bar-g" style="width:100%"></div></div>
         </div>
         <div>
           <div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">8.90%</strong></div>
-          <div class="bar-w"><div class="bar-f bar-g" style="width:86.3%"></div></div>
+          <div class="bar-w"><div class="bar-f bar-g" style="width:86.2%"></div></div>
         </div>
-        <div class="d-up">&#8593; +1.43%</div>
+        <div><span class="dlt-up">&#8593; +1.43%</span></div>
       </div>
       <div class="vsl-row">
-        <div class="vsl-lbl">Plays / Audiencia</div>
-        <div><strong style="color:var(--g);">274 plays</strong> hoje &mdash; 28 chegaram ao pitch</div>
-        <div><strong>3.188 plays</strong> 7d &mdash; 281 pitch (8.90%)</div>
-        <div class="d-up">&#9989; ok</div>
+        <div class="vsl-lbl">Plays</div>
+        <div><strong>274</strong> hoje</div>
+        <div><strong>3.188</strong> em 7d (455/dia)</div>
+        <div><span class="dlt-eq">&#9675; ok</span></div>
+      </div>
+      <div class="vsl-row">
+        <div class="vsl-lbl">Aud. Pitch</div>
+        <div><strong style="color:var(--g);">28 pessoas</strong> hoje</div>
+        <div><strong>281</strong> em 7d (40/dia)</div>
+        <div><span class="dlt-eq">&#9675; ok</span></div>
       </div>
     </div>
 
-    <!-- GLUCOZEN AGENCIA — Player Legado -->
+    <!-- AGENCIA COMPARATIVO -->
     <div class="vsl-box">
-      <div class="vsl-box-title">
+      <div class="vsl-title">
         <span class="tag tfb">FB</span>
         <span>GlucoZen VSL16 &mdash; AGENCIA MONKEY</span>
-        <span class="chip cy" style="margin-left:auto;"><span class="cd"></span>Player legado &mdash; Ret.Pitch N/D hoje</span>
+        <span class="chip cy" style="margin-left:auto;"><span class="cd"></span>&#9888; Player legado</span>
       </div>
       <div class="vsl-row">
         <div class="vsl-lbl">Play Rate</div>
@@ -306,82 +309,77 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">90.42%</strong></div>
           <div class="bar-w"><div class="bar-f bar-g" style="width:90.42%"></div></div>
         </div>
-        <div class="d-eq">&#9899; -0.07%</div>
+        <div><span class="dlt-eq">&#8596; -0.07%</span></div>
       </div>
       <div class="vsl-row">
-        <div class="vsl-lbl">Retencao ao Pitch</div>
+        <div class="vsl-lbl">Ret. ao Pitch</div>
         <div>
-          <div style="font-size:11px;color:var(--y);margin-bottom:4px;">Hoje: <strong>N/D</strong> &#9888; Player legado</div>
+          <div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--y);">N/D &#9888;</strong> Player legado</div>
           <div class="bar-w"><div class="bar-f bar-y" style="width:0%"></div></div>
         </div>
         <div>
           <div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">8.48%</strong></div>
           <div class="bar-w"><div class="bar-f bar-g" style="width:84.8%"></div></div>
         </div>
-        <div class="d-eq">&#9888; Migrar</div>
+        <div><span class="dlt-eq">&#9888; migrar</span></div>
       </div>
       <div class="vsl-row">
-        <div class="vsl-lbl">Plays / Audiencia</div>
-        <div><strong style="color:var(--g);">981 plays</strong> hoje</div>
-        <div><strong>6.047 plays</strong> 7d &mdash; 506 pitch (8.48%)</div>
-        <div class="d-up">&#9989; Volume alto</div>
+        <div class="vsl-lbl">Plays</div>
+        <div><strong>981</strong> hoje</div>
+        <div><strong>6.047</strong> em 7d (864/dia)</div>
+        <div><span class="dlt-up">&#8593; Volume alto</span></div>
+      </div>
+      <div class="vsl-row">
+        <div class="vsl-lbl">Aud. Pitch</div>
+        <div><strong class="z">N/D</strong> (legado)</div>
+        <div><strong>506</strong> em 7d (72/dia)</div>
+        <div><span class="dlt-eq">&#9888; migrar</span></div>
       </div>
     </div>
 
-    <!-- VAPOFIL — TK Pausado -->
-    <div class="st">Vapofil TK &mdash; Pausado (dados 7 dias residuais)</div>
-    <div class="tw">
-      <div class="th"><div class="tt">Vturb 13-19/04 &mdash; Vapofil TK (campanhas pausadas)</div><div class="tm" style="color:var(--r);">Volume minimo</div></div>
-      <table>
-        <thead><tr><th>VSL</th><th>Views 7d</th><th>Plays 7d</th><th>Play Rate</th><th>Ret.Pitch</th><th>Aud.Pitch</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr class="vb"><td>TTK-82-2 (MODELO)</td><td class="mo">255</td><td class="mo">151</td><td class="mo dn">62.08%</td><td class="mo dn">1.34%</td><td class="mo">2</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
-          <tr class="vb"><td>TTK-82-4 (MODELO)</td><td class="mo">449</td><td class="mo">281</td><td class="mo dn">66.34%</td><td class="mo dn">1.11%</td><td class="mo">3</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
-          <tr class="vb"><td>TTK-83-1 (CERTA)</td><td class="mo">1.218</td><td class="mo">575</td><td class="mo dn">47.57%</td><td class="mo dn">1.71%</td><td class="mo">9</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
-        </tbody>
-      </table>
+    <div class="ban r">
+      <div class="bi">&#9888;</div>
+      <div><div class="bt">Agencia Monkey ainda no player legado &mdash; migrar urgente</div>
+      Emily ja migrou e marcou 10.33% hoje. Agencia e o player de maior volume (981 plays/dia) mas sem dado de Ret.Pitch. Migrar para Player 2.0 hoje para recuperar visibilidade total do funil.</div>
     </div>
-    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Vapofil TK pausado sem substituicao de VSL — Retencao nunca passou de 2%</div>Pitch em 42:06. Se EMAG TK der certo, o aprendizado de VSL curta com pitch cedo deve ser aplicado ao Vapofil tambem caso retorne.</div></div>
 
-    <!-- HISTORICO RETENCAO -->
-    <div class="st">Historico retencao GlucoZen &mdash; 4 semanas</div>
+    <!-- VAPOFIL TABELA 7d (TK pausado) -->
+    <div class="st">Vapofil TK &mdash; 7 dias (TK pausado, volume residual)</div>
     <div class="tw">
-      <div class="th"><div class="tt">Tendencia de retencao ao pitch</div></div>
+      <div class="th"><div class="tt">Vapofil VSL players (13-19/04) &mdash; TK pausado</div><div class="tm">Volume minimo esta semana</div></div>
       <table>
-        <thead><tr><th>Semana</th><th>Emily Play Rate</th><th>Emily Ret.Pitch</th><th>Agencia Play Rate</th><th>Agencia Ret.Pitch</th><th>Tendencia</th></tr></thead>
+        <thead><tr><th>VSL</th><th>Views</th><th>Plays</th><th>Play Rate</th><th>Ret.Pitch</th><th>Aud.Pitch</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>06-12/04</td><td class="mo" style="color:var(--g);">91.20%</td><td class="mo" style="color:var(--g);">9.24%</td><td class="mo" style="color:var(--g);">92.17%</td><td class="mo" style="color:var(--g);">7.87%</td><td>&#9899; Baseline</td></tr>
-          <tr><td>09-15/04</td><td class="mo" style="color:var(--g);">89.89%</td><td class="mo">N/D &#9888;</td><td class="mo" style="color:var(--g);">91.44%</td><td class="mo" style="color:var(--g);">8.27%</td><td>&#9899; Estavel</td></tr>
-          <tr><td>13-19/04 (atual)</td><td class="mo" style="color:var(--g);">90.26%</td><td class="mo" style="color:var(--g);">8.90%</td><td class="mo" style="color:var(--g);">90.42%</td><td class="mo" style="color:var(--g);">8.48%</td><td>&#9899; Estavel</td></tr>
-          <tr class="vg"><td><strong>Hoje 19/04</strong></td><td class="mo" style="color:var(--g);font-weight:700;">91.16%</td><td class="mo" style="color:var(--g);font-weight:700;">10.33% &#127881;</td><td class="mo" style="color:var(--g);font-weight:700;">90.35%</td><td class="mo" style="color:var(--y);font-weight:700;">N/D &#9888;</td><td><span class="up">&#8593; Emily subindo!</span></td></tr>
+          <tr class="vb"><td>TTK-82-2</td><td class="mo">255</td><td class="mo">151</td><td style="color:var(--r);">62.08%</td><td style="color:var(--r);font-weight:700;">1.34%</td><td class="mo">2</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
+          <tr class="vb"><td>TTK-82-4</td><td class="mo">449</td><td class="mo">281</td><td style="color:var(--r);">66.34%</td><td style="color:var(--r);font-weight:700;">1.11%</td><td class="mo">3</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
+          <tr class="vb"><td>TTK-83-1</td><td class="mo">1.218</td><td class="mo">575</td><td style="color:var(--r);">47.57%</td><td style="color:var(--r);font-weight:700;">1.71%</td><td class="mo">9</td><td><span class="chip cr"><span class="cd"></span>TK pausado</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="ban g"><div class="bi">&#127881;</div><div><div class="bt">Emily C3 migrou para Player 2.0 — Retencao ao Pitch de 10.33% hoje, melhor historico!</div>Antes era player legado sem dado. Agora 10.33% de retencao ao pitch = muita gente chegando ao CTA. Proxima acao: migrar Agencia Monkey tambem para Player 2.0.</div></div>
+    <div style="font-size:11px;color:var(--m);margin-top:-12px;margin-bottom:20px;">* Vapofil TK pausado &mdash; volume residual. Nova VSL necessaria com pitch antes de 20 min antes de reativar.</div>
   </div>
 
   <!-- ALERTAS -->
   <div class="tc" id="tab-alertas">
     <div class="st">Status &mdash; 19 Abr 2026</div>
 
-    <div class="ban p"><div class="bi">&#128293;</div><div><div class="bt">EMAG TK lancado hoje — TTK73/TTK74 com EMAG002 e EMAG007</div>TTK73-16 EMAG002: ROAS 1.33x (acima BE). TTK74-21 EMAG007: ROAS 0.92x (abaixo BE). Aguardar 3-5 dias antes de cortar criativos. Monitorar sem mexer.</div></div>
-    <div class="ban g"><div class="bi">&#127881;</div><div><div class="bt">Emily C3 VSL Player 2.0 — Retencao ao Pitch 10.33% hoje (melhor historico!)</div>Migracao feita com sucesso. Agora temos visibilidade total do funil Emily. Proxima acao: migrar player da Agencia Monkey tambem.</div></div>
-    <div class="ban g"><div class="bi">&#128200;</div><div><div class="bt">GlucoZen FB isolado: ROAS 3.7x — ainda a maquina mais confiavel da operacao</div>Agencia Monkey BIDCAP 240 + Emily BIDCAP 240 continuam convertendo. Nao mexer no que esta funcionando.</div></div>
-    <div class="ban y"><div class="bi">&#9888;</div><div><div class="bt">Agencia Monkey player ainda legado — migrar para Player 2.0 essa semana</div>Sem Ret.Pitch hoje. Sabemos pelo historico 7d que esta em 8.48% mas nao temos dado de hoje para comparar a tendencia.</div></div>
-    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">AGENCIA 1-200-1 D070: $203 spend / ROAS 1.16x / CPA $203 — monitorar</div>Estrutura 1-200-1 com performance abaixo da 1-100-1 (ROAS 3.86x). Redistribuir budget para 1-100-1 se continuar assim amanha.</div></div>
+    <div class="ban pu"><div class="bi">&#10024;</div><div><div class="bt">Nova oferta EMAG TK lancada hoje &mdash; aguardar 3-5 dias</div>TTK73 EMAG002 (1.33x) mais promissor que TTK74 EMAG007 (0.92x). Nao pausar antes de 3 dias de dados. Monitorar CPA e ROAS diariamente.</div></div>
+    <div class="ban g"><div class="bi">&#127881;</div><div><div class="bt">Emily C3 migrada para Player 2.0 &mdash; Ret.Pitch 10.33% hoje!</div>Melhor taxa ja registrada. Continuar monitorando para ver se e consistente.</div></div>
+    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Migrar Agencia Monkey para Player 2.0 &mdash; urgente</div>Maior volume de plays (981/dia) sem dado de Ret.Pitch. Cego no funil mais importante da operacao.</div></div>
+    <div class="ban y"><div class="bi">&#128308;</div><div><div class="bt">Vapofil TK pausado &mdash; criar nova VSL antes de reativar</div>1-2% retencao ao pitch por 4 semanas consecutivas. Pitch em 42:06 e inalcancavel. Nova VSL com pitch antes de 20min e obrigatoria.</div></div>
+    <div class="ban g"><div class="bi">&#128640;</div><div><div class="bt">FB Agencia Monkey BIDCAP 240 continuando forte &mdash; ROAS 3.86-9.70x hoje</div>D070 ainda convertendo bem. Escalar apos verificar performance de amanha com EMAG calibrado.</div></div>
 
     <div class="st">Checklist &mdash; 19/04/2026</div>
     <div class="tw">
-      <div class="th"><div class="tt">Acoes do dia e da semana</div></div>
+      <div class="th"><div class="tt">Acoes do dia</div></div>
       <table>
-        <thead><tr><th>#</th><th>Acao</th><th>Impacto</th><th>Quando</th></tr></thead>
+        <thead><tr><th>#</th><th>Acao</th><th>Prioridade</th><th>Quando</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Monitorar EMAG TK TTK73/TTK74 sem mexer por 3-5 dias</td><td>Dar tempo para calibrar</td><td><span class="chip cp"><span class="cd"></span>Semana toda</span></td></tr>
-          <tr><td>2</td><td>Aumentar budget Agencia 1-100-1 se mantiver ROAS 3.8x+</td><td style="color:var(--g);">Multiplicar lucro FB</td><td><span class="chip cg"><span class="cd"></span>Amanha</span></td></tr>
-          <tr><td>3</td><td>Migrar player Agencia Monkey para Player 2.0 no Vturb</td><td>Recuperar Ret.Pitch diaria</td><td><span class="chip cy"><span class="cd"></span>Hoje</span></td></tr>
-          <tr><td>4</td><td>Se AGENCIA 1-200-1 continuar abaixo de 1.5x: pausar</td><td style="color:var(--g);">Libera $200/dia</td><td><span class="chip cy"><span class="cd"></span>Amanha</span></td></tr>
-          <tr><td>5</td><td>Verificar se EMAG TK usa VSL com pitch curto (&lt;20min)</td><td>Evitar erro do Vapofil</td><td><span class="chip cr"><span class="cd"></span>Hoje</span></td></tr>
-          <tr><td>6</td><td>Testar SCK85 + EMAG TK (mesmo criativo que funciona no FB)</td><td>Cross-test criativo</td><td><span class="chip cp"><span class="cd"></span>Esta semana</span></td></tr>
+          <tr><td>1</td><td>Migrar player Agencia Monkey VSL16 para Player 2.0 no Vturb</td><td style="color:var(--r);">Urgente &mdash; maior volume</td><td><span class="chip cr"><span class="cd"></span>Hoje</span></td></tr>
+          <tr><td>2</td><td>Monitorar EMAG TK TTK73 EMAG002 (melhor das 2 contas)</td><td style="color:var(--pu);">Nova oferta</td><td><span class="chip cpu"><span class="cd"></span>3 dias</span></td></tr>
+          <tr><td>3</td><td>Verificar se TTK74 EMAG007 (0.92x) melhora em 48h, senao pausar</td><td style="color:var(--y);">Monitor</td><td><span class="chip cy"><span class="cd"></span>21/04</span></td></tr>
+          <tr><td>4</td><td>Escalar FB Agencia Monkey 1-100-1 BIDCAP 240 (ROAS 3.86x hoje)</td><td style="color:var(--g);">Escalar</td><td><span class="chip cg"><span class="cd"></span>Amanha</span></td></tr>
+          <tr><td>5</td><td>Criar nova VSL Vapofil com pitch antes de 20 minutos</td><td style="color:var(--r);">Critico &mdash;4 semanas parado</td><td><span class="chip cr"><span class="cd"></span>Esta semana</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -395,7 +393,7 @@ function T(id){
   document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(e=>e.classList.remove('active'));
   const el=document.getElementById('tab-'+id);if(el)el.classList.add('active');
-  const m=['hoje','semana','camps','vsl','alertas'];
+  const m=['hoje','camps','semana','vsl','alertas'];
   const i=m.indexOf(id);
   const ts=document.querySelectorAll('.tab');
   const ns=document.querySelectorAll('nav a');
