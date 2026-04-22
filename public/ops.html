@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>isdigital OPS</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -45,14 +45,14 @@ nav a.active .dot{background:var(--g);}
 .card.pu{border-color:rgba(168,85,247,0.25);background:var(--pud);}.card.pu .cv{color:var(--pu);}
 .hero{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);}
 .hero.win{border-color:rgba(0,255,136,0.35);background:rgba(0,255,136,0.04);}
-.hero.lose{border-color:rgba(255,59,92,0.25);background:rgba(255,59,92,0.03);}
+.hero.wait{border-color:rgba(255,204,0,0.25);background:rgba(255,204,0,0.03);}
 .hi{padding:0 14px;border-right:1px solid var(--b);}
 .hi:first-child{padding-left:0;}
 .hi:last-child{border-right:none;}
 .hl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
 .hv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
 .hc{font-size:11px;color:var(--m);margin-top:4px;}
-.up{color:var(--g);}.dn{color:var(--r);}.fl{color:var(--y);}
+.up{color:var(--g);}.dn{color:var(--r);}
 .ban{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;display:flex;align-items:flex-start;gap:10px;}
 .ban.r{background:var(--rd);border:1px solid rgba(255,59,92,0.3);}
 .ban.y{background:var(--yd);border:1px solid rgba(255,204,0,0.3);}
@@ -71,7 +71,7 @@ td{padding:9px 14px;border-bottom:1px solid rgba(34,34,48,0.5);vertical-align:mi
 tr:last-child td{border-bottom:none;}
 tr:hover td{background:rgba(255,255,255,0.02);}
 .mo{font-family:'Space Mono',monospace;font-size:12px;}
-.cn{max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
+.cn{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
 .tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
 .tfb{background:rgba(24,119,242,0.2);color:#4f9eff;}
 .ttk{background:rgba(255,0,80,0.15);color:#ff3b5c;}
@@ -92,7 +92,6 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .vb td{background:rgba(255,59,92,0.03);}
 .vy td{background:rgba(255,204,0,0.03);}
 .tc2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
-/* VSL bars */
 .vsl-box{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:18px;margin-bottom:16px;}
 .vsl-title{font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .vsl-row{display:grid;grid-template-columns:130px 1fr 1fr 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(34,34,48,0.4);}
@@ -104,12 +103,12 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 .du{color:var(--g);font-weight:700;font-size:12px;}
 .dd{color:var(--r);font-weight:700;font-size:12px;}
 .de{color:var(--m);font-size:12px;}
-/* criativo bar visual */
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .bar-label{font-size:11px;font-family:'Space Mono',monospace;width:80px;flex-shrink:0;}
 .bar-track{flex:1;background:var(--b);border-radius:4px;height:10px;overflow:hidden;}
-.bar-fill{height:10px;border-radius:4px;transition:width 0.3s;}
-.bar-val{font-size:11px;font-family:'Space Mono',monospace;width:55px;text-align:right;flex-shrink:0;}
+.bar-fill{height:10px;border-radius:4px;}
+.bar-val{font-size:11px;font-family:'Space Mono',monospace;width:60px;text-align:right;flex-shrink:0;}
+.new-badge{display:inline-block;background:rgba(168,85,247,0.2);color:var(--pu);border:1px solid rgba(168,85,247,0.3);padding:1px 6px;border-radius:4px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;}
 </style>
 </head>
 <body>
@@ -117,13 +116,11 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 <div class="sb">
   <div class="logo">isdigital<span>OPS Dashboard</span></div>
   <nav>
-    <div class="nav-sep">Hoje 20/04</div>
+    <div class="nav-sep">Hoje 22/04</div>
     <a class="active" onclick="T('hoje')"><span class="dot"></span>Overview</a>
-    <a onclick="T('criativos')"><span class="dot"></span>Criativos do Dia &#128293;</a>
+    <a onclick="T('criativos')"><span class="dot"></span>&#128293; Criativos do Dia</a>
     <div class="nav-sep">Semana</div>
-    <a onclick="T('semana')"><span class="dot"></span>7 Dias</a>
-    <div class="nav-sep">Trackeamento</div>
-    <a onclick="T('compare')"><span class="dot"></span>RT vs UTMify</a>
+    <a onclick="T('semana')"><span class="dot"></span>7 Dias (16-22/04)</a>
     <div class="nav-sep">Funil</div>
     <a onclick="T('vsl')"><span class="dot"></span>VSL + Retencao</a>
     <div class="nav-sep">Acao</div>
@@ -132,390 +129,297 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 </div>
 <div class="mn">
 
-  <div class="hdr">
-    <div class="htit">OPS <span>// isdigital</span></div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-      <div class="bdg"><span class="bdg-dot"></span>20 Abr 2026 &mdash; 20:20h BRT</div>
-      <div class="bdg" style="border-color:rgba(0,255,136,0.3);color:var(--g);">ROAS 1.18x &#9989;</div>
-      <div class="bdg" style="border-color:rgba(168,85,247,0.3);color:var(--pu);">&#10024; EMAG TK dia 2</div>
+<div class="hdr">
+  <div class="htit">OPS <span>// isdigital</span></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <div class="bdg"><span class="bdg-dot"></span>22 Abr 2026 &mdash; 08:20h BRT</div>
+    <div class="bdg" style="border-color:rgba(255,204,0,0.3);color:var(--y);">&#128336; US ainda dormindo</div>
+    <div class="bdg" style="border-color:rgba(168,85,247,0.3);color:var(--pu);">&#10024; EMAG 016-020 novos!</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="T('hoje')">Overview</div>
+  <div class="tab" onclick="T('criativos')">&#128293; Criativos</div>
+  <div class="tab" onclick="T('semana')">7 Dias</div>
+  <div class="tab" onclick="T('vsl')">VSL + Retencao</div>
+  <div class="tab" onclick="T('alertas')">Alertas</div>
+</div>
+
+<!-- HOJE -->
+<div class="tc active" id="tab-hoje">
+  <div class="ban y">
+    <div class="bi">&#128336;</div>
+    <div><div class="bt">08:20h BRT &mdash; Campanhas iniciando &mdash; US acorda ~11-13h BRT</div>
+    D070 ja fez 1 venda nas primeiras horas. Novos criativos EMAG 016-020 ativos no TikTok. Ontem (21/04) foi mais um dia lucrativo &mdash; segunda semana consecutiva no verde.</div>
+  </div>
+
+  <div class="hero wait">
+    <div class="hi"><div class="hl">Spend Hoje</div><div class="hv" style="color:var(--y);">$548</div><div class="hc">08:20h &mdash; iniciando</div></div>
+    <div class="hi"><div class="hl">Receita Hoje</div><div class="hv" style="color:var(--y);">$235</div><div class="hc">1 venda D070</div></div>
+    <div class="hi"><div class="hl">ROAS</div><div class="hv" style="color:var(--m);">--</div><div class="hc">Aguardar US</div></div>
+    <div class="hi"><div class="hl">Vendas</div><div class="hv" style="color:var(--bl);">1</div><div class="hc">Cedo ainda</div></div>
+    <div class="hi"><div class="hl">Semana 7d</div><div class="hv" style="color:var(--g);">1.15x</div><div class="hc up">+$3.041 lucro</div></div>
+    <div class="hi"><div class="hl">CPA Meta</div><div class="hv" style="color:var(--g);">$168</div><div class="hc">7d: $196 &#127825;</div></div>
+  </div>
+
+  <div class="st">Novidades desta manha</div>
+  <div class="cards">
+    <div class="card pu"><div class="cl">&#10024; EMAG novos</div><div class="cv">016-020</div><div class="cs">Nova leva de criativos TK ativa</div></div>
+    <div class="card g"><div class="cl">7 Dias lucro</div><div class="cv">+$3.041</div><div class="cs">102 vendas / ROAS 1.15x</div></div>
+    <div class="card g"><div class="cl">D070 semana</div><div class="cv">1.61x</div><div class="cs">69 conv / $16.550 receita</div></div>
+    <div class="card y"><div class="cl">SCK08 novo 7d</div><div class="cv">4.30x</div><div class="cs">$55 / $235 &mdash; monitorar!</div></div>
+  </div>
+
+  <div class="ban b">
+    <div class="bi">&#128202;</div>
+    <div><div class="bt">Multiplas novidades hoje: TTK131 DIABETES TK + TTK34 PARASITE + EMAG 016-020</div>
+    Alem do emagrecimento, uma conta TK (TTK131) esta testando Diabetes e outra (TTK34) esta rodando PARASITE &mdash; nova estrategia de conteudo. Os dados cheios chegam apos as 14h BRT.</div>
+  </div>
+</div>
+
+<!-- CRIATIVOS -->
+<div class="tc" id="tab-criativos">
+  <div class="st">Criativos rodando hoje &mdash; 22/04 &mdash; 08:20h BRT (dados parciais)</div>
+
+  <div class="ban y">
+    <div class="bi">&#9200;</div>
+    <div><div class="bt">Dados parciais &mdash; 08:20h BRT &mdash; checar novamente apos 14h BRT</div>
+    A maioria das campanhas FB roda para publico US (EST). A janela de pico e 13-18h BRT. Os dados abaixo representam apenas as primeiras horas.</div>
+  </div>
+
+  <!-- RANKING VISUAL -->
+  <div class="tw">
+    <div class="th"><div class="tt">Ranking ROAS 7 dias &mdash; criativos com mais dados</div><div class="tm">Base: 16-22/04</div></div>
+    <div style="padding:16px;">
+      <div class="bar-row"><div class="bar-label" style="color:var(--pu);">SCK08</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--pu);"></div></div><div class="bar-val" style="color:var(--pu);">4.30x &#10024;</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--g);">EMAG003</div><div class="bar-track"><div class="bar-fill bg" style="width:32%"></div></div><div class="bar-val" style="color:var(--g);">1.38x</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--g);">D070</div><div class="bar-track"><div class="bar-fill bg" style="width:37%"></div></div><div class="bar-val" style="color:var(--g);">1.61x &#127942;</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--y);">D105</div><div class="bar-track"><div class="bar-fill by" style="width:23%"></div></div><div class="bar-val" style="color:var(--y);">0.97x</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--y);">EMAG002</div><div class="bar-track"><div class="bar-fill by" style="width:21%"></div></div><div class="bar-val" style="color:var(--y);">0.92x</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--y);">SCK85</div><div class="bar-track"><div class="bar-fill by" style="width:19%"></div></div><div class="bar-val" style="color:var(--y);">0.83x</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--r);">EMAG007</div><div class="bar-track"><div class="bar-fill br" style="width:14%"></div></div><div class="bar-val" style="color:var(--r);">0.62x</div></div>
+      <div class="bar-row"><div class="bar-label" style="color:var(--r);">EMAG014</div><div class="bar-track"><div class="bar-fill br" style="width:7%"></div></div><div class="bar-val" style="color:var(--r);">0.30x</div></div>
     </div>
   </div>
 
-  <div class="tabs">
-    <div class="tab active" onclick="T('hoje')">Overview</div>
-    <div class="tab" onclick="T('criativos')">&#128293; Criativos</div>
-    <div class="tab" onclick="T('semana')">7 Dias</div>
-    <div class="tab" onclick="T('compare')">RT vs UTMify</div>
-    <div class="tab" onclick="T('vsl')">VSL</div>
-    <div class="tab" onclick="T('alertas')">Alertas</div>
+  <!-- FACEBOOK -->
+  <div class="st">&#128153; Facebook &mdash; Criativos (7 dias 16-22/04)</div>
+  <div class="tw">
+    <div class="th"><div class="tt">FB Diabetes GlucoZen &mdash; Agencia Monkey</div><div class="tm">Spend total FB 7d: ~$12.9k</div></div>
+    <table>
+      <thead><tr><th>Criativo</th><th>Tipo</th><th>Spend 7d</th><th>Receita 7d</th><th>ROAS 7d</th><th>Conv</th><th>Hoje</th><th>Acao</th></tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>D070</strong> &#127942;</td><td><span class="chip cb"><span class="cd"></span>Veterano</span></td><td class="mo">$10.259</td><td class="mo">$16.550</td><td><span class="rg">1.61x</span></td><td class="mo"><strong>69</strong></td><td class="mo">1 conv</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+        <tr class="vg"><td><strong>SCK08</strong> <span class="new-badge">NOVO</span></td><td><span class="chip cg"><span class="cd"></span>Novo</span></td><td class="mo">$55</td><td class="mo">$235</td><td><span class="rg">4.30x</span></td><td class="mo">1</td><td class="mo z">--</td><td><span class="chip cg"><span class="cd"></span>Testar mais</span></td></tr>
+        <tr class="vy"><td><strong>D105</strong></td><td><span class="chip cy"><span class="cd"></span>Teste</span></td><td class="mo">$242</td><td class="mo">$235</td><td><span class="ry">0.97x</span></td><td class="mo">1</td><td class="mo">$12</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vy"><td><strong>SCK85</strong></td><td><span class="chip cb"><span class="cd"></span>Veterano</span></td><td class="mo">$2.292</td><td class="mo">$1.910</td><td><span class="ry">0.83x</span></td><td class="mo">8</td><td class="mo">$76</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vy"><td>D108 <span class="new-badge">NOVO</span></td><td><span class="chip cg"><span class="cd"></span>Novo</span></td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td class="mo">$2</td><td><span class="chip cy"><span class="cd"></span>Aguardar</span></td></tr>
+        <tr class="vy"><td>SCK83 <span class="new-badge">NOVO</span></td><td><span class="chip cg"><span class="cd"></span>Novo</span></td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td class="mo">$2</td><td><span class="chip cy"><span class="cd"></span>Aguardar</span></td></tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- HOJE -->
-  <div class="tc active" id="tab-hoje">
-    <div class="ban g">
-      <div class="bi">&#9989;</div>
-      <div><div class="bt">Dia lucrativo! ROAS 1.18x &mdash; $3.830 spend / $4.520 receita / 20 vendas / +$690</div>
-      D070 (FB) com 16 vendas e ROAS 1.49x. EMAG002 (TK) vencedor do TikTok com 3 vendas e 1.67x. Primeira semana lucrativa consolidada.</div>
-    </div>
-    <div class="hero win">
-      <div class="hi"><div class="hl">Spend</div><div class="hv" style="color:var(--t);">$3.830</div><div class="hc">FB $2.864 + TK $966</div></div>
-      <div class="hi"><div class="hl">Receita</div><div class="hv" style="color:var(--g);">$4.520</div><div class="hc up">20 vendas</div></div>
-      <div class="hi"><div class="hl">ROAS</div><div class="hv" style="color:var(--g);">1.18x</div><div class="hc">Meta: 1.43x</div></div>
-      <div class="hi"><div class="hl">Vendas</div><div class="hv" style="color:var(--bl);">20</div><div class="hc">16 FB + 4 TK</div></div>
-      <div class="hi"><div class="hl">Lucro</div><div class="hv" style="color:var(--g);">+$690</div><div class="hc up">ROI +18%</div></div>
-      <div class="hi"><div class="hl">CPA</div><div class="hv" style="color:var(--y);">$191</div><div class="hc">Meta: $168</div></div>
-    </div>
-    <div class="st">Por Oferta &mdash; Hoje</div>
-    <div class="cards">
-      <div class="card g"><div class="cl">&#128153; Diabetes FB (D070)</div><div class="cv">1.49x</div><div class="cs">$2.523 spend / $3.760 rev / 16v</div></div>
-      <div class="card g"><div class="cl">&#128154; EMAG TK (EMAG002)</div><div class="cv">1.67x</div><div class="cs">$341 / $570 / 3v &mdash; vencedor TK</div></div>
-      <div class="card y"><div class="cl">&#128154; EMAG TK (EMAG003)</div><div class="cv">0.81x</div><div class="cs">$235 / $190 / 1v &mdash; monitor</div></div>
-      <div class="card y"><div class="cl">&#128269; D105 em teste</div><div class="cv">0x hoje</div><div class="cs">3.40x ontem &mdash; aguardar</div></div>
-    </div>
+  <!-- TIKTOK -->
+  <div class="st">&#128154; TikTok &mdash; Criativos EMAG (7 dias 16-22/04) + novos 016-020</div>
+  <div class="tw">
+    <div class="th"><div class="tt">TK Emagrecimento &mdash; TTK73/74/83 + novos TTK131 Diabetes + TTK34 Parasite</div><div class="tm">Spend total TK 7d: ~$7.1k</div></div>
+    <table>
+      <thead><tr><th>Criativo</th><th>Conta</th><th>Spend 7d</th><th>Receita 7d</th><th>ROAS 7d</th><th>Conv</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>EMAG003</strong> &#127942;</td><td class="mo">TTK73-17</td><td class="mo">$1.105</td><td class="mo">$1.520</td><td><span class="rg">1.38x</span></td><td class="mo">2</td><td><span class="chip cg"><span class="cd"></span>Vencedor TK</span></td></tr>
+        <tr class="vy"><td><strong>EMAG002</strong></td><td class="mo">TTK82 multi</td><td class="mo">$1.852</td><td class="mo">$1.710</td><td><span class="ry">0.92x</span></td><td class="mo">3</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vy"><td><strong>EMAG007</strong></td><td class="mo">TTK74/83</td><td class="mo">$1.230</td><td class="mo">$760</td><td><span class="ry">0.62x</span></td><td class="mo">1</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vb"><td>EMAG014</td><td class="mo">TTK74</td><td class="mo">$623</td><td class="mo">$190</td><td><span class="rr">0.30x</span></td><td class="mo">1</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+        <tr class="vy"><td>EMAG016 <span class="new-badge">NOVO</span></td><td class="mo">TTK73</td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td><span class="chip cpu"><span class="cd"></span>Testando hoje</span></td></tr>
+        <tr class="vy"><td>EMAG017 <span class="new-badge">NOVO</span></td><td class="mo">TTK73</td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td><span class="chip cpu"><span class="cd"></span>Testando hoje</span></td></tr>
+        <tr class="vy"><td>EMAG018 <span class="new-badge">NOVO</span></td><td class="mo">TTK73</td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td><span class="chip cpu"><span class="cd"></span>Testando hoje</span></td></tr>
+        <tr class="vy"><td>EMAG019 <span class="new-badge">NOVO</span></td><td class="mo">TTK74</td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td><span class="chip cpu"><span class="cd"></span>Testando hoje</span></td></tr>
+        <tr class="vy"><td>EMAG020 <span class="new-badge">NOVO</span></td><td class="mo">TTK74</td><td class="mo z">--</td><td class="mo z">--</td><td class="z">--</td><td class="mo z">0</td><td><span class="chip cpu"><span class="cd"></span>Testando hoje</span></td></tr>
+        <tr style="opacity:0.5"><td>EMAG011/012/013/015</td><td class="mo z">multi</td><td class="mo">~$580</td><td class="mo z">$0</td><td><span class="rr">0x</span></td><td class="mo z">0</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- CRIATIVOS DO DIA -->
-  <div class="tc" id="tab-criativos">
-    <div class="st">Todos os criativos rodando hoje &mdash; 20/04/2026 &mdash; RT AD Level &mdash; 20:20h BRT</div>
+  <div class="tc2">
+    <div class="ban pu"><div class="bi">&#10024;</div><div><div class="bt">Nova leva EMAG 016-020 + novos FB SCK08/SCK83/D108</div>5 novos criativos TK hoje. SCK08 apareceu com 4.30x nos 7 dias &mdash; urgente aumentar budget neste.</div></div>
+    <div class="ban b"><div class="bi">&#128202;</div><div><div class="bt">TTK131 Diabetes TK + TTK34 Parasite &mdash; novas frentes de teste</div>Operacao expandindo alem do emagrecimento. Diabetes TK pode ser a proxima grande frente se o CTR do TK for mais barato.</div></div>
+  </div>
+</div>
 
-    <div class="ban b">
-      <div class="bi">&#128202;</div>
-      <div><div class="bt">13 criativos ativos hoje &mdash; 5 FB + 8 TK &mdash; $3.833 total spend</div>
-      D070 domina o Facebook com 16 das 20 vendas do dia. EMAG002 e o melhor do TikTok com ROAS 1.67x. 7 criativos com gasto relevante e zero conversoes devem ser pausados.</div>
+<!-- 7 DIAS -->
+<div class="tc" id="tab-semana">
+  <div class="ban g">
+    <div class="bi">&#127881;</div>
+    <div><div class="bt">&#127881; 2a semana lucrativa consecutiva! 16-22/04: ROAS 1.15x &mdash; +$3.041 de lucro</div>
+    102 vendas. D070 absoluto com 69 conversoes. EMAG003 lidera o TikTok com 1.38x. Tendencia de melhora sustentada.</div>
+  </div>
+
+  <div class="cards">
+    <div class="card g"><div class="cl">Spend 7d</div><div class="cv">$20.0k</div><div class="cs">$2.867/dia media</div></div>
+    <div class="card g"><div class="cl">Receita 7d</div><div class="cv">$23.1k</div><div class="cs">$3.301/dia media</div></div>
+    <div class="card g"><div class="cl">ROAS 7d</div><div class="cv">1.15x</div><div class="cs">&#9989; Acima do break-even!</div></div>
+    <div class="card b"><div class="cl">Vendas 7d</div><div class="cv">102</div><div class="cs">14.6/dia media</div></div>
+    <div class="card y"><div class="cl">CPA 7d</div><div class="cv">$196</div><div class="cs">Meta $168 &mdash; melhorando</div></div>
+    <div class="card g"><div class="cl">Lucro 7d</div><div class="cv">+$3.041</div><div class="cs">ROI +15.1%</div></div>
+  </div>
+
+  <div class="st">Top criativos 7 dias (16-22/04)</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Ranking por receita &mdash; todos os criativos</div></div>
+    <table>
+      <thead><tr><th>Canal</th><th>Criativo</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Conv</th><th>CPA medio</th><th>Veredicto</th></tr></thead>
+      <tbody>
+        <tr class="vg"><td><span class="tag tfb">FB</span></td><td><strong>D070</strong> &#127942;</td><td class="mo">$10.259</td><td class="mo">$16.550</td><td><span class="rg">1.61x</span></td><td class="mo"><strong>69</strong></td><td class="mo">$148</td><td><span class="chip cg"><span class="cd"></span>Pilar da operacao</span></td></tr>
+        <tr class="vg"><td><span class="tag ttk">TK</span></td><td><strong>EMAG003</strong> &#127942;</td><td class="mo">$1.105</td><td class="mo">$1.520</td><td><span class="rg">1.38x</span></td><td class="mo">2</td><td class="mo">$552</td><td><span class="chip cg"><span class="cd"></span>Vencedor TK</span></td></tr>
+        <tr class="vy"><td><span class="tag tfb">FB</span></td><td><strong>SCK85</strong></td><td class="mo">$2.292</td><td class="mo">$1.910</td><td><span class="ry">0.83x</span></td><td class="mo">8</td><td class="mo">$286</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vy"><td><span class="tag ttk">TK</span></td><td><strong>EMAG002</strong></td><td class="mo">$1.852</td><td class="mo">$1.710</td><td><span class="ry">0.92x</span></td><td class="mo">3</td><td class="mo">$617</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vy"><td><span class="tag ttk">TK</span></td><td><strong>EMAG007</strong></td><td class="mo">$1.230</td><td class="mo">$760</td><td><span class="ry">0.62x</span></td><td class="mo">1</td><td class="mo">$1.230</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+        <tr class="vg"><td><span class="tag tfb">FB</span></td><td><strong>SCK08</strong> <span class="new-badge">NOVO</span></td><td class="mo">$55</td><td class="mo">$235</td><td><span class="rg">4.30x</span></td><td class="mo">1</td><td class="mo">$55</td><td><span class="chip cg"><span class="cd"></span>Escalar urgente!</span></td></tr>
+        <tr class="vy"><td><span class="tag tfb">FB</span></td><td>D105</td><td class="mo">$242</td><td class="mo">$235</td><td><span class="ry">0.97x</span></td><td class="mo">1</td><td class="mo">$242</td><td><span class="chip cy"><span class="cd"></span>Monitor</span></td></tr>
+        <tr class="vb"><td><span class="tag ttk">TK</span></td><td>EMAG014</td><td class="mo">$623</td><td class="mo">$190</td><td><span class="rr">0.30x</span></td><td class="mo">1</td><td class="mo">$623</td><td><span class="chip cr"><span class="cd"></span>Pausar</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="st">Evolucao semanal</div>
+  <div class="tw">
+    <div class="th"><div class="tt">ROAS por semana</div></div>
+    <table>
+      <thead><tr><th>Semana</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Vendas</th><th>Lucro</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td>05-11/04</td><td class="mo">$26.2k</td><td class="mo">$23.3k</td><td><span class="rr">0.89x</span></td><td class="mo">129</td><td class="mo dn">-$2.887</td><td>TK Vapofil sangrando</td></tr>
+        <tr><td>09-15/04</td><td class="mo">$19.2k</td><td class="mo">$18.1k</td><td><span class="ry">0.94x</span></td><td class="mo">117</td><td class="mo dn">-$1.128</td><td>CPA $164 meta batida</td></tr>
+        <tr class="vg"><td>14-20/04</td><td class="mo">$18.0k</td><td class="mo">$20.8k</td><td><span class="rg">1.15x</span></td><td class="mo">91</td><td class="mo up">+$2.765</td><td>&#127881; 1a semana lucrativa!</td></tr>
+        <tr class="vg"><td><strong>16-22/04</strong></td><td class="mo">$20.0k</td><td class="mo">$23.1k</td><td><span class="rg">1.15x</span></td><td class="mo"><strong>102</strong></td><td class="mo up"><strong>+$3.041</strong></td><td>&#127881;&#127881; 2a semana lucrativa!</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- VSL -->
+<div class="tc" id="tab-vsl">
+  <div class="st">Vturb &mdash; Comparativo Hoje vs 7 Dias (16-22/04) &mdash; GlucoZen FB</div>
+
+  <div class="ban r">
+    <div class="bi">&#9888;</div>
+    <div><div class="bt">&#9888; Ret.Pitch Emily caiu hoje: 6.17% vs 8.68% media 7d (&darr; -2.51pp) &mdash; monitorar!</div>
+    Queda relevante. Play Rate ok (90.67% hoje). Pode ser variacao natural de um dia de volume baixo (493 plays vs 499/dia media) ou sinal de degradacao. Se cair mais amanha, investigar.</div>
+  </div>
+
+  <!-- AGENCIA -->
+  <div class="vsl-box">
+    <div class="vsl-title">
+      <span class="tag tfb">FB</span>
+      <span>GlucoZen VSL16 &mdash; AGENCIA MONKEY</span>
+      <span class="chip cy" style="margin-left:auto;"><span class="cd"></span>&#9888; Migrar player urgente</span>
     </div>
-
-    <!-- VISUAL ROAS BAR -->
-    <div class="tw">
-      <div class="th"><div class="tt">Ranking ROAS &mdash; todos os criativos hoje</div><div class="tm">Largura = proporcional ao ROAS maximo (1.67x)</div></div>
-      <div style="padding:16px;">
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--g);">EMAG002</div>
-          <div class="bar-track"><div class="bar-fill bg" style="width:100%"></div></div>
-          <div class="bar-val" style="color:var(--g);">1.67x &#128154;</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--g);">D070</div>
-          <div class="bar-track"><div class="bar-fill bg" style="width:89%"></div></div>
-          <div class="bar-val" style="color:var(--g);">1.49x &#128153;</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--y);">EMAG003</div>
-          <div class="bar-track"><div class="bar-fill by" style="width:49%"></div></div>
-          <div class="bar-val" style="color:var(--y);">0.81x</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--r);">SCK85</div>
-          <div class="bar-track"><div class="bar-fill br" style="width:3%"></div></div>
-          <div class="bar-val" style="color:var(--r);">0x</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--r);">D105</div>
-          <div class="bar-track"><div class="bar-fill br" style="width:3%"></div></div>
-          <div class="bar-val" style="color:var(--r);">0x</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--r);">EMAG014</div>
-          <div class="bar-track"><div class="bar-fill br" style="width:3%"></div></div>
-          <div class="bar-val" style="color:var(--r);">0x</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--r);">EMAG007</div>
-          <div class="bar-track"><div class="bar-fill br" style="width:3%"></div></div>
-          <div class="bar-val" style="color:var(--r);">0x</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="color:var(--r);">D104</div>
-          <div class="bar-track"><div class="bar-fill br" style="width:3%"></div></div>
-          <div class="bar-val" style="color:var(--r);">0x</div>
-        </div>
-      </div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Play Rate</div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--y);">88.21%</strong></div><div class="bw"><div class="bf by" style="width:88.21%"></div></div></div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">89.93%</strong></div><div class="bw"><div class="bf bg" style="width:89.93%"></div></div></div>
+      <div><span class="dd">&#8595; -1.72%</span></div>
     </div>
-
-    <!-- FACEBOOK -->
-    <div class="st">&#128153; Facebook Ads &mdash; Criativos rodando hoje (GlucoZen Diabetes)</div>
-    <div class="tw">
-      <div class="th"><div class="tt">FB &mdash; 5 criativos &mdash; spend total $2.864</div><div class="tm">Conta: Agencia Monkey 873022</div></div>
-      <table>
-        <thead><tr><th>Criativo</th><th>Tipo</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Conv</th><th>CPA</th><th>Historico</th><th>Acao</th></tr></thead>
-        <tbody>
-          <tr class="vg">
-            <td><strong>D070</strong> &#127942;</td>
-            <td><span class="chip cb"><span class="cd"></span>Veterano</span></td>
-            <td class="mo">$2.523</td><td class="mo">$3.760</td>
-            <td><span class="rg">1.49x</span></td>
-            <td class="mo"><strong>16</strong></td>
-            <td class="mo">$157</td>
-            <td style="font-size:11px;color:var(--g);">Sem. 1.49x / 7d 1.43x</td>
-            <td><span class="chip cg"><span class="cd"></span>Escalar</span></td>
-          </tr>
-          <tr class="vy">
-            <td><strong>SCK85</strong></td>
-            <td><span class="chip cb"><span class="cd"></span>Veterano</span></td>
-            <td class="mo">$128</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--y);">Converteu ontem 2.00x</td>
-            <td><span class="chip cy"><span class="cd"></span>Monitor 24h</span></td>
-          </tr>
-          <tr class="vy">
-            <td><strong>D105</strong> &#128293;</td>
-            <td><span class="chip cg"><span class="cd"></span>NOVO dia 2</span></td>
-            <td class="mo">$115</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--g);">Estreou ontem: 3.40x!</td>
-            <td><span class="chip cy"><span class="cd"></span>Monitor &mdash; aguardar</span></td>
-          </tr>
-          <tr class="vb">
-            <td><strong>D104</strong></td>
-            <td><span class="chip cy"><span class="cd"></span>Teste</span></td>
-            <td class="mo">$98</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">2 dias / 0 conv</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar amanha</span></td>
-          </tr>
-          <tr class="vb" style="opacity:0.6">
-            <td>D98</td>
-            <td><span class="chip cy"><span class="cd"></span>Teste</span></td>
-            <td class="mo">$6</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">Gasto minimo</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Ret. ao Pitch</div>
+      <div><div style="font-size:11px;color:var(--y);margin-bottom:4px;">Hoje: <strong>N/D &#9888; LEGADO</strong></div><div class="bw"><div class="bf by" style="width:0%"></div></div></div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">7.89%</strong></div><div class="bw"><div class="bf bg" style="width:78.9%"></div></div></div>
+      <div><span class="de">&#9888; migrar hoje</span></div>
     </div>
-
-    <div class="tc2">
-      <div class="ban g"><div class="bi">&#127942;</div><div><div class="bt">D070 absoluto: 16/20 vendas do dia (80% do resultado)</div>ROAS 1.49x com $2.523 de spend. Criativo mais consistente da operacao. Escalar budget.</div></div>
-      <div class="ban y"><div class="bi">&#128293;</div><div><div class="bt">D105 estreou ontem (3.40x) mas zerou hoje &mdash; aguardar mais 1 dia</div>Comum em criativos novos ter variacao entre dias. Se converter amanha, e o proximo a escalar junto com D070.</div></div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Plays</div>
+      <div><strong style="color:var(--y);">2.116</strong> hoje (8:20h)</div>
+      <div><strong>10.324</strong> em 7d (1.474/dia)</div>
+      <div><span class="du">&#8593; maior volume</span></div>
     </div>
-
-    <!-- TIKTOK -->
-    <div class="st">&#128154; TikTok Ads &mdash; Criativos EMAG rodando hoje (Emagrecimento)</div>
-    <div class="tw">
-      <div class="th"><div class="tt">TK &mdash; 8 criativos &mdash; spend total $966 &mdash; Dia 2 da oferta</div><div class="tm">Contas: TTK73, TTK74, TTK83</div></div>
-      <table>
-        <thead><tr><th>Criativo</th><th>Conta</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Conv</th><th>CPA</th><th>7 dias</th><th>Acao</th></tr></thead>
-        <tbody>
-          <tr class="vg">
-            <td><strong>EMAG002</strong> &#127942;</td>
-            <td class="mo">TTK82 multi</td>
-            <td class="mo">$341</td><td class="mo">$570</td>
-            <td><span class="rg">1.67x</span></td>
-            <td class="mo"><strong>3</strong></td>
-            <td class="mo">$114</td>
-            <td style="font-size:11px;color:var(--y);">7d: 0.84x (6 conv)</td>
-            <td><span class="chip cg"><span class="cd"></span>Vencedor TK</span></td>
-          </tr>
-          <tr class="vy">
-            <td><strong>EMAG003</strong></td>
-            <td class="mo">TTK73-17</td>
-            <td class="mo">$235</td><td class="mo">$190</td>
-            <td><span class="ry">0.81x</span></td>
-            <td class="mo">1</td>
-            <td class="mo">$235</td>
-            <td style="font-size:11px;color:var(--g);">7d: 1.22x (4 conv) &#9989;</td>
-            <td><span class="chip cy"><span class="cd"></span>Monitor</span></td>
-          </tr>
-          <tr class="vb">
-            <td><strong>EMAG014</strong></td>
-            <td class="mo">TTK74</td>
-            <td class="mo">$144</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0.50x (1 conv)</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar hoje</span></td>
-          </tr>
-          <tr class="vb">
-            <td><strong>EMAG007</strong></td>
-            <td class="mo">TTK74/83</td>
-            <td class="mo">$113</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td>
-            <td class="mo z">0</td>
-            <td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0.71x (4 conv)</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar hoje</span></td>
-          </tr>
-          <tr class="vb" style="opacity:0.65">
-            <td>EMAG011</td><td class="mo z">TTK82</td>
-            <td class="mo">$31</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td><td class="mo z">0</td><td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0x</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar</span></td>
-          </tr>
-          <tr class="vb" style="opacity:0.65">
-            <td>EMAG010</td><td class="mo z">TTK82</td>
-            <td class="mo">$30</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td><td class="mo z">0</td><td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0x</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar</span></td>
-          </tr>
-          <tr class="vb" style="opacity:0.65">
-            <td>EMAG013</td><td class="mo z">TTK82</td>
-            <td class="mo">$30</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td><td class="mo z">0</td><td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0x</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar</span></td>
-          </tr>
-          <tr class="vb" style="opacity:0.65">
-            <td>EMAG012</td><td class="mo z">TTK82</td>
-            <td class="mo">$29</td><td class="mo z">$0</td>
-            <td><span class="rr">0x</span></td><td class="mo z">0</td><td class="mo z">--</td>
-            <td style="font-size:11px;color:var(--r);">7d: 0x</td>
-            <td><span class="chip cr"><span class="cd"></span>Pausar</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="ban r">
-      <div class="bi">&#128308;</div>
-      <div><div class="bt">Pausar AGORA: EMAG007, EMAG010, EMAG011, EMAG012, EMAG013, EMAG014 &mdash; economiza ~$377/dia</div>
-      6 criativos TK com gasto acumulado de $377 e zero conversoes. EMAG003 tem 7 dias positivos (1.22x) mas hoje fraco &mdash; aguardar mais 24h antes de pausar.</div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Aud. Pitch</div>
+      <div><strong class="z">N/D</strong> (legado)</div>
+      <div><strong>803</strong> em 7d (114/dia)</div>
+      <div><span class="de">&#9888; cego</span></div>
     </div>
   </div>
 
-  <!-- 7 DIAS -->
-  <div class="tc" id="tab-semana">
-    <div class="ban g">
-      <div class="bi">&#127881;</div>
-      <div><div class="bt">&#127881; PRIMEIRA SEMANA LUCRATIVA! 14-20/04: ROAS 1.15x &mdash; +$2.765 de lucro</div>
-      Semanas anteriores foram negativas. Esta semana consolidou o padrao vencedor: Agencia Monkey BIDCAP 240 + EMAG TK no TikTok.</div>
+  <!-- EMILY -->
+  <div class="vsl-box">
+    <div class="vsl-title">
+      <span class="tag tfb">FB</span>
+      <span>GlucoZen VSL16 &mdash; EMILY C3</span>
+      <span class="chip cr" style="margin-left:auto;"><span class="cd"></span>&#9660; Ret.Pitch caindo &mdash; monitorar!</span>
     </div>
-    <div class="cards">
-      <div class="card g"><div class="cl">Spend 7d</div><div class="cv">$18.0k</div><div class="cs">$2.576/dia</div></div>
-      <div class="card g"><div class="cl">Receita 7d</div><div class="cv">$20.8k</div><div class="cs">$2.971/dia</div></div>
-      <div class="card g"><div class="cl">ROAS 7d</div><div class="cv">1.15x</div><div class="cs">&#9989; Acima do break-even!</div></div>
-      <div class="card b"><div class="cl">Vendas 7d</div><div class="cv">91</div><div class="cs">13/dia media</div></div>
-      <div class="card y"><div class="cl">CPA 7d</div><div class="cv">$198</div><div class="cs">Meta $168 &mdash; melhorando</div></div>
-      <div class="card g"><div class="cl">Lucro 7d</div><div class="cv">+$2.765</div><div class="cs">ROI +15.3%</div></div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Play Rate</div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--g);">90.67%</strong></div><div class="bw"><div class="bf bg" style="width:90.67%"></div></div></div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">90.38%</strong></div><div class="bw"><div class="bf bg" style="width:90.38%"></div></div></div>
+      <div><span class="du">&#8593; +0.29%</span></div>
     </div>
-    <div class="st">Evolucao semanal</div>
-    <div class="tw">
-      <div class="th"><div class="tt">ROAS por semana &mdash; tendencia de melhora</div></div>
-      <table>
-        <thead><tr><th>Semana</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>Vendas</th><th>Lucro</th><th>Nota</th></tr></thead>
-        <tbody>
-          <tr><td>05-11/04</td><td class="mo">$26.2k</td><td class="mo">$23.3k</td><td><span class="rr">0.89x</span></td><td class="mo">129</td><td class="mo dn">-$2.887</td><td>TK Vapofil sangrando</td></tr>
-          <tr><td>09-15/04</td><td class="mo">$19.2k</td><td class="mo">$18.1k</td><td><span class="ry">0.94x</span></td><td class="mo">117</td><td class="mo dn">-$1.128</td><td>CPA $164 meta batida</td></tr>
-          <tr class="vg"><td><strong>14-20/04</strong></td><td class="mo">$18.0k</td><td class="mo">$20.8k</td><td><span class="rg">1.15x</span></td><td class="mo">91</td><td class="mo up">+$2.765</td><td>&#127881; 1a semana lucrativa!</td></tr>
-        </tbody>
-      </table>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Ret. ao Pitch</div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--r);">6.17%</strong> &#9660;</div><div class="bw"><div class="bf br" style="width:71%"></div></div></div>
+      <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">8.68%</strong></div><div class="bw"><div class="bf bg" style="width:100%"></div></div></div>
+      <div><span class="dd">&#8595; -2.51pp &#9888;</span></div>
     </div>
-  </div>
-
-  <!-- RT vs UTMify -->
-  <div class="tc" id="tab-compare">
-    <div class="st">Comparativo RedTrack vs UTMify &mdash; Hoje 20/04 &mdash; 20:20h BRT</div>
-
-    <div class="ban g">
-      <div class="bi">&#9989;</div>
-      <div><div class="bt">Sem erro real &mdash; divergencia explicada: delay do RT + 4 vendas sem UTM + conversao cambial</div>
-      Anteriormente RT mostrava 14 vendas (delay). Atualizado agora mostra 20 &mdash; igual ao UTMify trackeadas. As 4 extras do UTMify sao vendas sem parametros UTM (organico/direto).</div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Plays</div>
+      <div><strong>493</strong> hoje</div>
+      <div><strong>2.920</strong> em 7d (417/dia)</div>
+      <div><span class="de">&#9675; volume ok</span></div>
     </div>
-
-    <div class="tw">
-      <div class="th"><div class="tt">Comparativo lado a lado &mdash; Hoje (Conversao: R$ 5,74 = $1)</div></div>
-      <table>
-        <thead><tr><th>Metrica</th><th>RedTrack (USD)</th><th>UTMify (BRL)</th><th>UTMify em USD</th><th>Divergencia</th><th>Causa</th></tr></thead>
-        <tbody>
-          <tr class="vg"><td>Vendas trackeadas</td><td class="mo"><strong>20</strong></td><td class="mo">20</td><td class="mo">20</td><td><span class="chip cg"><span class="cd"></span>Igual &#9989;</span></td><td style="font-size:11px;">Delay RT ja resolvido</td></tr>
-          <tr class="vy"><td>Vendas total</td><td class="mo">20</td><td class="mo"><strong>24</strong></td><td class="mo">24</td><td><span class="chip cy"><span class="cd"></span>+4 UTMify</span></td><td style="font-size:11px;">4 vendas sem UTM (organico)</td></tr>
-          <tr class="vy"><td>Spend</td><td class="mo">$3.830</td><td class="mo">R$ 19.273</td><td class="mo">$3.358</td><td><span class="chip cy"><span class="cd"></span>-$472</span></td><td style="font-size:11px;">Taxa cambio diferente</td></tr>
-          <tr class="vy"><td>Receita</td><td class="mo">$4.520</td><td class="mo">R$ 22.606</td><td class="mo">$3.939</td><td><span class="chip cy"><span class="cd"></span>-$581</span></td><td style="font-size:11px;">UTMify = liquido (sem taxa CB)</td></tr>
-          <tr class="vg"><td>ROI / ROAS</td><td class="mo">1.18x</td><td class="mo">1.17</td><td class="mo">1.17</td><td><span class="chip cg"><span class="cd"></span>Igual &#9989;</span></td><td style="font-size:11px;">Consistente entre plataformas</td></tr>
-          <tr class="vy"><td>CPA</td><td class="mo">$191</td><td class="mo">R$ 803</td><td class="mo">$140</td><td><span class="chip cy"><span class="cd"></span>Base dif.</span></td><td style="font-size:11px;">UTMify divide por 24v, RT por 20v</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="tc2">
-      <div class="tw">
-        <div class="th"><div class="tt">Por plataforma &mdash; UTMify</div></div>
-        <table>
-          <thead><tr><th>Plataforma</th><th>Vendas</th><th>Gastos</th><th>Fat.</th><th>ROI</th></tr></thead>
-          <tbody>
-            <tr><td><span class="tag tfb">FB</span></td><td class="mo">16</td><td class="mo">R$ 14.357</td><td class="mo">R$ 18.802</td><td><span class="rg">1.31x</span></td></tr>
-            <tr><td><span class="tag ttk">TK</span></td><td class="mo">4</td><td class="mo">R$ 4.866</td><td class="mo">R$ 3.803</td><td><span class="rr">0.78x</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div class="ban b"><div class="bi">&#128161;</div><div><div class="bt">Usar UTMify para vendas &mdash; RedTrack para custos de midia</div>UTMify captura vendas em tempo real via webhook + vendas sem UTM. RedTrack e mais granular por campanha/criativo em USD. Usar ambos de forma complementar.</div></div>
-        <div class="ban y"><div class="bi">&#128269;</div><div><div class="bt">Investigar as 4 vendas sem UTM no UTMify</div>Ir em UTMify &rarr; Relatorios &rarr; Vendas sem UTM. Podem ser vendas organicas ou de retargeting sem parametro.</div></div>
-      </div>
+    <div class="vsl-row">
+      <div class="vsl-lbl">Aud. Pitch</div>
+      <div><strong style="color:var(--r);">30 pessoas</strong> hoje</div>
+      <div><strong>250</strong> em 7d (35/dia)</div>
+      <div><span class="dd">&#8595; abaixo media</span></div>
     </div>
   </div>
 
-  <!-- VSL -->
-  <div class="tc" id="tab-vsl">
-    <div class="st">Vturb &mdash; Comparativo Hoje vs 7 Dias &mdash; GlucoZen FB</div>
-    <div class="vsl-box">
-      <div class="vsl-title"><span class="tag tfb">FB</span><span>GlucoZen VSL16 &mdash; AGENCIA MONKEY</span><span class="chip cy" style="margin-left:auto;"><span class="cd"></span>&#9888; Migrar Player</span></div>
-      <div class="vsl-row">
-        <div class="vsl-lbl">Play Rate</div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--g);">90.72%</strong></div><div class="bw"><div class="bf bg" style="width:90.72%"></div></div></div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">90.50%</strong></div><div class="bw"><div class="bf bg" style="width:90.50%"></div></div></div>
-        <div><span class="du">&#8593; +0.22%</span></div>
-      </div>
-      <div class="vsl-row">
-        <div class="vsl-lbl">Ret. ao Pitch</div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--g);">5.88%</strong> &#9989;</div><div class="bw"><div class="bf bg" style="width:58.8%"></div></div></div>
-        <div><div style="font-size:11px;color:var(--y);margin-bottom:4px;">7 dias: <strong>LEGADO &#9888;</strong></div><div class="bw"><div class="bf by" style="width:0%"></div></div></div>
-        <div><span class="de">&#9888; migrar</span></div>
-      </div>
-      <div class="vsl-row"><div class="vsl-lbl">Plays</div><div><strong style="color:var(--g);">2.089</strong> hoje</div><div><strong>8.174</strong> em 7d (1.167/dia)</div><div><span class="du">&#8593; alto</span></div></div>
-    </div>
-    <div class="vsl-box">
-      <div class="vsl-title"><span class="tag tfb">FB</span><span>GlucoZen VSL16 &mdash; EMILY C3</span><span class="chip cg" style="margin-left:auto;"><span class="cd"></span>&#9989; Player 2.0</span></div>
-      <div class="vsl-row">
-        <div class="vsl-lbl">Play Rate</div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--y);">88.03%</strong></div><div class="bw"><div class="bf by" style="width:88.03%"></div></div></div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">90.13%</strong></div><div class="bw"><div class="bf bg" style="width:90.13%"></div></div></div>
-        <div><span class="dd">&#8595; -2.10%</span></div>
-      </div>
-      <div class="vsl-row">
-        <div class="vsl-lbl">Ret. ao Pitch</div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">Hoje: <strong style="color:var(--g);">8.99%</strong> &#9989;</div><div class="bw"><div class="bf bg" style="width:89.9%"></div></div></div>
-        <div><div style="font-size:11px;color:var(--m);margin-bottom:4px;">7 dias: <strong style="color:var(--g);">8.87%</strong></div><div class="bw"><div class="bf bg" style="width:88.7%"></div></div></div>
-        <div><span class="du">&#8593; +0.12%</span></div>
-      </div>
-      <div class="vsl-row"><div class="vsl-lbl">Plays</div><div><strong>280</strong> hoje</div><div><strong>3.489</strong> em 7d (498/dia)</div><div><span class="de">&#9675; ok</span></div></div>
-    </div>
-    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Migrar Agencia Monkey para Player 2.0 &mdash; urgente</div>2.089 plays/dia sem Ret.Pitch. Maior player da operacao. Emily ja migrou e marcou 8.99% hoje.</div></div>
+  <div class="tc2">
+    <div class="ban y"><div class="bi">&#128269;</div><div><div class="bt">Emily Ret.Pitch: 6.17% hoje vs 8.68% media 7d &mdash; queda de 2.51pp</div>Play Rate ok (90.67%), entao o problema nao e a abertura do video. As pessoas abrem mas estao abandonando antes do pitch. Monitorar amanha &mdash; se cair para menos de 5%, investigar edicao da VSL.</div></div>
+    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Agencia Monkey: ainda player LEGADO &mdash; 1.474 plays/dia sem Ret.Pitch</div>Com 803 pessoas chegando ao pitch por semana, cada ponto de retencao representa 8 pessoas a mais no CTA. Migrar para Player 2.0 e prioridade maxima hoje.</div></div>
   </div>
 
-  <!-- ALERTAS -->
-  <div class="tc" id="tab-alertas">
-    <div class="st">Checklist &mdash; 20/04/2026 &mdash; 20:20h BRT</div>
-    <div class="ban g"><div class="bi">&#127881;</div><div><div class="bt">Semana lucrativa + dia lucrativo! ROAS 1.18x hoje / 1.15x na semana</div>D070 com 16 vendas, EMAG002 com 3 vendas. Operacao em boa trajetoria.</div></div>
-    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">PAUSAR AGORA: EMAG007/010/011/012/013/014 &mdash; economia $377/dia</div>6 criativos TK com gasto acumulado e zero conversoes. Concentrar em EMAG002 e EMAG003.</div></div>
-    <div class="ban y"><div class="bi">&#128269;</div><div><div class="bt">Monitorar D105 amanha &mdash; converteu 3.40x ontem, zerou hoje</div>Se converter amanha, escalar budget +100%. Se zerar de novo, pausar.</div></div>
-    <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Migrar Agencia Monkey VSL16 para Player 2.0 &mdash; urgente</div>Maior volume da operacao (2.089 plays/dia) sem visibilidade de Ret.Pitch. Emily ja migrou.</div></div>
-    <div class="tw">
-      <div class="th"><div class="tt">Acoes prioritarias</div></div>
-      <table>
-        <thead><tr><th>#</th><th>Acao</th><th>Impacto</th><th>Quando</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Pausar EMAG007/010/011/012/013/014</td><td style="color:var(--g);">Economiza $377/dia</td><td><span class="chip cr"><span class="cd"></span>Agora</span></td></tr>
-          <tr><td>2</td><td>Migrar Agencia Monkey para Player 2.0</td><td style="color:var(--g);">Recupera visibilidade Ret.Pitch</td><td><span class="chip cr"><span class="cd"></span>Agora</span></td></tr>
-          <tr><td>3</td><td>Aumentar budget D070 +50% (1.49x hoje)</td><td style="color:var(--g);">16 vendas hoje</td><td><span class="chip cg"><span class="cd"></span>Amanha cedo</span></td></tr>
-          <tr><td>4</td><td>Aumentar budget EMAG002 +100% (1.67x hoje)</td><td style="color:var(--g);">Vencedor TK</td><td><span class="chip cg"><span class="cd"></span>Amanha cedo</span></td></tr>
-          <tr><td>5</td><td>Verificar D105 amanha (3.40x ontem, 0x hoje)</td><td>Novo criativo com potencial</td><td><span class="chip cy"><span class="cd"></span>Amanha 14h</span></td></tr>
-          <tr><td>6</td><td>Investigar 4 vendas sem UTM no UTMify</td><td>Entender origem organica</td><td><span class="chip cy"><span class="cd"></span>Hoje</span></td></tr>
-          <tr><td>7</td><td>Pausar D104 + D98 (2 dias sem conversao)</td><td>Economiza $100+/dia</td><td><span class="chip cr"><span class="cd"></span>Amanha</span></td></tr>
-        </tbody>
-      </table>
-    </div>
+  <!-- VAPOFIL -->
+  <div class="st">Vapofil TK &mdash; 7 Dias (TK totalmente parado)</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Vapofil players &mdash; volume quasi zero (TK parado)</div></div>
+    <table>
+      <thead><tr><th>VSL</th><th>Plays 7d</th><th>Play Rate</th><th>Ret.Pitch</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="vb"><td>TTK-82-2</td><td class="mo">13</td><td class="mo" style="color:var(--r);">32.35%</td><td class="mo" style="color:var(--r);font-weight:700;">0.00%</td><td><span class="chip cr"><span class="cd"></span>TK parado</span></td></tr>
+        <tr class="vb"><td>TTK-82-4</td><td class="mo">18</td><td class="mo" style="color:var(--r);">30.43%</td><td class="mo" style="color:var(--r);font-weight:700;">0.00%</td><td><span class="chip cr"><span class="cd"></span>TK parado</span></td></tr>
+      </tbody>
+    </table>
   </div>
+  <div style="font-size:11px;color:var(--m);margin-top:-12px;">Vapofil TK praticamente parado &mdash; volume residual minimo. Nova VSL necessaria antes de reativar.</div>
+</div>
+
+<!-- ALERTAS -->
+<div class="tc" id="tab-alertas">
+  <div class="st">Status &mdash; 22 Abr 2026 &mdash; 08:20h BRT</div>
+
+  <div class="ban g"><div class="bi">&#127881;&#127881;</div><div><div class="bt">2a semana lucrativa consecutiva! 16-22/04: ROAS 1.15x / +$3.041 / 102 vendas</div>Operacao estabilizou no verde. D070 + EMAG003 formam a espinha dorsal da semana.</div></div>
+  <div class="ban g"><div class="bi">&#128293;</div><div><div class="bt">SCK08 novo criativo FB com 4.30x ROAS &mdash; escalar URGENTE</div>$55 de spend / $235 de receita em apenas 1 conversao. Aumentar budget nos adsets com SCK08 hoje mesmo.</div></div>
+  <div class="ban pu"><div class="bi">&#10024;</div><div><div class="bt">EMAG 016-020 lancados hoje &mdash; nova leva TK emagrecimento</div>5 novos criativos. Aguardar 2-3 dias para ter dados. Tambem: TTK131 Diabetes TK e TTK34 Parasite iniciando testes.</div></div>
+  <div class="ban r"><div class="bi">&#9660;</div><div><div class="bt">Emily Ret.Pitch caiu: 6.17% hoje vs 8.68% media (&darr; -2.51pp) &mdash; monitorar!</div>Se cair novamente amanha (abaixo de 5%), pode ser problema de edicao ou thumbnail. Comparar com dias anteriores.</div></div>
+  <div class="ban r"><div class="bi">&#128308;</div><div><div class="bt">Agencia Monkey player LEGADO &mdash; migrar hoje &mdash; 1.474 plays/dia cego</div>Maior volume da operacao sem Ret.Pitch. Cada dia de atraso = dia sem visibilidade do funil principal.</div></div>
+
+  <div class="st">Checklist &mdash; 22/04/2026</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Acoes prioritarias de hoje</div></div>
+    <table>
+      <thead><tr><th>#</th><th>Acao</th><th>Impacto</th><th>Quando</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Migrar Agencia Monkey VSL16 para Player 2.0</td><td style="color:var(--r);">Urgente &mdash; 1.474 plays/dia cego</td><td><span class="chip cr"><span class="cd"></span>Agora</span></td></tr>
+        <tr><td>2</td><td>Aumentar budget adsets com SCK08 +100-200%</td><td style="color:var(--g);">ROAS 4.30x &mdash; novo criativo quente</td><td><span class="chip cg"><span class="cd"></span>Agora</span></td></tr>
+        <tr><td>3</td><td>Pausar EMAG014 ($623 / ROAS 0.30x)</td><td style="color:var(--g);">Economiza $90+/dia</td><td><span class="chip cr"><span class="cd"></span>Agora</span></td></tr>
+        <tr><td>4</td><td>Monitorar Emily Ret.Pitch amanha (caiu 2.51pp hoje)</td><td>Detectar degradacao da VSL</td><td><span class="chip cy"><span class="cd"></span>Amanha</span></td></tr>
+        <tr><td>5</td><td>Verificar EMAG 016-020 apos 14h BRT</td><td>Nova leva &mdash; ver qual converte</td><td><span class="chip cy"><span class="cd"></span>14h BRT</span></td></tr>
+        <tr><td>6</td><td>Aumentar budget EMAG003 (1.38x em 7d)</td><td style="color:var(--g);">Vencedor TK consolidado</td><td><span class="chip cg"><span class="cd"></span>Manha</span></td></tr>
+        <tr><td>7</td><td>Escalar D070 +20% (1.61x / 69 conv em 7d)</td><td style="color:var(--g);">Pilar da operacao</td><td><span class="chip cg"><span class="cd"></span>Manha</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 </div>
 </div>
@@ -524,13 +428,13 @@ function T(id){
   document.querySelectorAll('.tc').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(e=>e.classList.remove('active'));
-  const el=document.getElementById('tab-'+id);if(el)el.classList.add('active');
-  const m=['hoje','criativos','semana','compare','vsl','alertas'];
+  const el=document.getElementById('tab-'+id); if(el) el.classList.add('active');
+  const m=['hoje','criativos','semana','vsl','alertas'];
   const i=m.indexOf(id);
   const ts=document.querySelectorAll('.tab');
   const ns=document.querySelectorAll('nav a');
-  if(i>=0&&ts[i])ts[i].classList.add('active');
-  if(i>=0&&ns[i])ns[i].classList.add('active');
+  if(i>=0&&ts[i]) ts[i].classList.add('active');
+  if(i>=0&&ns[i]) ns[i].classList.add('active');
 }
 </script>
 </body>
