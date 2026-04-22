@@ -125,6 +125,8 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     <a onclick="T('vsl')"><span class="dot"></span>VSL + Retencao</a>
     <div class="nav-sep">Acao</div>
     <a onclick="T('alertas')"><span class="dot"></span>Alertas</a>
+    <div class="nav-sep">Análise</div>
+    <a onclick="T('cpc')"><span class="dot"></span>&#128200; CPC / ROAS 14d</a>
   </nav>
 </div>
 <div class="mn">
@@ -144,6 +146,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   <div class="tab" onclick="T('semana')">7 Dias</div>
   <div class="tab" onclick="T('vsl')">VSL + Retencao</div>
   <div class="tab" onclick="T('alertas')">Alertas</div>
+  <div class="tab" onclick="T('cpc')">&#128200; CPC/ROAS 14d</div>
 </div>
 
 <!-- HOJE -->
@@ -420,6 +423,88 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     </table>
   </div>
 </div>
+  <!-- ANÁLISE CPC/ROAS 14 DIAS -->
+  <div class="tc" id="tab-cpc">
+    <div class="st">Facebook Diabetes — CPC, ROAS e Vendas dia a dia &mdash; 09-21/04/2026 &mdash; Filtro: DIABETES FB</div>
+
+    <div class="ban b">
+      <div class="bi">&#128161;</div>
+      <div><div class="bt">Insight: CPC alto nao e o problema &mdash; correlacao CPC x ROAS e positiva (+0.41)</div>
+      Dias com CPC mais caro tendem a ter ROAS melhor. O algoritmo com CPC baixo alcanca audiencias menos qualificadas: muitos clicks baratos que nao convertem. Quinta e Sexta sao os piores dias estruturais.</div>
+    </div>
+
+    <div class="cards">
+      <div class="card g"><div class="cl">Melhor dia</div><div class="cv">Ter</div><div class="cs">ROAS 1.27x media &middot; CPA $185</div></div>
+      <div class="card g"><div class="cl">2o melhor</div><div class="cv">Seg</div><div class="cs">ROAS 1.21x &middot; 19 vendas/dia</div></div>
+      <div class="card r"><div class="cl">Pior estrutural</div><div class="cv">Qui</div><div class="cs">ROAS 0.89x media &middot; CPA $247</div></div>
+      <div class="card r"><div class="cl">2o pior</div><div class="cv">Sex</div><div class="cs">ROAS 0.94x &middot; abaixo break-even</div></div>
+    </div>
+
+    <div class="st">Performance dia a dia &mdash; gasto, ROAS e CPC</div>
+    <div class="tw">
+      <div class="th"><div class="tt">14 dias &mdash; Facebook Diabetes only &mdash; filtro DIABETES FB</div><div class="tm">22/04 excluido (dia incompleto)</div></div>
+      <table>
+        <thead><tr><th>Data</th><th>Dia</th><th>Spend</th><th>Receita</th><th>ROAS</th><th>CPA</th><th>CPC</th><th>Vendas</th><th>Clicks</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="vb"><td class="mo">09/04</td><td>Qui</td><td class="mo">$4.336</td><td class="mo">$2.293</td><td><span class="rr">0.53x</span></td><td class="mo">$310</td><td class="mo">$0.17</td><td class="mo z">14</td><td class="mo z">25.5k</td><td><span class="chip cr"><span class="cd"></span>Negativo</span></td></tr>
+          <tr class="vb"><td class="mo">10/04</td><td>Sex</td><td class="mo">$3.672</td><td class="mo">$2.370</td><td><span class="rr">0.65x</span></td><td class="mo">$230</td><td class="mo">$0.17</td><td class="mo z">16</td><td class="mo z">21.6k</td><td><span class="chip cr"><span class="cd"></span>Negativo</span></td></tr>
+          <tr class="vg"><td class="mo">11/04</td><td>Sab</td><td class="mo">$3.553</td><td class="mo">$4.151</td><td><span class="rg">1.17x</span></td><td class="mo">$102</td><td class="mo">$0.20</td><td class="mo">35</td><td class="mo z">18.2k</td><td><span class="chip cg"><span class="cd"></span>Escalar</span></td></tr>
+          <tr class="vg"><td class="mo">12/04</td><td>Dom</td><td class="mo">$3.387</td><td class="mo">$3.997</td><td><span class="rg">1.18x</span></td><td class="mo">$113</td><td class="mo">$0.31</td><td class="mo">30</td><td class="mo z">10.9k</td><td><span class="chip cg"><span class="cd"></span>Bom domingo</span></td></tr>
+          <tr class="vy"><td class="mo">13/04</td><td>Seg</td><td class="mo">$2.515</td><td class="mo">$2.880</td><td><span class="rg">1.15x</span></td><td class="mo">$210</td><td class="mo">$0.44</td><td class="mo">12</td><td class="mo z">5.8k</td><td><span class="chip cy"><span class="cd"></span>Ok</span></td></tr>
+          <tr class="vg"><td class="mo">14/04</td><td>Ter</td><td class="mo">$1.767</td><td class="mo">$2.400</td><td><span class="rg">1.36x</span></td><td class="mo">$177</td><td class="mo">$0.96</td><td class="mo">10</td><td class="mo z">1.8k</td><td><span class="chip cg"><span class="cd"></span>Melhor ROAS</span></td></tr>
+          <tr class="vy"><td class="mo">15/04</td><td>Qua</td><td class="mo">$1.662</td><td class="mo">$1.920</td><td><span class="rg">1.16x</span></td><td class="mo">$208</td><td class="mo">$0.93</td><td class="mo">8</td><td class="mo z">1.8k</td><td><span class="chip cy"><span class="cd"></span>Ok</span></td></tr>
+          <tr class="vg"><td class="mo">16/04</td><td>Qui</td><td class="mo">$2.750</td><td class="mo">$3.450</td><td><span class="rg">1.25x</span></td><td class="mo">$183</td><td class="mo">$0.18</td><td class="mo">15</td><td class="mo z">15.3k</td><td><span class="chip cg"><span class="cd"></span>Bom</span></td></tr>
+          <tr class="vg"><td class="mo">17/04</td><td>Sex</td><td class="mo">$3.188</td><td class="mo">$3.880</td><td><span class="rg">1.22x</span></td><td class="mo">$188</td><td class="mo">$0.17</td><td class="mo">17</td><td class="mo z">18.4k</td><td><span class="chip cg"><span class="cd"></span>Bom</span></td></tr>
+          <tr class="vg"><td class="mo">18/04</td><td>Sab</td><td class="mo">$3.029</td><td class="mo">$3.730</td><td><span class="rg">1.23x</span></td><td class="mo">$178</td><td class="mo">$0.08</td><td class="mo">17</td><td class="mo z">37.6k</td><td><span class="chip cg"><span class="cd"></span>Bom</span></td></tr>
+          <tr class="vb"><td class="mo">19/04</td><td><strong>Dom</strong></td><td class="mo">$2.785</td><td class="mo">$2.260</td><td><span class="rr">0.81x</span></td><td class="mo">$279</td><td class="mo">$0.13</td><td class="mo z">10</td><td class="mo z">21.7k</td><td><span class="chip cr"><span class="cd"></span>Dom ruim</span></td></tr>
+          <tr class="vg"><td class="mo">20/04</td><td><strong>Seg</strong></td><td class="mo">$4.491</td><td class="mo">$5.695</td><td><span class="rg">1.27x</span></td><td class="mo">$180</td><td class="mo">$0.39</td><td class="mo"><strong>25</strong></td><td class="mo z">11.4k</td><td><span class="chip cg"><span class="cd"></span>Melhor dia</span></td></tr>
+          <tr class="vg"><td class="mo">21/04</td><td>Ter</td><td class="mo">$3.275</td><td class="mo">$3.860</td><td><span class="rg">1.18x</span></td><td class="mo">$193</td><td class="mo">$0.47</td><td class="mo">17</td><td class="mo z">6.9k</td><td><span class="chip cg"><span class="cd"></span>Bom</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="st">Media por dia da semana</div>
+    <div class="tc2">
+      <div class="tw">
+        <div class="th"><div class="tt">ROAS medio por dia</div><div class="tm">Break-even = 1.00x</div></div>
+        <table>
+          <thead><tr><th>Dia</th><th>ROAS med.</th><th>CPA med.</th><th>CPC med.</th><th>Vendas/dia</th></tr></thead>
+          <tbody>
+            <tr class="vg"><td><strong>Ter</strong></td><td><span class="rg">1.27x</span></td><td class="mo">$185</td><td class="mo">$0.71</td><td class="mo">14</td></tr>
+            <tr class="vg"><td><strong>Seg</strong></td><td><span class="rg">1.21x</span></td><td class="mo">$195</td><td class="mo">$0.42</td><td class="mo">19</td></tr>
+            <tr class="vg"><td>Sab</td><td><span class="rg">1.20x</span></td><td class="mo">$140</td><td class="mo">$0.14</td><td class="mo">26</td></tr>
+            <tr class="vy"><td>Qua</td><td><span class="ry">1.16x</span></td><td class="mo">$208</td><td class="mo">$0.93</td><td class="mo">8</td></tr>
+            <tr class="vb"><td>Dom</td><td><span class="ry">0.99x</span></td><td class="mo">$196</td><td class="mo">$0.22</td><td class="mo">20</td></tr>
+            <tr class="vb"><td>Sex</td><td><span class="rr">0.94x</span></td><td class="mo">$209</td><td class="mo">$0.17</td><td class="mo">17</td></tr>
+            <tr class="vb"><td>Qui</td><td><span class="rr">0.89x</span></td><td class="mo">$247</td><td class="mo">$0.17</td><td class="mo">15</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="ban r">
+          <div class="bi">&#128308;</div>
+          <div><div class="bt">Quinta e Sexta sao os piores dias estruturais &mdash; nao domingo!</div>
+          Com 2 semanas de dados, Qui (0.89x) e Sex (0.94x) sao consistentemente abaixo do break-even. Reducir budget nesses dias em 40% e realocar para Seg e Ter.</div>
+        </div>
+        <div class="ban y">
+          <div class="bi">&#128200;</div>
+          <div><div class="bt">CPC subindo Seg&rarr;Ter&rarr;Qua = sinal de saturacao de audiencia</div>
+          $0.39 &rarr; $0.47 &rarr; $0.58 em 3 dias. O leilao fica mais caro porque o publico ja viu o anuncio varias vezes. Checar frequencia no FB Ads Manager &mdash; se &gt; 3x, confirma saturacao.</div>
+        </div>
+        <div class="ban g">
+          <div class="bi">&#9989;</div>
+          <div><div class="bt">Acao: expandir audiencia para parar a alta do CPC</div>
+          Testar lookalike 3-5% (em vez do 1-2% atual), ou excluir quem clicou nos ultimos 14 dias. Isso injeta sangue novo e derruba o CPC sem perder qualidade.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ban r">
+      <div class="bi">&#128308;</div>
+      <div><div class="bt">Domingo e imprevisivel &mdash; nao e o vilao consistente que parecia</div>
+      Dom 12/04: ROAS 1.18x (30 vendas). Dom 19/04: ROAS 0.81x (10 vendas). Alta variancia. O problema real sao Qui e Sex. A sensacao de "mais apertado" vem da saturacao de audiencia semana após semana, nao do fim de semana.</div>
+    </div>
+  </div>
 
 </div>
 </div>
@@ -429,7 +514,7 @@ function T(id){
   document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('nav a').forEach(e=>e.classList.remove('active'));
   const el=document.getElementById('tab-'+id); if(el) el.classList.add('active');
-  const m=['hoje','criativos','semana','vsl','alertas'];
+  const m=['hoje','criativos','semana','vsl','alertas','cpc'];
   const i=m.indexOf(id);
   const ts=document.querySelectorAll('.tab');
   const ns=document.querySelectorAll('nav a');
