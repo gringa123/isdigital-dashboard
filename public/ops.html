@@ -499,6 +499,102 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
     </div>
 
+
+    <div class="st">Heatmap de vendas &mdash; Hora x Dia da Semana &mdash; Abril 2026 &mdash; FB Diabetes (312 vendas)</div>
+    <div class="ban b">
+      <div class="bi">&#128200;</div>
+      <div><div class="bt">Janela dourada: 16-22h RT (11-17h EST) concentra 43% de todas as vendas FB de abril</div>
+      Tarde de segunda e domingo tem picos fortes. Madrugada (02-08h RT) e praticamente morta &mdash; ideal para reduzir budget nesse intervalo.</div>
+    </div>
+    <div class="tw" id="heatmap-wrap">
+      <div class="th"><div class="tt">Vendas por hora (0-23h RT) x Dia da semana &mdash; abril 2026</div><div class="tm">Quanto mais escuro = mais vendas naquele slot</div></div>
+      <div id="heatmap-container" style="padding:16px;overflow-x:auto;"></div>
+    </div>
+    <div class="tc2">
+      <div class="tw">
+        <div class="th"><div class="tt">Vendas por hora do dia (total abril)</div><div class="tm">Horario RT (BRT-3)</div></div>
+        <div id="hour-bar-wrap" style="padding:12px;"></div>
+      </div>
+      <div class="tw">
+        <div class="th"><div class="tt">Vendas por dia da semana (abril)</div></div>
+        <div id="dow-bar-wrap" style="padding:12px;"></div>
+      </div>
+    </div>
+    <div class="ban g">
+      <div class="bi">&#9989;</div>
+      <div><div class="bt">Recomendacao de dayparting: concentrar budget entre 13-22h RT (08-17h EST)</div>
+      Reduzir em 60% o budget de 02-09h RT (madrugada americana). Segunda e Terca sao os dias mais fortes. Quarta tem volume baixo mas converte bem quando converte.</div>
+    </div>
+    <script>
+    (function(){
+      const grid = {"Dom":[8,4,0,0,0,0,0,0,0,0,0,0,0,16,0,4,12,0,12,8,12,0,4,4],"Seg":[8,4,0,4,0,0,0,0,0,0,0,8,0,0,0,4,12,8,0,0,0,4,0,4],"Ter":[0,0,0,4,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0],"Qua":[0,0,0,0,4,0,4,0,4,0,4,0,4,0,0,0,0,4,0,8,0,4,0,0],"Qui":[0,0,0,4,0,0,0,0,0,4,0,4,8,0,4,0,4,8,4,4,0,4,0,4],"Sex":[8,0,0,0,0,0,4,0,0,12,0,8,8,0,0,0,0,0,0,0,0,4,0,0],"Sab":[0,4,0,4,0,0,0,0,0,0,8,4,0,0,0,0,0,0,4,4,4,0,0,0]};
+      const byHour = [24,12,0,16,4,0,8,0,4,16,12,24,24,16,4,8,28,20,20,24,16,16,4,12];
+      const byDow = [84,56,8,36,52,44,32];
+      const DOW = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+      const maxVal = Math.max(...Object.values(grid).flat());
+      const maxH = Math.max(...byHour);
+      const maxD = Math.max(...byDow);
+      const cell = 26, labelW = 38, totalW = labelW + 24*cell;
+      let svg = '<svg width="' + totalW + '" height="' + (DOW.length*cell+32) + '" style="display:block;min-width:' + totalW + 'px;">';
+      for(let h=0;h<24;h++){
+        if(h%2===0) svg += '<text x="' + (labelW+h*cell+cell/2) + '" y="14" text-anchor="middle" font-size="9" fill="#888">' + String(h).padStart(2,'0') + 'h</text>';
+      }
+      DOW.forEach((day,di) => {
+        const y = 20 + di*cell;
+        svg += '<text x="' + (labelW-4) + '" y="' + (y+cell/2+4) + '" text-anchor="end" font-size="10" fill="#666">' + day + '</text>';
+        for(let h=0;h<24;h++){
+          const v = grid[day][h];
+          const ratio = maxVal>0 ? v/maxVal : 0;
+          const isGolden = h>=13 && h<=21;
+          let fill = '#f5f5f5';
+          if(v>0){
+            const r = Math.round(isGolden ? 24+ratio*14 : 40+ratio*60);
+            const g = Math.round(isGolden ? 95+ratio*65 : 40+ratio*30);
+            const b = Math.round(isGolden ? 165-ratio*41 : 200-ratio*100);
+            fill = 'rgba(' + r + ',' + g + ',' + b + ',' + (0.2+ratio*0.8).toFixed(2) + ')';
+          }
+          svg += '<rect x="' + (labelW+h*cell+1) + '" y="' + (y+1) + '" width="' + (cell-2) + '" height="' + (cell-2) + '" rx="3" fill="' + fill + '">';
+          if(v>0) svg += '<title>' + day + ' ' + String(h).padStart(2,'0') + 'h: ' + v + ' vendas</title>';
+          svg += '</rect>';
+          if(v>=8) svg += '<text x="' + (labelW+h*cell+cell/2) + '" y="' + (y+cell/2+4) + '" text-anchor="middle" font-size="8" fill="' + (ratio>0.5?'#0C447C':'#185FA5') + '" font-weight="500">' + v + '</text>';
+        }
+      });
+      svg += '</svg>';
+      document.getElementById('heatmap-container').innerHTML = svg;
+      // Barras por hora
+      let hbars = '<div style="display:flex;align-items:flex-end;gap:2px;height:80px;">';
+      byHour.forEach((v,h) => {
+        const ht = maxH>0 ? Math.round(v/maxH*78) : 0;
+        const col = (h>=13&&h<=21) ? '#378ADD' : '#B5D4F4';
+        hbars += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;">';
+        hbars += '<div style="width:100%;background:' + col + ';height:' + ht + 'px;border-radius:2px 2px 0 0;min-height:' + (v>0?2:0) + 'px;" title="' + String(h).padStart(2,'0') + 'h: ' + v + ' vendas"></div>';
+        if(h%3===0) hbars += '<div style="font-size:8px;color:#888;margin-top:2px;">' + String(h).padStart(2,'0') + '</div>';
+        else hbars += '<div style="font-size:8px;color:transparent;">x</div>';
+        hbars += '</div>';
+      });
+      hbars += '</div><div style="font-size:10px;color:#888;margin-top:4px;">Azul escuro = janela dourada 13-21h RT</div>';
+      document.getElementById('hour-bar-wrap').innerHTML = hbars;
+      // Barras por dia
+      const dowNames = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+      const dowColors = byDow.map((v,i) => {
+        if(i===0||i===6) return '#85B7EB';
+        if(v===Math.max(...byDow)) return '#185FA5';
+        return '#B5D4F4';
+      });
+      let dbars = '<div style="display:flex;align-items:flex-end;gap:6px;height:80px;">';
+      byDow.forEach((v,i) => {
+        const ht = maxD>0 ? Math.round(v/maxD*78) : 0;
+        dbars += '<div style="display:flex;flex-direction:column;align-items:center;flex:1;">';
+        dbars += '<div style="font-size:9px;color:#888;margin-bottom:2px;">' + v + '</div>';
+        dbars += '<div style="width:100%;background:' + dowColors[i] + ';height:' + ht + 'px;border-radius:2px 2px 0 0;" title="' + dowNames[i] + ': ' + v + ' vendas"></div>';
+        dbars += '<div style="font-size:10px;color:#888;margin-top:3px;">' + dowNames[i] + '</div>';
+        dbars += '</div>';
+      });
+      dbars += '</div>';
+      document.getElementById('dow-bar-wrap').innerHTML = dbars;
+    })();
+    </script>
+
     <div class="ban r">
       <div class="bi">&#128308;</div>
       <div><div class="bt">Domingo e imprevisivel &mdash; nao e o vilao consistente que parecia</div>
