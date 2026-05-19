@@ -7,7 +7,1083 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0a0f;--s:#111118;--s2:#18181f;--b:#222230;--t:#e8e8f0;--m:#6b6b80;--g:#00ff88;--r:#ff3b5c;--y:#ffcc00;--bl:#4f9eff;--pu:#a855f7;--gd:rgba(0,255,136,0.1);--rd:rgba(255,59,92,0.1);--yd:rgba(255,204,0,0.1);--bld:rgba(79,158,255,0.1);--pud:rgba(168,85,247,0.1);}
+*{box-sizing:border-box;margin:0;padding:0;}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>isdigital OPS</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--s:#111118;--s2:#18181f;--b:#222230;--t:#e8e8f0;--m:#6b6b80;--g:#00ff88;--r:#ff3b5c;--y:#ffcc00;--bl:#4f9eff;--pu:#a855f7;--gd:rgba(0,255,136,0.1);--rd:rgba(255,59,92,0.1);--yd:rgba(255,204,0,0.1);--bld:rgba(79,158,255,0.1);--pud:rgba(168,85,247,0.1);}
 *{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;font-size:14px;}
+.shell{display:flex;min-height:100vh;}
+.sb{width:210px;background:var(--s);border-right:1px solid var(--b);display:flex;flex-direction:column;padding:20px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;}
+.mn{margin-left:210px;flex:1;padding:24px 28px;}
+.logo{font-family:'Space Mono',monospace;font-size:15px;color:var(--g);padding:0 20px 20px;border-bottom:1px solid var(--b);}
+.logo span{color:var(--m);font-size:11px;display:block;margin-top:2px;}
+nav{padding:12px 8px;flex:1;}
+nav a{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;color:var(--m);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;margin-bottom:2px;}
+nav a:hover,nav a.active{background:var(--s2);color:var(--t);}
+nav a.active{color:var(--g);}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--m);flex-shrink:0;}
+nav a.active .dot{background:var(--g);}
+.nav-sep{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--m);padding:12px 12px 4px;font-weight:700;}
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px;}
+.htit{font-family:'Space Mono',monospace;font-size:22px;letter-spacing:-1px;}
+.htit span{color:var(--g);}
+.bdg{display:inline-flex;align-items:center;gap:6px;background:var(--s);border:1px solid var(--b);padding:6px 12px;border-radius:20px;font-size:12px;color:var(--m);}
+.bdg-dot{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--b);flex-wrap:wrap;}
+.tab{padding:8px 14px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;white-space:nowrap;}
+.tab:hover{color:var(--t);}
+.tab.active{color:var(--g);border-bottom-color:var(--g);}
+.tc{display:none;}
+.tc.active{display:block;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;}
+.card{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px;}
+.cl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;}
+.cv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
+.cs{font-size:11px;color:var(--m);margin-top:4px;}
+.card.g{border-color:rgba(0,255,136,0.25);background:var(--gd);}.card.g .cv{color:var(--g);}
+.card.r{border-color:rgba(255,59,92,0.25);background:var(--rd);}.card.r .cv{color:var(--r);}
+.card.y{border-color:rgba(255,204,0,0.2);background:var(--yd);}.card.y .cv{color:var(--y);}
+.card.b{border-color:rgba(79,158,255,0.2);background:var(--bld);}.card.b .cv{color:var(--bl);}
+.card.pu{border-color:rgba(168,85,247,0.25);background:var(--pud);}.card.pu .cv{color:var(--pu);}
+.hero{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:18px 22px;margin-bottom:20px;display:grid;grid-template-columns:repeat(6,1fr);}
+.hero.win{border-color:rgba(0,255,136,0.35);background:rgba(0,255,136,0.04);}
+.hero.wait{border-color:rgba(255,204,0,0.25);background:rgba(255,204,0,0.03);}
+.hi{padding:0 14px;border-right:1px solid var(--b);}
+.hi:first-child{padding-left:0;}
+.hi:last-child{border-right:none;}
+.hl{font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px;}
+.hv{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;}
+.hc{font-size:11px;color:var(--m);margin-top:4px;}
+.up{color:var(--g);}.dn{color:var(--r);}
+.ban{border-radius:8px;padding:12px 16px;margin-bottom:14px;font-size:13px;display:flex;align-items:flex-start;gap:10px;}
+.ban.r{background:var(--rd);border:1px solid rgba(255,59,92,0.3);}
+.ban.y{background:var(--yd);border:1px solid rgba(255,204,0,0.3);}
+.ban.g{background:var(--gd);border:1px solid rgba(0,255,136,0.3);}
+.ban.b{background:var(--bld);border:1px solid rgba(79,158,255,0.3);}
+.ban.pu{background:var(--pud);border:1px solid rgba(168,85,247,0.3);}
+.bi{font-size:18px;flex-shrink:0;}
+.bt{font-weight:700;margin-bottom:2px;}
+.tw{background:var(--s);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+.th{padding:14px 16px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;}
+.tt{font-size:13px;font-weight:700;}
+.tm{font-size:11px;color:var(--m);}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{padding:9px 14px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:0.7px;color:var(--m);font-weight:600;border-bottom:1px solid var(--b);white-space:nowrap;}
+td{padding:9px 14px;border-bottom:1px solid rgba(34,34,48,0.5);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.mo{font-family:'Space Mono',monospace;font-size:12px;}
+.cn{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
+.tfb{background:rgba(24,119,242,0.2);color:#4f9eff;}
+.ttk{background:rgba(255,0,80,0.15);color:#ff3b5c;}
+.rg{color:var(--g);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.ry{color:var(--y);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.rr{color:var(--r);font-weight:700;font-family:'Space Mono',monospace;font-size:12px;}
+.z{color:var(--m);}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.cg{background:var(--gd);color:var(--g);border:1px solid rgba(0,255,136,0.2);}
+.cr{background:var(--rd);color:var(--r);border:1px solid rgba(255,59,92,0.2);}
+.cy{background:var(--yd);color:var(--y);border:1px solid rgba(255,204,0,0.2);}
+.cb{background:var(--bld);color:var(--bl);border:1px solid rgba(79,158,255,0.2);}
+.cpu{background:var(--pud);color:var(--pu);border:1px solid rgba(168,85,247,0.2);}
+.cd{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.st{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--m);font-weight:700;margin-bottom:12px;margin-top:20px;}
+.st:first-child{margin-top:0;}
+.vg td{background:rgba(0,255,136,0.03);}
+.vb td{background:rgba(255,59,92,0.03);}
+.vy td{background:rgba(255,204,0,0.03);}
+.tc2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.vsl-box{background:var(--s2);border:1px solid var(--b);border-radius:12px;padding:18px;margin-bottom:16px;}
+.vsl-title{font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.vsl-row{display:grid;grid-template-columns:130px 1fr 1fr 90px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(34,34,48,0.4);}
+.vsl-row:last-child{border-bottom:none;}
+.vsl-lbl{font-size:11px;color:var(--m);}
+.bw{background:var(--b);border-radius:4px;height:6px;overflow:hidden;}
+.bf{height:6px;border-radius:4px;}
+.bg{background:var(--g);}.by{background:var(--y);}.br{background:var(--r);}
+.du{color:var(--g);font-weight:700;font-size:12px;}
+.dd{color:var(--r);font-weight:700;font-size:12px;}
+.de{color:var(--m);font-size:12px;}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.bar-label{font-size:11px;font-family:'Space Mono',monospace;width:80px;flex-shrink:0;}
+.bar-track{flex:1;background:var(--b);border-radius:4px;height:10px;overflow:hidden;}
+.bar-fill{height:10px;border-radius:4px;}
+.bar-val{font-size:11px;font-family:'Space Mono',monospace;width:60px;text-align:right;flex-shrink:0;}
+.new-badge{display:inline-block;background:rgba(168,85,247,0.2);color:var(--pu);border:1px solid rgba(168,85,247,0.3);padding:1px 6px;border-radius:4px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="sb">
+  <div class="logo">isdigital<span>OPS Dashboard</span></div>
+  <nav>
+    <div class="nav-sep">Hoje 19/05</div>
+    <a class="active" onclick="T('overview')"><span class="dot"></span>Overview</a>
+    <div class="nav-sep">Financeiro</div>
+    <a onclick="T('caixa')"><span class="dot"></span>&#128176; Caixa VendePay</a>
+    <a onclick="T('vendas')"><span class="dot"></span>Vendas &amp; ROAS Real</a>
+    <div class="nav-sep">Tráfego</div>
+    <a onclick="T('fb')"><span class="dot"></span>Facebook Ads 30d</a>
+    <a onclick="T('vsl')"><span class="dot"></span>&#127916; VSL + Retenção</a>
+    <div class="nav-sep">Análise</div>
+    <a onclick="T('criativos')"><span class="dot"></span>&#128293; Criativos detalhe</a>
+  </nav>
+</div>
+<div class="mn">
+
+<div class="hdr">
+  <div class="htit">OPS <span>// isdigital</span></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+    <div class="bdg"><span class="bdg-dot"></span>19 Mai 2026 &mdash; 11:30h BRT</div>
+    <div class="bdg" style="border-color:rgba(168,85,247,0.3);color:var(--pu);">&#128120; Prosperidade &mdash; 4 Archangel's Chant</div>
+    <div class="bdg" style="border-color:rgba(0,255,136,0.3);color:var(--g);">ROAS FB líq 1,46x &mdash; lucro $11k/30d</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="T('overview')">Overview</div>
+  <div class="tab" onclick="T('caixa')">&#128176; Caixa</div>
+  <div class="tab" onclick="T('vendas')">Vendas &amp; ROAS Real</div>
+  <div class="tab" onclick="T('fb')">Facebook Ads</div>
+  <div class="tab" onclick="T('vsl')">&#127916; VSL</div>
+  <div class="tab" onclick="T('criativos')">&#128293; Criativos</div>
+</div>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div class="tc active" id="tab-overview">
+
+  <div class="ban b">
+    <div class="bi">&#128202;</div>
+    <div><div class="bt">Operação Prosperidade — 30 dias (19 abr → 18 mai) — 2 canais ativos</div>
+    Facebook Ads (4 contas: Tatiane c1, Emily c6, Emily c7, Victoria c3) → conta VendePay Mariane · TikTok Ads (1 conta) → VendePay Mariana · Iago parada (residual $225).</div>
+  </div>
+
+  <div class="hero win">
+    <div class="hi"><div class="hl">Spend FB 30d</div><div class="hv" style="color:var(--bl);">$24.542</div><div class="hc">4 contas · $818/dia</div></div>
+    <div class="hi"><div class="hl">Receita Líquida FB+TK</div><div class="hv" style="color:var(--g);">$74.910</div><div class="hc">após taxas VendePay</div></div>
+    <div class="hi"><div class="hl">ROAS FB líquido</div><div class="hv" style="color:var(--g);">1,46x</div><div class="hc up">bruto 1,60x · meta 1,00x</div></div>
+    <div class="hi"><div class="hl">Lucro FB 30d</div><div class="hv" style="color:var(--g);">+$11.336</div><div class="hc up">~$378/dia</div></div>
+    <div class="hi"><div class="hl">Vendas pagas</div><div class="hv" style="color:var(--t);">1.903</div><div class="hc">924 FB · 979 TK</div></div>
+    <div class="hi"><div class="hl">Caixa Total</div><div class="hv" style="color:var(--pu);">$49.314</div><div class="hc">disponível + travado + reserva</div></div>
+  </div>
+
+  <div class="st">Quadro rápido</div>
+  <div class="cards">
+    <div class="card g"><div class="cl">Ticket médio real</div><div class="cv">$39,36</div><div class="cs">FB $38,83 · TK $39,87</div></div>
+    <div class="card b"><div class="cl">Compras pixel FB</div><div class="cv">1.039</div><div class="cs">vs 924 pagas (+11% gap)</div></div>
+    <div class="card pu"><div class="cl">Retenção VSL pitch</div><div class="cv">~28%</div><div class="cs">média 3 contas FB top</div></div>
+    <div class="card g"><div class="cl">CTA / Aud. Pitch</div><div class="cv">~30%</div><div class="cs">após troca player 05/05</div></div>
+    <div class="card y"><div class="cl">Spend seguro 5d</div><div class="cv">$31.761</div><div class="cs">FB + TK combinados</div></div>
+    <div class="card y"><div class="cl">Libera próx 5d</div><div class="cv">$27.717</div><div class="cs">D5 saindo do travado</div></div>
+  </div>
+
+  <div class="ban y">
+    <div class="bi">&#9888;</div>
+    <div><div class="bt">Pixel × VendePay: pixel inflou 11% no FB</div>
+    FB pixel marcou 1.039 compras mas só 924 pagaram na VendePay (gap 115). Com 67 pendentes que podem fechar, gap residual cai pra 48 (-4,6%). CPA real é maior que o pixel mostra — ver aba Vendas pra ROAS confirmado.</div>
+  </div>
+
+  <div class="ban r">
+    <div class="bi">&#128680;</div>
+    <div><div class="bt">Anomalia detectada: Victoria c3 — gap FB Ads × Vturb</div>
+    Victoria teve 1.215 cliques no FB mas só 19 plays no Vturb (1,5%). Outras contas convertem 6–66% de cliques em plays. Hipóteses: LP sem player embedado, player diferente ou tracking quebrado. Investigar antes de escalar — ver aba VSL.</div>
+  </div>
+
+  <div class="ban pu">
+    <div class="bi">&#128119;</div>
+    <div><div class="bt">TikTok faturou MAIS que Facebook, mas spend é desconhecido</div>
+    TK trouxe $39.032 líquido em 30 dias (vs FB $35.878) — 109% do volume FB. Sem CSV de spend TikTok, não dá pra calcular ROAS TK. <strong>Próximo passo: pegar CSV TikTok Ads pra fechar o quadro.</strong></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ CAIXA ═══════════════ -->
+<div class="tc" id="tab-caixa">
+
+  <div class="ban b">
+    <div class="bi">&#128181;</div>
+    <div><div class="bt">Caixa consolidado VendePay — 3 contas — snapshot 19/05/2026</div>
+    Mariane (Facebook) · Mariana (TikTok) · Iago (parada). Sistema D5 — saldo das vendas libera 5 dias após o pagamento.</div>
+  </div>
+
+  <div class="st">Visão geral</div>
+  <div class="cards">
+    <div class="card g"><div class="cl">Disponível p/ saque</div><div class="cv">$11.987</div><div class="cs">24% do caixa total</div></div>
+    <div class="card y"><div class="cl">Travado D5</div><div class="cv">$27.766</div><div class="cs">libera próximos 5d</div></div>
+    <div class="card pu"><div class="cl">Reserva</div><div class="cv">$9.560</div><div class="cs">20% · congelado padrão</div></div>
+    <div class="card b"><div class="cl">Saques aprovados em mai</div><div class="cv">~$41k</div><div class="cs">Mariana $25k · Mariane $16k</div></div>
+    <div class="card g"><div class="cl">Spend seguro 5d</div><div class="cv">$31.761</div><div class="cs">80% disp + liberações</div></div>
+    <div class="card g"><div class="cl">Média diária máx</div><div class="cv">$6.352/d</div><div class="cs">FB + TK combinados</div></div>
+  </div>
+
+  <div class="tw">
+    <div class="th"><div class="tt">Saldos por conta</div><div class="tm">USD · 19/05/2026</div></div>
+    <table>
+      <thead><tr>
+        <th>Conta</th><th>Função</th>
+        <th style="text-align:right">Disponível</th>
+        <th style="text-align:right">Travado D5</th>
+        <th style="text-align:right">Reserva</th>
+        <th style="text-align:right">Total</th>
+        <th style="text-align:right">% Op</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg">
+          <td><strong>Mariane</strong></td>
+          <td><span class="tag tfb">FB</span></td>
+          <td style="text-align:right" class="rg">$11.987,26</td>
+          <td style="text-align:right" class="mo">$16.252,64</td>
+          <td style="text-align:right" class="mo">$4.356,39</td>
+          <td style="text-align:right"><strong class="mo">$32.596,29</strong></td>
+          <td style="text-align:right" class="mo">66,1%</td>
+        </tr>
+        <tr class="vy">
+          <td><strong>Mariana</strong></td>
+          <td><span class="tag ttk">TK</span></td>
+          <td style="text-align:right" class="rr">$0,39</td>
+          <td style="text-align:right" class="mo">$11.464,02</td>
+          <td style="text-align:right" class="mo">$5.029,06</td>
+          <td style="text-align:right"><strong class="mo">$16.493,47</strong></td>
+          <td style="text-align:right" class="mo">33,4%</td>
+        </tr>
+        <tr>
+          <td><strong>Iago</strong></td>
+          <td><span class="chip cr"><span class="cd"></span>parada</span></td>
+          <td style="text-align:right" class="mo z">$0,09</td>
+          <td style="text-align:right" class="mo z">$49,62</td>
+          <td style="text-align:right" class="mo z">$175,25</td>
+          <td style="text-align:right" class="mo z">$224,96</td>
+          <td style="text-align:right" class="mo z">0,5%</td>
+        </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>TOTAL</td><td>—</td>
+          <td style="text-align:right" class="mo">$11.987,74</td>
+          <td style="text-align:right" class="mo">$27.766,28</td>
+          <td style="text-align:right" class="mo">$9.560,70</td>
+          <td style="text-align:right" class="mo">$49.314,72</td>
+          <td style="text-align:right" class="mo">100%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban y">
+    <div class="bi">&#128161;</div>
+    <div><div class="bt">Distribuição do caixa</div>
+    66% concentrado na Mariane (FB). A Mariana (TK) tem disponível $0,39 — sacaram tudo, mas tem $11.464 liberando nos próximos 5 dias. A Iago tá parada com $225 residual (reserva quase toda).</div>
+  </div>
+
+  <div class="tw">
+    <div class="th"><div class="tt">Liberações programadas — próximos 7 dias</div><div class="tm">D5 saindo do travado · 23-24/05 fds sem liberação</div></div>
+    <table>
+      <thead><tr>
+        <th>Data</th><th>Dia</th>
+        <th style="text-align:right">Mariane (FB)</th>
+        <th style="text-align:right">Mariana (TK)</th>
+        <th style="text-align:right">Total dia</th>
+        <th style="text-align:right">Acumulado</th>
+        <th style="text-align:right">Spend seguro 80%</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>20/05</td><td>terça</td>
+          <td style="text-align:right" class="mo">$3.609,62</td>
+          <td style="text-align:right" class="mo">$3.204,29</td>
+          <td style="text-align:right" class="rg">$6.813,91</td>
+          <td style="text-align:right" class="mo">$18.801,65</td>
+          <td style="text-align:right;color:var(--bl);font-weight:700">$15.041</td>
+        </tr>
+        <tr>
+          <td>21/05</td><td>quarta</td>
+          <td style="text-align:right" class="mo">$4.589,32</td>
+          <td style="text-align:right" class="mo">$2.893,78</td>
+          <td style="text-align:right" class="rg">$7.483,10</td>
+          <td style="text-align:right" class="mo">$26.284,75</td>
+          <td style="text-align:right;color:var(--bl);font-weight:700">$21.028</td>
+        </tr>
+        <tr>
+          <td>22/05</td><td>quinta</td>
+          <td style="text-align:right" class="mo">$3.945,75</td>
+          <td style="text-align:right" class="mo">$1.805,71</td>
+          <td style="text-align:right" class="rg">$5.751,46</td>
+          <td style="text-align:right" class="mo">$32.036,21</td>
+          <td style="text-align:right;color:var(--bl);font-weight:700">$25.629</td>
+        </tr>
+        <tr class="vb">
+          <td>23-24/05</td><td>fds</td>
+          <td style="text-align:right" class="z">—</td>
+          <td style="text-align:right" class="z">—</td>
+          <td style="text-align:right" class="z">$0</td>
+          <td style="text-align:right" class="mo z">$32.036,21</td>
+          <td style="text-align:right" class="z">—</td>
+        </tr>
+        <tr>
+          <td>25/05</td><td>domingo*</td>
+          <td style="text-align:right" class="mo">$3.127,76</td>
+          <td style="text-align:right" class="mo">$2.338,93</td>
+          <td style="text-align:right" class="rg">$5.466,69</td>
+          <td style="text-align:right" class="mo">$37.502,90</td>
+          <td style="text-align:right;color:var(--bl);font-weight:700">$30.002</td>
+        </tr>
+        <tr>
+          <td>26/05</td><td>segunda</td>
+          <td style="text-align:right" class="mo">$980,19</td>
+          <td style="text-align:right" class="mo">$1.221,30</td>
+          <td style="text-align:right" class="rg">$2.201,49</td>
+          <td style="text-align:right" class="mo">$39.704,39</td>
+          <td style="text-align:right;color:var(--bl);font-weight:700">$31.764</td>
+        </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>TOTAL 7d</td><td>—</td>
+          <td style="text-align:right" class="mo">$16.252,64</td>
+          <td style="text-align:right" class="mo">$11.464,01</td>
+          <td style="text-align:right" class="mo">$27.716,65</td>
+          <td>—</td>
+          <td style="text-align:right" class="z">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban g">
+    <div class="bi">&#128679;</div>
+    <div><div class="bt">Regra de spend seguro</div>
+    Spend máximo = 80% × (disponível + liberações no horizonte). Hoje disponível $11.987 + libera 5d $27.717 = $39.704 → spend seguro ≤ $31.764. Distribuição sugerida pelo % atual: FB ~32% · TK ~68% (TK fatura mais e libera mais).</div>
+  </div>
+
+  <div class="tw">
+    <div class="th"><div class="tt">Saques aprovados em maio (visíveis sem scroll)</div><div class="tm">Mariane = FB · Mariana = TK · Iago = parada</div></div>
+    <table>
+      <thead><tr><th>Data</th><th>Conta</th><th style="text-align:right">Valor bruto</th><th style="text-align:right">Taxa</th><th style="text-align:right">Líquido</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>05/05 11:00</td><td>Iago</td><td style="text-align:right" class="mo">$569,41</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$568,40</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>05/05 19:09</td><td>Mariana TK</td><td style="text-align:right" class="mo">$2.000,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$1.998,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>05/05 19:20</td><td>Mariane FB</td><td style="text-align:right" class="mo">$950,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$948,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>06/05 14:40</td><td>Mariana TK</td><td style="text-align:right" class="mo">$3.002,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$3.000,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>06/05 23:50</td><td>Mariana TK</td><td style="text-align:right" class="mo">$1.702,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$1.700,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>07/05 08:31</td><td>Mariane FB</td><td style="text-align:right" class="mo">$1.173,01</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$1.172,00</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>07/05 22:33</td><td>Mariana TK</td><td style="text-align:right" class="mo">$2.602,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$2.600,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>08/05 08:19</td><td>Mariane FB</td><td style="text-align:right" class="mo">$566,01</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$565,00</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>08/05 08:22</td><td>Mariana TK</td><td style="text-align:right" class="mo">$1.002,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$1.000,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>08/05 08:30</td><td>Iago</td><td style="text-align:right" class="mo">$352,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$350,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>09/05 10:53</td><td>Mariana TK</td><td style="text-align:right" class="mo">$3.202,00</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$3.200,98</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>09/05 17:18</td><td>Mariane FB</td><td style="text-align:right" class="mo">$1.092,39</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$1.091,37</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>11/05 13:22</td><td>Mariane FB</td><td style="text-align:right" class="mo">$3.689,68</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$3.688,67</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>11/05 13:29</td><td>Mariana TK</td><td style="text-align:right" class="mo">$9.702,00</td><td style="text-align:right" class="z">$1,01</td><td style="text-align:right" class="rg">$9.700,99</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>12/05 08:11</td><td>Mariane FB</td><td style="text-align:right" class="mo">$2.858,72</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$2.857,70</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>12/05 08:28</td><td>Iago</td><td style="text-align:right" class="mo">$637,35</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$636,33</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>13/05 08:35</td><td>Mariane FB</td><td style="text-align:right" class="mo">$3.084,89</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$3.083,87</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>13/05 08:48</td><td>Mariana TK</td><td style="text-align:right" class="mo">$1.202,00</td><td style="text-align:right" class="z">$1,02</td><td style="text-align:right" class="rg">$1.200,98</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>14/05 08:11</td><td>Mariane FB</td><td style="text-align:right" class="mo">$1.314,44</td><td style="text-align:right" class="z">$1,00</td><td style="text-align:right" class="rg">$1.313,44</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+        <tr><td>15/05 14:17</td><td>Mariane FB</td><td style="text-align:right" class="mo">$909,00</td><td style="text-align:right" class="z">$1,00</td><td style="text-align:right" class="rg">$908,00</td><td><span class="chip cg"><span class="cd"></span>aprovado</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════ VENDAS ═══════════════ -->
+<div class="tc" id="tab-vendas">
+
+  <div class="ban g">
+    <div class="bi">&#128176;</div>
+    <div><div class="bt">Receita real confirmada — fonte VendePay — 19/abr → 19/mai</div>
+    Dados de vendas pagas extraídos diretamente da VendePay, separados por canal de origem. Substitui a estimativa anterior via ticket médio.</div>
+  </div>
+
+  <div class="st">Receita por canal</div>
+  <div class="cards">
+    <div class="card b"><div class="cl">Receita Bruta total</div><div class="cv">$80.603</div><div class="cs">FB + TK 30d</div></div>
+    <div class="card g"><div class="cl">Receita Líquida total</div><div class="cv">$74.910</div><div class="cs">após taxas</div></div>
+    <div class="card pu"><div class="cl">Vendas pagas</div><div class="cv">1.903</div><div class="cs">924 FB · 979 TK</div></div>
+    <div class="card y"><div class="cl">Pendentes</div><div class="cv">114</div><div class="cs">67 FB · 47 TK</div></div>
+    <div class="card g"><div class="cl">Ticket médio</div><div class="cv">$39,36</div><div class="cs">consolidado 2 canais</div></div>
+    <div class="card b"><div class="cl">Total transações</div><div class="cv">3.579</div><div class="cs">incluindo recusadas</div></div>
+  </div>
+
+  <div class="tw">
+    <div class="th"><div class="tt">Vendas confirmadas por canal</div><div class="tm">19/abr–19/mai · USD · vendas completas (pagas)</div></div>
+    <table>
+      <thead><tr>
+        <th>Canal</th><th>Conta</th>
+        <th style="text-align:right">Receita Bruta</th>
+        <th style="text-align:right">Receita Líquida</th>
+        <th style="text-align:right">Ticket Médio</th>
+        <th style="text-align:right">Vendas Pagas</th>
+        <th style="text-align:right">Pendentes</th>
+        <th style="text-align:right">Total trx</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tfb">FB</span></td>
+          <td>Mariane</td>
+          <td style="text-align:right" class="mo">$39.268,50</td>
+          <td style="text-align:right" class="rg">$35.878,50</td>
+          <td style="text-align:right" class="mo">$38,83</td>
+          <td style="text-align:right" class="mo">924</td>
+          <td style="text-align:right" class="mo">67</td>
+          <td style="text-align:right" class="mo">1.534</td>
+        </tr>
+        <tr>
+          <td><span class="tag ttk">TK</span></td>
+          <td>Mariana</td>
+          <td style="text-align:right" class="mo">$41.335,00</td>
+          <td style="text-align:right" class="rg">$39.032,00</td>
+          <td style="text-align:right" class="mo">$39,87</td>
+          <td style="text-align:right" class="mo">979</td>
+          <td style="text-align:right" class="mo">47</td>
+          <td style="text-align:right" class="mo">2.045</td>
+        </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td colspan="2">TOTAL</td>
+          <td style="text-align:right" class="mo">$80.603,50</td>
+          <td style="text-align:right" class="mo">$74.910,50</td>
+          <td style="text-align:right" class="mo">$39,36</td>
+          <td style="text-align:right" class="mo">1.903</td>
+          <td style="text-align:right" class="mo">114</td>
+          <td style="text-align:right" class="mo">3.579</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban r">
+    <div class="bi">&#9888;</div>
+    <div><div class="bt">TikTok faturou MAIS que Facebook, spend desconhecido</div>
+    TK trouxe $39.032 líquido em 30 dias (vs FB $35.878) — 109% do volume FB com tickets quase iguais. Sem CSV de spend TikTok, não dá pra calcular ROAS TK. Pode ser o canal mais eficiente OU pode estar queimando dinheiro — sem dado de custo, não tem como saber. <strong>Próximo: pegar CSV TikTok Ads.</strong></div>
+  </div>
+
+  <div class="st">ROAS Facebook real — estimado vs confirmado</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Comparativo: estimativa via ticket $40,59 × dado real VendePay</div><div class="tm">substitui a projeção anterior</div></div>
+    <table>
+      <thead><tr>
+        <th>Métrica</th>
+        <th style="text-align:right">Estimado (ticket $40,59)</th>
+        <th style="text-align:right">REAL (VendePay)</th>
+        <th style="text-align:right">Delta</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Receita Bruta</td><td style="text-align:right" class="mo">$42.173</td><td style="text-align:right" class="mo">$39.268,50</td><td style="text-align:right" class="rr">−$2.904 (−6,9%)</td></tr>
+        <tr><td>Receita Líquida</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">$35.878,50</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>Ticket médio</td><td style="text-align:right" class="mo">$40,59</td><td style="text-align:right" class="mo">$38,83</td><td style="text-align:right" class="rr">−$1,76</td></tr>
+        <tr><td>Vendas pagas</td><td style="text-align:right" class="mo">1.039 (pixel)</td><td style="text-align:right" class="mo">924 (VendePay)</td><td style="text-align:right" class="rr">−115 (−11,1%)</td></tr>
+        <tr><td>ROAS bruto</td><td style="text-align:right" class="mo">1,72x</td><td style="text-align:right" class="mo">1,60x</td><td style="text-align:right" class="ry">−0,12x</td></tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>ROAS líquido</td>
+          <td style="text-align:right" class="z">—</td>
+          <td style="text-align:right" class="rg">1,46x</td>
+          <td style="text-align:right" class="rg">acima break-even 1,00x</td>
+        </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>Lucro 30d (líq − spend)</td>
+          <td style="text-align:right" class="z">—</td>
+          <td style="text-align:right" class="rg">+$11.335,70</td>
+          <td style="text-align:right" class="rg">~$378/dia</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="st">Gap pixel × VendePay</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Cruzamento de atribuição — Facebook</div><div class="tm">discrepância entre pixel FB e pagamentos confirmados</div></div>
+    <table>
+      <thead><tr>
+        <th>Origem</th>
+        <th style="text-align:right">Compras atribuídas</th>
+        <th>Observação</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>FB Pixel (4 contas)</td><td style="text-align:right" class="mo">1.039</td><td class="z">contagem de eventos fb_pixel_purchase</td></tr>
+        <tr><td>VendePay Mariane — pagas</td><td style="text-align:right" class="mo">924</td><td class="z">pagamentos confirmados</td></tr>
+        <tr><td>VendePay Mariane — pendentes</td><td style="text-align:right" class="mo">67</td><td class="z">aguardando confirmação</td></tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>Gap (pixel − pagas)</td>
+          <td style="text-align:right" class="rr">115</td>
+          <td>+11% inflação no pixel</td>
+        </tr>
+        <tr>
+          <td>Gap residual (se pendentes fecham)</td>
+          <td style="text-align:right" class="ry">48</td>
+          <td>−4,6% (tolerável)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban y">
+    <div class="bi">&#128269;</div>
+    <div><div class="bt">Hipóteses pro gap de 115 compras pixel × pagamento</div>
+    Pixel costuma inflar por: duplo-disparo (mesmo evento em mais de uma página), atribuição cruzada entre contas FB rodando o mesmo pixel, ou eventos disparados sem venda real. Se os 67 pendentes virarem pagas, gap real cai pra 48 (-4,6%) — tolerável.</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ FB ADS ═══════════════ -->
+<div class="tc" id="tab-fb">
+
+  <div class="ban r">
+    <div class="bi">&#128680;</div>
+    <div><div class="bt">Anomalia Victoria c3 — gap FB Ads × Vturb</div>
+    1.215 cliques no link FB mas só 19 plays no player Vturb (1,5%). Outras contas convertem 6–66%. Hipóteses: LP sem player embedado, player diferente ou tracking quebrado. Investigar antes de escalar — ver detalhe na aba VSL.</div>
+  </div>
+
+  <div class="st">Performance por conta — 30 dias</div>
+  <div class="tw">
+    <div class="th"><div class="tt">4 contas Facebook Ads</div><div class="tm">19/abr–18/mai · atribuição clique 7d + view 1d</div></div>
+    <table>
+      <thead><tr>
+        <th>Conta</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Cliques</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">CPM</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras pixel</th>
+        <th style="text-align:right">CPA pixel</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>Tatiane c1</td>
+          <td style="text-align:right" class="mo">$2.838,74</td>
+          <td style="text-align:right" class="mo">42.288</td>
+          <td style="text-align:right" class="mo">3.718</td>
+          <td style="text-align:right" class="mo">8,79%</td>
+          <td style="text-align:right" class="mo">$0,76</td>
+          <td style="text-align:right" class="mo">$67,13</td>
+          <td style="text-align:right" class="mo">263</td>
+          <td style="text-align:right" class="rg">$10,79</td>
+          <td style="text-align:right" class="mo">106</td>
+          <td style="text-align:right" class="ry">$26,78</td>
+        </tr>
+        <tr>
+          <td>Emily c6</td>
+          <td style="text-align:right" class="mo">$8.037,37</td>
+          <td style="text-align:right" class="mo">86.688</td>
+          <td style="text-align:right" class="mo">9.817</td>
+          <td style="text-align:right" class="mo">11,32%</td>
+          <td style="text-align:right" class="mo">$0,82</td>
+          <td style="text-align:right" class="mo">$92,72</td>
+          <td style="text-align:right" class="mo">553</td>
+          <td style="text-align:right" class="rg">$14,53</td>
+          <td style="text-align:right" class="mo">315</td>
+          <td style="text-align:right" class="ry">$25,52</td>
+        </tr>
+        <tr>
+          <td>Emily c7</td>
+          <td style="text-align:right" class="mo">$12.492,51</td>
+          <td style="text-align:right" class="mo">116.933</td>
+          <td style="text-align:right" class="mo">13.547</td>
+          <td style="text-align:right" class="mo">11,59%</td>
+          <td style="text-align:right" class="mo">$0,92</td>
+          <td style="text-align:right" class="mo">$106,83</td>
+          <td style="text-align:right" class="mo">708</td>
+          <td style="text-align:right" class="ry">$17,64</td>
+          <td style="text-align:right" class="mo">577</td>
+          <td style="text-align:right" class="rg">$21,65</td>
+        </tr>
+        <tr class="vb">
+          <td>Victoria c3</td>
+          <td style="text-align:right" class="mo">$1.174,18</td>
+          <td style="text-align:right" class="mo">17.186</td>
+          <td style="text-align:right" class="mo">1.215</td>
+          <td style="text-align:right" class="mo">7,07%</td>
+          <td style="text-align:right" class="mo">$0,97</td>
+          <td style="text-align:right" class="mo">$68,32</td>
+          <td style="text-align:right" class="mo">50</td>
+          <td style="text-align:right" class="rr">$23,48</td>
+          <td style="text-align:right" class="mo">41</td>
+          <td style="text-align:right" class="ry">$28,64</td>
+        </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>TOTAL FB</td>
+          <td style="text-align:right" class="mo">$24.542,80</td>
+          <td style="text-align:right" class="mo">263.095</td>
+          <td style="text-align:right" class="mo">28.297</td>
+          <td style="text-align:right" class="mo">10,75%</td>
+          <td style="text-align:right" class="mo">$0,87</td>
+          <td style="text-align:right" class="mo">$93,28</td>
+          <td style="text-align:right" class="mo">1.574</td>
+          <td style="text-align:right" class="mo">$15,59</td>
+          <td style="text-align:right" class="mo">1.039</td>
+          <td style="text-align:right" class="mo">$23,62</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="st">Funil FB consolidado</div>
+  <div class="tw">
+    <div class="th"><div class="tt">4 etapas — 30 dias</div><div class="tm">acumulado das 4 contas FB</div></div>
+    <div style="padding:16px;">
+      <div class="bar-row"><div class="bar-label">Impressões</div><div class="bar-track"><div class="bar-fill bg" style="width:100%"></div></div><div class="bar-val" style="color:var(--g)">263.095</div></div>
+      <div class="bar-row"><div class="bar-label">Cliques</div><div class="bar-track"><div class="bar-fill bg" style="width:11%"></div></div><div class="bar-val" style="color:var(--g)">28.297</div></div>
+      <div class="bar-row"><div class="bar-label">Checkout</div><div class="bar-track"><div class="bar-fill by" style="width:0.6%;min-width:4px"></div></div><div class="bar-val" style="color:var(--y)">1.574</div></div>
+      <div class="bar-row"><div class="bar-label">Vendas pagas</div><div class="bar-track"><div class="bar-fill by" style="width:0.35%;min-width:3px"></div></div><div class="bar-val" style="color:var(--y)">924</div></div>
+      <div style="font-size:11px;color:var(--m);margin-top:8px;padding-top:8px;border-top:1px solid var(--b);">
+        CTR 10,75% · clique→checkout 5,56% · checkout→venda paga 58,7% · clique→venda paga 3,27%
+      </div>
+    </div>
+  </div>
+
+  <div class="st">Top 15 criativos consolidados (4 contas)</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Ranking por nº de compras pixel</div><div class="tm">nomes normalizados · "ADS 35" = "ADS35"</div></div>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Criativo</th><th>Conta</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA pixel</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td>1</td><td><strong>ADS35</strong></td><td>c7</td><td style="text-align:right" class="mo">$3.561,02</td><td style="text-align:right" class="mo">$0,76</td><td style="text-align:right" class="mo">214</td><td style="text-align:right" class="mo">$16,64</td><td style="text-align:right" class="mo">186</td><td style="text-align:right" class="rg">$19,15</td></tr>
+        <tr class="vg"><td>2</td><td><strong>G4.1</strong></td><td>c7</td><td style="text-align:right" class="mo">$2.836,62</td><td style="text-align:right" class="mo">$1,14</td><td style="text-align:right" class="mo">161</td><td style="text-align:right" class="mo">$17,62</td><td style="text-align:right" class="mo">144</td><td style="text-align:right" class="rg">$19,70</td></tr>
+        <tr class="vg"><td>3</td><td><strong>ADS30</strong></td><td>c6</td><td style="text-align:right" class="mo">$2.803,26</td><td style="text-align:right" class="mo">$0,74</td><td style="text-align:right" class="mo">193</td><td style="text-align:right" class="mo">$14,52</td><td style="text-align:right" class="mo">122</td><td style="text-align:right" class="ry">$22,98</td></tr>
+        <tr class="vg"><td>4</td><td><strong>A5</strong></td><td>c6</td><td style="text-align:right" class="mo">$1.534,72</td><td style="text-align:right" class="mo">$0,79</td><td style="text-align:right" class="mo">172</td><td style="text-align:right" class="mo">$8,92</td><td style="text-align:right" class="mo">93</td><td style="text-align:right" class="rg">$16,50</td></tr>
+        <tr class="vb"><td>5</td><td>ADS35</td><td>c6</td><td style="text-align:right" class="mo">$2.449,44</td><td style="text-align:right" class="mo">$0,87</td><td style="text-align:right" class="mo">123</td><td style="text-align:right" class="mo">$19,91</td><td style="text-align:right" class="mo">72</td><td style="text-align:right" class="rr">$34,02</td></tr>
+        <tr class="vg"><td>6</td><td><strong>A5</strong></td><td>c1</td><td style="text-align:right" class="mo">$1.005,14</td><td style="text-align:right" class="mo">$0,80</td><td style="text-align:right" class="mo">135</td><td style="text-align:right" class="mo">$7,45</td><td style="text-align:right" class="mo">66</td><td style="text-align:right" class="rg">$15,23</td></tr>
+        <tr class="vy"><td>7</td><td>A5</td><td>c7</td><td style="text-align:right" class="mo">$1.054,03</td><td style="text-align:right" class="mo">$1,01</td><td style="text-align:right" class="mo">67</td><td style="text-align:right" class="mo">$15,73</td><td style="text-align:right" class="mo">40</td><td style="text-align:right" class="ry">$26,35</td></tr>
+        <tr class="vg"><td>8</td><td>ADS22</td><td>c7</td><td style="text-align:right" class="mo">$754,67</td><td style="text-align:right" class="mo">$0,97</td><td style="text-align:right" class="mo">35</td><td style="text-align:right" class="mo">$21,56</td><td style="text-align:right" class="mo">38</td><td style="text-align:right" class="rg">$19,86</td></tr>
+        <tr class="vg"><td>9</td><td>G4</td><td>c7</td><td style="text-align:right" class="mo">$773,38</td><td style="text-align:right" class="mo">$1,18</td><td style="text-align:right" class="mo">32</td><td style="text-align:right" class="mo">$24,17</td><td style="text-align:right" class="mo">37</td><td style="text-align:right" class="rg">$20,90</td></tr>
+        <tr class="vg"><td>10</td><td><strong>A5</strong></td><td>Victoria c3</td><td style="text-align:right" class="mo">$652,94</td><td style="text-align:right" class="mo">$0,98</td><td style="text-align:right" class="mo">27</td><td style="text-align:right" class="mo">$24,18</td><td style="text-align:right" class="mo">32</td><td style="text-align:right" class="rg">$20,40</td></tr>
+        <tr class="vy"><td>11</td><td>ADS31</td><td>c7</td><td style="text-align:right" class="mo">$789,33</td><td style="text-align:right" class="mo">$1,08</td><td style="text-align:right" class="mo">63</td><td style="text-align:right" class="mo">$12,53</td><td style="text-align:right" class="mo">29</td><td style="text-align:right" class="ry">$27,22</td></tr>
+        <tr class="vg"><td>12</td><td>ADS34</td><td>c7</td><td style="text-align:right" class="mo">$366,29</td><td style="text-align:right" class="mo">$0,87</td><td style="text-align:right" class="mo">23</td><td style="text-align:right" class="mo">$15,93</td><td style="text-align:right" class="mo">23</td><td style="text-align:right" class="rg">$15,93</td></tr>
+        <tr class="vy"><td>13</td><td>A4</td><td>c7</td><td style="text-align:right" class="mo">$655,76</td><td style="text-align:right" class="mo">$1,13</td><td style="text-align:right" class="mo">28</td><td style="text-align:right" class="mo">$23,42</td><td style="text-align:right" class="mo">22</td><td style="text-align:right" class="ry">$29,81</td></tr>
+        <tr class="vy"><td>14</td><td>A5.3</td><td>c1</td><td style="text-align:right" class="mo">$478,90</td><td style="text-align:right" class="mo">$0,90</td><td style="text-align:right" class="mo">50</td><td style="text-align:right" class="mo">$9,58</td><td style="text-align:right" class="mo">18</td><td style="text-align:right" class="ry">$26,61</td></tr>
+        <tr class="vg"><td>15</td><td>ADS19</td><td>c7</td><td style="text-align:right" class="mo">$164,76</td><td style="text-align:right" class="mo">$0,64</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="mo">$10,98</td><td style="text-align:right" class="mo">16</td><td style="text-align:right" class="rg">$10,30</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════ VSL ═══════════════ -->
+<div class="tc" id="tab-vsl">
+
+  <div class="ban b">
+    <div class="bi">&#127916;</div>
+    <div><div class="bt">VSL principal: "Cavaleiros do Vaticano / Vatican Secret Prayer" — 33:42 — Pitch em 17:00–19:00</div>
+    5 players ativos com tag 🟢 REDTRACK · pasta Vturb: Meus Vídeos > FACEBOOK > NOVO > PROSPERIDADE | ANJOS · range default Vturb 05/05–19/05 (15d) ou data de criação até hoje.</div>
+  </div>
+
+  <div class="st">Players ativos — funil VSL</div>
+  <div class="tw">
+    <div class="th"><div class="tt">5 players Vturb</div><div class="tm">métricas: retenção · audiência pitch · CTA</div></div>
+    <table>
+      <thead><tr>
+        <th>Player</th>
+        <th>Conta FB</th>
+        <th style="text-align:right">Período</th>
+        <th style="text-align:right">Plays únicos</th>
+        <th style="text-align:right">Play Rate</th>
+        <th style="text-align:right">Ret. Pitch</th>
+        <th style="text-align:right">Aud. Pitch</th>
+        <th style="text-align:right">CTA Clicks</th>
+        <th style="text-align:right">CTA/AudPitch</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>🟢 TATIANE | VLS1 | REDTRACK</td>
+          <td>Tatiane c1</td>
+          <td style="text-align:right" class="mo">15d</td>
+          <td style="text-align:right" class="mo">2.444</td>
+          <td style="text-align:right" class="mo">92,40%</td>
+          <td style="text-align:right" class="mo">27,36%</td>
+          <td style="text-align:right" class="mo">669</td>
+          <td style="text-align:right" class="mo">202</td>
+          <td style="text-align:right" class="rg">30,2%</td>
+        </tr>
+        <tr>
+          <td>🟢 EMILY | VLS1 | REDTRACK</td>
+          <td>Emily c7</td>
+          <td style="text-align:right" class="mo">15d</td>
+          <td style="text-align:right" class="mo">2.931</td>
+          <td style="text-align:right" class="mo">92,46%</td>
+          <td style="text-align:right" class="mo">28,93%</td>
+          <td style="text-align:right" class="mo">851</td>
+          <td style="text-align:right" class="mo">264</td>
+          <td style="text-align:right" class="rg">31,0%</td>
+        </tr>
+        <tr>
+          <td>🟢 EMILY 6 | VLS1 (pitch 26m38s)</td>
+          <td>Emily c6 A</td>
+          <td style="text-align:right" class="mo">8d</td>
+          <td style="text-align:right" class="mo">589</td>
+          <td style="text-align:right" class="mo">92,32%</td>
+          <td style="text-align:right" class="mo">29,08%</td>
+          <td style="text-align:right" class="mo">171</td>
+          <td style="text-align:right" class="mo">49</td>
+          <td style="text-align:right" class="rg">28,7%</td>
+        </tr>
+        <tr class="vb">
+          <td>🟢 EMILY 6 | MICROLEAD 1 (pitch 27m07s)</td>
+          <td>Emily c6 B</td>
+          <td style="text-align:right" class="mo">8d</td>
+          <td style="text-align:right" class="mo">30</td>
+          <td style="text-align:right" class="mo">93,75%</td>
+          <td style="text-align:right" class="rr">13,33%</td>
+          <td style="text-align:right" class="mo">4</td>
+          <td style="text-align:right" class="mo">1</td>
+          <td style="text-align:right" class="ry">25,0%</td>
+        </tr>
+        <tr class="vb">
+          <td>🟢 VICTORIA | VLS1 | REDTRACK</td>
+          <td>Victoria c3</td>
+          <td style="text-align:right" class="mo">15d</td>
+          <td style="text-align:right" class="rr">19</td>
+          <td style="text-align:right" class="mo">79,17%</td>
+          <td style="text-align:right" class="mo">36,84%</td>
+          <td style="text-align:right" class="mo">7</td>
+          <td style="text-align:right" class="mo">0</td>
+          <td style="text-align:right" class="rr">0%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="st">🚨 Achado crítico — Player Emily anterior vs atual</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Migração executada em 05/05/2026 — CTA multiplicado por 27x</div><div class="tm">vaticansecretprayer.com.mp4 → VLS1 REDTRACK</div></div>
+    <table>
+      <thead><tr>
+        <th>Métrica</th>
+        <th style="text-align:right">Anterior (vaticansecretprayer)</th>
+        <th style="text-align:right">Atual (REDTRACK)</th>
+        <th style="text-align:right">Delta</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Período medido</td><td style="text-align:right" class="mo">29/04–19/05 (21d)</td><td style="text-align:right" class="mo">05/05–19/05 (15d)</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>Plays únicos</td><td style="text-align:right" class="mo">13.224</td><td style="text-align:right" class="mo">2.931</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>Retenção Pitch</td><td style="text-align:right" class="mo">25,38%</td><td style="text-align:right" class="mo">28,93%</td><td style="text-align:right" class="rg">+3,55 pp</td></tr>
+        <tr><td>Audiência Pitch</td><td style="text-align:right" class="mo">3.363</td><td style="text-align:right" class="mo">851</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>Cliques no Botão</td><td style="text-align:right" class="rr">38</td><td style="text-align:right" class="rg">264</td><td style="text-align:right" class="z">—</td></tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03);">
+          <td>CTA / Audiência Pitch</td>
+          <td style="text-align:right" class="rr">1,13%</td>
+          <td style="text-align:right" class="rg">31,0%</td>
+          <td style="text-align:right" class="rg">+27x</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban g">
+    <div class="bi">&#128161;</div>
+    <div><div class="bt">Interpretação</div>
+    O player anterior estava com o CTA praticamente inoperante — 38 cliques em 3.363 pessoas que chegaram ao pitch. A troca em 05/05 multiplicou a taxa por 27 e parece explicar boa parte do salto de performance da operação. Vale documentar a configuração do novo player para garantir que outras contas sigam o mesmo padrão.</div>
+  </div>
+
+  <div class="st">🧪 Teste A/B em andamento — Emily 6 (desde 12/05)</div>
+  <div class="tw">
+    <div class="th"><div class="tt">VLS1 (Cavaleiros) × MICROLEAD 1 (Padre)</div><div class="tm">8 dias · split 95% / 5%</div></div>
+    <table>
+      <thead><tr>
+        <th>Versão</th>
+        <th>Vídeo</th>
+        <th style="text-align:right">Pitch em</th>
+        <th style="text-align:right">Plays</th>
+        <th style="text-align:right">Ret. Pitch</th>
+        <th style="text-align:right">Aud. Pitch</th>
+        <th style="text-align:right">CTA Clicks</th>
+        <th style="text-align:right">CTA/AudPitch</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg">
+          <td>VLS1</td>
+          <td>Cavaleiros do Vaticano</td>
+          <td style="text-align:right" class="mo">26m38s</td>
+          <td style="text-align:right" class="mo">606</td>
+          <td style="text-align:right" class="rg">29,08%</td>
+          <td style="text-align:right" class="mo">171</td>
+          <td style="text-align:right" class="mo">49</td>
+          <td style="text-align:right" class="rg">28,7%</td>
+        </tr>
+        <tr class="vb">
+          <td>MICROLEAD 1</td>
+          <td>Padre na igreja</td>
+          <td style="text-align:right" class="mo">27m07s</td>
+          <td style="text-align:right" class="mo">30</td>
+          <td style="text-align:right" class="rr">13,33%</td>
+          <td style="text-align:right" class="mo">4</td>
+          <td style="text-align:right" class="mo">1</td>
+          <td style="text-align:right" class="ry">25,0%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban y">
+    <div class="bi">&#9201;</div>
+    <div><div class="bt">Teste inconclusivo</div>
+    Volume desbalanceado (95% VLS1 / 5% MICROLEAD) e são vídeos completamente diferentes — não apenas posições de pitch. MICROLEAD com retenção menos da metade. Decisão de continuar/parar fica em aberto.</div>
+  </div>
+
+  <div class="st">Eficiência cliques FB → plays Vturb</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Saúde do tracking por conta</div><div class="tm">% dos cliques no link FB que viraram play no Vturb</div></div>
+    <table>
+      <thead><tr>
+        <th>Conta</th>
+        <th style="text-align:right">Cliques FB</th>
+        <th style="text-align:right">Plays únicos Vturb</th>
+        <th style="text-align:right">% Cliques → Plays</th>
+        <th>Status</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg">
+          <td>Tatiane c1</td>
+          <td style="text-align:right" class="mo">3.718</td>
+          <td style="text-align:right" class="mo">2.444</td>
+          <td style="text-align:right" class="rg">65,7%</td>
+          <td><span class="chip cg"><span class="cd"></span>benchmark</span></td>
+        </tr>
+        <tr class="vy">
+          <td>Emily c7</td>
+          <td style="text-align:right" class="mo">13.547</td>
+          <td style="text-align:right" class="mo">2.931</td>
+          <td style="text-align:right" class="ry">21,6%</td>
+          <td><span class="chip cy"><span class="cd"></span>player atual desde 05/05</span></td>
+        </tr>
+        <tr class="vy">
+          <td>Emily c6</td>
+          <td style="text-align:right" class="mo">9.817</td>
+          <td style="text-align:right" class="mo">589</td>
+          <td style="text-align:right" class="ry">6,0%</td>
+          <td><span class="chip cy"><span class="cd"></span>player A/B desde 12/05</span></td>
+        </tr>
+        <tr class="vb">
+          <td>Victoria c3</td>
+          <td style="text-align:right" class="mo">1.215</td>
+          <td style="text-align:right" class="rr">19</td>
+          <td style="text-align:right" class="rr">1,5%</td>
+          <td><span class="chip cr"><span class="cd"></span>investigar tracking</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban pu">
+    <div class="bi">&#128274;</div>
+    <div><div class="bt">Sobre a aparente baixa conversão Emily c6 e c7</div>
+    Os players Vturb foram trocados/criados no meio do período (05/05 e 12/05). O player anterior Emily teve 13.224 plays — somando aos atuais, c6+c7 convertem cliques→plays próximo de 73%. Já Victoria c3 não tem essa explicação: range Vturb cobre todo o período mas só 19 plays.</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ CRIATIVOS ═══════════════ -->
+<div class="tc" id="tab-criativos">
+
+  <div class="ban b">
+    <div class="bi">&#128293;</div>
+    <div><div class="bt">Detalhe criativos por conta — 30 dias — apenas spend ≥ $1</div>
+    Nomes normalizados (espaços removidos): "ADS 35" = "ADS35". CPA mostrado é via pixel FB (inflado em ~11% vs VendePay) — use como referência relativa entre criativos, não como custo absoluto.</div>
+  </div>
+
+  <!-- VICTORIA C3 -->
+  <div class="st">Victoria c3 — $1.174,18 · 41 compras · 4 criativos</div>
+  <div class="tw">
+    <div class="th"><div class="tt">Conta enxuta — A5 carrega 78% das compras</div><div class="tm">CPA $28,64 médio</div></div>
+    <table>
+      <thead><tr>
+        <th>Criativo</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Cliques</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>A5</strong></td><td style="text-align:right" class="mo">$652,94</td><td style="text-align:right" class="mo">9.502</td><td style="text-align:right" class="mo">669</td><td style="text-align:right" class="mo">7,04%</td><td style="text-align:right" class="mo">$0,98</td><td style="text-align:right" class="mo">27</td><td style="text-align:right" class="ry">$24,18</td><td style="text-align:right" class="mo">32</td><td style="text-align:right" class="rg">$20,40</td></tr>
+        <tr><td>A4</td><td style="text-align:right" class="mo">$382,59</td><td style="text-align:right" class="mo">5.865</td><td style="text-align:right" class="mo">432</td><td style="text-align:right" class="mo">7,37%</td><td style="text-align:right" class="mo">$0,89</td><td style="text-align:right" class="mo">21</td><td style="text-align:right" class="ry">$18,22</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="rr">$42,51</td></tr>
+        <tr><td>A1</td><td style="text-align:right" class="mo">$128,85</td><td style="text-align:right" class="mo">1.716</td><td style="text-align:right" class="mo">103</td><td style="text-align:right" class="mo">6,00%</td><td style="text-align:right" class="mo">$1,25</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="rr">$64,42</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS30</td><td style="text-align:right" class="mo">$8,89</td><td style="text-align:right" class="mo">72</td><td style="text-align:right" class="mo">8</td><td style="text-align:right" class="mo">11,11%</td><td style="text-align:right" class="mo">$1,11</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TATIANE C1 -->
+  <div class="st">Tatiane c1 — $2.838,74 · 106 compras · 21 criativos</div>
+  <div class="tw">
+    <div class="th"><div class="tt">A5 carrega 62% das compras (CPA $15,23)</div><div class="tm">CPA $26,78 médio</div></div>
+    <table>
+      <thead><tr>
+        <th>Criativo</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Cliques</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>A5</strong></td><td style="text-align:right" class="mo">$1.005,14</td><td style="text-align:right" class="mo">15.809</td><td style="text-align:right" class="mo">1.261</td><td style="text-align:right" class="mo">7,98%</td><td style="text-align:right" class="mo">$0,80</td><td style="text-align:right" class="mo">135</td><td style="text-align:right" class="rg">$7,45</td><td style="text-align:right" class="mo">66</td><td style="text-align:right" class="rg">$15,23</td></tr>
+        <tr><td>A5.3</td><td style="text-align:right" class="mo">$478,90</td><td style="text-align:right" class="mo">5.392</td><td style="text-align:right" class="mo">531</td><td style="text-align:right" class="mo">9,85%</td><td style="text-align:right" class="mo">$0,90</td><td style="text-align:right" class="mo">50</td><td style="text-align:right" class="rg">$9,58</td><td style="text-align:right" class="mo">18</td><td style="text-align:right" class="ry">$26,61</td></tr>
+        <tr><td>ADS30</td><td style="text-align:right" class="mo">$301,41</td><td style="text-align:right" class="mo">6.404</td><td style="text-align:right" class="mo">682</td><td style="text-align:right" class="mo">10,65%</td><td style="text-align:right" class="mo">$0,44</td><td style="text-align:right" class="mo">26</td><td style="text-align:right" class="ry">$11,59</td><td style="text-align:right" class="mo">13</td><td style="text-align:right" class="ry">$23,19</td></tr>
+        <tr><td>ADS35</td><td style="text-align:right" class="mo">$219,10</td><td style="text-align:right" class="mo">2.688</td><td style="text-align:right" class="mo">279</td><td style="text-align:right" class="mo">10,38%</td><td style="text-align:right" class="mo">$0,79</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="rr">$31,30</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$73,03</td></tr>
+        <tr><td>ADS22</td><td style="text-align:right" class="mo">$156,51</td><td style="text-align:right" class="mo">2.140</td><td style="text-align:right" class="mo">173</td><td style="text-align:right" class="mo">8,08%</td><td style="text-align:right" class="mo">$0,90</td><td style="text-align:right" class="mo">22</td><td style="text-align:right" class="rg">$7,11</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="rr">$78,25</td></tr>
+        <tr><td>G4</td><td style="text-align:right" class="mo">$133,78</td><td style="text-align:right" class="mo">3.967</td><td style="text-align:right" class="mo">172</td><td style="text-align:right" class="mo">4,34%</td><td style="text-align:right" class="mo">$0,78</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$44,59</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$133,78</td></tr>
+        <tr><td>A8</td><td style="text-align:right" class="mo">$97,24</td><td style="text-align:right" class="mo">937</td><td style="text-align:right" class="mo">123</td><td style="text-align:right" class="mo">13,13%</td><td style="text-align:right" class="mo">$0,79</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="ry">$19,45</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$32,41</td></tr>
+        <tr><td>G4.1</td><td style="text-align:right" class="mo">$93,27</td><td style="text-align:right" class="mo">1.153</td><td style="text-align:right" class="mo">119</td><td style="text-align:right" class="mo">10,32%</td><td style="text-align:right" class="mo">$0,78</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$31,09</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5A6</td><td style="text-align:right" class="mo">$66,15</td><td style="text-align:right" class="mo">759</td><td style="text-align:right" class="mo">70</td><td style="text-align:right" class="mo">9,22%</td><td style="text-align:right" class="mo">$0,94</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$66,15</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5.1</td><td style="text-align:right" class="mo">$43,91</td><td style="text-align:right" class="mo">361</td><td style="text-align:right" class="mo">48</td><td style="text-align:right" class="mo">13,30%</td><td style="text-align:right" class="mo">$0,91</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5.2</td><td style="text-align:right" class="mo">$43,88</td><td style="text-align:right" class="mo">351</td><td style="text-align:right" class="mo">41</td><td style="text-align:right" class="mo">11,68%</td><td style="text-align:right" class="mo">$1,07</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A4.1</td><td style="text-align:right" class="mo">$43,53</td><td style="text-align:right" class="mo">649</td><td style="text-align:right" class="mo">66</td><td style="text-align:right" class="mo">10,17%</td><td style="text-align:right" class="mo">$0,66</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rg">$7,25</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A4.2</td><td style="text-align:right" class="mo">$42,07</td><td style="text-align:right" class="mo">560</td><td style="text-align:right" class="mo">46</td><td style="text-align:right" class="mo">8,21%</td><td style="text-align:right" class="mo">$0,91</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="ry">$21,04</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A1.1</td><td style="text-align:right" class="mo">$41,98</td><td style="text-align:right" class="mo">343</td><td style="text-align:right" class="mo">61</td><td style="text-align:right" class="mo">17,78%</td><td style="text-align:right" class="mo">$0,69</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$41,98</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G25</td><td style="text-align:right" class="mo">$26,41</td><td style="text-align:right" class="mo">134</td><td style="text-align:right" class="mo">8</td><td style="text-align:right" class="mo">5,97%</td><td style="text-align:right" class="mo">$3,30</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="ry">$26,41</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G17</td><td style="text-align:right" class="mo">$20,18</td><td style="text-align:right" class="mo">118</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="mo">5,93%</td><td style="text-align:right" class="mo">$2,88</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS31</td><td style="text-align:right" class="mo">$12,90</td><td style="text-align:right" class="mo">51</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="mo">13,73%</td><td style="text-align:right" class="mo">$1,84</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="ry">$12,90</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G16</td><td style="text-align:right" class="mo">$6,54</td><td style="text-align:right" class="mo">30</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="mo">3,33%</td><td style="text-align:right" class="mo">$6,54</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>D116</td><td style="text-align:right" class="mo">$2,24</td><td style="text-align:right" class="mo">111</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="mo">8,11%</td><td style="text-align:right" class="mo">$0,25</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>D114</td><td style="text-align:right" class="mo">$1,97</td><td style="text-align:right" class="mo">207</td><td style="text-align:right" class="mo">11</td><td style="text-align:right" class="mo">5,31%</td><td style="text-align:right" class="mo">$0,18</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>D115</td><td style="text-align:right" class="mo">$1,57</td><td style="text-align:right" class="mo">123</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="mo">2,44%</td><td style="text-align:right" class="mo">$0,52</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EMILY C6 -->
+  <div class="st">Emily c6 — $8.037,37 · 315 compras · 24 criativos</div>
+  <div class="tw">
+    <div class="th"><div class="tt">ADS30, ADS35 e A5 carregam 91% das compras</div><div class="tm">CPA $25,52 médio</div></div>
+    <table>
+      <thead><tr>
+        <th>Criativo</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Cliques</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>ADS30</strong></td><td style="text-align:right" class="mo">$2.803,26</td><td style="text-align:right" class="mo">32.083</td><td style="text-align:right" class="mo">3.808</td><td style="text-align:right" class="mo">11,87%</td><td style="text-align:right" class="mo">$0,74</td><td style="text-align:right" class="mo">193</td><td style="text-align:right" class="rg">$14,52</td><td style="text-align:right" class="mo">122</td><td style="text-align:right" class="ry">$22,98</td></tr>
+        <tr><td>ADS35</td><td style="text-align:right" class="mo">$2.449,44</td><td style="text-align:right" class="mo">21.125</td><td style="text-align:right" class="mo">2.821</td><td style="text-align:right" class="mo">13,35%</td><td style="text-align:right" class="mo">$0,87</td><td style="text-align:right" class="mo">123</td><td style="text-align:right" class="ry">$19,91</td><td style="text-align:right" class="mo">72</td><td style="text-align:right" class="rr">$34,02</td></tr>
+        <tr class="vg"><td><strong>A5</strong></td><td style="text-align:right" class="mo">$1.534,72</td><td style="text-align:right" class="mo">20.676</td><td style="text-align:right" class="mo">1.935</td><td style="text-align:right" class="mo">9,36%</td><td style="text-align:right" class="mo">$0,79</td><td style="text-align:right" class="mo">172</td><td style="text-align:right" class="rg">$8,92</td><td style="text-align:right" class="mo">93</td><td style="text-align:right" class="rg">$16,50</td></tr>
+        <tr><td>ADS31</td><td style="text-align:right" class="mo">$232,26</td><td style="text-align:right" class="mo">1.956</td><td style="text-align:right" class="mo">177</td><td style="text-align:right" class="mo">9,05%</td><td style="text-align:right" class="mo">$1,31</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="rr">$25,81</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rr">$38,71</td></tr>
+        <tr><td>K32</td><td style="text-align:right" class="mo">$155,63</td><td style="text-align:right" class="mo">2.153</td><td style="text-align:right" class="mo">254</td><td style="text-align:right" class="mo">11,80%</td><td style="text-align:right" class="mo">$0,61</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="rg">$10,38</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="rg">$17,29</td></tr>
+        <tr><td>ADS34</td><td style="text-align:right" class="mo">$134,73</td><td style="text-align:right" class="mo">1.239</td><td style="text-align:right" class="mo">136</td><td style="text-align:right" class="mo">10,98%</td><td style="text-align:right" class="mo">$0,99</td><td style="text-align:right" class="mo">10</td><td style="text-align:right" class="ry">$13,47</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$44,91</td></tr>
+        <tr><td>ADS10</td><td style="text-align:right" class="mo">$112,22</td><td style="text-align:right" class="mo">762</td><td style="text-align:right" class="mo">98</td><td style="text-align:right" class="mo">12,86%</td><td style="text-align:right" class="mo">$1,15</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="ry">$16,03</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$37,41</td></tr>
+        <tr><td>A8</td><td style="text-align:right" class="mo">$103,49</td><td style="text-align:right" class="mo">1.204</td><td style="text-align:right" class="mo">135</td><td style="text-align:right" class="mo">11,21%</td><td style="text-align:right" class="mo">$0,77</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="ry">$17,25</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A1</td><td style="text-align:right" class="mo">$80,90</td><td style="text-align:right" class="mo">1.088</td><td style="text-align:right" class="mo">68</td><td style="text-align:right" class="mo">6,25%</td><td style="text-align:right" class="mo">$1,19</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>K34</td><td style="text-align:right" class="mo">$76,38</td><td style="text-align:right" class="mo">593</td><td style="text-align:right" class="mo">80</td><td style="text-align:right" class="mo">13,49%</td><td style="text-align:right" class="mo">$0,95</td><td style="text-align:right" class="mo">4</td><td style="text-align:right" class="ry">$19,09</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$76,38</td></tr>
+        <tr><td>K33</td><td style="text-align:right" class="mo">$73,83</td><td style="text-align:right" class="mo">1.404</td><td style="text-align:right" class="mo">115</td><td style="text-align:right" class="mo">8,19%</td><td style="text-align:right" class="mo">$0,64</td><td style="text-align:right" class="mo">4</td><td style="text-align:right" class="ry">$18,46</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>K36</td><td style="text-align:right" class="mo">$65,45</td><td style="text-align:right" class="mo">547</td><td style="text-align:right" class="mo">25</td><td style="text-align:right" class="mo">4,57%</td><td style="text-align:right" class="mo">$2,62</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$65,45</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$65,45</td></tr>
+        <tr><td>A4.3</td><td style="text-align:right" class="mo">$53,03</td><td style="text-align:right" class="mo">486</td><td style="text-align:right" class="mo">46</td><td style="text-align:right" class="mo">9,47%</td><td style="text-align:right" class="mo">$1,15</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="rr">$26,52</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="rg">$10,61</td></tr>
+        <tr><td>K35</td><td style="text-align:right" class="mo">$38,22</td><td style="text-align:right" class="mo">371</td><td style="text-align:right" class="mo">29</td><td style="text-align:right" class="mo">7,82%</td><td style="text-align:right" class="mo">$1,32</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G25</td><td style="text-align:right" class="mo">$36,78</td><td style="text-align:right" class="mo">262</td><td style="text-align:right" class="mo">27</td><td style="text-align:right" class="mo">10,31%</td><td style="text-align:right" class="mo">$1,36</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="ry">$18,39</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS36</td><td style="text-align:right" class="mo">$36,78</td><td style="text-align:right" class="mo">196</td><td style="text-align:right" class="mo">13</td><td style="text-align:right" class="mo">6,63%</td><td style="text-align:right" class="mo">$2,83</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="rg">$7,36</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS24</td><td style="text-align:right" class="mo">$18,67</td><td style="text-align:right" class="mo">233</td><td style="text-align:right" class="mo">12</td><td style="text-align:right" class="mo">5,15%</td><td style="text-align:right" class="mo">$1,56</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS29</td><td style="text-align:right" class="mo">$15,68</td><td style="text-align:right" class="mo">97</td><td style="text-align:right" class="mo">17</td><td style="text-align:right" class="mo">17,53%</td><td style="text-align:right" class="mo">$0,92</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A4</td><td style="text-align:right" class="mo">$4,69</td><td style="text-align:right" class="mo">58</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="mo">1,72%</td><td style="text-align:right" class="mo">$4,69</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS22</td><td style="text-align:right" class="mo">$3,97</td><td style="text-align:right" class="mo">36</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="mo">25,00%</td><td style="text-align:right" class="mo">$0,44</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS33</td><td style="text-align:right" class="mo">$3,41</td><td style="text-align:right" class="mo">43</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="mo">4,65%</td><td style="text-align:right" class="mo">$1,70</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS32</td><td style="text-align:right" class="mo">$1,45</td><td style="text-align:right" class="mo">17</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="mo">17,65%</td><td style="text-align:right" class="mo">$0,48</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS19</td><td style="text-align:right" class="mo">$1,24</td><td style="text-align:right" class="mo">36</td><td style="text-align:right" class="mo">4</td><td style="text-align:right" class="mo">11,11%</td><td style="text-align:right" class="mo">$0,31</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS15</td><td style="text-align:right" class="mo">$1,01</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="mo">11,11%</td><td style="text-align:right" class="mo">$1,01</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EMILY C7 -->
+  <div class="st">Emily c7 — $12.492,51 · 577 compras · 32 criativos · MAIOR conta</div>
+  <div class="tw">
+    <div class="th"><div class="tt">ADS35 + G4.1 carregam 57% das compras</div><div class="tm">CPA $21,65 médio — melhor da operação</div></div>
+    <table>
+      <thead><tr>
+        <th>Criativo</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Cliques</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPC</th>
+        <th style="text-align:right">Chkt</th>
+        <th style="text-align:right">CPI-Chkt</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>ADS35</strong></td><td style="text-align:right" class="mo">$3.561,02</td><td style="text-align:right" class="mo">38.258</td><td style="text-align:right" class="mo">4.677</td><td style="text-align:right" class="mo">12,22%</td><td style="text-align:right" class="mo">$0,76</td><td style="text-align:right" class="mo">214</td><td style="text-align:right" class="ry">$16,64</td><td style="text-align:right" class="mo">186</td><td style="text-align:right" class="rg">$19,15</td></tr>
+        <tr class="vg"><td><strong>G4.1</strong></td><td style="text-align:right" class="mo">$2.836,62</td><td style="text-align:right" class="mo">22.725</td><td style="text-align:right" class="mo">2.490</td><td style="text-align:right" class="mo">10,96%</td><td style="text-align:right" class="mo">$1,14</td><td style="text-align:right" class="mo">161</td><td style="text-align:right" class="ry">$17,62</td><td style="text-align:right" class="mo">144</td><td style="text-align:right" class="rg">$19,70</td></tr>
+        <tr><td>A5</td><td style="text-align:right" class="mo">$1.054,03</td><td style="text-align:right" class="mo">8.662</td><td style="text-align:right" class="mo">1.040</td><td style="text-align:right" class="mo">12,01%</td><td style="text-align:right" class="mo">$1,01</td><td style="text-align:right" class="mo">67</td><td style="text-align:right" class="ry">$15,73</td><td style="text-align:right" class="mo">40</td><td style="text-align:right" class="ry">$26,35</td></tr>
+        <tr><td>ADS31</td><td style="text-align:right" class="mo">$789,33</td><td style="text-align:right" class="mo">7.052</td><td style="text-align:right" class="mo">732</td><td style="text-align:right" class="mo">10,38%</td><td style="text-align:right" class="mo">$1,08</td><td style="text-align:right" class="mo">63</td><td style="text-align:right" class="rg">$12,53</td><td style="text-align:right" class="mo">29</td><td style="text-align:right" class="ry">$27,22</td></tr>
+        <tr><td>G4</td><td style="text-align:right" class="mo">$773,38</td><td style="text-align:right" class="mo">7.125</td><td style="text-align:right" class="mo">655</td><td style="text-align:right" class="mo">9,19%</td><td style="text-align:right" class="mo">$1,18</td><td style="text-align:right" class="mo">32</td><td style="text-align:right" class="rr">$24,17</td><td style="text-align:right" class="mo">37</td><td style="text-align:right" class="rg">$20,90</td></tr>
+        <tr><td>ADS22</td><td style="text-align:right" class="mo">$754,67</td><td style="text-align:right" class="mo">7.257</td><td style="text-align:right" class="mo">777</td><td style="text-align:right" class="mo">10,71%</td><td style="text-align:right" class="mo">$0,97</td><td style="text-align:right" class="mo">35</td><td style="text-align:right" class="rr">$21,56</td><td style="text-align:right" class="mo">38</td><td style="text-align:right" class="rg">$19,86</td></tr>
+        <tr><td>A4</td><td style="text-align:right" class="mo">$655,76</td><td style="text-align:right" class="mo">4.820</td><td style="text-align:right" class="mo">581</td><td style="text-align:right" class="mo">12,05%</td><td style="text-align:right" class="mo">$1,13</td><td style="text-align:right" class="mo">28</td><td style="text-align:right" class="rr">$23,42</td><td style="text-align:right" class="mo">22</td><td style="text-align:right" class="ry">$29,81</td></tr>
+        <tr><td>ADS30</td><td style="text-align:right" class="mo">$430,19</td><td style="text-align:right" class="mo">5.929</td><td style="text-align:right" class="mo">695</td><td style="text-align:right" class="mo">11,72%</td><td style="text-align:right" class="mo">$0,62</td><td style="text-align:right" class="mo">25</td><td style="text-align:right" class="ry">$17,21</td><td style="text-align:right" class="mo">16</td><td style="text-align:right" class="ry">$26,89</td></tr>
+        <tr><td>ADS34</td><td style="text-align:right" class="mo">$366,29</td><td style="text-align:right" class="mo">3.071</td><td style="text-align:right" class="mo">420</td><td style="text-align:right" class="mo">13,68%</td><td style="text-align:right" class="mo">$0,87</td><td style="text-align:right" class="mo">23</td><td style="text-align:right" class="ry">$15,93</td><td style="text-align:right" class="mo">23</td><td style="text-align:right" class="rg">$15,93</td></tr>
+        <tr><td>A4.1</td><td style="text-align:right" class="mo">$198,67</td><td style="text-align:right" class="mo">1.850</td><td style="text-align:right" class="mo">211</td><td style="text-align:right" class="mo">11,41%</td><td style="text-align:right" class="mo">$0,94</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rr">$33,11</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$198,67</td></tr>
+        <tr><td>ADS35.2</td><td style="text-align:right" class="mo">$196,95</td><td style="text-align:right" class="mo">1.537</td><td style="text-align:right" class="mo">162</td><td style="text-align:right" class="mo">10,54%</td><td style="text-align:right" class="mo">$1,22</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rr">$32,83</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="ry">$28,14</td></tr>
+        <tr><td>ADS19</td><td style="text-align:right" class="mo">$164,76</td><td style="text-align:right" class="mo">1.418</td><td style="text-align:right" class="mo">256</td><td style="text-align:right" class="mo">18,05%</td><td style="text-align:right" class="mo">$0,64</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="rg">$10,98</td><td style="text-align:right" class="mo">16</td><td style="text-align:right" class="rg">$10,30</td></tr>
+        <tr><td>ADS32</td><td style="text-align:right" class="mo">$143,55</td><td style="text-align:right" class="mo">1.501</td><td style="text-align:right" class="mo">240</td><td style="text-align:right" class="mo">15,99%</td><td style="text-align:right" class="mo">$0,60</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="rr">$28,71</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="ry">$28,71</td></tr>
+        <tr><td>A8</td><td style="text-align:right" class="mo">$104,22</td><td style="text-align:right" class="mo">1.154</td><td style="text-align:right" class="mo">151</td><td style="text-align:right" class="mo">13,08%</td><td style="text-align:right" class="mo">$0,69</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A1.1</td><td style="text-align:right" class="mo">$99,79</td><td style="text-align:right" class="mo">982</td><td style="text-align:right" class="mo">124</td><td style="text-align:right" class="mo">12,63%</td><td style="text-align:right" class="mo">$0,80</td><td style="text-align:right" class="mo">8</td><td style="text-align:right" class="ry">$12,47</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$33,26</td></tr>
+        <tr><td>ADS35.3</td><td style="text-align:right" class="mo">$45,06</td><td style="text-align:right" class="mo">487</td><td style="text-align:right" class="mo">45</td><td style="text-align:right" class="mo">9,24%</td><td style="text-align:right" class="mo">$1,00</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G4.5</td><td style="text-align:right" class="mo">$41,75</td><td style="text-align:right" class="mo">398</td><td style="text-align:right" class="mo">35</td><td style="text-align:right" class="mo">8,79%</td><td style="text-align:right" class="mo">$1,19</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G4.4</td><td style="text-align:right" class="mo">$38,96</td><td style="text-align:right" class="mo">366</td><td style="text-align:right" class="mo">34</td><td style="text-align:right" class="mo">9,29%</td><td style="text-align:right" class="mo">$1,15</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS22.2</td><td style="text-align:right" class="mo">$37,88</td><td style="text-align:right" class="mo">383</td><td style="text-align:right" class="mo">39</td><td style="text-align:right" class="mo">10,18%</td><td style="text-align:right" class="mo">$0,97</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5.1</td><td style="text-align:right" class="mo">$37,74</td><td style="text-align:right" class="mo">197</td><td style="text-align:right" class="mo">25</td><td style="text-align:right" class="mo">12,69%</td><td style="text-align:right" class="mo">$1,51</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rg">$12,58</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS15</td><td style="text-align:right" class="mo">$33,36</td><td style="text-align:right" class="mo">349</td><td style="text-align:right" class="mo">50</td><td style="text-align:right" class="mo">14,33%</td><td style="text-align:right" class="mo">$0,67</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rg">$5,56</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rg">$11,12</td></tr>
+        <tr><td>A1</td><td style="text-align:right" class="mo">$31,09</td><td style="text-align:right" class="mo">437</td><td style="text-align:right" class="mo">18</td><td style="text-align:right" class="mo">4,12%</td><td style="text-align:right" class="mo">$1,73</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$31,09</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS10</td><td style="text-align:right" class="mo">$21,75</td><td style="text-align:right" class="mo">175</td><td style="text-align:right" class="mo">19</td><td style="text-align:right" class="mo">10,86%</td><td style="text-align:right" class="mo">$1,14</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="ry">$21,75</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5.5</td><td style="text-align:right" class="mo">$17,44</td><td style="text-align:right" class="mo">198</td><td style="text-align:right" class="mo">16</td><td style="text-align:right" class="mo">8,08%</td><td style="text-align:right" class="mo">$1,09</td><td style="text-align:right" class="mo">4</td><td style="text-align:right" class="rg">$4,36</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="rg">$2,49</td></tr>
+        <tr><td>A5.2</td><td style="text-align:right" class="mo">$16,15</td><td style="text-align:right" class="mo">172</td><td style="text-align:right" class="mo">20</td><td style="text-align:right" class="mo">11,63%</td><td style="text-align:right" class="mo">$0,81</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rg">$5,38</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G25</td><td style="text-align:right" class="mo">$11,22</td><td style="text-align:right" class="mo">106</td><td style="text-align:right" class="mo">4</td><td style="text-align:right" class="mo">3,77%</td><td style="text-align:right" class="mo">$2,80</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS24</td><td style="text-align:right" class="mo">$11,10</td><td style="text-align:right" class="mo">110</td><td style="text-align:right" class="mo">10</td><td style="text-align:right" class="mo">9,09%</td><td style="text-align:right" class="mo">$1,11</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>ADS29</td><td style="text-align:right" class="mo">$9,15</td><td style="text-align:right" class="mo">51</td><td style="text-align:right" class="mo">7</td><td style="text-align:right" class="mo">13,73%</td><td style="text-align:right" class="mo">$1,31</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rg">$9,15</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A4.2</td><td style="text-align:right" class="mo">$5,15</td><td style="text-align:right" class="mo">76</td><td style="text-align:right" class="mo">5</td><td style="text-align:right" class="mo">6,58%</td><td style="text-align:right" class="mo">$1,03</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rg">$5,15</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>A5.3</td><td style="text-align:right" class="mo">$3,29</td><td style="text-align:right" class="mo">48</td><td style="text-align:right" class="mo">9</td><td style="text-align:right" class="mo">18,75%</td><td style="text-align:right" class="mo">$0,37</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G17</td><td style="text-align:right" class="mo">$1,17</td><td style="text-align:right" class="mo">22</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="mo">0,00%</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+        <tr><td>G16</td><td style="text-align:right" class="mo">$1,00</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="mo">0,00%</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</div>
+</div>
+<script>
+function T(id){
+  document.querySelectorAll('.tc').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(e=>e.classList.remove('active'));
+  const el=document.getElementById('tab-'+id); if(el) el.classList.add('active');
+  const m=['overview','caixa','vendas','fb','vsl','criativos'];
+  const i=m.indexOf(id);
+  const ts=document.querySelectorAll('.tab');
+  const ns=document.querySelectorAll('nav a');
+  if(i>=0&&ts[i]) ts[i].classList.add('active');
+  if(i>=0&&ns[i]) ns[i].classList.add('active');
+}
+</script>
+</body>
+</html>
 body{background:var(--bg);color:var(--t);font-family:'DM Sans',sans-serif;font-size:14px;}
 .shell{display:flex;min-height:100vh;}
 .sb{width:210px;background:var(--s);border-right:1px solid var(--b);display:flex;flex-direction:column;padding:20px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;}
