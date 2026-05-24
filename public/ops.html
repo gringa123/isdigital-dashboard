@@ -125,7 +125,8 @@ tr:hover td{background:rgba(255,255,255,0.02);}
     <a onclick="T('fb')"><span class="dot"></span>Facebook Ads 30d</a>
     <a onclick="T('vsl')"><span class="dot"></span>&#127916; VSL + Retenção</a>
     <div class="nav-sep">Análise</div>
-    <a onclick="T('criativos')"><span class="dot"></span>&#128293; Criativos detalhe</a>
+    <a onclick="T('campanhas')" ><span class="dot"></span>&#128200; Análise Campanhas</a>
+        <a onclick="T('criativos')"><span class="dot"></span>&#128293; Criativos detalhe</a>
     <a onclick="T('tiktok')"><span class="dot"></span>&#127925; TikTok</a>
   </nav>
 </div>
@@ -146,6 +147,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
   <div class="tab" onclick="T('vendas')">Vendas &amp; ROAS Real</div>
   <div class="tab" onclick="T('fb')">Facebook Ads</div>
   <div class="tab" onclick="T('vsl')">&#127916; VSL</div>
+  <div class="tab" onclick="T('campanhas')">&#128200; Campanhas FB</div>
   <div class="tab" onclick="T('criativos')">&#128293; Criativos</div>
   <div class="tab" onclick="T('tiktok')">&#127925; TikTok</div>
 </div>
@@ -882,6 +884,132 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 </div>
 
 <!-- ═══════════════ CRIATIVOS ═══════════════ -->
+
+<div class="tc" id="tab-campanhas">
+
+  <div class="ban g">
+    <div class="bi">&#128200;</div>
+    <div><div class="bt">Análise nível campanha — 8 contas FB — 23/abr–23/mai 2026</div>
+    240 campanhas com dados. Estrutura CBO domina (98% do spend). BidCap supera CostCap na maioria dos níveis. Fonte: exportação por campanha de cada conta.</div>
+  </div>
+
+  <!-- INSIGHTS PRINCIPAIS -->
+  <div class="st">Insights principais</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+    <div class="ban g" style="margin:0">
+      <div class="bi">&#127942;</div>
+      <div><div class="bt">Emily c3: ouro escondido</div>
+      BidCap 65 + CJ Limitado: CPA $7,39 (CP0173, 24c) e $13,41 (CP0174, 12c). O CTR baixo médio (5,9%) é puxado pelos criativos Diabetes e Catálogo que não convertem. Kills as ruins e escala as boas.</div>
+    </div>
+    <div class="ban b" style="margin:0">
+      <div class="bi">&#127919;</div>
+      <div><div class="bt">BidCap 47–65 = zona ideal</div>
+      BidCap 65: CPA $14,30 · BidCap 47: CPA $16,87 · BidCap 45: CPA $17,96. Volume está em BidCap 70 ($9.277, CPA $21,93) — testar migrar para $55-60. CostCap 70 é exceção positiva (CPA $13,55, Emily c6).</div>
+    </div>
+    <div class="ban r" style="margin:0">
+      <div class="bi">&#128683;</div>
+      <div><div class="bt">ABO = estrutura errada</div>
+      CBO: $36.070 spend, CPA $24,22. ABO: $1.255 spend, CPA $43,27 (+79%). Tatiane c4 rodou tudo em ABO e entregou CPA $136. Reformular c4 ou encerrar.</div>
+    </div>
+    <div class="ban y" style="margin:0">
+      <div class="bi">&#9889;</div>
+      <div><div class="bt">Emily c10: CTR mais alto (15,8%), zero conversão</div>
+      Pixel novo ou tracking inconsistente. Não escalar antes de corrigir atribuição. CPM $121 já está alto para uma conta sem histórico de conversão.</div>
+    </div>
+  </div>
+
+  <!-- TABELA POR CONTA -->
+  <div class="st">Performance por conta — nível campanha</div>
+  <div class="tw">
+    <div class="th"><div class="tt">8 contas · 240 campanhas com dados</div><div class="tm">spend > $0, 23/abr–23/mai</div></div>
+    <table>
+      <thead><tr>
+        <th>Conta</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Compras</th>
+        <th style="text-align:right">CPA pixel</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">CPM</th>
+        <th style="text-align:right">Camps</th>
+        <th>Status</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td><strong>Emily c7</strong></td><td style="text-align:right" class="mo">$15.190</td><td style="text-align:right" class="mo">682</td><td style="text-align:right" class="rg">$22,27</td><td style="text-align:right" class="rg">11,82%</td><td style="text-align:right" class="mo">$109,92</td><td style="text-align:right" class="mo">43</td><td><span class="chip cg">pillar</span></td></tr>
+        <tr class="vg"><td>Tatiane c1</td><td style="text-align:right" class="mo">$9.348</td><td style="text-align:right" class="mo">378</td><td style="text-align:right" class="rg">$24,73</td><td style="text-align:right" class="rg">10,44%</td><td style="text-align:right" class="mo">$97,75</td><td style="text-align:right" class="mo">65</td><td><span class="chip cg">pillar</span></td></tr>
+        <tr><td>Emily c6</td><td style="text-align:right" class="mo">$8.038</td><td style="text-align:right" class="mo">315</td><td style="text-align:right" class="ry">$25,52</td><td style="text-align:right" class="rg">11,32%</td><td style="text-align:right" class="mo">$92,72</td><td style="text-align:right" class="mo">33</td><td><span class="chip cr">parada</span></td></tr>
+        <tr class="vy"><td>Emily c3</td><td style="text-align:right" class="mo">$1.524</td><td style="text-align:right" class="mo">55</td><td style="text-align:right" class="ry">$27,72</td><td style="text-align:right" class="rr">5,94%</td><td style="text-align:right" class="mo">$59,13</td><td style="text-align:right" class="mo">42</td><td><span class="chip cpu">ouro escondido</span></td></tr>
+        <tr class="vy"><td>Tatiane c2</td><td style="text-align:right" class="mo">$1.384</td><td style="text-align:right" class="mo">44</td><td style="text-align:right" class="rr">$31,47</td><td style="text-align:right" class="ry">8,53%</td><td style="text-align:right" class="mo">$91,71</td><td style="text-align:right" class="mo">12</td><td><span class="chip cy">crescendo</span></td></tr>
+        <tr><td>Victoria c3</td><td style="text-align:right" class="mo">$1.276</td><td style="text-align:right" class="mo">41</td><td style="text-align:right" class="rr">$31,12</td><td style="text-align:right" class="rr">7,17%</td><td style="text-align:right" class="mo">$71,86</td><td style="text-align:right" class="mo">34</td><td><span class="chip cm">fora do FB</span></td></tr>
+        <tr class="vb"><td>Tatiane c4</td><td style="text-align:right" class="mo">$410</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="rr">$136,63</td><td style="text-align:right" class="rr">5,33%</td><td style="text-align:right" class="mo">$61,36</td><td style="text-align:right" class="mo">5</td><td><span class="chip cr">crítica · só ABO</span></td></tr>
+        <tr><td>Emily c10</td><td style="text-align:right" class="mo">$160</td><td style="text-align:right" class="mo">0</td><td style="text-align:right" class="z">&mdash;</td><td style="text-align:right" class="rg">15,82%</td><td style="text-align:right" class="mo">$121,38</td><td style="text-align:right" class="mo">6</td><td><span class="chip cb">nova · tracking?</span></td></tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03)"><td>TOTAL</td><td style="text-align:right" class="mo">$37.332</td><td style="text-align:right" class="mo">1.518</td><td style="text-align:right" class="mo">$24,59</td><td style="text-align:right" class="mo">10,38%</td><td style="text-align:right" class="mo">&mdash;</td><td style="text-align:right" class="mo">240</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BID STRATEGY -->
+  <div class="st">Estratégia de bid — CBO (camps spend > $50)</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+    <div class="tw">
+      <div class="th"><div class="tt">BIDCAP por nível</div></div>
+      <table>
+        <thead><tr><th>Bid</th><th style="text-align:right">Spend</th><th style="text-align:right">Compras</th><th style="text-align:right">CPA</th><th style="text-align:right">N</th></tr></thead>
+        <tbody>
+          <tr class="vg"><td class="mo">BidCap 65</td><td style="text-align:right" class="mo">$787</td><td style="text-align:right" class="mo">55</td><td style="text-align:right" class="rg">$14,30</td><td style="text-align:right" class="z">6</td></tr>
+          <tr class="vg"><td class="mo">BidCap 47</td><td style="text-align:right" class="mo">$2.210</td><td style="text-align:right" class="mo">131</td><td style="text-align:right" class="rg">$16,87</td><td style="text-align:right" class="z">4</td></tr>
+          <tr class="vg"><td class="mo">BidCap 45</td><td style="text-align:right" class="mo">$377</td><td style="text-align:right" class="mo">21</td><td style="text-align:right" class="rg">$17,96</td><td style="text-align:right" class="z">3</td></tr>
+          <tr><td class="mo">BidCap 60</td><td style="text-align:right" class="mo">$1.020</td><td style="text-align:right" class="mo">49</td><td style="text-align:right" class="ry">$20,81</td><td style="text-align:right" class="z">4</td></tr>
+          <tr><td class="mo">BidCap 70 ←volume</td><td style="text-align:right" class="mo">$9.277</td><td style="text-align:right" class="mo">423</td><td style="text-align:right" class="ry">$21,93</td><td style="text-align:right" class="z">9</td></tr>
+          <tr><td class="mo">BidCap 40</td><td style="text-align:right" class="mo">$402</td><td style="text-align:right" class="mo">18</td><td style="text-align:right" class="ry">$22,33</td><td style="text-align:right" class="z">2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tw">
+      <div class="th"><div class="tt">COSTCAP por nível</div></div>
+      <table>
+        <thead><tr><th>Bid</th><th style="text-align:right">Spend</th><th style="text-align:right">Compras</th><th style="text-align:right">CPA</th><th style="text-align:right">N</th></tr></thead>
+        <tbody>
+          <tr class="vg"><td class="mo">CostCap 70 ⭐</td><td style="text-align:right" class="mo">$1.436</td><td style="text-align:right" class="mo">106</td><td style="text-align:right" class="rg">$13,55</td><td style="text-align:right" class="z">3</td></tr>
+          <tr><td class="mo">CostCap 60</td><td style="text-align:right" class="mo">$1.014</td><td style="text-align:right" class="mo">43</td><td style="text-align:right" class="ry">$23,58</td><td style="text-align:right" class="z">1</td></tr>
+          <tr><td class="mo">CostCap 55</td><td style="text-align:right" class="mo">$1.574</td><td style="text-align:right" class="mo">66</td><td style="text-align:right" class="ry">$23,84</td><td style="text-align:right" class="z">1</td></tr>
+          <tr><td class="mo">CostCap 47</td><td style="text-align:right" class="mo">$6.075</td><td style="text-align:right" class="mo">254</td><td style="text-align:right" class="ry">$23,92</td><td style="text-align:right" class="z">5</td></tr>
+          <tr><td class="mo">CostCap 40</td><td style="text-align:right" class="mo">$5.486</td><td style="text-align:right" class="mo">218</td><td style="text-align:right" class="ry">$25,17</td><td style="text-align:right" class="z">4</td></tr>
+          <tr class="vb"><td class="mo">CostCap 45 ⚠</td><td style="text-align:right" class="mo">$757</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="rr">$50,48</td><td style="text-align:right" class="z">8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TOP CAMPANHAS -->
+  <div class="st">Top campanhas por CPA — spend > $100</div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>#</th><th>Conta</th><th>Campanha</th><th style="text-align:right">Spend</th><th style="text-align:right">Compras</th><th style="text-align:right">CPA</th><th style="text-align:right">CTR</th><th style="text-align:right">CPM</th><th>Bid</th></tr></thead>
+      <tbody>
+        <tr class="vg"><td class="z">1</td><td>Emily c3</td><td style="font-size:11px;color:var(--m)">CP0173 · CBO | CJ Limitado | BidCap 65 | A1.1</td><td style="text-align:right" class="mo">$177</td><td style="text-align:right" class="mo">24</td><td style="text-align:right" class="rg">$7,39</td><td style="text-align:right" class="rg">13,2%</td><td style="text-align:right" class="mo">$86</td><td><span class="chip cg">BidCap 65</span></td></tr>
+        <tr class="vg"><td class="z">2</td><td>Emily c6</td><td style="font-size:11px;color:var(--m)">CP0020 · CBO | CJ Limitado | CostCap 70 | A5</td><td style="text-align:right" class="mo">$775</td><td style="text-align:right" class="mo">76</td><td style="text-align:right" class="rg">$10,19</td><td style="text-align:right" class="ry">10,0%</td><td style="text-align:right" class="mo">$72</td><td><span class="chip cg">CostCap 70</span></td></tr>
+        <tr class="vg"><td class="z">3</td><td>Tatiane c1</td><td style="font-size:11px;color:var(--m)">CP0086 · CBO | BidCap 60 | K43</td><td style="text-align:right" class="mo">$191</td><td style="text-align:right" class="mo">17</td><td style="text-align:right" class="rg">$11,25</td><td style="text-align:right" class="rg">14,9%</td><td style="text-align:right" class="mo">$133</td><td><span class="chip cg">BidCap 60</span></td></tr>
+        <tr class="vg"><td class="z">4</td><td>Emily c7</td><td style="font-size:11px;color:var(--m)">CP0034 · CBO | BidCap 45 | A5.3 A5.5 A5.6 A5.7</td><td style="text-align:right" class="mo">$218</td><td style="text-align:right" class="mo">17</td><td style="text-align:right" class="rg">$12,85</td><td style="text-align:right" class="rg">13,2%</td><td style="text-align:right" class="mo">$101</td><td><span class="chip cg">BidCap 45</span></td></tr>
+        <tr class="vg"><td class="z">5</td><td>Emily c3</td><td style="font-size:11px;color:var(--m)">CP0174 · CBO | CJ Limitado | BidCap 65 | A1.1</td><td style="text-align:right" class="mo">$161</td><td style="text-align:right" class="mo">12</td><td style="text-align:right" class="rg">$13,41</td><td style="text-align:right" class="rg">11,7%</td><td style="text-align:right" class="mo">$78</td><td><span class="chip cg">BidCap 65</span></td></tr>
+        <tr class="vg"><td class="z">6</td><td>Tatiane c1</td><td style="font-size:11px;color:var(--m)">CP0051 · CBO | CJ Limitado | BidCap 47 | A5</td><td style="text-align:right" class="mo">$1.147</td><td style="text-align:right" class="mo">78</td><td style="text-align:right" class="rg">$14,71</td><td style="text-align:right" class="ry">8,3%</td><td style="text-align:right" class="mo">$60</td><td><span class="chip cg">BidCap 47</span></td></tr>
+        <tr class="vg"><td class="z">7</td><td>Emily c7</td><td style="font-size:11px;color:var(--m)">CP0012 · CBO | BidCap 70 | ADS31 ADS35</td><td style="text-align:right" class="mo">$3.422</td><td style="text-align:right" class="mo">177</td><td style="text-align:right" class="ry">$19,33</td><td style="text-align:right" class="rg">13,3%</td><td style="text-align:right" class="mo">$113</td><td><span class="chip cb">BidCap 70</span></td></tr>
+        <tr class="vg"><td class="z">8</td><td>Emily c7</td><td style="font-size:11px;color:var(--m)">CP0020 · CBO | CostCap 47 | X</td><td style="text-align:right" class="mo">$3.347</td><td style="text-align:right" class="mo">167</td><td style="text-align:right" class="ry">$20,04</td><td style="text-align:right" class="rg">11,6%</td><td style="text-align:right" class="mo">$143</td><td><span class="chip cb">CostCap 47</span></td></tr>
+        <tr class="vg"><td class="z">9</td><td>Emily c7</td><td style="font-size:11px;color:var(--m)">CP0007 · CBO | BidCap 70 | X</td><td style="text-align:right" class="mo">$2.934</td><td style="text-align:right" class="mo">146</td><td style="text-align:right" class="ry">$20,10</td><td style="text-align:right" class="rg">12,5%</td><td style="text-align:right" class="mo">$122</td><td><span class="chip cb">BidCap 70</span></td></tr>
+        <tr><td class="z">10</td><td>Tatiane c1</td><td style="font-size:11px;color:var(--m)">CP0063 · CBO | CostCap 40 | A5.3</td><td style="text-align:right" class="mo">$2.462</td><td style="text-align:right" class="mo">114</td><td style="text-align:right" class="ry">$21,59</td><td style="text-align:right" class="rg">11,6%</td><td style="text-align:right" class="mo">$114</td><td><span class="chip cy">CostCap 40</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ZERO CONVERSÃO -->
+  <div class="st">Campanhas que queimaram >$100 sem conversão</div>
+  <div class="ban r">
+    <div class="bi">&#128680;</div>
+    <div><div class="bt">~$775 desperdiçados em estruturas/criativos errados</div>
+    Emily c3 Advantage+ ($176) · Catálogo Emily c3 ($117) · Tatiane c4 ABO K37 ($119) + K41 ($118) · Victoria c3 CostCap 45 ($102). Padrão: ABO, Advantage+, Catálogo e CostCap 45 não funcionam nessa oferta.</div>
+  </div>
+
+</div>
+
 <div class="tc" id="tab-criativos">
 
   <div class="ban b">
@@ -1063,10 +1191,68 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 
   <div class="tc" id="tab-tiktok">
 
+  <div class="ban g">
+    <div class="bi">&#127925;</div>
+    <div><div class="bt">TikTok Ads — conta TTK74 — dados de campanha 23/mai 2026</div>
+    Exportação por campanha da conta TTK74 (Mariana). Período 30 dias (10/abr–23/mai) + snapshot de hoje (23/mai). Spend em USD, conversões pixel TikTok.</div>
+  </div>
+
+  <div class="st">TTK74 — Performance 30 dias (10/abr–23/mai)</div>
+  <div class="cards">
+    <div class="card pu"><div class="cl">Spend 30d</div><div class="cv">$17.555</div><div class="cs">conta TTK74</div></div>
+    <div class="card g"><div class="cl">Conversões</div><div class="cv">700</div><div class="cs">pixel TikTok</div></div>
+    <div class="card g"><div class="cl">CPA pixel</div><div class="cv">$25,08</div><div class="cs">30 dias</div></div>
+    <div class="card b"><div class="cl">Impressões</div><div class="cv">731.316</div><div class="cs">CPM $24,01</div></div>
+    <div class="card y"><div class="cl">CTR</div><div class="cv">6,18%</div><div class="cs">15.410 cliques top camp</div></div>
+    <div class="card y"><div class="cl">Checkouts</div><div class="cv">2.472</div><div class="cs">CPI $7,10 top camp</div></div>
+  </div>
+
+  <div class="st">TTK74 — Hoje 23/mai 2026</div>
+  <div class="cards">
+    <div class="card r"><div class="cl">Spend hoje</div><div class="cv">$1.664</div><div class="cs">2 camps com dados</div></div>
+    <div class="card y"><div class="cl">Conversões hoje</div><div class="cv">50</div><div class="cs">pixel TikTok</div></div>
+    <div class="card y"><div class="cl">CPA hoje</div><div class="cv">$33,28</div><div class="cs">vs $25,08 no período</div></div>
+    <div class="card b"><div class="cl">Impressões hoje</div><div class="cv">60.802</div><div class="cs">CPM $27,36</div></div>
+  </div>
+
+  <div class="tw">
+    <div class="th"><div class="tt">TTK74 — Por campanha (30 dias)</div><div class="tm">spend > $0 · ordenado por CPA</div></div>
+    <table>
+      <thead><tr>
+        <th>Campanha</th>
+        <th style="text-align:right">Spend</th>
+        <th style="text-align:right">Conv</th>
+        <th style="text-align:right">CPA</th>
+        <th style="text-align:right">CPM</th>
+        <th style="text-align:right">CTR</th>
+        <th style="text-align:right">Imp</th>
+        <th style="text-align:right">Checkouts</th>
+      </tr></thead>
+      <tbody>
+        <tr class="vg"><td style="font-size:11px">CP0003 · ADS19</td><td style="text-align:right" class="mo">$5.619</td><td style="text-align:right" class="mo">267</td><td style="text-align:right" class="rg">$21,05</td><td style="text-align:right" class="mo">$21,99</td><td style="text-align:right" class="ry">6,03%</td><td style="text-align:right" class="mo">255.595</td><td style="text-align:right" class="mo">974</td></tr>
+        <tr class="vy"><td style="font-size:11px">CP0012 · ADS22 (Teste AB)</td><td style="text-align:right" class="mo">$47</td><td style="text-align:right" class="mo">2</td><td style="text-align:right" class="ry">$23,27</td><td style="text-align:right" class="mo">$19,86</td><td style="text-align:right" class="ry">6,53%</td><td style="text-align:right" class="mo">2.343</td><td style="text-align:right" class="mo">15</td></tr>
+        <tr class="vy"><td style="font-size:11px">CP0004 · G10</td><td style="text-align:right" class="mo">$80</td><td style="text-align:right" class="mo">3</td><td style="text-align:right" class="ry">$26,56</td><td style="text-align:right" class="mo">$45,35</td><td style="text-align:right" class="ry">7,11%</td><td style="text-align:right" class="mo">1.757</td><td style="text-align:right" class="mo">3</td></tr>
+        <tr><td style="font-size:11px">CP0005 · ADS22</td><td style="text-align:right" class="mo">$808</td><td style="text-align:right" class="mo">26</td><td style="text-align:right" class="ry">$31,07</td><td style="text-align:right" class="mo">$31,09</td><td style="text-align:right" class="ry">6,80%</td><td style="text-align:right" class="mo">25.989</td><td style="text-align:right" class="mo">75</td></tr>
+        <tr><td style="font-size:11px">CP0008 · ADS22</td><td style="text-align:right" class="mo">$618</td><td style="text-align:right" class="mo">19</td><td style="text-align:right" class="ry">$32,54</td><td style="text-align:right" class="mo">$38,25</td><td style="text-align:right" class="ry">7,37%</td><td style="text-align:right" class="mo">16.163</td><td style="text-align:right" class="mo">66</td></tr>
+        <tr class="vy"><td style="font-size:11px">CP0007 · G14</td><td style="text-align:right" class="mo">$377</td><td style="text-align:right" class="mo">11</td><td style="text-align:right" class="ry">$34,30</td><td style="text-align:right" class="mo">$34,10</td><td style="text-align:right" class="ry">6,27%</td><td style="text-align:right" class="mo">11.063</td><td style="text-align:right" class="mo">16</td></tr>
+        <tr class="vb"><td style="font-size:11px">CP0002 · ADS19</td><td style="text-align:right" class="mo">$602</td><td style="text-align:right" class="mo">15</td><td style="text-align:right" class="rr">$40,12</td><td style="text-align:right" class="mo">$29,99</td><td style="text-align:right" class="ry">6,88%</td><td style="text-align:right" class="mo">20.063</td><td style="text-align:right" class="mo">39</td></tr>
+        <tr class="vb"><td style="font-size:11px">CP0010 · ADS22</td><td style="text-align:right" class="mo">$275</td><td style="text-align:right" class="mo">6</td><td style="text-align:right" class="rr">$45,83</td><td style="text-align:right" class="mo">$20,28</td><td style="text-align:right" class="ry">5,49%</td><td style="text-align:right" class="mo">13.561</td><td style="text-align:right" class="mo">23</td></tr>
+        <tr class="vb"><td style="font-size:11px">CP0010 · G14</td><td style="text-align:right" class="mo">$102</td><td style="text-align:right" class="mo">1</td><td style="text-align:right" class="rr">$101,87</td><td style="text-align:right" class="mo">$35,31</td><td style="text-align:right" class="ry">6,83%</td><td style="text-align:right" class="mo">2.885</td><td style="text-align:right" class="mo">7</td></tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03)"><td>TOTAL TTK74</td><td style="text-align:right" class="mo">$17.555</td><td style="text-align:right" class="mo">700</td><td style="text-align:right" class="mo">$25,08</td><td style="text-align:right" class="mo">$24,01</td><td style="text-align:right" class="mo">6,18%</td><td style="text-align:right" class="mo">731.316</td><td style="text-align:right" class="mo">2.472</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ban y">
+    <div class="bi">&#9889;</div>
+    <div><div class="bt">ADS19 (CP0003) é o pilar do TikTok — mesmo criativo que lidera no FB</div>
+    $5.619 spend (32% do total), 267 conversões, CPA $21,05 — melhor CPA da conta. CPM $21,99 é o mais baixo de todas as camps. CTR 6,03% consistente. G14 (CP0010) e ADS22 (CP0002/CP0010) piorando: CPA $40-102.</div>
+  </div>
+
   <div class="ban r">
-    <div class="bi">&#128241;</div>
-    <div><div class="bt">TikTok Ads &mdash; dados do dashboard do gestor (coleta 22/05)</div>
-    Fonte: dash do gestor de TikTok. ATEN&Ccedil;&Atilde;O &mdash; dados parciais e inconsistentes: mistura R$ (gasto/faturamento) e US$ (export/VendePay), per&iacute;odos diferentes, e o export de criativos cobre s&oacute; parte das contas. O ROAS real do TikTok ainda n&atilde;o &eacute; calcul&aacute;vel com precis&atilde;o.</div>
+    <div class="bi">&#128683;</div>
+    <div><div class="bt">Conta suspensa — todos os dados são históricos</div>
+    Status "Not delivering / Account suspended" em todas as campanhas da TTK74. Os dados acima são do período antes da suspensão. Para reativar a operação TikTok, será necessária nova conta ou reativação da TTK74.</div>
   </div>
 
   <div class="st">Resumo TikTok</div>
