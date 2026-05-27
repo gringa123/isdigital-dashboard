@@ -1601,5 +1601,19 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 </div>
 </div>
 
+<script>
+function T(id){
+  document.querySelectorAll('.tc').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(e=>e.classList.remove('active'));
+  const el=document.getElementById('tab-'+id); if(el) el.classList.add('active');
+  const m=['overview','caixa','vendas','fb','vsl','campanhas','criativos','tiktok'];
+  const i=m.indexOf(id);
+  const ts=document.querySelectorAll('.tab');
+  const ns=document.querySelectorAll('nav a');
+  if(i>=0&&ts[i]) ts[i].classList.add('active');
+  if(i>=0&&ns[i]) ns[i].classList.add('active');
+}
+</script>
 </body>
 </html>
