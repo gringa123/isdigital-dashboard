@@ -189,270 +189,351 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 
 <div class="tc" id="tab-caixa">
 <style>
-/* ── CAIXA VendePay — estilos escopados ── */
-.vp-caixa { font-family: 'Segoe UI', system-ui, sans-serif; padding: 8px 0; }
-.vp-caixa .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.vp-caixa .page-header h1 { font-size: 18px; font-weight: 600; color: #fff; letter-spacing: -.3px; margin:0; }
-.vp-caixa .badge-date { background: #1e1e2a; border: 1px solid #2a2a3a; padding: 5px 12px; border-radius: 20px; font-size: 11px; color: #8888aa; }
-.vp-caixa .vp-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
-.vp-caixa .vp-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-.vp-caixa .vp-card { background: #13131c; border: 1px solid #1e1e2e; border-radius: 12px; padding: 18px 20px; position: relative; overflow: hidden; }
-.vp-caixa .vp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.vp-caixa .vp-card.vp-green::before { background: linear-gradient(90deg, #00ff88, #00cc6a); }
-.vp-caixa .vp-card.vp-blue::before { background: linear-gradient(90deg, #4488ff, #2266dd); }
-.vp-caixa .vp-card.vp-orange::before { background: linear-gradient(90deg, #ff8844, #dd5522); }
-.vp-caixa .vp-card.vp-purple::before { background: linear-gradient(90deg, #aa66ff, #7744cc); }
-.vp-caixa .vp-card.vp-fb::before { background: linear-gradient(90deg, #1877f2, #0d5bbf); }
-.vp-caixa .vp-card.vp-tk::before { background: linear-gradient(90deg, #ee1d52, #00f2ea); }
-.vp-caixa .vp-card.vp-dark { background: #0f0f18; }
-.vp-caixa .metric-label { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: #5a5a7a; font-weight: 600; margin-bottom: 8px; }
-.vp-caixa .metric-value { font-size: 26px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 5px; }
-.vp-caixa .metric-value.vp-green { color: #00ff88; }
-.vp-caixa .metric-value.vp-blue { color: #4488ff; }
-.vp-caixa .metric-value.vp-orange { color: #ff8844; }
-.vp-caixa .metric-value.vp-purple { color: #aa66ff; }
-.vp-caixa .metric-sub { font-size: 11px; color: #5a5a7a; }
-.vp-caixa .acc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-.vp-caixa .acc-title { font-size: 15px; font-weight: 700; color: #fff; }
-.vp-caixa .acc-source { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
-.vp-caixa .acc-source.vp-fb { background: rgba(24,119,242,.18); color: #4488ff; border: 1px solid rgba(24,119,242,.3); }
-.vp-caixa .acc-source.vp-tk { background: rgba(238,29,82,.14); color: #ff4466; border: 1px solid rgba(238,29,82,.25); }
-.vp-caixa .acc-total { font-size: 22px; font-weight: 700; letter-spacing: -.5px; margin-bottom: 16px; }
-.vp-caixa .bal-row { margin-bottom: 11px; }
-.vp-caixa .bal-row:last-child { margin-bottom: 0; }
-.vp-caixa .bal-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
-.vp-caixa .bal-name { font-size: 12px; color: #8888aa; }
-.vp-caixa .bal-val { font-size: 13px; font-weight: 600; }
-.vp-caixa .bal-pct { font-size: 11px; color: #5a5a7a; margin-left: 5px; }
-.vp-caixa .bar-track { background: #1a1a28; border-radius: 4px; height: 5px; overflow: hidden; }
-.vp-caixa .bar-fill { height: 100%; border-radius: 4px; }
-.vp-caixa .bar-fill.vp-green { background: linear-gradient(90deg, #00ff88, #00cc6a); }
-.vp-caixa .bar-fill.vp-blue { background: linear-gradient(90deg, #4488ff, #2266dd); }
-.vp-caixa .bar-fill.vp-orange { background: linear-gradient(90deg, #ff8844, #dd5522); }
-.vp-caixa .acc-stats { display: flex; gap: 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #1e1e2e; }
-.vp-caixa .acc-stat { flex: 1; }
-.vp-caixa .acc-stat-label { font-size: 10px; color: #5a5a7a; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 2px; }
-.vp-caixa .acc-stat-val { font-size: 13px; font-weight: 700; color: #d0d0e8; }
-.vp-caixa .section-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: #5a5a7a; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.vp-caixa .section-title::after { content: ''; flex: 1; height: 1px; background: #1e1e2e; }
-.vp-caixa .release-row { display: grid; grid-template-columns: 72px 1fr 100px; align-items: center; gap: 12px; margin-bottom: 9px; }
-.vp-caixa .release-row:last-child { margin-bottom: 0; }
-.vp-caixa .release-date { font-size: 11px; font-weight: 600; color: #8888aa; line-height: 1.4; }
-.vp-caixa .release-date.soon { color: #ff8844; }
-.vp-caixa .release-bar-wrap { position: relative; height: 26px; background: #1a1a28; border-radius: 5px; overflow: hidden; }
-.vp-caixa .release-bar-inner { position: absolute; top: 0; left: 0; height: 100%; border-radius: 5px; display: flex; }
-.vp-caixa .release-bar-fb { background: rgba(24,119,242,.7); }
-.vp-caixa .release-bar-tk { background: rgba(238,29,82,.65); }
-.vp-caixa .release-bar-label { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 8px; gap: 5px; font-size: 10px; }
-.vp-caixa .release-val { font-size: 12px; font-weight: 700; color: #e0e0f0; text-align: right; }
-.vp-caixa .release-val small { display: block; font-size: 10px; color: #5a5a7a; font-weight: 400; }
-.vp-caixa .vp-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
-.vp-caixa .vp-tbl th { text-align: left; padding: 9px 11px; font-size: 10px; text-transform: uppercase; letter-spacing: .7px; color: #5a5a7a; border-bottom: 1px solid #1e1e2e; }
-.vp-caixa .vp-tbl td { padding: 10px 11px; border-bottom: 1px solid #13131c; }
-.vp-caixa .vp-tbl tr:last-child td { border-bottom: none; }
-.vp-caixa .vp-tbl tr:hover td { background: rgba(255,255,255,.02); }
-.vp-caixa .vp-tbl td:first-child { font-weight: 600; }
-.vp-caixa .vp-tbl .total-row td { background: #1a1a28; font-weight: 700; border-top: 1px solid #2a2a3a; }
-.vp-caixa .vp-chip { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-.vp-caixa .vp-chip.vp-fb { background: rgba(24,119,242,.2); color: #4488ff; }
-.vp-caixa .vp-chip.vp-tk { background: rgba(238,29,82,.2); color: #ff4466; }
-.vp-caixa .vp-chip.vp-both { background: rgba(0,255,136,.12); color: #00ff88; }
-.vp-caixa .legend { display: flex; gap: 16px; font-size: 11px; margin-bottom: 12px; }
-.vp-caixa .legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
-.vp-caixa .upcoming-total { background: linear-gradient(135deg, #1a2a1a, #132013); border: 1px solid #00ff8830; border-radius: 10px; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-.vp-caixa .upcoming-total-label { font-size: 12px; color: #5a5a7a; }
-.vp-caixa .upcoming-total-val { font-size: 19px; font-weight: 700; color: #00ff88; }
+.vp-caixa{font-family:'Segoe UI',system-ui,sans-serif;padding:8px 0}
+.vp-caixa .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.vp-caixa .page-header h1{font-size:18px;font-weight:600;color:#fff;letter-spacing:-.3px;margin:0}
+.vp-caixa .badge-date{background:#1e1e2a;border:1px solid #2a2a3a;padding:5px 12px;border-radius:20px;font-size:11px;color:#8888aa}
+.vp-caixa .vp-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.vp-caixa .vp-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.vp-caixa .vp-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.vp-caixa .vp-card{background:#13131c;border:1px solid #1e1e2e;border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.vp-caixa .vp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.vp-caixa .vp-card.vp-green::before{background:linear-gradient(90deg,#00ff88,#00cc6a)}
+.vp-caixa .vp-card.vp-blue::before{background:linear-gradient(90deg,#4488ff,#2266dd)}
+.vp-caixa .vp-card.vp-orange::before{background:linear-gradient(90deg,#ff8844,#dd5522)}
+.vp-caixa .vp-card.vp-purple::before{background:linear-gradient(90deg,#aa66ff,#7744cc)}
+.vp-caixa .vp-card.vp-fb::before{background:linear-gradient(90deg,#1877f2,#0d5bbf)}
+.vp-caixa .vp-card.vp-tk::before{background:linear-gradient(90deg,#ee1d52,#00f2ea)}
+.vp-caixa .vp-card.vp-dark{background:#0f0f18}
+.vp-caixa .metric-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#5a5a7a;font-weight:600;margin-bottom:8px}
+.vp-caixa .metric-value{font-size:26px;font-weight:700;letter-spacing:-1px;line-height:1;margin-bottom:5px}
+.vp-caixa .metric-value.vp-green{color:#00ff88}
+.vp-caixa .metric-value.vp-blue{color:#4488ff}
+.vp-caixa .metric-value.vp-orange{color:#ff8844}
+.vp-caixa .metric-value.vp-purple{color:#aa66ff}
+.vp-caixa .metric-sub{font-size:11px;color:#5a5a7a}
+.vp-caixa .acc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.vp-caixa .acc-title{font-size:15px;font-weight:700;color:#fff}
+.vp-caixa .acc-source{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+.vp-caixa .acc-source.vp-fb{background:rgba(24,119,242,.18);color:#4488ff;border:1px solid rgba(24,119,242,.3)}
+.vp-caixa .acc-source.vp-tk{background:rgba(238,29,82,.14);color:#ff4466;border:1px solid rgba(238,29,82,.25)}
+.vp-caixa .acc-total{font-size:22px;font-weight:700;letter-spacing:-.5px;margin-bottom:16px}
+.vp-caixa .bal-row{margin-bottom:11px}
+.vp-caixa .bal-row:last-child{margin-bottom:0}
+.vp-caixa .bal-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.vp-caixa .bal-name{font-size:12px;color:#8888aa}
+.vp-caixa .bal-val{font-size:13px;font-weight:600}
+.vp-caixa .bal-pct{font-size:11px;color:#5a5a7a;margin-left:5px}
+.vp-caixa .bar-track{background:#1a1a28;border-radius:4px;height:5px;overflow:hidden}
+.vp-caixa .bar-fill{height:100%;border-radius:4px}
+.vp-caixa .bar-fill.vp-green{background:linear-gradient(90deg,#00ff88,#00cc6a)}
+.vp-caixa .bar-fill.vp-blue{background:linear-gradient(90deg,#4488ff,#2266dd)}
+.vp-caixa .bar-fill.vp-orange{background:linear-gradient(90deg,#ff8844,#dd5522)}
+.vp-caixa .acc-stats{display:flex;gap:14px;margin-top:14px;padding-top:14px;border-top:1px solid #1e1e2e}
+.vp-caixa .acc-stat{flex:1}
+.vp-caixa .acc-stat-label{font-size:10px;color:#5a5a7a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.vp-caixa .acc-stat-val{font-size:13px;font-weight:700;color:#d0d0e8}
+.vp-caixa .section-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:#5a5a7a;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.vp-caixa .section-title::after{content:'';flex:1;height:1px;background:#1e1e2e}
+.vp-caixa .release-row{display:grid;grid-template-columns:72px 1fr 100px;align-items:center;gap:12px;margin-bottom:9px}
+.vp-caixa .release-row:last-child{margin-bottom:0}
+.vp-caixa .release-date{font-size:11px;font-weight:600;color:#8888aa;line-height:1.4}
+.vp-caixa .release-date.soon{color:#ff8844}
+.vp-caixa .release-bar-wrap{position:relative;height:26px;background:#1a1a28;border-radius:5px;overflow:hidden}
+.vp-caixa .release-bar-inner{position:absolute;top:0;left:0;height:100%;border-radius:5px;display:flex}
+.vp-caixa .release-bar-fb{background:rgba(24,119,242,.7)}
+.vp-caixa .release-bar-tk{background:rgba(238,29,82,.65)}
+.vp-caixa .release-bar-label{position:absolute;inset:0;display:flex;align-items:center;padding:0 8px;gap:5px;font-size:10px}
+.vp-caixa .release-val{font-size:12px;font-weight:700;color:#e0e0f0;text-align:right}
+.vp-caixa .release-val small{display:block;font-size:10px;color:#5a5a7a;font-weight:400}
+.vp-caixa .vp-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.vp-caixa .vp-tbl th{text-align:left;padding:9px 11px;font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#5a5a7a;border-bottom:1px solid #1e1e2e}
+.vp-caixa .vp-tbl td{padding:10px 11px;border-bottom:1px solid #13131c}
+.vp-caixa .vp-tbl tr:last-child td{border-bottom:none}
+.vp-caixa .vp-tbl tr:hover td{background:rgba(255,255,255,.02)}
+.vp-caixa .vp-tbl .total-row td{background:#1a1a28;font-weight:700;border-top:1px solid #2a2a3a}
+.vp-caixa .vp-chip{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+.vp-caixa .vp-chip.vp-fb{background:rgba(24,119,242,.2);color:#4488ff}
+.vp-caixa .vp-chip.vp-tk{background:rgba(238,29,82,.2);color:#ff4466}
+.vp-caixa .vp-chip.vp-both{background:rgba(0,255,136,.12);color:#00ff88}
+.vp-caixa .legend{display:flex;gap:16px;font-size:11px;margin-bottom:12px}
+.vp-caixa .legend-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.vp-caixa .upcoming-total{background:linear-gradient(135deg,#1a2a1a,#132013);border:1px solid #00ff8830;border-radius:10px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.vp-caixa .upcoming-total-label{font-size:12px;color:#5a5a7a}
+.vp-caixa .upcoming-total-val{font-size:19px;font-weight:700;color:#00ff88}
+/* ROAS analysis table */
+.vp-caixa .roas-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.vp-caixa .roas-tbl th{text-align:right;padding:9px 12px;font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#5a5a7a;border-bottom:1px solid #1e1e2e}
+.vp-caixa .roas-tbl th:first-child{text-align:left}
+.vp-caixa .roas-tbl td{padding:11px 12px;border-bottom:1px solid #13131c;text-align:right;color:#d0d0e8}
+.vp-caixa .roas-tbl td:first-child{text-align:left;font-weight:600;color:#fff}
+.vp-caixa .roas-tbl tr:hover td{background:rgba(255,255,255,.02)}
+.vp-caixa .roas-tbl .total-row td{background:#1a1a28;font-weight:700;border-top:1px solid #2a2a3a}
+.vp-caixa .rg{color:#00ff88}.vp-caixa .rr{color:#ff4466}.vp-caixa .ry{color:#ffcc44}.vp-caixa .mo{color:#aab8ff}
+.vp-caixa .roas-badge{display:inline-block;padding:2px 8px;border-radius:8px;font-weight:700;font-size:12px}
+.vp-caixa .roas-good{background:rgba(0,255,136,.15);color:#00ff88}
+.vp-caixa .roas-ok{background:rgba(255,204,68,.12);color:#ffcc44}
+.vp-caixa .roas-bad{background:rgba(255,68,102,.15);color:#ff4466}
 </style>
 
 <div class="vp-caixa">
 
-  <!-- HEADER -->
   <div class="page-header">
-    <h1>&#128176; Caixa VendePay</h1>
-    <div class="badge-date">27 de maio de 2026 &middot; Atualizado agora</div>
+    <h1>&#128176; Caixa VendePay &mdash; 3 Contas</h1>
+    <div class="badge-date">28 de maio de 2026 &middot; Atualizado agora</div>
   </div>
 
-  <!-- RESUMO CONSOLIDADO -->
+  <!-- RESUMO 4 CARDS -->
   <div class="vp-grid-4">
     <div class="vp-card vp-green">
       <div class="metric-label">Dispon&iacute;vel Agora</div>
-      <div class="metric-value vp-green">$2.234</div>
-      <div class="metric-sub">FB $2.029 &middot; TK $205</div>
+      <div class="metric-value vp-green">$821</div>
+      <div class="metric-sub">FB $346 &middot; TK $475</div>
     </div>
     <div class="vp-card vp-blue">
       <div class="metric-label">Total em Caixa</div>
-      <div class="metric-value vp-blue">$52.807</div>
-      <div class="metric-sub">Dispon&iacute;vel + A Liberar + Reserva</div>
+      <div class="metric-value vp-blue">$52.966</div>
+      <div class="metric-sub">Dispon&iacute;vel + D+ + Reserva</div>
     </div>
     <div class="vp-card vp-orange">
-      <div class="metric-label">Pr&oacute;ximas Libera&ccedil;&otilde;es (7d)</div>
-      <div class="metric-value vp-orange">$19.306</div>
-      <div class="metric-sub">28/mai &rarr; 02/jun</div>
+      <div class="metric-label">D+ Programado</div>
+      <div class="metric-value vp-orange">$36.681</div>
+      <div class="metric-sub">29/mai &rarr; 12/jun &mdash; 3 contas</div>
     </div>
     <div class="vp-card vp-purple">
       <div class="metric-label">Em Reserva</div>
-      <div class="metric-value vp-purple">$14.357</div>
-      <div class="metric-sub">FB $7.865 &middot; TK $6.492</div>
+      <div class="metric-value vp-purple">$15.463</div>
+      <div class="metric-sub">FB $8.384 &middot; TK $7.079</div>
     </div>
   </div>
 
   <!-- POR CONTA -->
-  <div class="vp-grid-2">
+  <div class="vp-grid-3">
 
     <!-- MARIANE FB -->
     <div class="vp-card vp-fb">
       <div class="acc-header">
-        <div>
-          <div class="acc-title">Mariane</div>
-          <div style="font-size:11px;color:#5a5a7a;margin-top:2px">Tr&aacute;fego Facebook Ads</div>
-        </div>
+        <div><div class="acc-title">Mariane</div><div style="font-size:11px;color:#5a5a7a;margin-top:2px">Facebook Ads</div></div>
         <span class="acc-source vp-fb">FB</span>
       </div>
-      <div class="acc-total" style="color:#4488ff">$32.864 <span style="font-size:13px;color:#5a5a7a">total</span></div>
+      <div class="acc-total" style="color:#4488ff">$31.413 <span style="font-size:13px;color:#5a5a7a">total</span></div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#9989; Dispon&iacute;vel para Saque</span>
-          <span class="bal-val" style="color:#00ff88">$2.029,83 <span class="bal-pct">6,2%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-green" style="width:6.2%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#9989; Dispon&iacute;vel</span><span class="bal-val" style="color:#00ff88">$346,41 <span class="bal-pct">1,1%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-green" style="width:1.1%"></div></div>
       </div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#9203; Dependente de Libera&ccedil;&atilde;o</span>
-          <span class="bal-val" style="color:#4488ff">$22.969,44 <span class="bal-pct">69,9%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-blue" style="width:69.9%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#9203; D+ a liberar</span><span class="bal-val" style="color:#4488ff">$22.682,54 <span class="bal-pct">72,2%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-blue" style="width:72.2%"></div></div>
       </div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#128274; Em Reserva</span>
-          <span class="bal-val" style="color:#ff8844">$7.865,23 <span class="bal-pct">23,9%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-orange" style="width:23.9%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#128274; Reserva</span><span class="bal-val" style="color:#ff8844">$8.384,25 <span class="bal-pct">26,7%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-orange" style="width:26.7%"></div></div>
       </div>
       <div class="acc-stats">
-        <div class="acc-stat"><div class="acc-stat-label">Bruta total</div><div class="acc-stat-val">$68.084</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">L&iacute;quida total</div><div class="acc-stat-val">$60.709</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">Vendas pagas</div><div class="acc-stat-val">1.544</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">Pendentes</div><div class="acc-stat-val" style="color:#ff8844">135</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">Bruta 30d</div><div class="acc-stat-val">$72.972</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">L&iacute;quida 30d</div><div class="acc-stat-val">$64.891</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">Vendas 30d</div><div class="acc-stat-val">1.646</div></div>
       </div>
     </div>
 
     <!-- MARIANA TK -->
     <div class="vp-card vp-tk">
       <div class="acc-header">
-        <div>
-          <div class="acc-title">Mariana</div>
-          <div style="font-size:11px;color:#5a5a7a;margin-top:2px">Tr&aacute;fego TikTok Ads</div>
-        </div>
+        <div><div class="acc-title">Mariana</div><div style="font-size:11px;color:#5a5a7a;margin-top:2px">TikTok Ads</div></div>
         <span class="acc-source vp-tk">TK</span>
       </div>
-      <div class="acc-total" style="color:#ff4466">$19.942 <span style="font-size:13px;color:#5a5a7a">total</span></div>
+      <div class="acc-total" style="color:#ff4466">$18.681 <span style="font-size:13px;color:#5a5a7a">total</span></div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#9989; Dispon&iacute;vel para Saque</span>
-          <span class="bal-val" style="color:#00ff88">$205,15 <span class="bal-pct">1,0%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-green" style="width:1%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#9989; Dispon&iacute;vel</span><span class="bal-val" style="color:#00ff88">$425,18 <span class="bal-pct">2,3%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-green" style="width:2.3%"></div></div>
       </div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#9203; Dependente de Libera&ccedil;&atilde;o</span>
-          <span class="bal-val" style="color:#4488ff">$13.245,51 <span class="bal-pct">66,4%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-blue" style="width:66.4%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#9203; D+ a liberar</span><span class="bal-val" style="color:#4488ff">$11.556,81 <span class="bal-pct">61,9%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-blue" style="width:61.9%"></div></div>
       </div>
       <div class="bal-row">
-        <div class="bal-top">
-          <span class="bal-name">&#128274; Em Reserva</span>
-          <span class="bal-val" style="color:#ff8844">$6.491,83 <span class="bal-pct">32,6%</span></span>
-        </div>
-        <div class="bar-track"><div class="bar-fill vp-orange" style="width:32.6%"></div></div>
+        <div class="bal-top"><span class="bal-name">&#128274; Reserva</span><span class="bal-val" style="color:#ff8844">$6.699,49 <span class="bal-pct">35,8%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-orange" style="width:35.8%"></div></div>
       </div>
       <div class="acc-stats">
-        <div class="acc-stat"><div class="acc-stat-label">Bruta total</div><div class="acc-stat-val">$49.805</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">L&iacute;quida total</div><div class="acc-stat-val">$48.131</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">Vendas pagas</div><div class="acc-stat-val">1.228</div></div>
-        <div class="acc-stat"><div class="acc-stat-label">Pendentes</div><div class="acc-stat-val" style="color:#ff8844">36</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">Bruta 30d</div><div class="acc-stat-val">$50.326</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">L&iacute;quida 30d</div><div class="acc-stat-val">$48.495</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">Vendas 30d</div><div class="acc-stat-val">1.241</div></div>
+      </div>
+    </div>
+
+    <!-- IAGO TK -->
+    <div class="vp-card vp-tk">
+      <div class="acc-header">
+        <div><div class="acc-title">Iago</div><div style="font-size:11px;color:#5a5a7a;margin-top:2px">TikTok Ads</div></div>
+        <span class="acc-source vp-tk">TK</span>
+      </div>
+      <div class="acc-total" style="color:#ff4466">$2.872 <span style="font-size:13px;color:#5a5a7a">total</span></div>
+      <div class="bal-row">
+        <div class="bal-top"><span class="bal-name">&#9989; Dispon&iacute;vel</span><span class="bal-val" style="color:#00ff88">$49,71 <span class="bal-pct">1,7%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-green" style="width:1.7%"></div></div>
+      </div>
+      <div class="bal-row">
+        <div class="bal-top"><span class="bal-name">&#9203; D+ a liberar</span><span class="bal-val" style="color:#4488ff">$2.442,00 <span class="bal-pct">85,0%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-blue" style="width:85%"></div></div>
+      </div>
+      <div class="bal-row">
+        <div class="bal-top"><span class="bal-name">&#128274; Reserva</span><span class="bal-val" style="color:#ff8844">$379,66 <span class="bal-pct">13,2%</span></span></div>
+        <div class="bar-track"><div class="bar-fill vp-orange" style="width:13.2%"></div></div>
+      </div>
+      <div class="acc-stats">
+        <div class="acc-stat"><div class="acc-stat-label">Bruta 30d</div><div class="acc-stat-val">$2.738</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">L&iacute;quida 30d</div><div class="acc-stat-val">$2.552</div></div>
+        <div class="acc-stat"><div class="acc-stat-label">Vendas 30d</div><div class="acc-stat-val">71</div></div>
       </div>
     </div>
 
   </div>
 
-  <!-- CALENDÁRIO DE LIBERAÇÕES -->
+  <!-- ═══ AN&Aacute;LISE SPEND vs RECEITA ═══ -->
   <div class="vp-card vp-dark" style="margin-bottom:20px">
-    <div class="section-title">&#128197; Calend&aacute;rio de Libera&ccedil;&otilde;es Programadas</div>
+    <div class="section-title">&#128202; An&aacute;lise: Gasto em Ads vs Receita VendePay</div>
+
+    <table class="roas-tbl">
+      <thead><tr>
+        <th style="text-align:left">Plataforma</th>
+        <th>Spend Ads</th>
+        <th>Receita VendePay (l&iacute;q)</th>
+        <th>ROAS</th>
+        <th>Lucro</th>
+        <th>Vendas</th>
+      </tr></thead>
+      <tbody>
+        <!-- 30 DIAS -->
+        <tr><td colspan="6" style="background:#0a0a14;color:#5a5a7a;font-size:10px;text-transform:uppercase;letter-spacing:.8px;padding:7px 12px">&#128197; &Uacute;ltimos 30 dias</td></tr>
+        <tr>
+          <td><span class="vp-chip vp-fb" style="margin-right:6px">FB</span>Mariane</td>
+          <td class="mo">$45.721</td>
+          <td class="mo">$64.891</td>
+          <td><span class="roas-badge roas-ok">1,42&times;</span></td>
+          <td class="rg">+$19.170</td>
+          <td class="mo">1.646</td>
+        </tr>
+        <tr>
+          <td><span class="vp-chip vp-tk" style="margin-right:6px">TK</span>Mariana + Iago</td>
+          <td class="mo">$26.655</td>
+          <td class="mo">$51.048</td>
+          <td><span class="roas-badge roas-good">1,92&times;</span></td>
+          <td class="rg">+$24.393</td>
+          <td class="mo">1.312</td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL 30d</td>
+          <td class="mo">$72.376</td>
+          <td class="mo">$115.939</td>
+          <td><span class="roas-badge roas-good">1,60&times;</span></td>
+          <td class="rg">+$43.563</td>
+          <td class="mo">2.958</td>
+        </tr>
+        <!-- DIA 27 -->
+        <tr><td colspan="6" style="background:#0a0a14;color:#5a5a7a;font-size:10px;text-transform:uppercase;letter-spacing:.8px;padding:7px 12px">&#128198; Dia 27/mai/2026</td></tr>
+        <tr>
+          <td><span class="vp-chip vp-fb" style="margin-right:6px">FB</span>Mariane</td>
+          <td class="mo">$3.317</td>
+          <td class="ry">$3.655</td>
+          <td><span class="roas-badge roas-ok">1,10&times;</span></td>
+          <td class="rg">+$338</td>
+          <td class="mo">89</td>
+        </tr>
+        <tr>
+          <td><span class="vp-chip vp-tk" style="margin-right:6px">TK</span>Mariana + Iago</td>
+          <td class="mo">$7.840</td>
+          <td class="ry">$1.236</td>
+          <td><span class="roas-badge roas-bad">0,16&times;</span></td>
+          <td class="rr">&minus;$6.604</td>
+          <td class="mo">33</td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL 27/mai</td>
+          <td class="mo">$11.157</td>
+          <td class="ry">$4.891</td>
+          <td><span class="roas-badge roas-bad">0,44&times;</span></td>
+          <td class="rr">&minus;$6.266</td>
+          <td class="mo">122</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;padding:12px 14px;background:#1a0f0f;border:1px solid #ff446630;border-radius:8px;font-size:12px;color:#cc8888;line-height:1.6">
+      &#9888; <strong style="color:#ff8888">Aten&ccedil;&atilde;o &mdash; dia 27 com ROAS negativo:</strong>
+      FB gerou $3.655 l&iacute;quido com $3.317 em ads &mdash; ROAS 1,10&times; no dia, positivo. TK gastou $7.840 com $1.236 de receita &mdash; abaixo da m&eacute;dia, dia fraco para o TikTok.
+      Isso &eacute; normal em parte: VendePay registra vendas com delay e o dia 27 ainda pode ter receitas entrando.
+      Compare sempre com a m&eacute;dia di&aacute;ria 30d: FB m&eacute;dia di&aacute;ria ~$2.163 receita &middot; TK m&eacute;dia di&aacute;ria ~$1.702.
+    </div>
+  </div>
+
+  <!-- CALEND&Aacute;RIO D+ -->
+  <div class="vp-card vp-dark" style="margin-bottom:20px">
+    <div class="section-title">&#128197; Calend&aacute;rio D+ Consolidado &mdash; 3 Contas</div>
+
     <div class="upcoming-total">
       <div>
         <div class="upcoming-total-label">Total programado a liberar</div>
-        <div style="font-size:11px;color:#5a5a7a;margin-top:2px">28/mai &rarr; 11/jun &mdash; 6 datas</div>
+        <div style="font-size:11px;color:#5a5a7a;margin-top:2px">29/mai &rarr; 12/jun &mdash; 3 contas</div>
       </div>
-      <div class="upcoming-total-val">$36.215</div>
+      <div class="upcoming-total-val">$36.681</div>
     </div>
+
     <div class="legend">
       <div><span class="legend-dot" style="background:#4488ff"></span>Mariane (FB)</div>
       <div><span class="legend-dot" style="background:#ee1d52"></span>Mariana (TK)</div>
+      <div><span class="legend-dot" style="background:#aa66ff"></span>Iago (TK)</div>
     </div>
+
     <div class="release-row">
-      <div class="release-date soon">28/mai<br><span style="font-size:10px;color:#5a5a7a">Quinta</span></div>
+      <div class="release-date soon">29/mai<br><span style="font-size:10px;color:#5a5a7a">Quinta</span></div>
       <div class="release-bar-wrap">
         <div class="release-bar-inner" style="width:100%">
-          <div class="release-bar-fb" style="width:61%"></div>
-          <div class="release-bar-tk" style="width:39%"></div>
-        </div>
-        <div class="release-bar-label">
-          <span style="color:#88aaff;font-size:10px">FB $6.475</span>
-          <span style="color:#ff8899;font-size:10px">&middot; TK $4.133</span>
-        </div>
-      </div>
-      <div class="release-val">$10.609<small>maior libera&ccedil;&atilde;o</small></div>
-    </div>
-    <div class="release-row">
-      <div class="release-date soon">29/mai<br><span style="font-size:10px;color:#5a5a7a">Sexta</span></div>
-      <div class="release-bar-wrap">
-        <div class="release-bar-inner" style="width:82%">
-          <div class="release-bar-fb" style="width:54%"></div>
-          <div class="release-bar-tk" style="width:46%"></div>
+          <div class="release-bar-fb" style="width:55%"></div>
+          <div class="release-bar-tk" style="width:45%"></div>
         </div>
         <div class="release-bar-label">
           <span style="color:#88aaff;font-size:10px">FB $4.722</span>
           <span style="color:#ff8899;font-size:10px">&middot; TK $3.974</span>
         </div>
       </div>
-      <div class="release-val">$8.697<small>&ndash;</small></div>
+      <div class="release-val">$8.697<small>maior</small></div>
     </div>
+
     <div class="release-row">
       <div class="release-date">01/jun<br><span style="font-size:10px;color:#5a5a7a">Segunda</span></div>
       <div class="release-bar-wrap">
-        <div class="release-bar-inner" style="width:73%">
-          <div class="release-bar-fb" style="width:60%"></div>
-          <div class="release-bar-tk" style="width:40%"></div>
+        <div class="release-bar-inner" style="width:100%">
+          <div class="release-bar-fb" style="width:59%"></div>
+          <div class="release-bar-tk" style="width:41%"></div>
         </div>
         <div class="release-bar-label">
-          <span style="color:#88aaff;font-size:10px">FB $4.682</span>
-          <span style="color:#ff8899;font-size:10px">&middot; TK $3.060</span>
+          <span style="color:#88aaff;font-size:10px">FB $6.505</span>
+          <span style="color:#ff8899;font-size:10px">&middot; TK $4.596</span>
         </div>
       </div>
-      <div class="release-val">$7.741<small>&ndash;</small></div>
+      <div class="release-val">$11.101<small>&ndash;</small></div>
     </div>
+
     <div class="release-row">
       <div class="release-date">02/jun<br><span style="font-size:10px;color:#5a5a7a">Ter&ccedil;a</span></div>
       <div class="release-bar-wrap">
-        <div class="release-bar-inner" style="width:62%">
-          <div class="release-bar-fb" style="width:76%"></div>
-          <div class="release-bar-tk" style="width:24%"></div>
+        <div class="release-bar-inner" style="width:83%">
+          <div class="release-bar-fb" style="width:63%"></div>
+          <div class="release-bar-tk" style="width:37%"></div>
         </div>
         <div class="release-bar-label">
-          <span style="color:#88aaff;font-size:10px">FB $5.012</span>
-          <span style="color:#ff8899;font-size:10px">&middot; TK $1.553</span>
+          <span style="color:#88aaff;font-size:10px">FB $6.269</span>
+          <span style="color:#ff8899;font-size:10px">&middot; TK $3.681</span>
         </div>
       </div>
-      <div class="release-val">$6.566<small>&ndash;</small></div>
+      <div class="release-val">$9.950<small>&ndash;</small></div>
     </div>
+
     <div class="release-row">
       <div class="release-date">10/jun<br><span style="font-size:10px;color:#5a5a7a">Quarta</span></div>
       <div class="release-bar-wrap">
-        <div class="release-bar-inner" style="width:15%">
+        <div class="release-bar-inner" style="width:17%">
           <div class="release-bar-fb" style="width:89%"></div>
           <div class="release-bar-tk" style="width:11%"></div>
         </div>
@@ -463,25 +544,42 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
       <div class="release-val">$1.591<small>&ndash;</small></div>
     </div>
+
     <div class="release-row">
       <div class="release-date">11/jun<br><span style="font-size:10px;color:#5a5a7a">Quinta</span></div>
       <div class="release-bar-wrap">
-        <div class="release-bar-inner" style="width:10%">
-          <div class="release-bar-fb" style="width:65%"></div>
-          <div class="release-bar-tk" style="width:35%"></div>
+        <div class="release-bar-inner" style="width:34%">
+          <div class="release-bar-fb" style="width:80%"></div>
+          <div class="release-bar-tk" style="width:20%"></div>
         </div>
         <div class="release-bar-label">
-          <span style="color:#88aaff;font-size:10px">FB $654</span>
-          <span style="color:#ff8899;font-size:10px">&middot; TK $357</span>
+          <span style="color:#88aaff;font-size:10px">FB $2.507</span>
+          <span style="color:#ff8899;font-size:10px">&middot; TK $617</span>
         </div>
       </div>
-      <div class="release-val">$1.011<small>&ndash;</small></div>
+      <div class="release-val">$3.124<small>&ndash;</small></div>
     </div>
+
+    <div class="release-row">
+      <div class="release-date">12/jun<br><span style="font-size:10px;color:#5a5a7a">Sexta</span></div>
+      <div class="release-bar-wrap">
+        <div class="release-bar-inner" style="width:24%">
+          <div class="release-bar-fb" style="width:57%"></div>
+          <div class="release-bar-tk" style="width:43%"></div>
+        </div>
+        <div class="release-bar-label">
+          <span style="color:#88aaff;font-size:10px">FB $1.256</span>
+          <span style="color:#ff8899;font-size:10px">&middot; TK $962</span>
+        </div>
+      </div>
+      <div class="release-val">$2.218<small>&ndash;</small></div>
+    </div>
+
   </div>
 
   <!-- TABELA DETALHADA D+ -->
   <div class="vp-card vp-dark">
-    <div class="section-title">&#128194; Detalhamento D+ por Conta</div>
+    <div class="section-title">&#128194; Detalhamento D+ por Conta e Data</div>
     <table class="vp-tbl">
       <thead>
         <tr>
@@ -489,44 +587,45 @@ tr:hover td{background:rgba(255,255,255,0.02);}
           <th>Dia</th>
           <th>Mariane <span class="vp-chip vp-fb">FB</span></th>
           <th>Mariana <span class="vp-chip vp-tk">TK</span></th>
+          <th>Iago <span class="vp-chip vp-tk">TK</span></th>
           <th>Total <span class="vp-chip vp-both">consolidado</span></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>28/mai/2026</td><td style="color:#ff8844">Quinta-feira</td>
-          <td>$6.475,84</td><td>$4.133,18</td>
-          <td style="color:#00ff88;font-weight:700">$10.609,02</td>
-        </tr>
-        <tr>
-          <td>29/mai/2026</td><td style="color:#ff8844">Sexta-feira</td>
-          <td>$4.722,46</td><td>$3.974,38</td>
+          <td>29/mai/2026</td><td style="color:#ff8844">Quinta-feira</td>
+          <td>$4.722,46</td><td>$3.974,38</td><td>&mdash;</td>
           <td style="color:#00ff88;font-weight:700">$8.696,84</td>
         </tr>
         <tr>
           <td>01/jun/2026</td><td>Segunda-feira</td>
-          <td>$4.681,68</td><td>$3.059,58</td>
-          <td style="color:#00ff88;font-weight:700">$7.741,26</td>
+          <td>$6.505,24</td><td>$3.319,67</td><td>$1.276,32</td>
+          <td style="color:#00ff88;font-weight:700">$11.101,23</td>
         </tr>
         <tr>
           <td>02/jun/2026</td><td>Ter&ccedil;a-feira</td>
-          <td>$5.012,41</td><td>$1.553,22</td>
-          <td style="color:#00ff88;font-weight:700">$6.565,63</td>
+          <td>$6.268,75</td><td>$2.515,37</td><td>$1.165,68</td>
+          <td style="color:#00ff88;font-weight:700">$9.949,80</td>
         </tr>
         <tr>
           <td>10/jun/2026</td><td>Quarta-feira</td>
-          <td>$1.423,08</td><td>$167,89</td>
+          <td>$1.423,08</td><td>$167,89</td><td>&mdash;</td>
           <td style="color:#8888aa;font-weight:700">$1.590,97</td>
         </tr>
         <tr>
           <td>11/jun/2026</td><td>Quinta-feira</td>
-          <td>$653,97</td><td>$357,27</td>
-          <td style="color:#8888aa;font-weight:700">$1.011,24</td>
+          <td>$2.506,71</td><td>$617,34</td><td>&mdash;</td>
+          <td style="color:#8888aa;font-weight:700">$3.124,05</td>
+        </tr>
+        <tr>
+          <td>12/jun/2026</td><td>Sexta-feira</td>
+          <td>$1.256,31</td><td>$962,17</td><td>&mdash;</td>
+          <td style="color:#8888aa;font-weight:700">$2.218,48</td>
         </tr>
         <tr class="total-row">
           <td colspan="2">TOTAL PROGRAMADO</td>
-          <td>$22.969,44</td><td>$13.245,54</td>
-          <td style="color:#00ff88">$36.214,98</td>
+          <td>$22.682,55</td><td>$11.556,82</td><td>$2.442,00</td>
+          <td style="color:#00ff88">$36.681,37</td>
         </tr>
       </tbody>
     </table>
@@ -534,6 +633,7 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 
 </div>
 </div>
+
 
 <div class="tc" id="tab-vendas">
   <div class="ban b">
@@ -898,224 +998,136 @@ tr:hover td{background:rgba(255,255,255,0.02);}
 
   <div class="ban b">
     <div class="bi">&#127916;</div>
-    <div><div class="bt">VSL "Cavaleiros do Vaticano / Vatican Secret Prayer" &mdash; 33:42 &mdash; Pitch 17:00&ndash;19:00</div>
-    Coleta Vturb 22/05 &middot; pasta PROSPERIDADE | ANJOS | VENDPAY | GUILHERME (NOVA) &middot; 7 players ativos &middot; range de cada player a partir da cria\u00e7\u00e3o at\u00e9 22/05.</div>
+    <div><div class="bt">VSL "Cavaleiros do Vaticano / Vatican Secret Prayer" &mdash; 33:42 &mdash; Pitch 17:00</div>
+    5 players ativos &middot; Vturb &middot; Per&iacute;odo: 05/05&ndash;28/05/2026 (Tatiane c2: 19/05 | Emily c6: 12/05)</div>
   </div>
 
-  <div class="st">Players ativos &mdash; funil VSL</div>
+  <!-- ── CARDS RESUMO ── -->
+  <div class="cards">
+    <div class="card g"><div class="cl">Total Plays</div><div class="cv">10.378</div><div class="cs">+591 vs snapshot 25/mai</div></div>
+    <div class="card b"><div class="cl">Play Rate m&eacute;d</div><div class="cv">87,5%</div><div class="cs">Tatiane c1 lidera 90,8%</div></div>
+    <div class="card pu"><div class="cl">Audi&ecirc;ncia Pitch</div><div class="cv">2.716</div><div class="cs">m&eacute;dia pitch 26,2%</div></div>
+    <div class="card y"><div class="cl">Total CTAs</div><div class="cv">881</div><div class="cs">CTA/Pitch m&eacute;d 32,4%</div></div>
+  </div>
+
+  <!-- ── TABELA PRINCIPAL ── -->
+  <div class="st">Performance por Player &mdash; 05/05&ndash;28/05/2026</div>
   <div class="tw">
-    <div class="th"><div class="tt">7 players Vturb</div><div class="tm">reten\u00e7\u00e3o &middot; audi\u00eancia no pitch &middot; CTA</div></div>
+    <div class="th">
+      <div class="tt">5 players &middot; dados ao vivo do Vturb &middot; atualizado 28/mai/2026</div>
+      <div class="tm">Play Rate = plays/visualiza&ccedil;&otilde;es &middot; Pitch% = retencao no pitch &middot; CTA% = cliques/audiencia pitch</div>
+    </div>
     <table>
       <thead><tr>
         <th>Player</th>
-        <th>Conta FB</th>
-        <th style="text-align:right">Per\u00edodo</th>
-        <th style="text-align:right">Plays \u00fanicos</th>
+        <th>Conta</th>
+        <th style="text-align:right">Views</th>
+        <th style="text-align:right">Plays</th>
+        <th style="text-align:right">&Delta; Plays</th>
         <th style="text-align:right">Play Rate</th>
-        <th style="text-align:right">Ret. Pitch</th>
+        <th style="text-align:right">Reten&ccedil;&atilde;o Pitch</th>
         <th style="text-align:right">Aud. Pitch</th>
         <th style="text-align:right">CTA</th>
-        <th style="text-align:right">CTA/AudPitch</th>
+        <th style="text-align:right">CTA%</th>
       </tr></thead>
       <tbody>
         <tr class="vg">
-          <td>&#128994; TATIANE C1 | VLS1 | REDTRACK</td>
+          <td><strong>TATIANE C1 VLS1</strong></td>
           <td>Tatiane c1</td>
-          <td style="text-align:right" class="mo">05/05&ndash;23/05</td>
-          <td style="text-align:right" class="mo">4.699</td>
-          <td style="text-align:right" class="mo">91,44%</td>
-          <td style="text-align:right" class="mo">26,30%</td>
-          <td style="text-align:right" class="mo">1.201</td>
-          <td style="text-align:right" class="mo">378</td>
-          <td style="text-align:right" class="rg">31,5%</td>
+          <td style="text-align:right" class="mo">5.927</td>
+          <td style="text-align:right" class="mo"><strong>5.238</strong></td>
+          <td style="text-align:right" class="rg">+274</td>
+          <td style="text-align:right" class="rg">90,79%</td>
+          <td style="text-align:right" class="ry">26,76%</td>
+          <td style="text-align:right" class="mo">1.271</td>
+          <td style="text-align:right" class="mo"><strong>421</strong></td>
+          <td style="text-align:right" class="rg">33,1%</td>
         </tr>
         <tr class="vg">
-          <td>&#128994; EMILY | VLS1 | REDTRACK</td>
+          <td><strong>EMILY C7 VLS1</strong></td>
           <td>Emily c7</td>
-          <td style="text-align:right" class="mo">05/05&ndash;23/05</td>
-          <td style="text-align:right" class="mo">3.589</td>
-          <td style="text-align:right" class="mo">92,26%</td>
-          <td style="text-align:right" class="mo">29,44%</td>
-          <td style="text-align:right" class="mo">1.013</td>
-          <td style="text-align:right" class="mo">333</td>
-          <td style="text-align:right" class="rg">32,9%</td>
+          <td style="text-align:right" class="mo">4.420</td>
+          <td style="text-align:right" class="mo"><strong>3.891</strong></td>
+          <td style="text-align:right" class="rg">+178</td>
+          <td style="text-align:right" class="rg">91,82%</td>
+          <td style="text-align:right" class="ry">29,54%</td>
+          <td style="text-align:right" class="mo">1.100</td>
+          <td style="text-align:right" class="mo"><strong>364</strong></td>
+          <td style="text-align:right" class="rg">33,1%</td>
         </tr>
         <tr>
-          <td>&#128994; EMILY 6 | VLS1 (pitch 26m38s) <span class="chip cr" style="padding:1px 6px;font-size:9px">parada</span></td>
-          <td>Emily c6</td>
-          <td style="text-align:right" class="mo">12/05&ndash;23/05</td>
+          <td>EMILY C6 VLS1</td>
+          <td>Emily c6 <span class="chip cy" style="font-size:9px;padding:1px 5px">pausa</span></td>
+          <td style="text-align:right" class="mo">695</td>
           <td style="text-align:right" class="mo">606</td>
-          <td style="text-align:right" class="mo">92,32%</td>
-          <td style="text-align:right" class="mo">29,08%</td>
+          <td style="text-align:right" class="z">&mdash;</td>
+          <td style="text-align:right" class="rg">92,32%</td>
+          <td style="text-align:right" class="ry">29,08%</td>
           <td style="text-align:right" class="mo">171</td>
           <td style="text-align:right" class="mo">49</td>
-          <td style="text-align:right" class="rg">28,7%</td>
+          <td style="text-align:right" class="ry">28,7%</td>
         </tr>
-        <tr class="vy">
-          <td>&#128994; TATIANE 2 | VLS1 (pitch 26m38s)</td>
+        <tr>
+          <td>TATIANE C2 VLS1</td>
           <td>Tatiane c2</td>
-          <td style="text-align:right" class="mo">19/05&ndash;23/05</td>
-          <td style="text-align:right" class="mo">459</td>
-          <td style="text-align:right" class="mo">85,66%</td>
-          <td style="text-align:right" class="mo">27,54%</td>
-          <td style="text-align:right" class="mo">122</td>
+          <td style="text-align:right" class="mo">754</td>
+          <td style="text-align:right" class="mo">622</td>
+          <td style="text-align:right" class="rg">+139</td>
+          <td style="text-align:right" class="ry">86,48%</td>
+          <td style="text-align:right" class="ry">28,02%</td>
+          <td style="text-align:right" class="mo">167</td>
+          <td style="text-align:right" class="mo">47</td>
+          <td style="text-align:right" class="ry">28,1%</td>
+        </tr>
+        <tr class="vb">
+          <td>VICTORIA VLS1</td>
+          <td>Victoria c3 <span class="chip cm" style="font-size:9px;padding:1px 5px">fora FB</span></td>
           <td style="text-align:right" class="mo">36</td>
-          <td style="text-align:right" class="rg">29,5%</td>
-        </tr>
-        <tr class="vy">
-          <td>&#128994; TATIANE 2 | MICROLEAD 1 (pitch 27m07s)</td>
-          <td>Tatiane c2</td>
-          <td style="text-align:right" class="mo">19/05&ndash;23/05</td>
-          <td style="text-align:right" class="mo">498</td>
-          <td style="text-align:right" class="mo">88,07%</td>
-          <td style="text-align:right" class="mo">18,98%</td>
-          <td style="text-align:right" class="mo">93</td>
-          <td style="text-align:right" class="mo">29</td>
-          <td style="text-align:right" class="ry">31,2%</td>
-        </tr>
-        <tr class="vb">
-          <td>&#128994; EMILY 6 | MICROLEAD 1 (pitch 27m07s)</td>
-          <td>Emily c6</td>
-          <td style="text-align:right" class="mo">12/05&ndash;23/05</td>
-          <td style="text-align:right" class="mo">42</td>
-          <td style="text-align:right" class="mo">85,11%</td>
-          <td style="text-align:right" class="rr">10,00%</td>
-          <td style="text-align:right" class="mo">4</td>
-          <td style="text-align:right" class="mo">2</td>
-          <td style="text-align:right" class="ry">50,0%</td>
-        </tr>
-        <tr class="vb">
-          <td>&#128994; VICTORIA | VLS1 | REDTRACK <span class="chip cr" style="padding:1px 6px;font-size:9px">saiu do FB</span></td>
-          <td>&mdash;</td>
-          <td style="text-align:right" class="mo">05/05&ndash;23/05</td>
-          <td style="text-align:right" class="rr">21</td>
-          <td style="text-align:right" class="mo">76,00%</td>
-          <td style="text-align:right" class="mo">36,84%</td>
+          <td style="text-align:right" class="mo">21</td>
+          <td style="text-align:right" class="z">&mdash;</td>
+          <td style="text-align:right" class="rr">76,00%</td>
+          <td style="text-align:right" class="rg">36,84%</td>
           <td style="text-align:right" class="mo">7</td>
-          <td style="text-align:right" class="mo">0</td>
+          <td style="text-align:right" class="rr">0</td>
           <td style="text-align:right" class="rr">0%</td>
         </tr>
+        <tr style="font-weight:700;background:rgba(255,255,255,0.03)">
+          <td>TOTAL / M&Eacute;DIA</td>
+          <td>&mdash;</td>
+          <td style="text-align:right" class="mo">11.832</td>
+          <td style="text-align:right" class="mo">10.378</td>
+          <td style="text-align:right" class="rg">+591</td>
+          <td style="text-align:right" class="mo">87,7%</td>
+          <td style="text-align:right" class="mo">28,0%</td>
+          <td style="text-align:right" class="mo">2.716</td>
+          <td style="text-align:right" class="mo">881</td>
+          <td style="text-align:right" class="mo">32,4%</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
+  <!-- ── INSIGHTS ── -->
   <div class="ban g">
-    <div class="bi">&#127919;</div>
-    <div><div class="bt">Pilares consistentes</div>
-    Tatiane c1 (4.699 plays) e Emily c7 (3.589 plays) seguem como pilares. Play rate &gt;91% nas duas. CTA/Aud.Pitch ~32% est\u00e1vel. Players com mais volume e o padr\u00e3o REDTRACK que multiplicou o CTA em 05/05.</div>
-  </div>
-
-  <div class="st">&#129514; Teste A/B Tatiane c2 &mdash; VLS1 vs MICROLEAD (balanceado!)</div>
-  <div class="tw">
-    <div class="th"><div class="tt">Split parelho ~50/50 &mdash; teste v\u00e1lido</div><div class="tm">desde 19/05 &middot; mesma audi\u00eancia no pitch (58 cada)</div></div>
-    <table>
-      <thead><tr>
-        <th>Vers\u00e3o</th>
-        <th>V\u00eddeo</th>
-        <th style="text-align:right">Pitch em</th>
-        <th style="text-align:right">Plays</th>
-        <th style="text-align:right">Ret. Pitch</th>
-        <th style="text-align:right">Aud. Pitch</th>
-        <th style="text-align:right">CTA</th>
-        <th style="text-align:right">CTA/AudPitch</th>
-      </tr></thead>
-      <tbody>
-        <tr class="vg">
-          <td>VLS1</td>
-          <td>Cavaleiros do Vaticano</td>
-          <td style="text-align:right" class="mo">26m38s</td>
-          <td style="text-align:right" class="mo">459</td>
-          <td style="text-align:right" class="rg">27,54%</td>
-          <td style="text-align:right" class="mo">122</td>
-          <td style="text-align:right" class="mo">36</td>
-          <td style="text-align:right" class="rg">29,5%</td>
-        </tr>
-        <tr class="vy">
-          <td>MICROLEAD 1</td>
-          <td>Padre na igreja</td>
-          <td style="text-align:right" class="mo">27m07s</td>
-          <td style="text-align:right" class="mo">498</td>
-          <td style="text-align:right" class="rr">18,98%</td>
-          <td style="text-align:right" class="mo">93</td>
-          <td style="text-align:right" class="mo">29</td>
-          <td style="text-align:right" class="ry">31,2%</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="bi">&#9889;</div>
+    <div><div class="bt">Play Rate acima de 90% nas 3 contas principais &mdash; p&aacute;gina de destino est&aacute; convertendo bem</div>
+    Emily c6 lidera com 92,32% mesmo pausada. Tatiane c2 cresceu +139 plays desde o snapshot de 25/mai &mdash; conta est&aacute; ganhando vol.</div>
   </div>
 
   <div class="ban y">
-    <div class="bi">&#128201;</div>
-    <div><div class="bt">Leitura do A/B Tatiane c2</div>
-    VLS1 lidera em pitch (27,54% vs 18,98% microlead) — diferença cresceu vs snapshot anterior. Microlead tem mais plays (498 vs 459) mas perde feio na reten\u00e7\u00e3o. VLS1 tricas: reten\u00e7\u00e3o 25,1% vs 24,0% e CTA/Aud 31,0% vs 29,3%. Margem pequena, mas consistente a favor do VLS1. Volume ainda baixo (~230 plays cada) &mdash; deixar rodar pra confirmar.</div>
+    <div class="bi">&#9888;</div>
+    <div><div class="bt">Reten&ccedil;&atilde;o ao Pitch est&aacute; entre 26&ndash;30% &mdash; oportunidade de melhora</div>
+    A refer&ecirc;ncia saud&aacute;vel &eacute; acima de 30%. Emily c7 est&aacute; mais pr&oacute;xima com 29,54%. Victoria tem 36,84% mas volume insuficiente para concluir. Testar novos hooks antes do pitch para aumentar reten&ccedil;&atilde;o.</div>
   </div>
 
-  <div class="st">Efici\u00eancia cliques FB &rarr; plays Vturb (23/abr&ndash;23/mai)</div>
-  <div class="tw">
-    <div class="th"><div class="tt">Sa\u00fade do tracking por conta</div><div class="tm">% dos cliques no link FB que viraram play no Vturb</div></div>
-    <table>
-      <thead><tr>
-        <th>Conta</th>
-        <th style="text-align:right">Cliques FB</th>
-        <th style="text-align:right">Plays Vturb</th>
-        <th style="text-align:right">% Cliques &rarr; Plays</th>
-        <th>Status</th>
-      </tr></thead>
-      <tbody>
-        <tr class="vg">
-          <td>Tatiane c2</td>
-          <td style="text-align:right" class="mo">1.285</td>
-          <td style="text-align:right" class="mo">957</td>
-          <td style="text-align:right" class="rg">74,4%</td>
-          <td><span class="chip cg"><span class="cd"></span>A/B somado</span></td>
-        </tr>
-        <tr class="vg">
-          <td>Tatiane c1</td>
-          <td style="text-align:right" class="mo">9.554</td>
-          <td style="text-align:right" class="mo">4.699</td>
-          <td style="text-align:right" class="ry">49,2%</td>
-          <td><span class="chip cg"><span class="cd"></span>benchmark</span></td>
-        </tr>
-        <tr class="vy">
-          <td>Emily c7</td>
-          <td style="text-align:right" class="mo">16.139</td>
-          <td style="text-align:right" class="mo">3.589</td>
-          <td style="text-align:right" class="ry">22,2%</td>
-          <td><span class="chip cy"><span class="cd"></span>player atual desde 05/05</span></td>
-        </tr>
-        <tr class="vy">
-          <td>Emily c6 <span class="chip cr" style="padding:1px 6px;font-size:9px">parada</span></td>
-          <td style="text-align:right" class="mo">9.817</td>
-          <td style="text-align:right" class="mo">606</td>
-          <td style="text-align:right" class="ry">6,2%</td>
-          <td><span class="chip cr"><span class="cd"></span>conta parada</span></td>
-        </tr>
-        <tr class="vb">
-          <td>Emily c3</td>
-          <td style="text-align:right" class="mo">1.531</td>
-          <td style="text-align:right" class="z">&mdash;</td>
-          <td style="text-align:right" class="z">&mdash;</td>
-          <td><span class="chip cr"><span class="cd"></span>sem player REDTRACK</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ban pu">
-    <div class="bi">&#128269;</div>
-    <div><div class="bt">Pendente: Emily c3 e Tatiane c4 sem player VSL identificado</div>
-    Emily c3 (55 compras, CTR 5,94%) e Tatiane c4 (3 compras, CPA $135) n\u00e3o t\u00eam player REDTRACK dedicado na pasta. Existem players "VLS WHITE | PROSPERIDADE" soltos (sem REDTRACK no nome) que podem ser dessas contas. Vale confirmar onde o tr\u00e1fego dessas duas est\u00e1 caindo &mdash; principalmente a Emily c3 que tem CTR metade das outras.</div>
-  </div>
-
-  <div class="ban pu">
-    <div class="bi">&#128272;</div>
-    <div><div class="bt">Player IDs (refer\u00eancia)</div>
-    Tatiane c1: <span class="mo">69fa119081f6128fd958f0a1</span> &middot; Emily c7: <span class="mo">69fa109e74d4440869631c66</span> &middot; Emily 6 VLS1: <span class="mo">6a03d77613e119642182a0b1</span> &middot; Emily 6 microlead: <span class="mo">6a03d7d94d6e3177e1f87d69</span> &middot; Tatiane 2 VLS1: <span class="mo">6a0cb6f618242f93fbda4664</span> &middot; Tatiane 2 microlead: <span class="mo">6a0cb6f6af60d3892cc992c0</span> &middot; Victoria: <span class="mo">69fa110d74d4440869631cf6</span></div>
+  <div class="ban b">
+    <div class="bi">&#128680;</div>
+    <div><div class="bt">CTA/Pitch consistente: 33,1% em Tatiane c1 e Emily c7 &mdash; bot&atilde;o bem posicionado</div>
+    Das 1.271 pessoas que chegam ao pitch na Tatiane c1, 421 clicam no CTA (33,1%). Emily c7 id&ecirc;ntico. Tatiane c2 e Emily c6 ficam em ~28% &mdash; avaliar se o CTA est&aacute; aparecendo no momento correto nesses players.</div>
   </div>
 
 </div>
 
-<!-- ═══════════════ CRIATIVOS ═══════════════ -->
 
 <div class="tc" id="tab-campanhas">
 
