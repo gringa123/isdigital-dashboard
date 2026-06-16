@@ -19,7 +19,10 @@ export default async function handler(req, res) {
   const { player_id, from, to, endpoint } = req.query;
   const BASE = 'https://analytics-api.vturb.com.br/v1';
 
+  // Versão 2 — inclui api.vturb.com como fallback
   // Endpoints disponíveis
+  // Tentar também api.vturb.com (endpoint interno do app)
+  const BASE_INT = 'https://api.vturb.com/vturb/v2/players';
   const ROUTES = {
     summary:  player_id ? `${BASE}/sessions/summary?player_id=${player_id}&from=${from}&to=${to}` : null,
     sessions: player_id ? `${BASE}/sessions?player_id=${player_id}&from=${from}&to=${to}&limit=1` : null,
