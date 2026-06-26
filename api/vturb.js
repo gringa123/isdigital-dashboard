@@ -1,5 +1,5 @@
-// api/vturb.js — Vercel Serverless Function v3
-// Proxy para a API do VTurb — usa api.vturb.com (URL real do app)
+// api/vturb.js — Vercel Serverless Function v4
+// Testa múltiplas URLs base descobertas via vturb-mcp open source
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -7,53 +7,82 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const API_KEY = process.env.VTURB_API_KEY;
-  if (!API_KEY) return res.status(500).json({ error: 'VTURB_API_KEY não configurada' });
+  const TOKEN = process.env.VTURB_API_KEY;
+  if (!TOKEN) return res.status(500).json({ error: 'VTURB_API_KEY não configurada' });
 
-  const { player_id, from, to } = req.query;
-  if (!player_id) return res.status(400).json({ error: 'player_id obrigatório' });
+  const { player_id, from, to, debug } = req.query;
 
-  // URL real descoberta via network inspection do app.vturb.com
-  const BASE = 'https://api.vturb.com/vturb/v2/players';
-  const url  = `${BASE}/${player_id}/analytics_stream/player_stats`;
+  // Período padrão: últimos 30 dias
+  const toDate   = to   || new Date().toISOString().split('T')[0];
+  const fromDate = from || new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
+  const pid = player_id || '69fa119081f6128fd958f0a1'; // Tatiane C1 default
 
-  // O app usa XHR — testar headers possíveis
-  const authVariants = [
-    { 'x-api-key': API_KEY, 'Accept': 'application/json' },
-    { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' },
-    { 'Authorization': `Token ${API_KEY}`, 'Accept': 'application/json' },
-    { 'X-Auth-Token': API_KEY, 'Accept': 'application/json' },
+  // URLs base a testar — baseadas no vturb-mcp e na documentação
+  const BASES = [
+    'https://analytics-api.vturb.com.br/v1',
+    'https://analytics-api.vturb.com/v1',
+    'https://api.vturb.com.br/analytics/v1',
+    'https://analytics.vturb.com.br/v1',
   ];
 
-  const results = [];
+  // Endpoints a testar (baseados nas 15 tools do vturb-mcp)
+  const ENDPOINTS = [
+    `/sessions/summary?player_id=${pid}&from=${fromDate}&to=${toDate}`,
+    `/sessions/summary?video_id=${pid}&from=${fromDate}&to=${toDate}`,
+    `/players/${pid}/summary?from=${fromDate}&to=${toDate}`,
+    `/stats/summary?player_id=${pid}&from=${fromDate}&to=${toDate}`,
+  ];
 
-  for (const headers of authVariants) {
-    try {
-      // Tentar GET
-      const rg = await fetch(url, { method: 'GET', headers });
-      const tg  = await rg.text();
-      results.push({ method: 'GET', auth: Object.keys(headers)[0], status: rg.status, body: tg.slice(0, 300) });
-      if (rg.ok) {
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('X-Auth', Object.keys(headers)[0]);
-        return res.status(200).send(tg);
-      }
+  // Headers a testar
+  const HEADERS_VARIANTS = [
+    { 'Authorization': `Bearer ${TOKEN}`, 'Accept': 'application/json' },
+    { 'x-api-key': TOKEN, 'Accept': 'application/json' },
+    { 'Authorization': `Token ${TOKEN}`, 'Accept': 'application/json' },
+    { 'api-token': TOKEN, 'Accept': 'application/json' },
+  ];
 
-      // Tentar POST com body de período
-      const body = JSON.stringify({ start_date: from, end_date: to, from, to });
-      const rp   = await fetch(url, { method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' }, body });
-      const tp   = await rp.text();
-      results.push({ method: 'POST', auth: Object.keys(headers)[0], status: rp.status, body: tp.slice(0, 300) });
-      if (rp.ok) {
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('X-Auth', 'POST+' + Object.keys(headers)[0]);
-        return res.status(200).send(tp);
+  if (debug === '1') {
+    // Modo diagnóstico — testa todas as combinações
+    const results = [];
+    for (const base of BASES) {
+      for (const ep of ENDPOINTS.slice(0, 2)) { // só 2 endpoints por base
+        for (const headers of HEADERS_VARIANTS.slice(0, 2)) { // só 2 headers
+          const url = base + ep;
+          try {
+            const r = await fetch(url, { headers, signal: AbortSignal.timeout(6000) });
+            const txt = await r.text();
+            results.push({
+              url: url.split('?')[0],
+              auth: Object.keys(headers)[0],
+              status: r.status,
+              body: txt.slice(0, 200)
+            });
+            if (r.ok) {
+              return res.status(200).json({ success: true, url, auth: Object.keys(headers)[0], data: JSON.parse(txt) });
+            }
+          } catch(e) {
+            results.push({ url: url.split('?')[0], auth: Object.keys(headers)[0], status: 'NET', body: e.message });
+          }
+        }
       }
-    } catch (e) {
-      results.push({ error: e.message, auth: Object.keys(headers)[0] });
     }
+    return res.status(502).json({ diagnostico: results });
   }
 
-  // Nenhum funcionou — retornar diagnóstico completo
-  return res.status(502).json({ diagnostico: results, url_testada: url });
+  // Modo normal — tenta a combinação mais provável
+  const url = `${BASES[0]}/sessions/summary?player_id=${pid}&from=${fromDate}&to=${toDate}`;
+  try {
+    const r = await fetch(url, {
+      headers: { 'Authorization': `Bearer ${TOKEN}`, 'Accept': 'application/json' },
+      signal: AbortSignal.timeout(8000)
+    });
+    const txt = await r.text();
+    if (r.ok) {
+      res.setHeader('Content-Type', 'application/json');
+      return res.status(200).send(txt);
+    }
+    return res.status(r.status).json({ error: txt, url });
+  } catch(e) {
+    return res.status(502).json({ error: e.message });
+  }
 }
