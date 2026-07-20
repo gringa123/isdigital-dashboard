@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel VendePay · Real (3 contas)</title>
+<style>
+  :root{
+    --bg:#0a0d12; --panel:#121820; --panel2:#0f141b; --card:#161d27;
+    --line:#212a36; --line2:#2b3644;
+    --tx:#e6edf3; --tx2:#8b98a5; --tx3:#5b6673;
+    --green:#2ea043; --green2:#3fb950; --red:#f85149; --orange:#f0883e;
+    --blue:#58a6ff; --purple:#a371f7; --yellow:#d29922;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:14px;line-height:1.45;display:flex;min-height:100vh}
+  /* Sidebar */
+  .side{width:236px;background:var(--panel2);border-right:1px solid var(--line);flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;padding:0 0 24px}
+  .brand{display:flex;align-items:center;gap:11px;padding:18px 18px 16px}
+  .brand .mk{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#2ea043,#0f5a26);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px}
+  .brand h1{font-size:14px;font-weight:700;letter-spacing:.2px}
+  .brand p{font-size:10.5px;color:var(--tx3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px}
+  .fx{margin:4px 14px 12px;padding:9px 12px;background:var(--card);border:1px solid var(--line);border-radius:9px;font-size:11px;color:var(--tx2)}
+  .fx b{color:var(--green2);font-family:var(--mono)}
+  .navlab{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;padding:10px 20px 6px}
+  .nav a{display:flex;align-items:center;gap:11px;padding:9px 20px;color:var(--tx2);text-decoration:none;font-size:13.5px;border-left:2px solid transparent;cursor:pointer;transition:.12s}
+  .nav a .ic{width:17px;text-align:center;opacity:.85}
+  .nav a:hover{background:#141b24;color:var(--tx)}
+  .nav a.on{background:#101922;color:var(--green2);border-left-color:var(--green);font-weight:600}
+  /* Main */
+  main{flex:1;min-width:0;padding:26px 30px 60px;max-width:1250px}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+  .top h2{font-size:22px;font-weight:700}
+  .top .sub{color:var(--tx2);font-size:13px;margin-top:3px}
+  .stamp{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 13px;font-size:11.5px;color:var(--tx2);font-family:var(--mono)}
+  .sec{display:none;animation:fade .25s}
+  .sec.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .hl{display:flex;align-items:center;gap:9px;margin:26px 0 13px;font-size:15px;font-weight:700}
+  .hl:before{content:"";width:3px;height:16px;background:var(--green);border-radius:2px}
+  .hl.first{margin-top:4px}
+  /* Cards grid */
+  .grid{display:grid;gap:13px}
+  .g5{grid-template-columns:repeat(5,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:1050px){.g5,.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr!important}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .card .lb{font-size:10.5px;color:var(--tx2);text-transform:uppercase;letter-spacing:.7px;display:flex;align-items:center;gap:6px;margin-bottom:9px}
+  .card .big{font-size:24px;font-weight:750;font-family:var(--mono);letter-spacing:-.5px}
+  .card .brl{font-size:11.5px;color:var(--tx3);font-family:var(--mono);margin-top:3px}
+  .card .tag{font-size:11px;margin-top:6px;color:var(--tx2)}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .green{color:var(--green2)} .red{color:var(--red)} .orange{color:var(--orange)} .blue{color:var(--blue)} .purple{color:var(--purple)} .yellow{color:var(--yellow)} .mut{color:var(--tx2)}
+  .bgreen{background:var(--green2)} .bred{background:var(--red)} .borange{background:var(--orange)} .bblue{background:var(--blue)} .bpurple{background:var(--purple)} .byellow{background:var(--yellow)}
+  /* callout */
+  .callout{border-radius:12px;padding:15px 17px;margin:16px 0;border:1px solid;font-size:13px;line-height:1.5}
+  .callout.warn{background:rgba(240,136,62,.08);border-color:rgba(240,136,62,.35)}
+  .callout.bad{background:rgba(248,81,73,.08);border-color:rgba(248,81,73,.35)}
+  .callout.ok{background:rgba(46,160,67,.08);border-color:rgba(46,160,67,.32)}
+  .callout b{color:var(--tx)}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th{text-align:right;font-size:10.5px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding:9px 12px;border-bottom:1px solid var(--line2)}
+  th:first-child{text-align:left}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--mono);font-size:12.5px}
+  td:first-child{text-align:left;font-family:inherit}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{border-top:2px solid var(--line2);font-weight:750;background:#101720}
+  .acc{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+  .pill{font-size:10px;padding:2px 7px;border-radius:20px;font-family:var(--mono);font-weight:600}
+  .pill.g{background:rgba(46,160,67,.15);color:var(--green2)} .pill.r{background:rgba(248,81,73,.15);color:var(--red)} .pill.o{background:rgba(240,136,62,.15);color:var(--orange)}
+  /* bar */
+  .barwrap{margin:14px 0}
+  .barrow{display:flex;align-items:center;gap:12px;margin:9px 0;font-size:12.5px}
+  .barrow .nm{width:180px;flex-shrink:0;color:var(--tx2)}
+  .barrow .tk{flex:1;height:22px;background:#0c1119;border-radius:5px;overflow:hidden;position:relative}
+  .barrow .fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:var(--mono);font-size:11px;color:#fff;min-width:34px}
+  .barrow .vv{width:150px;text-align:right;font-family:var(--mono);flex-shrink:0}
+  .split{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:8px 0 4px}
+  .split div{display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--mono);color:#fff;font-weight:600}
+  .leg{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--tx2);margin-top:6px}
+  .leg span{display:inline-flex;align-items:center;gap:6px}
+  .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--tx3);line-height:1.6}
+  .acccard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:0;overflow:hidden}
+  .acchd{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .acchd .nm{font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px}
+  .acchd .em{font-size:11px;color:var(--tx3);font-family:var(--mono)}
+  .accbody{padding:15px 17px;display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+  @media(max-width:760px){.accbody{grid-template-columns:repeat(2,1fr)}}
+  .mini .lb{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .mini .v{font-size:17px;font-weight:700;font-family:var(--mono)}
+  .mini .s{font-size:10.5px;color:var(--tx3);font-family:var(--mono)}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="brand"><div class="mk">VP</div><div><h1>VendePay · Real</h1><p>3 contas · Prosperidade US/IT</p></div></div>
+  <div class="fx" id="fx"></div>
+  <nav class="nav" id="nav">
+    <div class="navlab">Geral</div>
+    <a data-s="op" class="on"><span class="ic">🧭</span>Resumo da Operação</a>
+    <div class="navlab">Financeiro · VendePay</div>
+    <a data-s="geral"><span class="ic">📊</span>Visão Financeira</a>
+    <a data-s="contas"><span class="ic">🏦</span>Por Conta</a>
+    <a data-s="custos"><span class="ic">🩸</span>Custos &amp; Perdas</a>
+    <a data-s="tesouraria"><span class="ic">💰</span>Tesouraria</a>
+    <a data-s="cancel"><span class="ic">⚠️</span>Cancelamento</a>
+    <div class="navlab">Tráfego Pago</div>
+    <a data-s="trafego"><span class="ic">🚀</span>Visão Tráfego</a>
+    <a data-s="prosp"><span class="ic">🇺🇸</span>Prosperidade</a>
+    <a data-s="nutra"><span class="ic">🐴</span>Nutra</a>
+    <a data-s="cod"><span class="ic">📦</span>COD</a>
+    <div class="navlab">Referência</div>
+    <a data-s="metodo"><span class="ic">📐</span>Metodologia</a>
+  </nav>
+</aside>
+<main>
+  <div class="top">
+    <div><h2 id="ttl">Resumo da Operação</h2><div class="sub" id="stl">Financeiro + Tráfego — a operação inteira</div></div>
+    <div class="stamp">Atualizado: 20/07/2026 · fonte: app.vendepay.com</div>
+  </div>
+
+  <!-- RESUMO DA OPERAÇÃO (landing) -->
+  <section class="sec on" id="s-op">
+    <div class="callout warn"><b>Painel geral — financeiro + tráfego.</b> O módulo financeiro (VendePay) é dado vivo e batido. O módulo de tráfego abaixo é <b>skeleton da última depuração (17–19/jul)</b> — refresh amanhã com RedTrack + UTMify ao vivo (e Stripe entra no financeiro).</div>
+    <div class="hl first">Os dois lados da operação</div>
+    <div class="grid g2" id="op-cards"></div>
+    <div class="hl">Tráfego por oferta (gasto × resultado)</div>
+    <div class="card" style="padding:4px 6px"><table id="op-tab"></table></div>
+    <div class="callout bad" style="margin-top:16px"><b>⚠️ Falta ligar os dois lados.</b> A receita do tráfego aqui é a <b>atribuída pelo RedTrack</b> (bruta) — a Prosperidade aparece +R$49k no RT, mas o líquido real que caiu (VendePay) é bem menor depois de 57% cancelar e as taxas comerem 48%. O <b>lucro real</b> só sai ligando gasto (RT/UTMify) × líquido (VendePay/Stripe), com janelas alinhadas. E o <b>COD</b>: hoje é break-even (<b>+R$ 900</b>), com <b class="green">~+R$ 44k projetados</b> represados na fila (219 clientes pendentes @ 45,57%). Detalhe na aba COD. É o passo de amanhã.</div>
+  </section>
+
+  <!-- GERAL (financeiro) -->
+  <section class="sec" id="s-geral">
+    <div class="callout ok"><b>Este é o número real.</b> Direto da API da VendePay (não do espelho painel-fb, que congelou em 08/07 e mostrava bruto). Aqui é o líquido de verdade das 3 contas, já descontando taxa de venda (9,9%+1,49), reembolso, chargeback e taxa de chargeback.</div>
+    <div class="hl first">Consolidado USD</div>
+    <div class="grid g5" id="ov-usd"></div>
+    <div class="hl">Consolidado EUR</div>
+    <div class="grid g4" id="ov-eur"></div>
+    <div class="hl">Pago → Líquido (USD)</div>
+    <div class="card">
+      <div id="ov-split"></div>
+    </div>
+    <div class="hl">Líquido real por conta (USD)</div>
+    <div class="card" style="padding:4px 6px">
+      <table id="ov-tab"></table>
+    </div>
+  </section>
+
+  <!-- CONTAS -->
+  <section class="sec" id="s-contas">
+    <div class="sub" style="margin-bottom:6px">Cada conta é um login VendePay separado. Valores lifetime (29/04→20/07).</div>
+    <div id="acc-cards" style="display:flex;flex-direction:column;gap:16px;margin-top:12px"></div>
+  </section>
+
+  <!-- CUSTOS -->
+  <section class="sec" id="s-custos">
+    <div class="callout warn"><b>48% do que a VendePay aprova vira custo.</b> E o maior vilão não é a taxa da plataforma — é <b>reembolso (18% do pago)</b> e <b>chargeback+taxa (16%)</b>. Derrubar reembolso de 18%→8% recupera ~$20k.</div>
+    <div class="hl first">Composição dos custos (USD · total consolidado)</div>
+    <div class="card"><div class="barwrap" id="cost-bars"></div></div>
+    <div class="hl">Custos por conta (USD)</div>
+    <div class="card" style="padding:4px 6px"><table id="cost-tab"></table></div>
+  </section>
+
+  <!-- TESOURARIA -->
+  <section class="sec" id="s-tesouraria">
+    <div class="hl first">Caixa parado agora (USD · não sacado)</div>
+    <div class="grid g4" id="tes-cards"></div>
+    <div class="callout warn" style="margin-top:16px"><b>$30.737 presos em reserva</b> (lastro anti-chargeback) só voltam em +90 dias. Disponível pra sacar hoje: só <b>$331</b>.</div>
+    <div class="hl">Saldos e saques por conta (USD)</div>
+    <div class="card" style="padding:4px 6px"><table id="tes-tab"></table></div>
+  </section>
+
+  <!-- CANCELAMENTO -->
+  <section class="sec" id="s-cancel">
+    <div class="callout bad"><b>57% dos pedidos cancelam antes de pagar.</b> De cada 100 pedidos gerados pela mídia, só ~43 pagam. É o furo nº1 da operação — e não aparece no painel-fb (que contava tudo como "venda").</div>
+    <div class="hl first">Pago × Cancelado por conta (contagem de pedidos)</div>
+    <div class="card"><div class="barwrap" id="cancel-bars"></div></div>
+    <div class="hl">Detalhe (USD)</div>
+    <div class="card" style="padding:4px 6px"><table id="cancel-tab"></table></div>
+  </section>
+
+  <!-- TRÁFEGO: VISÃO -->
+  <section class="sec" id="s-trafego">
+    <div class="callout warn"><b>Skeleton — última depuração 17–19/jul.</b> Prosperidade (MTD 01–17, RedTrack) · Nutra (30d 17jun–17jul, RedTrack) · COD (01–17, UTMify+LightFunnels). Refresh amanhã com dado vivo.</div>
+    <div class="hl first">Gasto de mídia por oferta</div>
+    <div class="grid g3" id="tf-cards"></div>
+    <div class="hl">Resultado por oferta (como o RedTrack atribui)</div>
+    <div class="card" style="padding:4px 6px"><table id="tf-tab"></table></div>
+  </section>
+
+  <!-- PROSPERIDADE -->
+  <section class="sec" id="s-prosp">
+    <div class="sub" style="margin-bottom:4px">MTD 01–17 jul · RedTrack · gasto $38.525 → receita $48.061 · ROAS 1,25x · resultado +R$ 49.018 <span class="yellow">(RT-atribuído)</span></div>
+    <div class="hl first">Por praça</div>
+    <div class="card" style="padding:4px 6px"><table id="pr-praca"></table></div>
+    <div class="hl">Campeãs US (ROAS RedTrack)</div>
+    <div class="card"><div class="barwrap" id="pr-camp"></div></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><div class="lb">🎨 Criativos-motor</div><div style="font-size:15px;font-weight:700;margin-top:4px">A1.1 · K42 · K67 · K65</div><div class="tag">os 4 criativos que puxam a receita US</div></div>
+      <div class="card"><div class="lb">🏦 Contas motrizes</div><div style="font-size:14px;font-weight:600;margin-top:4px">TATIANE C4 <span class="green">1,55x</span> ($13,5k) · C2 <span class="green">1,63x</span> ($9k)</div><div class="tag">VICTORIA C3 zerou · TT US morto pós-07/jul</div></div>
+    </div>
+    <div class="callout warn" style="margin-top:14px"><b>Sangria não-US:</b> IT FB (0,86x) e TikTok (US 0,67x / IT 0,02x) drenam −R$ 19,6k. US carrega a oferta sozinha (1,52x). Joias paradas p/ reativar: CP0077/K65, CP0063/A1.1, CP0070, CP0083/K68.</div>
+  </section>
+
+  <!-- NUTRA -->
+  <section class="sec" id="s-nutra">
+    <div class="sub" style="margin-bottom:4px">30d 17jun–17jul · RedTrack · gasto $7.257 → receita $4.520 · ROAS 0,62x · resultado <span class="red">−R$ 14.069</span></div>
+    <div class="callout bad"><b>No vermelho — e o site HorseVital estava quebrado no período</b>, então subestima. Mesmo assim, 50% do gasto FB foi em campanhas zero-venda. Payout misto $230/$190.</div>
+    <div class="hl">Por praça</div>
+    <div class="card" style="padding:4px 6px"><table id="nu-praca"></table></div>
+    <div class="hl">Criativos com venda (KED · ROAS)</div>
+    <div class="card"><div class="barwrap" id="nu-camp"></div></div>
+  </section>
+
+  <!-- COD -->
+  <section class="sec" id="s-cod">
+    <div class="sub" style="margin-bottom:4px">PrimeCOD ao vivo (20/07) · 4 produtos nutra COD (Romênia) · <b>deduplicado por cliente</b> (telefone→email→nome)</div>
+    <div class="hl first">Resumo COD (cliente único)</div>
+    <div class="grid g4" id="cod-cards"></div>
+    <div class="callout warn" style="margin-top:8px"><b>Régua real = 45,57% de entrega por cliente único</b> (vs 40,68% bruto do dashboard). Deduplicar <b>melhora</b> a régua porque as <b>91 duplicatas (19,4%)</b> se concentram em devolução. ⚠️ 2 clientes com 7 e 9 pedidos — cheiram teste/fraude, investigar.</div>
+    <div class="hl">📊 Previsibilidade de lucro — os 219 pedidos que ainda vão entregar</div>
+    <div class="card" style="padding:4px 6px"><table id="cod-prev"></table></div>
+    <div class="callout ok" style="margin-top:12px"><b>Média de lucro projetada ≈ +R$ 44k</b> (se a fila destravar e os 219 pendentes entregarem a 45,57%). Faixa R$ 32k (@35%) a R$ 54k (@55%). Hoje, realizado = <b>+R$ 900</b> (break-even). <b class="red">Risco:</b> pedido COD parado entrega pior com o tempo (cliente esquece/recusa) — 45,57% é otimista pra fila travada há dias.</div>
+    <div class="hl">Gasto por plataforma (UTMify · 01–17)</div>
+    <div class="card" style="padding:4px 6px"><table id="cod-plat"></table></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><div class="lb">🎨 Top criativos KRED</div><div style="font-size:14px;margin-top:5px;line-height:1.7">KRED2 <b class="green">65</b> · KRED3 <b>43</b> · <span class="red">? 41 (UTM quebrada)</span> · KRED10 32 · KRED1 28</div></div>
+      <div class="card"><div class="lb">⚠️ Operação PrimeCOD (Hanane)</div><div style="font-size:13px;margin-top:5px;line-height:1.7">468 pedidos → 377 clientes · entregues 72 · <b class="red">fila travou ~15/jul</b> (arrecadado €7.819 parado) · Billetera €4.997</div></div>
+    </div>
+  </section>
+
+  <!-- METODO -->
+  <section class="sec" id="s-metodo">
+    <div class="hl first">Como cada número foi calculado</div>
+    <div class="card" style="line-height:1.7;font-size:13px;color:var(--tx2)">
+      <p><b class="mut" style="color:var(--tx)">Fonte:</b> API interna <code style="font-family:var(--mono);color:var(--green2)">bff.vendepay.com/api/financeiro/*</code> — endpoints <i>valor-status</i>, <i>resumo-vendas</i> e <i>extrato-transacional</i>, período 29/04→20/07 (conferido com range amplo = lifetime completo).</p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">Pago / Cancelado:</b> vindos de <i>valor-status</i> (por moeda: currency 2=USD, 3=EUR). Pago = transações aprovadas; cancelado = recusadas/canceladas.</p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">Taxa de venda:</b> 9,9% × pago + 1,49 × nº de vendas pagas. <span class="yellow">⚠ o fixo 1,49 foi assumido na moeda da venda ($1,49/€1,49) — a confirmar se é R$1,49.</span></p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">Reembolso / Chargeback / Taxa de chargeback:</b> somados linha a linha do ledger (<i>extrato-transacional</i>), por descrição.</p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">Net real:</b> pago − taxa de venda − reembolso − chargeback − taxa de chargeback − taxa de saque.</p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">⚠ Divergência conhecida (Mariane):</b> Análises "pago" $131.749 vs ledger "liberado" $152.236 (~$20k, provável timing/atribuição de reserva). Usei o "pago" da Análises como base.</p>
+      <p style="margin-top:10px"><b style="color:var(--tx)">Não incluído:</b> gasto de mídia (UTMify) — este painel é a receita LÍQUIDA do processador, não o lucro final da operação.</p>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</main>
+
+<script>
+const FX={usd:5.17,eur:5.84};
+const CONTAS=[
+ {nome:'Mariane',email:'estruturaeua@gmail.com',cor:'#3fb950',
+  usd:{pago:131749.66,pagas:3380,cancelado:174758.42,canceladas:4412,ticket:39.12,reemb:21377.50,cb:5892,taxacb:13084,taxavenda:18079.42,taxasaque:57,disp:0,lib:9878.09,reserva:19674.68,sacado:160692.26},
+  eur:{pago:7055.63,pagas:189,cancelado:9603,canceladas:207,ticket:36.12,reemb:0,cb:96,taxacb:0,taxavenda:980.12,taxasaque:9,disp:0,lib:83.64,reserva:700.87,sacado:5306.14}},
+ {nome:'Mariana',email:'imdigitall@hotmail.com',cor:'#58a6ff',
+  usd:{pago:46298,pagas:1202,cancelado:69143,canceladas:1671,ticket:38.77,reemb:11640.50,cb:2423,taxacb:7180,taxavenda:6374.48,taxasaque:41,disp:48.71,lib:2222.77,reserva:8903.22,sacado:115125.13},
+  eur:{pago:50.80,pagas:2,cancelado:413,canceladas:7,ticket:25.40,reemb:0,cb:0,taxacb:0,taxavenda:8.01,taxasaque:0,disp:0,lib:0,reserva:0,sacado:0}},
+ {nome:'iago',email:'ibdigitall@outlook.com',cor:'#a371f7',
+  usd:{pago:17403.23,pagas:479,cancelado:24812.99,canceladas:716,ticket:35.78,reemb:2497.50,cb:1194,taxacb:1713,taxavenda:2436.63,taxasaque:23,disp:282.27,lib:189.04,reserva:2159.00,sacado:15282.83},
+  eur:{pago:915.77,pagas:31,cancelado:1108.21,canceladas:29,ticket:29.88,reemb:165.50,cb:0,taxacb:0,taxavenda:136.85,taxasaque:3,disp:0,lib:0,reserva:0,sacado:410.86}}
+];
+const nf=(n,d=2)=>Number(n).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const nfi=(n)=>Number(n).toLocaleString('pt-BR');
+const S=(o)=>({...o, custos:o.reemb+o.cb+o.taxacb+o.taxavenda+o.taxasaque, net:o.pago-(o.reemb+o.cb+o.taxacb+o.taxavenda+o.taxasaque)});
+function sum(cur){const t={pago:0,pagas:0,cancelado:0,canceladas:0,reemb:0,cb:0,taxacb:0,taxavenda:0,taxasaque:0,disp:0,lib:0,reserva:0,sacado:0};CONTAS.forEach(c=>{for(const k in t)t[k]+=c[cur][k]||0;});return S(t);}
+const U=sum('usd'), E=sum('eur');
+const sym={usd:'$',eur:'€'};
+
+document.getElementById('fx').innerHTML=`Câmbio VendePay<br>USD → BRL <b>${nf(FX.usd)}</b> &nbsp; EUR → BRL <b>${nf(FX.eur)}</b>`;
+
+// ---- VISÃO GERAL ----
+function cardHtml(lb,dotColor,big,brl,tag){return `<div class="card"><div class="lb">${dotColor?`<span class="dot ${dotColor}"></span>`:''}${lb}</div><div class="big ${typeof big==='object'?big.cls:''}">${typeof big==='object'?big.v:big}</div>${brl?`<div class="brl">${brl}</div>`:''}${tag?`<div class="tag">${tag}</div>`:''}</div>`;}
+const cancelRateU=(U.canceladas/(U.pagas+U.canceladas)*100);
+document.getElementById('ov-usd').innerHTML=[
+ cardHtml('Pago (aprovado)','', '$'+nf(U.pago), 'R$ '+nf(U.pago*FX.usd), `<span class="green">${nfi(U.pagas)}</span> vendas pagas`),
+ cardHtml('Net real','bgreen', {v:'$'+nf(U.net),cls:'green'}, 'R$ '+nf(U.net*FX.usd), `retenção <b class="green">${nf(U.net/U.pago*100,1)}%</b>`),
+ cardHtml('Custos VendePay','bred', {v:'$'+nf(U.custos),cls:'red'}, 'R$ '+nf(U.custos*FX.usd), `<span class="red">${nf(U.custos/U.pago*100,1)}%</span> do pago`),
+ cardHtml('Cancelamento','borange', {v:nf(cancelRateU,1)+'%',cls:'orange'}, nfi(U.canceladas)+' pedidos', 'cancelam antes de pagar'),
+ cardHtml('Caixa parado','byellow', {v:'$'+nf(U.disp+U.lib+U.reserva),cls:'yellow'}, 'R$ '+nf((U.disp+U.lib+U.reserva)*FX.usd), 'não sacado (reserva +90d)')
+].join('');
+document.getElementById('ov-eur').innerHTML=[
+ cardHtml('Pago (aprovado)','', '€'+nf(E.pago), 'R$ '+nf(E.pago*FX.eur), `${nfi(E.pagas)} vendas`),
+ cardHtml('Net real','bgreen', {v:'€'+nf(E.net),cls:'green'}, 'R$ '+nf(E.net*FX.eur), `retenção <b class="green">${nf(E.net/E.pago*100,1)}%</b>`),
+ cardHtml('Custos','bred', {v:'€'+nf(E.custos),cls:'red'}, 'R$ '+nf(E.custos*FX.eur), ''),
+ cardHtml('Cancelamento','borange', {v:nf(E.canceladas/(E.pagas+E.canceladas)*100,1)+'%',cls:'orange'}, nfi(E.canceladas)+' pedidos','')
+].join('');
+
+// split pago->net
+const tot=U.pago;
+document.getElementById('ov-split').innerHTML=`
+ <div class="split">
+   <div class="bgreen" style="width:${U.net/tot*100}%">Net $${nf(U.net,0)} · ${nf(U.net/tot*100,1)}%</div>
+   <div class="bred" style="width:${U.custos/tot*100}%">Custos $${nf(U.custos,0)} · ${nf(U.custos/tot*100,1)}%</div>
+ </div>
+ <div class="leg"><span><span class="dot bgreen"></span>Líquido que sobra</span><span><span class="dot bred"></span>Taxa + reembolso + chargeback</span></div>`;
+
+// tabela por conta
+let rows=CONTAS.map(c=>{const u=S(c.usd);return `<tr>
+  <td><span class="acc"><span class="dot" style="background:${c.cor}"></span>${c.nome}</span></td>
+  <td>$${nf(u.pago)}</td><td>$${nf(u.custos)}</td>
+  <td class="green">$${nf(u.net)}</td>
+  <td><span class="pill ${u.net/u.pago>0.5?'g':'o'}">${nf(u.net/u.pago*100,1)}%</span></td>
+  <td>R$ ${nf(u.net*FX.usd)}</td></tr>`;}).join('');
+rows+=`<tr class="tot"><td>TOTAL 3 contas</td><td>$${nf(U.pago)}</td><td>$${nf(U.custos)}</td><td class="green">$${nf(U.net)}</td><td><span class="pill g">${nf(U.net/U.pago*100,1)}%</span></td><td>R$ ${nf(U.net*FX.usd)}</td></tr>`;
+document.getElementById('ov-tab').innerHTML=`<thead><tr><th>Conta</th><th>Pago</th><th>Custos</th><th>Net real</th><th>Retenção</th><th>Net R$</th></tr></thead><tbody>${rows}</tbody>`;
+
+// ---- POR CONTA ----
+document.getElementById('acc-cards').innerHTML=CONTAS.map(c=>{
+ const u=S(c.usd),e=S(c.eur);
+ const mini=(lb,v,s,cls='')=>`<div class="mini"><div class="lb">${lb}</div><div class="v ${cls}">${v}</div><div class="s">${s||''}</div></div>`;
+ return `<div class="acccard">
+   <div class="acchd"><div class="nm"><span class="dot" style="background:${c.cor}"></span>${c.nome}</div><div class="em">${c.email}</div></div>
+   <div class="accbody">
+     ${mini('Pago USD','$'+nf(u.pago),nfi(u.pagas)+' pagas · tkt $'+nf(u.ticket))}
+     ${mini('Net real USD','$'+nf(u.net),nf(u.net/u.pago*100,1)+'% retenção','green')}
+     ${mini('Custos USD','$'+nf(u.custos),nf(u.custos/u.pago*100,1)+'% do pago','red')}
+     ${mini('Cancelado','$'+nf(u.cancelado),nfi(u.canceladas)+' ped ('+nf(u.canceladas/(u.pagas+u.canceladas)*100,0)+'%)','orange')}
+     ${mini('Reembolso','$'+nf(u.reemb),nf(u.reemb/u.pago*100,1)+'% do pago')}
+     ${mini('Chargeback','$'+nf(u.cb+u.taxacb),'cb $'+nf(u.cb)+' + taxa $'+nf(u.taxacb))}
+     ${mini('Tesouraria USD','$'+nf(u.disp+u.lib+u.reserva),'disp '+nf(u.disp,0)+' · lib '+nf(u.lib,0)+' · res '+nf(u.reserva,0),'yellow')}
+     ${mini('EUR (net)', e.pago>10?('€'+nf(e.net)):'—', e.pago>10?(nfi(e.pagas)+' vendas'):'não roda EUR', e.pago>10?'green':'mut')}
+   </div></div>`;
+}).join('');
+
+// ---- CUSTOS ----
+const costParts=[
+ {nm:'Reembolsos',v:U.reemb,c:'bred'},
+ {nm:'Taxa de venda (9,9%+1,49)',v:U.taxavenda,c:'bblue'},
+ {nm:'Taxa de chargeback',v:U.taxacb,c:'borange'},
+ {nm:'Chargebacks',v:U.cb,c:'bpurple'},
+ {nm:'Taxa de saque',v:U.taxasaque,c:'byellow'}
+].sort((a,b)=>b.v-a.v);
+const maxc=Math.max(...costParts.map(p=>p.v));
+document.getElementById('cost-bars').innerHTML=costParts.map(p=>`<div class="barrow">
+  <div class="nm">${p.nm}</div>
+  <div class="tk"><div class="fill ${p.c}" style="width:${Math.max(p.v/maxc*100,6)}%">${nf(p.v/U.custos*100,1)}%</div></div>
+  <div class="vv">$${nf(p.v)}</div></div>`).join('') +
+  `<div class="barrow" style="margin-top:14px;border-top:1px solid var(--line2);padding-top:12px"><div class="nm" style="font-weight:700;color:var(--tx)">TOTAL custos</div><div class="tk" style="background:none"></div><div class="vv" style="font-weight:700;color:var(--red)">$${nf(U.custos)}</div></div>`;
+
+let crows=CONTAS.map(c=>{const u=S(c.usd);return `<tr>
+  <td><span class="acc"><span class="dot" style="background:${c.cor}"></span>${c.nome}</span></td>
+  <td>$${nf(u.reemb)}</td><td>$${nf(u.cb)}</td><td>$${nf(u.taxacb)}</td><td>$${nf(u.taxavenda)}</td>
+  <td class="red">$${nf(u.custos)}</td></tr>`;}).join('');
+crows+=`<tr class="tot"><td>TOTAL</td><td>$${nf(U.reemb)}</td><td>$${nf(U.cb)}</td><td>$${nf(U.taxacb)}</td><td>$${nf(U.taxavenda)}</td><td class="red">$${nf(U.custos)}</td></tr>`;
+document.getElementById('cost-tab').innerHTML=`<thead><tr><th>Conta</th><th>Reembolso</th><th>Chargeback</th><th>Taxa cb</th><th>Taxa venda</th><th>Custo total</th></tr></thead><tbody>${crows}</tbody>`;
+
+// ---- TESOURARIA ----
+document.getElementById('tes-cards').innerHTML=[
+ cardHtml('Disponível','bgreen','$'+nf(U.disp),'R$ '+nf(U.disp*FX.usd),'pronto pra sacar'),
+ cardHtml('Em liberação','bblue','$'+nf(U.lib),'R$ '+nf(U.lib*FX.usd),'settle D+'),
+ cardHtml('Em reserva','borange','$'+nf(U.reserva),'R$ '+nf(U.reserva*FX.usd),'lastro · volta +90d'),
+ cardHtml('Já sacado (lifetime)','', {v:'$'+nf(U.sacado),cls:'green'},'R$ '+nf(U.sacado*FX.usd),'nas 3 contas')
+].join('');
+let trows=CONTAS.map(c=>{const u=c.usd;return `<tr>
+ <td><span class="acc"><span class="dot" style="background:${c.cor}"></span>${c.nome}</span></td>
+ <td>$${nf(u.disp)}</td><td>$${nf(u.lib)}</td><td>$${nf(u.reserva)}</td>
+ <td class="yellow">$${nf(u.disp+u.lib+u.reserva)}</td><td>$${nf(u.sacado)}</td></tr>`;}).join('');
+trows+=`<tr class="tot"><td>TOTAL</td><td>$${nf(U.disp)}</td><td>$${nf(U.lib)}</td><td>$${nf(U.reserva)}</td><td class="yellow">$${nf(U.disp+U.lib+U.reserva)}</td><td>$${nf(U.sacado)}</td></tr>`;
+document.getElementById('tes-tab').innerHTML=`<thead><tr><th>Conta</th><th>Disponível</th><th>Liberação</th><th>Reserva</th><th>Parado</th><th>Sacado</th></tr></thead><tbody>${trows}</tbody>`;
+
+// ---- CANCELAMENTO ----
+document.getElementById('cancel-bars').innerHTML=CONTAS.map(c=>{const u=c.usd;const tot=u.pagas+u.canceladas;const pg=u.pagas/tot*100;return `<div class="barrow">
+  <div class="nm"><span class="dot" style="background:${c.cor}"></span> ${c.nome}</div>
+  <div class="tk"><div style="display:flex;height:100%"><div class="bgreen" style="width:${pg}%;display:flex;align-items:center;justify-content:flex-start;padding-left:7px;font-family:var(--mono);font-size:11px;color:#04270f;font-weight:700">${nf(pg,0)}% pg</div><div class="bred" style="width:${100-pg}%;display:flex;align-items:center;justify-content:flex-end;padding-right:7px;font-family:var(--mono);font-size:11px;color:#fff">${nf(100-pg,0)}% cancel</div></div></div>
+  <div class="vv">${nfi(u.pagas)}/${nfi(tot)}</div></div>`;}).join('');
+let xrows=CONTAS.map(c=>{const u=c.usd;const tot=u.pagas+u.canceladas;return `<tr>
+ <td><span class="acc"><span class="dot" style="background:${c.cor}"></span>${c.nome}</span></td>
+ <td class="green">${nfi(u.pagas)}</td><td class="red">${nfi(u.canceladas)}</td>
+ <td><span class="pill r">${nf(u.canceladas/tot*100,1)}%</span></td>
+ <td>$${nf(u.pago)}</td><td class="red">$${nf(u.cancelado)}</td></tr>`;}).join('');
+const totPed=U.pagas+U.canceladas;
+xrows+=`<tr class="tot"><td>TOTAL</td><td class="green">${nfi(U.pagas)}</td><td class="red">${nfi(U.canceladas)}</td><td><span class="pill r">${nf(U.canceladas/totPed*100,1)}%</span></td><td>$${nf(U.pago)}</td><td class="red">$${nf(U.cancelado)}</td></tr>`;
+document.getElementById('cancel-tab').innerHTML=`<thead><tr><th>Conta</th><th>Pagas</th><th>Canceladas</th><th>% Cancel</th><th>$ Pago</th><th>$ Cancelado</th></tr></thead><tbody>${xrows}</tbody>`;
+
+document.getElementById('foot').innerHTML=`Painel gerado por Claudia · dados coletados 20/07/2026 direto do app.vendepay.com (3 contas: Mariane, Mariana, iago) · USD+EUR · lifetime 29/04→20/07.<br>Substitui o painel-fb.vercel.app (espelho congelado em 08/07 que mostrava bruto). Números aqui = líquido real do processador, antes de mídia.`;
+
+// ---- TRÁFEGO PAGO (skeleton 17-19/jul) ----
+const CM=5.17; // câmbio média p/ converter gasto $ em R$
+const TRAFEGO=[
+ {nome:'Prosperidade',cor:'#3fb950',janela:'MTD 01–17 jul · RedTrack',cur:'$',gasto:38525,receita:48061,roas:1.25,resBRL:49018,
+  pracas:[['US FB',25695,39046,1.52,68629],['IT FB',7335,6275,0.86,-5449],['TT US',4038,2709,0.67,-6832],['TT IT',1457,31,0.02,-7330]],
+  camp:[['CP0068 A1.1/A5.3',2.19],['CP0129 K42',2.10],['CP0033 K42',2.04],['CP0067 combo-5',1.85],['CP0081 K43.1',1.85],['CP0077 K65',1.84],['CP0079 K67',1.76],['CP0063 A1.1',1.76]]},
+ {nome:'Nutra',cor:'#f0883e',janela:'30d 17jun–17jul · RedTrack',cur:'$',gasto:7257,receita:4520,roas:0.62,resBRL:-14069,
+  pracas:[['FB (ED NUTRA)',4260,2490,0.58,-9098],['TT (NUTRA TK)',2997,2030,0.68,-4971]],
+  camp:[['KED02',3.38],['KED03',1.91],['KED18',1.20],['KED23',1.09],['KED13 (TT)',0.78]]},
+ {nome:'COD · Nutra',cor:'#58a6ff',janela:'PrimeCOD ao vivo · 20/07',cur:'R$',gastoBRL:29318,
+  pedidos:468,clientes:377,dup:91,dupPct:19.4,entregues:72,devolvidosU:86,pendentes:219,taxaU:45.57,taxaRaw:40.68,
+  arrecadadoEur:7819,lucroEur:5158,mediaEur:5003,realizadoBRL:900,
+  prev:[[35,32159],[45.57,43891],[55,54094]],
+  plat:[['FB',22184,0.50,47],['TT',7134,0.46,60]],proj:true,lucro:900}
+];
+const gastoBRLof=o=>o.gastoBRL||o.gasto*CM;
+const resOf=o=>o.resBRL!==undefined?o.resBRL:o.lucro;
+// Resumo da Operação
+const finNetBRL=U.net*FX.usd+E.net*FX.eur;
+const gastoTotal=TRAFEGO.reduce((s,o)=>s+gastoBRLof(o),0);
+document.getElementById('op-cards').innerHTML=[
+ `<div class="card"><div class="lb"><span class="dot bgreen"></span>Financeiro · líquido real (VendePay · lifetime)</div><div class="big green">R$ ${nf(finNetBRL)}</div><div class="brl">$${nf(U.net)} + €${nf(E.net)} · já pós taxa/reembolso/chargeback</div><div class="tag">o que <b>entrou</b> de verdade</div></div>`,
+ `<div class="card"><div class="lb"><span class="dot bred"></span>Tráfego · gasto de mídia (jul)</div><div class="big red">R$ ${nf(gastoTotal)}</div><div class="brl">Prosp R$ ${nf(38525*CM,0)} · Nutra R$ ${nf(7257*CM,0)} · COD R$ ${nf(29318,0)}</div><div class="tag">o que <b>saiu</b> em anúncio</div></div>`
+].join('');
+const opRows=TRAFEGO.map(o=>{const res=resOf(o);const roasTxt=o.roas?nf(o.roas,2)+'x':'—';const flag=o.proj?' <span class="orange" style="font-size:10px">⚠ prev +R$44k</span>':'';return `<tr><td><span class="acc"><span class="dot" style="background:${o.cor}"></span>${o.nome}</span></td><td>R$ ${nf(gastoBRLof(o))}</td><td class="${o.roas&&o.roas>=1?'green':(o.roas?'red':'mut')}">${roasTxt}</td><td class="${res>=0?'green':'red'}">${res>=0?'+':'−'}R$ ${nf(Math.abs(res))}${flag}</td><td class="mut" style="font-size:11px">${o.janela}</td></tr>`;}).join('');
+document.getElementById('op-tab').innerHTML=`<thead><tr><th>Oferta</th><th>Gasto mídia</th><th>ROAS (RT)</th><th>Resultado</th><th>Janela</th></tr></thead><tbody>${opRows}</tbody>`;
+// Visão Tráfego
+document.getElementById('tf-cards').innerHTML=TRAFEGO.map(o=>{const sub=o.cur==='$'?('$'+nf(o.gasto)+' → $'+nf(o.receita)):('R$ '+nf(o.gastoBRL)+' → R$ '+nf(o.receitaBRL));return `<div class="card"><div class="lb"><span class="dot" style="background:${o.cor}"></span>${o.nome}</div><div class="big">R$ ${nf(gastoBRLof(o),0)}</div><div class="brl">${sub}</div><div class="tag">${o.janela}</div></div>`;}).join('');
+const tfRows=TRAFEGO.map(o=>{const res=resOf(o);const g=o.cur==='$'?('$'+nf(o.gasto)):('R$ '+nf(o.gastoBRL));const r=o.cur==='$'?('$'+nf(o.receita)):('R$ '+nf(o.receitaBRL));const roasTxt=o.roas?`<span class="${o.roas>=1?'green':'red'}">${nf(o.roas,2)}x</span>`:'<span class="mut">—</span>';return `<tr><td><span class="acc"><span class="dot" style="background:${o.cor}"></span>${o.nome}</span></td><td>${g}</td><td>${r}</td><td>${roasTxt}</td><td class="${res>=0?'green':'red'}">${res>=0?'+':'−'}R$ ${nf(Math.abs(res))}</td></tr>`;}).join('');
+document.getElementById('tf-tab').innerHTML=`<thead><tr><th>Oferta</th><th>Gasto</th><th>Receita</th><th>ROAS</th><th>Resultado (R$)</th></tr></thead><tbody>${tfRows}</tbody>`;
+// Prosperidade
+const P=TRAFEGO[0];
+document.getElementById('pr-praca').innerHTML=`<thead><tr><th>Praça</th><th>Gasto</th><th>Receita</th><th>ROAS</th><th>Resultado</th></tr></thead><tbody>`+P.pracas.map(p=>`<tr><td>${p[0]}</td><td>$${nf(p[1])}</td><td>$${nf(p[2])}</td><td class="${p[3]>=1?'green':'red'}">${nf(p[3],2)}x</td><td class="${p[4]>=0?'green':'red'}">${p[4]>=0?'+':'−'}R$ ${nf(Math.abs(p[4]))}</td></tr>`).join('')+`</tbody>`;
+const pmax=Math.max(...P.camp.map(c=>c[1]));
+document.getElementById('pr-camp').innerHTML=P.camp.map(c=>`<div class="barrow"><div class="nm">${c[0]}</div><div class="tk"><div class="fill bgreen" style="width:${c[1]/pmax*100}%"></div></div><div class="vv green">${nf(c[1],2)}x</div></div>`).join('');
+// Nutra
+const N=TRAFEGO[1];
+document.getElementById('nu-praca').innerHTML=`<thead><tr><th>Praça</th><th>Gasto</th><th>Receita</th><th>ROAS</th><th>Resultado</th></tr></thead><tbody>`+N.pracas.map(p=>`<tr><td>${p[0]}</td><td>$${nf(p[1])}</td><td>$${nf(p[2])}</td><td class="${p[3]>=1?'green':'red'}">${nf(p[3],2)}x</td><td class="${p[4]>=0?'green':'red'}">${p[4]>=0?'+':'−'}R$ ${nf(Math.abs(p[4]))}</td></tr>`).join('')+`</tbody>`;
+const nmax=Math.max(...N.camp.map(c=>c[1]));
+document.getElementById('nu-camp').innerHTML=N.camp.map(c=>`<div class="barrow"><div class="nm">${c[0]}</div><div class="tk"><div class="fill ${c[1]>=1?'bgreen':'borange'}" style="width:${c[1]/nmax*100}%"></div></div><div class="vv ${c[1]>=1?'green':'orange'}">${nf(c[1],2)}x</div></div>`).join('');
+// COD
+const C=TRAFEGO[2];
+document.getElementById('cod-cards').innerHTML=[
+ cardHtml('Clientes únicos','',nfi(C.clientes),'de '+nfi(C.pedidos)+' ped · <b class="orange">'+C.dup+' dup ('+nf(C.dupPct,1)+'%)</b>',''),
+ cardHtml('Gasto mídia','bred',{v:'R$ '+nf(C.gastoBRL,0),cls:'red'},'FB+TT (UTMify) · já saiu',''),
+ cardHtml('Entregues','bgreen',{v:nfi(C.entregues),cls:'green'},'taxa única <b class="green">'+nf(C.taxaU,2)+'%</b>',''),
+ cardHtml('Pendentes','borange',{v:nfi(C.pendentes),cls:'orange'},'58% · travados na fila','')
+].join('');
+document.getElementById('cod-plat').innerHTML=`<thead><tr><th>Plataforma</th><th>Gasto</th><th>CPC</th><th>Custo/IC</th></tr></thead><tbody>`+C.plat.map(p=>`<tr><td>${p[0]}</td><td>R$ ${nf(p[1])}</td><td>R$ ${nf(p[2])}</td><td>R$ ${nf(p[3])}</td></tr>`).join('')+`<tr class="tot"><td>TOTAL</td><td>R$ ${nf(C.gastoBRL)}</td><td class="mut">—</td><td class="mut">—</td></tr></tbody>`;
+const prevRows=[`<tr><td>💵 Realizado hoje</td><td>72 entregas</td><td class="green">+R$ 900</td><td class="mut">break-even · fila travada</td></tr>`].concat(C.prev.map(function(x){const taxa=x[0],lucro=x[1];const isBase=Math.abs(taxa-C.taxaU)<0.1;const del=Math.round(72+C.pendentes*taxa/100);return '<tr'+(isBase?' class="tot"':'')+'><td>'+(isBase?'⭐ ':'')+'Projeção @ '+nf(taxa,isBase?2:0)+'%'+(isBase?' (régua atual)':'')+'</td><td>~'+del+' entregas</td><td class="green">+R$ '+nf(lucro,0)+'</td><td class="mut">dos 219 pendentes</td></tr>';})).join('');
+document.getElementById('cod-prev').innerHTML=`<thead><tr><th>Cenário</th><th>Entregas totais</th><th>Lucro projetado</th><th>Obs</th></tr></thead><tbody>${prevRows}</tbody>`;
+
+// ---- NAV ----
+const titles={op:['Resumo da Operação','Financeiro + Tráfego — a operação inteira'],geral:['Visão Financeira','Consolidado real das 3 contas VendePay · USD + EUR'],contas:['Por Conta','Mariane · Mariana · iago — detalhe lifetime'],custos:['Custos & Perdas','Para onde vai o dinheiro que a VendePay aprova'],tesouraria:['Tesouraria','Saldos e saques por conta'],cancel:['Cancelamento','O furo nº1: pedidos que não viram pagamento'],trafego:['Visão Tráfego','Gasto e resultado por oferta · RedTrack + UTMify'],prosp:['Prosperidade','US/IT · FB/TikTok · campanhas e criativos'],nutra:['Nutra','HorseVital/HorseWood · 30 dias'],cod:['COD · Nutra (PrimeCOD)','4 produtos · deduplicado por cliente · previsibilidade de lucro'],metodo:['Metodologia','Fonte e fórmula de cada número']};
+document.getElementById('nav').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const s=a.dataset.s;
+ document.querySelectorAll('#nav a').forEach(x=>x.classList.toggle('on',x===a));
+ document.querySelectorAll('.sec').forEach(x=>x.classList.remove('on'));
+ document.getElementById('s-'+s).classList.add('on');
+ document.getElementById('ttl').textContent=titles[s][0];document.getElementById('stl').textContent=titles[s][1];
+ window.scrollTo(0,0);
+});
+</script>
+</body>
+</html>
